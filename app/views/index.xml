@@ -1,5 +1,16 @@
 <Alloy>
-	<Window class="container">
-		<Label id="label" onClick="doClick">Hello, World</Label>
-	</Window>
+	<NavigationWindow id="navWin" module="xp.ui">
+		<Window class="container" layout="vertical" onOpen="hideActionBar">
+			<ImageView id="bigLogo"/>
+			<TextField id="username" value="rnduser_1418923442021"/>
+			<View class="subContainer">
+				<TextField id="password" value="password"/>
+				<Label id="btn_login" onClick="do_login" />
+			</View>
+			<View class="bottomContainer">
+				<Switch value="false" id="remember" onChange="manageRememberMe"/>
+				<Label id="forgotPassword"/>
+			</View>
+		</Window>
+	</NavigationWindow>
 </Alloy>

@@ -1,15 +1,116 @@
 ".container": {
-	backgroundColor:"white"
+	
+	backgroundColor: '#8BC7F2',
+	layout: "vertical",
+	exitOnClose: true,
+	navBarHidden: true,
+	//exitOnClose: true,
+	orientationModes: [Ti.UI.PORTRAIT]
 }
 
-"Label": {
+"#bigLogo":{
+	top: 40,
+	image: "/images/bigLogo.png",
+	height: 160
+}
+
+"#username": {
+
+	color: "#999",
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 18,
+	},
+	textAlign: "",
+	top: 20,
+	width: 330,
+	height: 40,
+	backgroundColor: '#fff',
+	hintText: "Username or Email",
+	borderRadius: 2,
+	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED
+}
+
+ ".subContainer":{
+	top: 10,
 	width: Ti.UI.SIZE,
 	height: Ti.UI.SIZE,
-	color: "#000"
+	layout: "horizontal"
 }
 
-"#label": {
+"#password": {
+
+	color: "#999",
 	font: {
-		fontSize: 12
-	}
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 18,
+	},
+	textAlign: "",
+	left: 0,
+	//top: 10,
+	width: 200,
+	height: 40,
+	backgroundColor: '#fff',
+	hintText: "Password",
+	passwordMask: true,	
+	borderRadius: 2,
+	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED
 }
+
+"#btn_login": {
+	backgroundColor: "#4BAEE7",
+	text: "LOGIN",
+	textAlign: "center",
+	left: 5,
+	color: "#fff",
+	//top: 20,
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 18,
+	},
+	width: 125,
+	borderRadius: 2,
+	height: 40
+}
+
+".bottomContainer":{
+	top: 10,
+	width: 330,
+	height: Ti.UI.SIZE
+}
+
+"#remember[platform=android]": {
+	color: "#fff",
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 18,
+	},
+	left: 0,
+	height: 30,
+	title: "Remember me",
+	width: Ti.UI.SIZE,
+	style: Titanium.UI.Android.SWITCH_STYLE_CHECKBOX
+}
+
+"#remember[platform=ios]": {
+	color: "#fff",
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 18,
+	},
+	left: 0,
+	height: 30,
+	title: "Remember me",
+	width: Ti.UI.SIZE
+}
+
+"#forgotPassword": {
+	color: "#4BAEE7",
+	right: 0,
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 18,
+	},
+	text: "Forgot Password?"
+}
+

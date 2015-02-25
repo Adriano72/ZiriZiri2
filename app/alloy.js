@@ -9,3 +9,7 @@
 // object. For example:
 //
 // Alloy.Globals.someGlobalFunction = function(){};
+
+var zzAPI = require("ti.zz.api");
+
+ZZ = zzAPI.ZZ;
