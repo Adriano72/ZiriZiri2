@@ -2,6 +2,9 @@
 	<NavigationWindow id="navWin" module="xp.ui">
 		<Window class="container" layout="vertical" onOpen="hideActionBar">
 			<ImageView id="bigLogo"/>
+			<View>
+				
+			</View>
 			<TextField id="username" value="rnduser_1418923442021"/>
 			<View class="subContainer">
 				<TextField id="password" value="password"/>
