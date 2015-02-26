@@ -13,3 +13,5 @@
 var zzAPI = require("ti.zz.api");
 
 ZZ = zzAPI.ZZ;
+
+Alloy.Globals.loading = Alloy.createWidget("nl.fokkezb.loading");

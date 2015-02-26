@@ -1,19 +1,26 @@
 <Alloy>
 	<NavigationWindow id="navWin" module="xp.ui">
-		<Window class="container" layout="vertical" onOpen="hideActionBar">
+		<Window class="container" layout="vertical" onOpen="doOpen">
+			<TitleControl platform="ios">
+				<View class="titleControl"></View>
+			</TitleControl>
+			<RightNavButton platform="ios">
+				<ImageView class="rightNavImg"/>
+			</RightNavButton>
+			<Menu id="menu" platform="android">
+				<MenuItem id="mn_settings" title="Impostazioni"/>
+			</Menu>
 			<ImageView id="bigLogo"/>
-			<View>
-				
-			</View>
-			<TextField id="username" value="rnduser_1418923442021"/>
-			<View class="subContainer">
+			<View class="textFieldContainer">
+				<TextField id="username" value="rnduser_1418923442021"/>
 				<TextField id="password" value="password"/>
-				<Label id="btn_login" onClick="do_login" />
+				<Button id="btn_login" onClick="do_login" />
+				<View id="ricordamiContainer">
+					<Widget id="ricordami" src="checkbox" value="false"/>
+					<Label class="ricordamiText">Ricordami</Label>
+				</View>
 			</View>
-			<View class="bottomContainer">
-				<Switch value="false" id="remember" onChange="manageRememberMe"/>
-				<Label id="forgotPassword"/>
-			</View>
+
 		</Window>
 	</NavigationWindow>
 </Alloy>
