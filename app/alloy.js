@@ -15,3 +15,29 @@ var zzAPI = require("ti.zz.api");
 ZZ = zzAPI.ZZ;
 
 Alloy.Globals.loading = Alloy.createWidget("nl.fokkezb.loading");
+
+Alloy.Models.Post = new Backbone.Model;
+
+var Timeline = Backbone.Collection.extend({
+
+	comparator : function(model) {
+		return -model.get('referenceTime');
+	}
+});
+
+Alloy.Collections.Timeline = new Timeline();
+Alloy.Collections.categorie = new Backbone.Collection;
+Alloy.Collections.aspettoEvento = new Backbone.Collection;
+Alloy.Collections.aspettiCashflow = new Backbone.Collection;
+Alloy.Collections.aspettiDocument = new Backbone.Collection;
+Alloy.Collections.aspettiLink = new Backbone.Collection;
+Alloy.Collections.aspettiNote = new Backbone.Collection;
+
+Alloy.Models.Template = new Backbone.Model;
+Alloy.Models.Post_template = new Backbone.Model;
+Alloy.Models.Event_template = new Backbone.Model;
+Alloy.Models.Cashflow_template = new Backbone.Model;
+Alloy.Models.Document_template = new Backbone.Model;
+Alloy.Models.Note_template = new Backbone.Model;
+Alloy.Models.Link_template = new Backbone.Model;
+Alloy.Models.Communication_template = new Backbone.Model;
