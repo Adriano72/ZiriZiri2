@@ -1,5 +1,5 @@
 <Alloy>
-	<NavigationWindow id="navWin" module="xp.ui">
+	
 		<Window class="container" layout="vertical" onOpen="doOpen">
 			<TitleControl platform="ios">
 				<View class="titleControl"></View>
@@ -22,5 +22,5 @@
 			</View>
 
 		</Window>
-	</NavigationWindow>
+	
 </Alloy>

@@ -7,7 +7,7 @@ if (OS_ANDROID) {
 
 function doOpen(evt) {
 	//Alloy.Globals.loading.show('Sincronizzazione', false);
-	Alloy.Globals.navMenu = $.navWin;
+	
 	if (OS_ANDROID) {
 		abx.title = "ZiriZiri";
 		abx.titleFont = "SourceSansPro-Regular.ttf";
@@ -53,14 +53,14 @@ function _loadTimelineAlreadyLoggedIn(utente) {
 
 		Ti.API.info("ZZ.API.Core.Posts.list success [response : " + JSON.stringify(posts) + "]");
 
-		Ti.App.Properties.setObject('timelineProp', posts);
+		//Ti.App.Properties.setObject('timelineProp', posts);
 
-		//Alloy.Collections.Timeline.reset(posts);
+		Alloy.Collections.Timeline.reset(posts);
 
-		//Ti.API.info("PROP TIMELINE: " + JSON.stringify(Ti.App.Properties.getObject('timelineProp')));
+		Ti.API.info("COLLECTION TIMELINE: " + JSON.stringify(Ti.App.Properties.getObject('timelineProp')));
 
-		var timeline_win = Alloy.createController("timeline").getView();
-		Alloy.Globals.navMenu.openWindow(timeline_win);
+		var timeline_win = Alloy.createController("timeline").getView().open();
+		//Alloy.Globals.navMenu.openWindow(timeline_win);
 
 	}, function(error) {
 
@@ -86,9 +86,28 @@ var _coreSessionLogInCallback = function(user) {
 		Ti.App.Properties.setString("user_password", $.password.value);
 
 	};
+	
+	ZZ.API.Core.Posts.list(function(posts) {
 
-	var timeline_win = Alloy.createController("timeline").getView();
-	Alloy.Globals.navMenu.openWindow(timeline_win);
+		Ti.API.info("ZZ.API.Core.Posts.list success [response : " + JSON.stringify(posts) + "]");
+
+		//Ti.App.Properties.setObject('timelineProp', posts);
+
+		Alloy.Collections.Timeline.reset(posts);
+
+		Ti.API.info("COLLECTION TIMELINE: " + JSON.stringify(Alloy.Collections.Timeline));
+
+		var timeline_win = Alloy.createController("timeline").getView();
+		//Alloy.Globals.navMenu.openWindow(timeline_win);
+
+	}, function(error) {
+
+		Ti.API.error("ZZ.API.Core.Posts.list error [error : " + error + "]");
+
+	});
+
+	var timeline_win = Alloy.createController("timeline").getView().open();
+	//Alloy.Globals.navMenu.openWindow(timeline_win);
 
 };
 
@@ -120,4 +139,4 @@ function manageRememberMe(e) {
 	rememberMe = e.value;
 }
 
-$.navWin.open();
+$.index.open();

@@ -1,8 +1,68 @@
 ".container": {
-	
+
 	backgroundColor: '#8BC7F2',
 	layout: "vertical",
 	exitOnClose: true,
-	
-	orientationModes: [Ti.UI.PORTRAIT]
+	top: Alloy.Globals.winTop,
+	orientationModes: []
+}
+
+'#timelineList': {
+	//top : '3',
+	separatorColor : '#CCC',
+    background : 'white',
+    width: Ti.UI.FILL,
+    height: Ti.UI.FILL
+},
+
+"#cat_icon": {
+	left: 0,
+	top: 0,
+	touchEnabled: false,
+	width: 70,
+	height: 70,
+	borderRadius: 4
+},
+
+"#symbol[platform=android]": {
+	left: 0
+}
+"#postData": {
+	top: 0,
+	left: 80,
+	right: 0,
+	bottom: 0,
+	layout: "vertical"
+},
+"#postData[platform=android]": {
+	left: 65
+},
+"#titolo": {
+	left: 0,
+	top: 4,
+	color: "black",
+	textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+	font: {
+		fontSize: 16
+	}
+},
+"#secondLine": {
+	left: 0,
+	right: 0,
+	layout: "horizontal"
+},
+".fieldLabel": {
+	color: "#999"
+},
+".line2": {
+	font: {
+		fontSize: 10
+	}
+},
+"#number": {
+	width: 30,
+	color: 'red'
+},
+"#mass": {
+	color: "blue"
 }
