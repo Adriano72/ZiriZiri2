@@ -1,24 +1,33 @@
 <Alloy>
 	<NavigationWindow id="navWin" module="xp.ui">
-		<Window id="timeline_win" class="container">
-			<ListView id="timelineList" defaultItemTemplate="timelineTemplate">
+		<Window id="timeline_win" class="container" title="Diario" onOpen="doOpen" onPostlayout="layoutComplete">
+			<TitleControl platform="ios">
+				<Label class="titleControl">Diario</Label>
+			</TitleControl>
+			<RightNavButton platform="ios">
+				<ImageView class="rightNavImg"/>
+			</RightNavButton>
+			<Menu id="menu" platform="android">
+				<MenuItem id="mn_settings" title="Impostazioni"/>
+			</Menu>
+			<ListView id="timelineList" defaultItemTemplate="timelineTemplate" onItemclick="dettaglioEvento">
 				<Templates>
-					<ItemTemplate name="timelineTemplate" height="120" width="Ti.UI.FILL">
+					<ItemTemplate name="timelineTemplate" height="90" width="90%">
 						<ImageView bindId="cat_icon" id="cat_icon" />
 						<View id="postData">
 							<Label bindId="titolo" id="titolo" />
 							<View id="secondLine">
-								<Label class="line2 fieldLabel" text="Number: " />
-								<Label class="line2" bindId="number" id="number" />
-								<Label class="line2 fieldLabel" text="Atomic Mass: " />
-								<Label class="line2" bindId="mass" id="mass" />
+								<ImageView id="cat_mini_icon"/>
+								<Label id="category" bindId="categoria"/>
 							</View>
+							<Label id="data_post" bindId="data"/>
+
 						</View>
 
 					</ItemTemplate>
 				</Templates>
 				<ListSection dataCollection="Timeline" dataTransform="transformData">
-					<ListItem cat_icon:image="{catImage}" titolo:text="{name}"></ListItem>
+					<ListItem cat_icon:image="{catImage}" titolo:text="{name}" categoria:text="{categoria}" data:text="{postDate}"></ListItem>
 				</ListSection>
 			</ListView>
 		</Window>

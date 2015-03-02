@@ -1,38 +1,13 @@
 ".container": {
-
-	backgroundColor: '#fff',
-	layout: "vertical",
-	exitOnClose: true,
-	//top: Alloy.Globals.winTop,
-	orientationModes: []
-}
-
-"#navWin": {
-	backgroundColor:"#fff",
-	swipeBack: false,
-	top: 20
-}
-
-".rightNavImg[platform=ios]": {
-	image: "/images/ico_rotella_celeste.png",
-	height: 15
-}
-
-"#mn_settings": {
-	icon: "/images/ico_rotella_celeste.png"
+	backgroundColor: "#FFF",
+	layout: "vertical"
 }
 
 
-'#timelineList': {
-	//top : '3',
-	separatorColor : '#CCC',
-    background : 'white',
-    width: Ti.UI.FILL,
-    height: Ti.UI.FILL
-},
-
-"ListItem": {
-	accessoryType: Titanium.UI.LIST_ACCESSORY_TYPE_DISCLOSURE
+"#dettaglio_post_container": {
+  height: 90,
+  top: 0,
+  width: Titanium.UI.FILL
 }
 
 "#cat_icon": {
@@ -44,9 +19,6 @@
 	borderRadius: 4
 },
 
-"#cat_icon[platform=android]": {
-	left: 0
-}
 
 "#postData": {
 	//width: 
@@ -57,9 +29,6 @@
 	layout: "vertical"
 },
 
-"#postData[platform=android]": {
-	left: 80
-},
 
 "#titolo": {
 	left: 0,
@@ -103,3 +72,13 @@
 "#category": {
 	left: 5
 }
+
+"#aspect_icon_toolbar": {
+	top: 10,
+	height: 45,
+	width: Ti.UI.FILL,
+	touchEnabled: false,
+	layout: "horizontal",
+	left: 5
+}
+

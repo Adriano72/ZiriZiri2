@@ -1,0 +1,28 @@
+<Alloy>
+	<Window id="dettaglio_post_win" class="container" title="Dettaglio Post">
+		<TitleControl platform="ios">
+			<Label class="titleControl">Dettaglio Post</Label>
+		</TitleControl>
+		<RightNavButton platform="ios">
+			<ImageView class="rightNavImg"/>
+		</RightNavButton>
+		<Menu id="menu" platform="android">
+			<MenuItem id="mn_settings" title="Impostazioni"/>
+		</Menu>
+		<View id="dettaglio_post_container">
+			<ImageView id="cat_icon" />
+			<View id="postData">
+				<Label id="titolo" />
+				<View id="secondLine">
+					<ImageView id="cat_mini_icon"/>
+					<Label id="category"/>
+				</View>
+				<Label id="data_post"/>
+
+			</View>
+
+		</View>
+		<View id="aspect_icon_toolbar"></View>
+
+	</Window>
+</Alloy>
