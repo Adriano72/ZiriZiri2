@@ -107,3 +107,8 @@ function dettaglioEvento(e) {
 	Alloy.Globals.navMenu.openWindow(dett_post_win);
  
 };
+
+$.timeline_win.addEventListener("close", function(){
+	
+    $.destroy();
+});

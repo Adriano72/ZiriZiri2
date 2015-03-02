@@ -3,9 +3,14 @@
 	layout: "vertical"
 }
 
+"#scrollableTimeline": {
+	height: Ti.UI.SIZE,
+	width: Ti.UI.FILL
+}
+
 
 "#dettaglio_post_container": {
-  height: 90,
+  height: 120,
   top: 0,
   width: Titanium.UI.FILL
 }

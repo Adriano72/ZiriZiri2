@@ -4,6 +4,13 @@ var moment = require('alloy/moment');
 moment.lang('it', Alloy.Globals.Moment_IT);
 moment.lang('it');
 
+Ti.API.info("COLLECTION TIMELINE: " + JSON.stringify(Alloy.Collections.Timeline));
+
+function doOpen(){
+	updateCollection();
+}
+
+/*
 var modJson = Alloy.Models.Post.toJSON();
 
 modJson.tmp_referenceTime = moment(Alloy.Models.Post.get("referenceTime")).format('LL');
@@ -26,8 +33,27 @@ modJson.aspects_note = checkAspects(modJson.aspects, "NOTEDATATYPE_CODE");
 modJson.aspects_link = checkAspects(modJson.aspects, "FILELINKDATATYPE_CODE");
 modJson.aspects_communication = checkAspects(modJson.aspects, "COMMUNICATIONDATATYPE_CODE");
 
+*/
 
 
+function transformData(model) {
+
+	var attrs = model.toJSON();
+
+	var diffTime = moment().diff(attrs.referenceTime, 'days');
+
+	attrs.catImage = ((_.isNull(attrs.category)) || (_.isNull(attrs.category.code)) ) ? '/images/android-robot.jpg' : '/images/cat_' + attrs.category.code.slice(0, 2) + ".png";
+	Ti.API.info("DETTAGLIO CAT IMAGE: "+attrs.catImage);
+	attrs.postDate = (diffTime > 1) ? moment(attrs.referenceTime).format('LL') : moment(attrs.referenceTime).fromNow();
+	attrs.categoria = (!_.isNull(attrs.category)) ? attrs.category.name : "";
+
+
+	attrs.tag = (_.isNull(attrs.tags)) ? "" : attrs.tags[0].name;
+
+	return attrs;
+};
+
+/*
 $.data_post.text = modJson.tmp_referenceTime;
 $.titolo.text = modJson.name;
 $.category.text = modJson.categoria;
@@ -164,4 +190,5 @@ function checkAspects(node, target) {
 	}
 
 };
+*/
 
