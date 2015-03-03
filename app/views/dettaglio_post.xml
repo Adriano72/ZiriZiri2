@@ -27,6 +27,10 @@
 			</View>
 		</ScrollableView>
 		<View id="aspect_icon_toolbar"></View>
+		<View id="aspect_detail_container">
+			
+		</View>
+		
 		
 	</Window>
 </Alloy>

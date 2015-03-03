@@ -83,8 +83,14 @@
 	top: 10,
 	height: 45,
 	width: Ti.UI.FILL,
-	touchEnabled: false,
+	//touchEnabled: false,
 	layout: "horizontal",
 	left: 5
+}
+
+"#aspect_detail_container": {
+	top: 5,
+	height: Ti.UI.FILL,
+	backgroundColor: "#F5F9FA"
 }
 

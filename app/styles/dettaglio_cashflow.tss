@@ -1,0 +1,76 @@
+"#scrollableCashflow": {
+	height: Ti.UI.SIZE,
+	width: Ti.UI.FILL
+}
+
+"#aspectScrollView": {
+	left: 5,
+	right: 5,
+	top: 5,
+	bottom: 5,
+	borderRadius: 5,
+	borderWidth: 1,
+	borderColor: "#CCCCCC",
+	backgroundColor: '#FFF',
+	//bottom:10,
+	height: Ti.UI.SIZE,
+	layout: "vertical",
+	touchEnabled: false
+}
+
+
+".eventContainer": {
+	//width: '100%',
+	left: 5,
+	right: 5,
+	top: 5,
+	bottom: 5,
+	borderRadius: 5,
+	borderWidth: 1,
+	borderColor: "#CCCCCC",
+	backgroundColor: '#FFF',
+	//bottom:10,
+	height: Ti.UI.SIZE,
+	layout: "vertical",
+	touchEnabled: false
+}
+
+".rowWrapper": {
+	layout: "horizontal",
+	top: 10
+}
+
+".label": {
+	touchEnabled: false,
+	font: {
+		//fontFamily: 'SourceSansPro-Regular',
+		fontSize: 18,
+	},
+	color: "#5FAEE3",
+	text: "Titolo",
+	height: Ti.UI.SIZE,
+	width: Ti.UI.SIZE,
+	left: 10
+}
+
+".value": {
+	touchEnabled: false,
+	font: {
+		//fontFamily: 'SourceSansPro-Regular',
+		fontSize: 18,
+	},
+	color: "#444",
+	height: Ti.UI.SIZE,
+	width: Ti.UI.SIZE,
+	left: 10,
+	ellipsize: true,
+	wordWrap: false
+}
+
+".newline": {
+	top: 30
+}
+
+".last": {
+	bottom: 20
+}

@@ -1,0 +1,48 @@
+<Alloy>
+	<ScrollableView id="scrollableCashflow" dataCollection="aspettiCashflow" dataFunction="dataResync" dataTransform="transformData">
+		<ScrollView id="aspectScrollView">
+
+			<View class="rowWrapper">
+				<Label class = "label">Importo:</Label>
+				<Label id = "importo" class = "value" text="{importo}"/>
+			</View>
+			<View class="rowWrapper">
+				<Label class = "label">Movimento:</Label>
+				<Label id = "movimento" class = "value" text="{movimento}"/>
+			</View>
+			<View class="rowWrapper">
+				<Label class = "label">Pagamento:</Label>
+				<Label id = "pagamento" class = "value"/>
+			</View>
+			<View class="rowWrapper newline">
+				<Label class = "label">Variabilità:</Label>
+				<Label id = "variabilita" class = "value"/>
+			</View>
+			<View class="rowWrapper">
+				<Label class = "label">Stato:</Label>
+				<Label id = "stato" class = "value"/>
+			</View>
+			<View class="rowWrapper">
+				<Label class = "label">Tipologia:</Label>
+				<Label id = "tipologia" class = "value"/>
+			</View>
+			<View class="rowWrapper">
+				<Label class = "label">Dichiarazione dei Redditi:</Label>
+				<Label id = "redditi" class = "value"/>
+			</View>
+			<View class="rowWrapper newline">
+				<Label class = "label">Data Valuta:</Label>
+				<Label id = "datavaluta" class = "value"/>
+			</View>
+			<View class="rowWrapper">
+				<Label class = "label">Data Scadenza:</Label>
+				<Label id = "datascadenza" class = "value"/>
+			</View>
+			<View class="rowWrapper last">
+				<Label class = "label">Data Pagamento:</Label>
+				<Label id = "datapagamento" class = "value"/>
+			</View>
+
+		</ScrollView>
+	</ScrollableView>
+</Alloy>
