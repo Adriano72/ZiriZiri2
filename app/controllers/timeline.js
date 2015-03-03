@@ -103,7 +103,7 @@ function dettaglioEvento(e) {
 	Alloy.Models.Post.set(Alloy.Collections.Timeline.at(e.itemIndex));
 	//Ti.API.info("STATO POST: " + JSON.stringify(Alloy.Models.Post));
 	
-	var dett_post_win = Alloy.createController("dettaglio_post").getView();
+	var dett_post_win = Alloy.createController("dettaglio_post", {postIndex: e.itemIndex}).getView();
 	Alloy.Globals.navMenu.openWindow(dett_post_win);
  
 };

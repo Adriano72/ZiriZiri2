@@ -11,7 +11,7 @@
 			<MenuItem id="mn_settings" title="Impostazioni"/>
 		</Menu>
 		
-		<ScrollableView id="scrollableTimeline" dataFunction="updateCollection" dataCollection="Timeline" dataTransform="transformData"  showPagingControl="true">
+		<ScrollableView id="scrollableTimeline" dataFunction="updateCollection" dataCollection="Timeline" dataTransform="transformData" showPagingControl="true">
 			<View id="dettaglio_post_container">
 				<ImageView id="cat_icon" image="{catImage}" />
 				<View id="postData">
@@ -26,7 +26,7 @@
 
 			</View>
 		</ScrollableView>
+		<View id="aspect_icon_toolbar"></View>
 		
-
 	</Window>
 </Alloy>
