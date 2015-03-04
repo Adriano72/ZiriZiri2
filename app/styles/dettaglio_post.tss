@@ -4,13 +4,23 @@
 }
 
 "#scrollableTimeline": {
-	height: 120,
+	top: 0,
+	height: 170,
 	width: Ti.UI.FILL
+}
+
+"#scrollableTimeline[platform=ios]": {
+	height: 190
+}
+
+"#dettaglio_post_container": {
+	top: 0,
+	height: Ti.UI.SIZE
 }
 
 "#cat_icon": {
 	left: 15,
-	//top: 0,
+	top: 20,
 	touchEnabled: false,
 	width: 70,
 	height: 70,
@@ -21,7 +31,7 @@
 "#postData": {
 	//width: 
 	//backgroundColor:"red",
-	
+	top: 15,
 	left: 95,
 	right: 0,
 	height: Ti.UI.SIZE,
@@ -80,16 +90,29 @@
 }
 
 "#aspect_icon_toolbar": {
-	top: 10,
+	top: 120,
+	left: 0,
 	height: 45,
 	width: Ti.UI.FILL,
+	//backgroundColor: "black",
 	//touchEnabled: false,
-	layout: "horizontal",
-	left: 5
+	layout: "horizontal"
+}
+
+".aspects_icons":{
+	//backgroundColor: "navy",
+	left: 25,
+	top: 10,
+	bottom: 10,
+	//image: '/images/android-robot.jpg',
+	//touchEnabled: false,
+	center: 45,
+	width: 25,
+	height: 25
 }
 
 "#aspect_detail_container": {
-	top: 5,
+	top: 0,
 	height: Ti.UI.FILL,
 	backgroundColor: "#F5F9FA"
 }

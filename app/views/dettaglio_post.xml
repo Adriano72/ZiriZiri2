@@ -1,5 +1,4 @@
 <Alloy>
-	
 	<Window id="dettaglio_post_win" class="container" title="Dettaglio Post" onOpen="doOpen">
 		<TitleControl platform="ios">
 			<Label class="titleControl">Dettaglio Post</Label>
@@ -10,8 +9,7 @@
 		<Menu id="menu" platform="android">
 			<MenuItem id="mn_settings" title="Impostazioni"/>
 		</Menu>
-		
-		<ScrollableView id="scrollableTimeline" dataFunction="updateCollection" dataCollection="Timeline" dataTransform="transformData" showPagingControl="true">
+		<ScrollableView id="scrollableTimeline" dataFunction="updateCollection" dataCollection="Timeline" dataTransform="transformData" showPagingControl="true" onScrollend="scrollendEvent">
 			<View id="dettaglio_post_container">
 				<ImageView id="cat_icon" image="{catImage}" />
 				<View id="postData">
@@ -23,14 +21,25 @@
 					<Label id="data_post" text="{postDate}"/>
 
 				</View>
+				<View id="aspect_icon_toolbar">
+					<ImageView class="aspects_icons first" id="event_icon" image="{iconEvent}"/>
+					<ImageView class="aspects_icons" id="cashflow_icon" onClick="dettCashflow" image="{iconCashFlow}"/>
+					<ImageView class="aspects_icons" id="document_icon" onClick="dettDocument" image="{iconDocument}"/>
+					<ImageView class="aspects_icons" id="note_icon" image="{iconNote}"/>
+					<ImageView class="aspects_icons" id="link_icon" image="{iconLink}"/>
+					<ImageView class="aspects_icons" id="communication_icon" image="{iconCommunication}"/>
+					<!--<Label id = "aspects" text="{aspects}"/>-->
+					<View class="show_all_container">
+						<View class="push_to_right">
+							<!--<Label  id="show_all_text"/>-->
+							<ImageView  id="show_all_icon"/>
+						</View>
+					</View>
 
+				</View>
 			</View>
 		</ScrollableView>
-		<View id="aspect_icon_toolbar"></View>
-		<View id="aspect_detail_container">
-			
-		</View>
-		
-		
+		<View id="aspect_detail_container"></View>
+
 	</Window>
 </Alloy>

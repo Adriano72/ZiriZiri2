@@ -6,13 +6,18 @@ moment.lang('it');
 
 Ti.API.info("POST INDEX: " + args.postIndex);
 
-var postIndex = args.postIndex;
+
 
 function doOpen() {
 	updateCollection();
+	var postIndex = args.postIndex;
 	$.scrollableTimeline.setCurrentPage(postIndex);
-	updateIconToolbar();
+	//updateIconToolbar();
 }
+
+
+
+
 
 function transformData(model) {
 
@@ -26,119 +31,73 @@ function transformData(model) {
 	attrs.categoria = (!_.isNull(attrs.category)) ? attrs.category.name : "";
 
 	attrs.tag = (_.isNull(attrs.tags)) ? "" : attrs.tags[0].name;
+	
+	attrs.iconEvent = checkAspects(attrs.aspects, "EVENTDATATYPE_CODE").icona;
+	attrs.iconCashFlow = checkAspects(attrs.aspects, "CASHFLOWDATATYPE_CODE").icona;
+	attrs.iconDocument = checkAspects(attrs.aspects, "FILEDOCUMENTDATATYPE_CODE").icona;
+	attrs.iconNote = checkAspects(attrs.aspects, "NOTEDATATYPE_CODE").icona;
+	attrs.iconLink = checkAspects(attrs.aspects, "FILELINKDATATYPE_CODE").icona;
+	attrs.iconCommunication = checkAspects(attrs.aspects, "COMMUNICATIONDATATYPE_CODE").icona;
 
 	return attrs;
 };
 
 
-$.scrollableTimeline.addEventListener("scrollend", function(e) {
+function scrollendEvent(e) {
+	
 	Ti.API.info("CURRENT  PAGE: " + e.currentPage);
-	updateIconToolbar();
+	
+	$.aspect_detail_container.removeAllChildren();
+	
+	
+	//updateIconToolbar();
 
-});
+};
 
-function updateIconToolbar() {
+var dettaglioCashflow = Alloy.createController("dettaglio_cashflow").getView();
+var dettaglioDocument = Alloy.createController("dettaglio_document").getView();
 
-	$.aspect_icon_toolbar.removeAllChildren();
-
+function dettCashflow(){
+	
+	$.aspect_detail_container.removeAllChildren();
+	
 	Alloy.Models.Post.set(Alloy.Collections.Timeline.at($.scrollableTimeline.currentPage));
-
+	
 	var modJson = Alloy.Models.Post.toJSON();
-
-	modJson.aspects_event = checkAspects(modJson.aspects, "EVENTDATATYPE_CODE");
-	modJson.aspects_cashFlow = checkAspects(modJson.aspects, "CASHFLOWDATATYPE_CODE");
-	modJson.aspects_document = checkAspects(modJson.aspects, "FILEDOCUMENTDATATYPE_CODE");
-	modJson.aspects_note = checkAspects(modJson.aspects, "NOTEDATATYPE_CODE");
-	modJson.aspects_link = checkAspects(modJson.aspects, "FILELINKDATATYPE_CODE");
-	modJson.aspects_communication = checkAspects(modJson.aspects, "COMMUNICATIONDATATYPE_CODE");
-
-	if (modJson.aspects_event) {
-		var aspect_icon = Ti.UI.createImageView({
-			image : modJson.aspects_event.icona,
-			left : 10,
-			top : 10,
-			width : 25,
-			height : 25
-		});
-		aspect_icon.addEventListener("click", function(){
-			Ti.API.info("OGGETTO ASPETTO: "+JSON.stringify(modJson.aspects_event.arrayAspetti));
-		});
-		$.aspect_icon_toolbar.add(aspect_icon);
-	}
-
-	if (modJson.aspects_cashFlow) {
-		var aspect_icon = Ti.UI.createImageView({
-			image : modJson.aspects_cashFlow.icona,
-			left : 10,
-			top : 10,
-			width : 25,
-			height : 25
-		});
-		aspect_icon.addEventListener("click", function(){
-			Alloy.Collections.aspettiCashflow.reset(modJson.aspects_cashFlow.arrayAspetti);
-			Ti.API.info("OGGETTO ASPETTO: "+JSON.stringify(modJson.aspects_cashFlow.arrayAspetti));
-			var dettaglioCashflow = Alloy.createController("dettaglio_cashflow").getView();
-			$.aspect_detail_container.add(dettaglioCashflow);
-		});
-		$.aspect_icon_toolbar.add(aspect_icon);
-	}
-
-	if (modJson.aspects_document) {
-		var aspect_icon = Ti.UI.createImageView({
-			image : modJson.aspects_document.icona,
-			left : 10,
-			top : 10,
-			width : 25,
-			height : 25
-		});
-		aspect_icon.addEventListener("click", function(){
-			Ti.API.info("OGGETTO ASPETTO: "+JSON.stringify(modJson.aspects_document.arrayAspetti));
-		});
-		$.aspect_icon_toolbar.add(aspect_icon);
-	}
-
-	if (modJson.aspects_note) {
-		var aspect_icon = Ti.UI.createImageView({
-			image : modJson.aspects_note.icona,
-			left : 10,
-			top : 10,
-			width : 25,
-			height : 25
-		});
-		aspect_icon.addEventListener("click", function(){
-			Ti.API.info("OGGETTO ASPETTO: "+JSON.stringify(modJson.aspects_note.arrayAspetti));
-		});
-		$.aspect_icon_toolbar.add(aspect_icon);
-	}
-
-	if (modJson.aspects_link) {
-		var aspect_icon = Ti.UI.createImageView({
-			image : modJson.aspects_link.icona,
-			left : 10,
-			top : 10,
-			width : 25,
-			height : 25
-		});
-		aspect_icon.addEventListener("click", function(){
-			Ti.API.info("OGGETTO ASPETTO: "+JSON.stringify(modJson.aspects_link.arrayAspetti));
-		});
-		$.aspect_icon_toolbar.add(aspect_icon);
-	}
-
-	if (modJson.aspects_communication) {
-		var aspect_icon = Ti.UI.createImageView({
-			image : modJson.aspects_communication.icona,
-			left : 10,
-			top : 10,
-			width : 25,
-			height : 25
-		});
-		aspect_icon.addEventListener("click", function(){
-			Ti.API.info("OGGETTO ASPETTO: "+JSON.stringify(modJson.aspects_communication.arrayAspetti));
-		});
-		$.aspect_icon_toolbar.add(aspect_icon);
-	}
+	
+	var aspettiCashflow = _.filter(modJson.aspects, function(value) {
+		return value.kind.code == "CASHFLOWDATATYPE_CODE";
+	});
+	
+	Alloy.Collections.aspettiCashflow.reset(aspettiCashflow);
+	
+	
+	$.aspect_detail_container.add(dettaglioCashflow);
+	//var dettaglioDocument = Alloy.createController("dettaglio_document").getView();
+	
 }
+
+function dettDocument(){
+	
+	$.aspect_detail_container.removeAllChildren();
+	
+	Alloy.Models.Post.set(Alloy.Collections.Timeline.at($.scrollableTimeline.currentPage));
+	
+	var modJson = Alloy.Models.Post.toJSON();
+	
+	var aspDocument = _.filter(modJson.aspects, function(value) {
+		return value.kind.code == "FILEDOCUMENTDATATYPE_CODE";
+	});
+	
+	Alloy.Collections.aspettiDocument.reset(aspDocument);
+	
+	
+	$.aspect_detail_container.add(dettaglioDocument);
+	//var dettaglioDocument = Alloy.createController("dettaglio_document").getView();
+	
+}
+
+
 
 function checkAspects(node, target) {
 
@@ -150,7 +109,46 @@ function checkAspects(node, target) {
 
 	if (_.isUndefined(node) || aspettiTrovati.length == 0) {
 
-		return (null);
+		switch(target) {
+		case "EVENTDATATYPE_CODE":
+			return ( {
+				icona : '/images/kernel-event-off.png',
+				tipoAspetto: "EVENTDATATYPE_CODE"
+			});
+			break;
+		case "CASHFLOWDATATYPE_CODE":
+			return ( {
+				icona : '/images/kernel-finance-off.png',
+				tipoAspetto: "CASHFLOWDATATYPE_CODE"
+			});
+			break;
+		case "FILEDOCUMENTDATATYPE_CODE":
+			return ( {
+				icona : '/images/kernel-document-off.png',
+				tipoAspetto: "FILEDOCUMENTDATATYPE_CODE"
+			});
+			break;
+		case "NOTEDATATYPE_CODE":
+			return ( {
+				icona : '/images/kernel-note-off.png',
+				tipoAspetto: "NOTEDATATYPE_CODE"
+			});
+			break;
+		case "FILELINKDATATYPE_CODE":
+			return ( {
+				icona : '/images/kernel-link-off.png',
+				tipoAspetto: "FILELINKDATATYPE_CODE"
+			});
+			break;
+		case "COMMUNICATIONDATATYPE_CODE":
+			return ( {
+				icona : '/images/kernel-comunicazioni-off.png',
+				tipoAspetto: "COMMUNICATIONDATATYPE_CODE"
+			});
+			break;
+		default:
+			return;
+		}
 
 	} else {
 
@@ -209,4 +207,10 @@ function checkAspects(node, target) {
 	}
 
 };
+
+$.dettaglio_post_win.addEventListener("close", function(){
+	//$.scrollableCashflow.removeAllChildren();
+
+    $.destroy();
+});
 

@@ -1,4 +1,4 @@
-"#scrollableCashflow": {
+"#scrollableDocument": {
 	//height: Ti.UI.SIZE,
 	//width: Ti.UI.FILL
 }
@@ -14,6 +14,20 @@
 	layout: "vertical"
 }
 
+"#img_preview": {
+	
+	borderColor: "#000000",
+	
+	top: 10,
+	left: 5,
+	right: 5,
+	//width: Alloy.Globals.screenWidth,
+	height: 200
+	//backgroundColor: '#C8DDE8',
+	
+
+}
+
 ".rowWrapper": {
 	layout: "horizontal",
 	top: 10,
@@ -23,7 +37,7 @@
 ".label": {
 	touchEnabled: false,
 	font: {
-		//fontFamily: 'SourceSansPro-Regular',
+		fontFamily: 'SourceSansPro-Regular',
 		fontSize: 18,
 	},
 	color: "#5FAEE3",
@@ -36,7 +50,7 @@
 ".value": {
 	touchEnabled: false,
 	font: {
-		//fontFamily: 'SourceSansPro-Regular',
+		fontFamily: 'SourceSansPro-Regular',
 		fontSize: 18,
 	},
 	color: "#444",
@@ -54,3 +68,5 @@
 ".last": {
 	bottom: 20
 }
+
+
