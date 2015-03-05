@@ -32,6 +32,8 @@
 },
 
 "ListItem": {
+	
+	backgroundColor: "#f5f6f7",
 	accessoryType: Titanium.UI.LIST_ACCESSORY_TYPE_DISCLOSURE
 }
 

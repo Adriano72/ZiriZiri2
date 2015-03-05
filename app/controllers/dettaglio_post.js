@@ -22,6 +22,8 @@ function doOpen() {
 function transformData(model) {
 
 	var attrs = model.toJSON();
+	
+	Ti.API.info("POST DETTAGLIO: "+JSON.stringify(attrs));
 
 	var diffTime = moment().diff(attrs.referenceTime, 'days');
 
@@ -56,6 +58,31 @@ function scrollendEvent(e) {
 
 var dettaglioCashflow = Alloy.createController("dettaglio_cashflow").getView();
 var dettaglioDocument = Alloy.createController("dettaglio_document").getView();
+
+
+function dettEvento(){
+	
+	$.aspect_detail_container.removeAllChildren();
+	
+	Alloy.Models.Post.set(Alloy.Collections.Timeline.at($.scrollableTimeline.currentPage));
+	
+	var modJson = Alloy.Models.Post.toJSON();
+	
+	Ti.API.info("MODJSON E VENTO: "+JSON.stringify(modJson));
+	
+	var aspettoEvento = _.find(modJson.aspects, function(value) {
+		return value.kind.code == "EVENTDATATYPE_CODE";
+	});
+	
+	Alloy.Collections.aspettoEvento.reset(aspettoEvento);
+	
+	var dettaglioEvento = Alloy.createController("dettaglio_evento").getView();
+	
+	
+	$.aspect_detail_container.add(dettaglioEvento);
+	//var dettaglioDocument = Alloy.createController("dettaglio_document").getView();
+	
+}
 
 function dettCashflow(){
 	

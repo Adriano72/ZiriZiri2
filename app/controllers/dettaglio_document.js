@@ -1,6 +1,6 @@
 var args = arguments[0] || {};
 
-Ti.API.info("CASHFLOW COLLECTION: "+Alloy.Collections.aspettiCashflow.length);
+Ti.API.info("DOCUMENT COLLECTION LENGTH d: "+Alloy.Collections.aspettiCashflow.length);
 
 //var ImageFactory = require('ti.imagefactory');
 
@@ -8,7 +8,7 @@ function transform(model) {
 	
 	var attrs = model.toJSON();
 	
-	Ti.API.info("MODELLO STRINGIFYZZAT DOCUMENT: "+JSON.stringify(attrs));
+	Ti.API.info("MODELLO STRINGIFYZZATO DOCUMENT: "+JSON.stringify(attrs));
 	
 	//var selectedAspect = Alloy.Collections.aspettiDocument.at($.scrollableDocument.currentPage).attributes;
 	var immagine;

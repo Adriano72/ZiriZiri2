@@ -22,7 +22,7 @@
 
 				</View>
 				<View id="aspect_icon_toolbar">
-					<ImageView class="aspects_icons first" id="event_icon" image="{iconEvent}"/>
+					<ImageView class="aspects_icons first" id="event_icon" onClick="dettEvento" image="{iconEvent}"/>
 					<ImageView class="aspects_icons" id="cashflow_icon" onClick="dettCashflow" image="{iconCashFlow}"/>
 					<ImageView class="aspects_icons" id="document_icon" onClick="dettDocument" image="{iconDocument}"/>
 					<ImageView class="aspects_icons" id="note_icon" image="{iconNote}"/>

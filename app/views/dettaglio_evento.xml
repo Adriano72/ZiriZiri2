@@ -1,0 +1,24 @@
+<Alloy>
+	
+		<ScrollView id="aspectScrollView">
+
+			<View id="mapview" ns="Alloy.Globals.Map"/>
+			<View class="aspectEventContainer">
+
+				
+				<View class="row">
+					<View class="dataWrapper">
+						<Label class="dataDisplay first" id="dataInizio"/>
+						<Label class="dataDisplay" id="dataFine"/>
+
+					</View>
+					<View class="dataWrapper">
+						<Label class="dataDisplay" id="location"/>
+					</View>
+				</View>
+
+			</View>
+
+		</ScrollView>
+
+</Alloy>

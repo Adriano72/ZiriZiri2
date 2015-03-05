@@ -1,0 +1,107 @@
+"#aspectScrollView": {
+	width: "95%",
+	//borderRadius: 5,
+	//borderWidth: 1,
+	//borderColor: "#CCCCCC",
+	backgroundColor: 'transparent',
+	//bottom:10,
+	//height: Ti.UI.SIZE,
+	layout: "vertical"
+}
+
+".eventContainer": {
+	//width: '100%',
+	left: 5,
+	right: 5,
+	top: 5,
+	//borderRadius: 5,
+	borderWidth: 1,
+	borderColor: "#CCCCCC",
+	backgroundColor: '#FFF',
+	//bottom:10,
+	height: Ti.UI.SIZE,
+	layout: "vertical"
+	//touchEnabled: false
+}
+
+
+"#mapview": {
+	height: 130,
+	top: 5,
+	right: 5,
+	left: 5,
+	//borderRadius: 5,
+	borderWidth: 1,
+	borderColor: "#CCCCCC"
+}
+
+"#container": {
+	
+	//layout: 'horizontal',
+	height: Ti.UI.SIZE,
+	width: Ti.UI.FILL
+	
+}
+
+".row": {
+	//backgroundColor: 'pink',
+	className: 'itemRow',
+	layout: "vertical",
+	width: Ti.UI.FILL
+}
+
+".aspectEventContainer": {
+	//width: '100%',
+	//borderRadius: 5,
+	//backgroundColor: 'lime',
+	top: 5,
+	bottom:5,
+	width: Ti.UI.FILL,
+	height: Ti.UI.SIZE,
+	touchEnabled: false,
+	layout: 'horizontal'
+}
+
+".aspectEventIcon": {
+	top:5,
+	left: 5,
+	width: 25,
+	height: 25
+}
+"#eventIcona": {
+	backgroundImage: '/images/kernel-event-on.png'
+}
+
+".dataWrapper": {
+	top:2,
+	left: 2,
+	layout: "horizontal",
+	height: Ti.UI.SIZE,
+	width: Ti.UI.FILL
+}
+
+".dataDisplay": {
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 18,
+	},
+	color: "#444",
+	backgroundColor: 'white',
+	textAlign: 'center',
+	height: Ti.UI.SIZE,
+	width: 140
+	
+}
+
+"#location": {
+	color: "#999",
+	left: 5,
+	width: Ti.UI.FILL,
+	wordWrap: false,
+	ellipsize: true
+}
+
+".first": {
+	left: 0
+
+}
