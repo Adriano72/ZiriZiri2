@@ -109,7 +109,7 @@ function extractCtegoryIcons(code) {
 	case "04":
 		return ( {
 			icona : icons.home,
-			colore : "#1ea500"
+			colore : "#ffdd01"
 		});
 		break;
 	case "05":
