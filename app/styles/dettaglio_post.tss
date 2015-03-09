@@ -29,7 +29,7 @@
 
 
 "#postData": {
-	//width: 
+	//width:
 	//backgroundColor:"red",
 	top: 15,
 	left: 95,
@@ -56,9 +56,7 @@
 	}
 },
 
-"#titolo[platform=android]": {
-	//top:20
-}
+"#titolo[platform=android]": {}
 
 "#secondLine": {
 	left: 0,
@@ -82,7 +80,11 @@
 	touchEnabled: false,
 	left: 0,
 	width: 17,
-	height: 17
+	height: 17,
+	font: {
+		fontFamily: 'AppIcons',
+		fontSize: 14
+	}
 }
 
 "#category": {

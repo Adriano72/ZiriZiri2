@@ -15,7 +15,7 @@
 				<View id="postData">
 					<Label id="titolo" text="{name}" />
 					<View id="secondLine">
-						<ImageView id="cat_mini_icon"/>
+						<Label id="cat_mini_icon" text ="{catMiniIcon}"/>
 						<Label id="category" text="{categoria}"/>
 					</View>
 					<Label id="data_post" text="{postDate}"/>
@@ -40,6 +40,6 @@
 			</View>
 		</ScrollableView>
 		<View id="aspect_detail_container"></View>
-
+		
 	</Window>
 </Alloy>

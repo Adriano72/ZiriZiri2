@@ -2,9 +2,9 @@
 	
 	backgroundColor: '#8BC7F2',
 	layout: "vertical",
-	exitOnClose: true,
+	
 	navBarHidden: true,
-	//exitOnClose: true,
+	exitOnClose: true,
 	orientationModes: [Ti.UI.PORTRAIT]
 }
 

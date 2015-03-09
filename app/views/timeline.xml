@@ -1,6 +1,6 @@
 <Alloy>
 	<NavigationWindow id="navWin" module="xp.ui">
-		<Window id="timeline_win" class="container" title="Diario" onOpen="doOpen" onPostlayout="layoutComplete">
+		<Window id="timeline_win" class="container" title="Diario" onOpen="doOpen" onPostlayout="layoutComplete" onAndroid:back="manageClose">
 			<TitleControl platform="ios">
 				<Label class="titleControl">Diario</Label>
 			</TitleControl>
@@ -8,12 +8,14 @@
 				<ImageView class="rightNavImg"/>
 			</RightNavButton>
 			<Menu id="menu" platform="android">
-				<MenuItem id="mn_settings" title="Impostazioni"/>
+				<MenuItem id="mn_settings" title="Logout" onClick="f_logout"/>
 			</Menu>
 			<ListView id="timelineList" defaultItemTemplate="timelineTemplate" onItemclick="dettaglioEvento">
 				<Templates>
 					<ItemTemplate name="timelineTemplate" height="90" width="90%">
-						<ImageView bindId="cat_icon" id="cat_icon" />
+						<View id="cat_icon_container" bindId="catColor">
+							<Label bindId="cat_icon" id="catIcon"/>
+						</View>
 						<View id="postData">
 							<Label bindId="titolo" id="titolo" />
 							<View id="secondLine">
@@ -27,9 +29,10 @@
 					</ItemTemplate>
 				</Templates>
 				<ListSection dataCollection="Timeline" dataTransform="transformData">
-					<ListItem cat_icon:image="{catImage}" titolo:text="{name}" categoria:text="{categoria}" data:text="{postDate}"></ListItem>
+					<ListItem cat_icon:text="{catImage}" catColor:backgroundColor="{cat_color}" titolo:text="{name}" categoria:text="{categoria}" data:text="{postDate}"></ListItem>
 				</ListSection>
 			</ListView>
+
 		</Window>
 	</NavigationWindow>
 </Alloy>

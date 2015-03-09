@@ -1,14 +1,14 @@
 ".container": {
 
-	backgroundColor: '#fff',
+	backgroundColor: '#f5f6f7',
 	layout: "vertical",
-	exitOnClose: true,
+	//exitOnClose: true,
 	//top: Alloy.Globals.winTop,
 	orientationModes: []
 }
 
 "#navWin": {
-	backgroundColor:"#fff",
+	backgroundColor: "#fff",
 	swipeBack: false,
 	top: 20
 }
@@ -25,19 +25,19 @@
 
 '#timelineList': {
 	//top : '3',
-	separatorColor : '#CCC',
-    background : 'white',
-    width: Ti.UI.FILL,
-    height: Ti.UI.FILL
+	separatorColor: '#CCC',
+	background: 'white',
+	width: Ti.UI.FILL,
+	height: Ti.UI.FILL
 },
 
 "ListItem": {
-	
+
 	backgroundColor: "#f5f6f7",
 	accessoryType: Titanium.UI.LIST_ACCESSORY_TYPE_DISCLOSURE
 }
 
-"#cat_icon": {
+"#cat_icon_container": {
 	left: 15,
 	//top: 0,
 	touchEnabled: false,
@@ -46,12 +46,21 @@
 	borderRadius: 4
 },
 
-"#cat_icon[platform=android]": {
+"#catIcon": {
+
+	color: "#fff",
+	font: {
+		fontFamily: 'AppIcons',
+		fontSize: 32
+	}
+}
+
+"#cat_icon_container[platform=android]": {
 	left: 0
 }
 
 "#postData": {
-	//width: 
+	//width:
 	//backgroundColor:"red",
 	left: 95,
 	right: 0,

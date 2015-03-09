@@ -79,10 +79,10 @@
         <module platform="android">com.alcoapps.actionbarextras</module>
         <module platform="iphone">ti.map</module>
         <module platform="android">ti.map</module>
-        <module platform="android">ti.zz.api</module>
-        <module platform="iphone">ti.zz.api</module>
         <module platform="iphone">ti.imagefactory</module>
         <module platform="android">ti.imagefactory</module>
+        <module platform="android">ti.zz.api</module>
+        <module platform="iphone">ti.zz.api</module>
     </modules>
     <deployment-targets>
         <target device="android">true</target>

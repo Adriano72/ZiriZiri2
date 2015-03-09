@@ -15,20 +15,18 @@ function doOpen() {
 	//updateIconToolbar();
 }
 
-
-
-
-
 function transformData(model) {
 
 	var attrs = model.toJSON();
+	
+	attrs.catMiniIcon = icons.tags;
 	
 	Ti.API.info("POST DETTAGLIO: "+JSON.stringify(attrs));
 
 	var diffTime = moment().diff(attrs.referenceTime, 'days');
 
 	attrs.catImage = ((_.isNull(attrs.category)) || (_.isNull(attrs.category.code)) ) ? '/images/android-robot.jpg' : '/images/cat_' + attrs.category.code.slice(0, 2) + ".png";
-	Ti.API.info("DETTAGLIO CAT IMAGE: " + attrs.catImage);
+	//Ti.API.info("DETTAGLIO CAT IMAGE: " + attrs.catImage);
 	attrs.postDate = (diffTime > 1) ? moment(attrs.referenceTime).format('LL') : moment(attrs.referenceTime).fromNow();
 	attrs.categoria = (!_.isNull(attrs.category)) ? attrs.category.name : "";
 

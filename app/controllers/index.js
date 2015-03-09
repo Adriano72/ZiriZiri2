@@ -5,13 +5,15 @@ if (OS_ANDROID) {
 	var abx = require('com.alcoapps.actionbarextras');
 }
 
+var loadTabData = require("loadTabulatedData");
+
 function doOpen(evt) {
 	//Alloy.Globals.loading.show('Sincronizzazione', false);
-	
 	if (OS_ANDROID) {
 		abx.title = "ZiriZiri";
 		abx.titleFont = "SourceSansPro-Regular.ttf";
 		abx.titleColor = "#4A678C";
+	
 
 		//actionBarHelper.setIcon('/drawericonw@2x.png');
 
@@ -47,19 +49,17 @@ function _loadTimelineAlreadyLoggedIn(utente) {
 
 	Ti.API.info("**** WELCOME BACK: " + utente.username);
 
-	var loadTabData = require("loadTabulatedData");
-
 	loadTabData.loadTabData();
 
 	ZZ.API.Core.Posts.list(function(posts) {
 
-		Ti.API.info("ZZ.API.Core.Posts.list success [response : " + JSON.stringify(posts) + "]");
+		//Ti.API.info("ZZ.API.Core.Posts.list success [response : " + JSON.stringify(posts) + "]");
 
 		//Ti.App.Properties.setObject('timelineProp', posts);
 
 		Alloy.Collections.Timeline.reset(posts);
 
-		Ti.API.info("COLLECTION TIMELINE: " + JSON.stringify(Alloy.Collections.Timeline));
+		//Ti.API.info("COLLECTION TIMELINE: " + JSON.stringify(Alloy.Collections.Timeline));
 
 		//var timeline_win = Alloy.createController("timeline").getView().open();
 		//Alloy.Globals.navMenu.openWindow(timeline_win);
@@ -81,9 +81,9 @@ $.ricordami.getView().addEventListener('change', function(e) {
 
 var _coreSessionLogInCallback = function(user) {
 	
-	
-
 	Ti.API.info("ZZ.API.Core.Session.logIn success [user : " + JSON.stringify(user) + "]");
+	
+	loadTabData.loadTabData();
 
 	if (rememberMe) {
 
@@ -95,14 +95,14 @@ var _coreSessionLogInCallback = function(user) {
 	
 	ZZ.API.Core.Posts.list(function(posts) {
 
-		Ti.API.info("ZZ.API.Core.Posts.list success [response : " + JSON.stringify(posts) + "]");
+		//Ti.API.info("ZZ.API.Core.Posts.list success [response : " + JSON.stringify(posts) + "]");
 
 		//Ti.App.Properties.setObject('timelineProp', posts);
 
 		Alloy.Collections.Timeline.reset(posts);
 		
 
-		Ti.API.info("COLLECTION TIMELINE: " + JSON.stringify(Alloy.Collections.Timeline));
+		//Ti.API.info("COLLECTION TIMELINE: " + JSON.stringify(Alloy.Collections.Timeline));
 
 		//var timeline_win = Alloy.createController("timeline").getView();
 		//Alloy.Globals.navMenu.openWindow(timeline_win);

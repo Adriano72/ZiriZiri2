@@ -1,5 +1,6 @@
 exports.loadTabData = function() {
 
+	Ti.API.info("*************LOAD TAB DATA ****************");
 
 	f1();
 
@@ -7,7 +8,7 @@ exports.loadTabData = function() {
 
 		ZZ.API.Core.Post.Templates.list(function(templates) {
 
-			Ti.API.info("ZZ.API.Core.Post.Templates.list success [response : " + JSON.stringify(templates) + "]");
+			//Ti.API.info("ZZ.API.Core.Post.Templates.list success [response : " + JSON.stringify(templates) + "]");
 
 			var template = templates[0];
 
@@ -48,7 +49,7 @@ exports.loadTabData = function() {
 			});
 
 			Alloy.Models.Cashflow_template.set(templateCashflow[0]);
-			Ti.API.info("_____||||||| TEMPLATE CASHFLOW: "+JSON.stringify(templateCashflow[0]));
+			//Ti.API.info("_____||||||| TEMPLATE CASHFLOW: "+JSON.stringify(templateCashflow[0]));
 
 			Alloy.Models.Cashflow_template.unset("id");
 
@@ -64,7 +65,7 @@ exports.loadTabData = function() {
 
 			Alloy.Models.Document_template.unset("id");
 
-			Ti.API.info("DOCUMENT  TEMPLATE: " + JSON.stringify(Alloy.Models.Document_template));
+			//Ti.API.info("DOCUMENT  TEMPLATE: " + JSON.stringify(Alloy.Models.Document_template));
 			
 			// ***** EXTRACT LINK TEMPLATE *****************
 
@@ -78,7 +79,7 @@ exports.loadTabData = function() {
 
 			Alloy.Models.Link_template.unset("id");
 			
-			Ti.API.info("_____||||||| TEMPLATE LINK: "+JSON.stringify(Alloy.Models.Link_template));
+			//Ti.API.info("_____||||||| TEMPLATE LINK: "+JSON.stringify(Alloy.Models.Link_template));
 			///////
 
 			_.defer(f2);
@@ -120,7 +121,7 @@ exports.loadTabData = function() {
 
 			//Ti.App.Properties.setObject("elencoCategorie", objCategorie);
 
-			Ti.API.info("************  COLLECTION CATEGORIE: " + JSON.stringify(Alloy.Collections.categorie));
+			//Ti.API.info("************  COLLECTION CATEGORIE: " + JSON.stringify(Alloy.Collections.categorie));
 
 			_.defer(f3);
 
@@ -136,7 +137,7 @@ exports.loadTabData = function() {
 
 		ZZ.API.Finance.CashSources.list(function(cashsources) {
 
-			Ti.API.info("ZZ.API.Finance.CashSources.list success [response : " + JSON.stringify(cashsources) + "]");
+			//Ti.API.info("ZZ.API.Finance.CashSources.list success [response : " + JSON.stringify(cashsources) + "]");
 
 			_.defer(f4);
 
@@ -152,7 +153,7 @@ exports.loadTabData = function() {
 
 		ZZ.API.Finance.PaymentModes.list(function(paymentmodes) {
 
-			Ti.API.info("ZZ.API.Finance.PaymentModes.list success [response : " + JSON.stringify(paymentmodes) + "]");
+			//Ti.API.info("ZZ.API.Finance.PaymentModes.list success [response : " + JSON.stringify(paymentmodes) + "]");
 
 			_.defer(f5);
 
@@ -168,7 +169,7 @@ exports.loadTabData = function() {
 
 		ZZ.API.Finance.CashflowStatuses.list(function(cashflowstatuses) {
 
-			Ti.API.info("ZZ.API.Finance.CashflowStatuses.list success [response : " + JSON.stringify(cashflowstatuses) + "]");
+			//Ti.API.info("ZZ.API.Finance.CashflowStatuses.list success [response : " + JSON.stringify(cashflowstatuses) + "]");
 
 			var objStatoMovimento = [];
 
@@ -210,7 +211,7 @@ exports.loadTabData = function() {
 
 		ZZ.API.Finance.PaymentTakingTools.list(function(paymenttakingtools) {
 
-			Ti.API.info("ZZ.API.Finance.PaymentTakingTools.list success [response : " + JSON.stringify(paymenttakingtools) + "]");
+			//Ti.API.info("ZZ.API.Finance.PaymentTakingTools.list success [response : " + JSON.stringify(paymenttakingtools) + "]");
 
 			var objPagamIncasso = [];
 
@@ -232,7 +233,7 @@ exports.loadTabData = function() {
 
 			Ti.App.Properties.setObject("elencoPagamIncasso", objPagamIncasso);
 
-			Ti.API.info("OBJ PAGAM INCASSO: " + JSON.stringify(Ti.App.Properties.getObject("elencoPagamIncasso")));
+			//Ti.API.info("OBJ PAGAM INCASSO: " + JSON.stringify(Ti.App.Properties.getObject("elencoPagamIncasso")));
 
 			_.defer(f7);
 
@@ -248,7 +249,7 @@ exports.loadTabData = function() {
 
 		ZZ.API.Finance.CashflowTypes.list(function(cashflowtypes) {
 
-			Ti.API.info("ZZ.API.Finance.CashflowTypes.list success [response : " + JSON.stringify(cashflowtypes) + "]");
+			//Ti.API.info("ZZ.API.Finance.CashflowTypes.list success [response : " + JSON.stringify(cashflowtypes) + "]");
 
 			var objTipoMov = [];
 
@@ -272,7 +273,7 @@ exports.loadTabData = function() {
 
 			Ti.App.Properties.setObject("elencoTipoMov", objTipoMov);
 
-			Ti.API.info("OBJ TIPO MOVIMENTO: " + JSON.stringify(Ti.App.Properties.getObject("elencoTipoMov")));
+			//Ti.API.info("OBJ TIPO MOVIMENTO: " + JSON.stringify(Ti.App.Properties.getObject("elencoTipoMov")));
 
 			_.defer(f8);
 
@@ -287,7 +288,8 @@ exports.loadTabData = function() {
 	function f8() {
 
 		ZZ.API.Finance.CashflowVariabilities.list(function(cashflowvariabilities) {
-			Ti.API.info("ZZ.API.Finance.CashflowVariabilities.list success [response : " + JSON.stringify(cashflowvariabilities) + "]");
+			
+			//Ti.API.info("ZZ.API.Finance.CashflowVariabilities.list success [response : " + JSON.stringify(cashflowvariabilities) + "]");
 
 			var objTipoVariabilita = [];
 
@@ -313,7 +315,7 @@ exports.loadTabData = function() {
 
 			Ti.App.Properties.setObject("tipoVariabilita", objTipoVariabilita);
 
-			Ti.API.info("OBJ VARIABILITA': " + JSON.stringify(Ti.App.Properties.getObject("tipoVariabilita")));
+			//Ti.API.info("OBJ VARIABILITA': " + JSON.stringify(Ti.App.Properties.getObject("tipoVariabilita")));
 
 		}, function(error) {
 			Ti.API.error("ZZ.API.Finance.CashflowVariabilities.list error [error : " + error + "]");
