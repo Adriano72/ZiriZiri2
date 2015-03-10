@@ -32,13 +32,34 @@ function transformData(model) {
 
 	attrs.tag = (_.isNull(attrs.tags)) ? "" : attrs.tags[0].name;
 	
-	attrs.iconEvent = checkAspects(attrs.aspects, "EVENTDATATYPE_CODE").icona;
-	attrs.iconCashFlow = checkAspects(attrs.aspects, "CASHFLOWDATATYPE_CODE").icona;
-	attrs.iconDocument = checkAspects(attrs.aspects, "FILEDOCUMENTDATATYPE_CODE").icona;
-	attrs.iconNote = checkAspects(attrs.aspects, "NOTEDATATYPE_CODE").icona;
-	attrs.iconLink = checkAspects(attrs.aspects, "FILELINKDATATYPE_CODE").icona;
-	attrs.iconCommunication = checkAspects(attrs.aspects, "COMMUNICATIONDATATYPE_CODE").icona;
-
+	var datiIconaEvento = checkAspects(attrs.aspects, "EVENTDATATYPE_CODE");
+	var datiIconaCashflow = checkAspects(attrs.aspects, "CASHFLOWDATATYPE_CODE");
+	var datiIconaDocument = checkAspects(attrs.aspects, "FILEDOCUMENTDATATYPE_CODE");
+	var datiIconaNote = checkAspects(attrs.aspects, "NOTEDATATYPE_CODE");
+	var datiIconaLink = checkAspects(attrs.aspects, "FILELINKDATATYPE_CODE");
+	var datiIconaCommunication = checkAspects(attrs.aspects, "COMMUNICATIONDATATYPE_CODE");
+	
+	attrs.iconEvent = datiIconaEvento.icona;
+	attrs.iconCashFlow = datiIconaCashflow.icona;
+	attrs.iconDocument = datiIconaDocument.icona;
+	attrs.iconNote = datiIconaNote.icona;
+	attrs.iconLink = datiIconaLink.icona;
+	attrs.iconCommunication = datiIconaCommunication.icona;
+	
+	attrs.iconEventWidth = datiIconaEvento.largh;
+	attrs.iconCashWidth = datiIconaCashflow.largh;
+	attrs.iconDocWidth = datiIconaDocument.largh;
+	attrs.iconNoteWidth = datiIconaNote.largh;
+	attrs.iconLinktWidth = datiIconaLink.largh;
+	attrs.iconCommWidth = datiIconaCommunication.largh;
+	
+	attrs.iconEventLeft = datiIconaEvento.leftSize;
+	attrs.iconCashLeft = datiIconaCashflow.leftSize;
+	attrs.iconDocLeft = datiIconaDocument.leftSize;
+	attrs.iconNoteLeft = datiIconaNote.leftSize;
+	attrs.iconLinkLeft = datiIconaLink.leftSize;
+	attrs.iconCommLeft = datiIconaCommunication.leftSize;
+	
 	return attrs;
 };
 
@@ -137,37 +158,49 @@ function checkAspects(node, target) {
 		switch(target) {
 		case "EVENTDATATYPE_CODE":
 			return ( {
-				icona : '/images/kernel-event-off.png',
+				icona : "",
+				largh: 0,
+				leftSize: 0,
 				tipoAspetto: "EVENTDATATYPE_CODE"
 			});
 			break;
 		case "CASHFLOWDATATYPE_CODE":
 			return ( {
-				icona : '/images/kernel-finance-off.png',
+				icona : "",
+				largh: 0,
+				leftSize: 0,
 				tipoAspetto: "CASHFLOWDATATYPE_CODE"
 			});
 			break;
 		case "FILEDOCUMENTDATATYPE_CODE":
 			return ( {
-				icona : '/images/kernel-document-off.png',
+				icona : "",
+				largh: 0,
+				leftSize: 0,
 				tipoAspetto: "FILEDOCUMENTDATATYPE_CODE"
 			});
 			break;
 		case "NOTEDATATYPE_CODE":
 			return ( {
-				icona : '/images/kernel-note-off.png',
+				icona : "",
+				largh: 0,
+				leftSize: 0,
 				tipoAspetto: "NOTEDATATYPE_CODE"
 			});
 			break;
 		case "FILELINKDATATYPE_CODE":
 			return ( {
-				icona : '/images/kernel-link-off.png',
+				icona : "",
+				largh: 0,
+				leftSize: 0,
 				tipoAspetto: "FILELINKDATATYPE_CODE"
 			});
 			break;
 		case "COMMUNICATIONDATATYPE_CODE":
 			return ( {
-				icona : '/images/kernel-comunicazioni-off.png',
+				icona : "",
+				largh: 0,
+				leftSize: 0,
 				tipoAspetto: "COMMUNICATIONDATATYPE_CODE"
 			});
 			break;
@@ -180,49 +213,60 @@ function checkAspects(node, target) {
 		switch(target) {
 		case "EVENTDATATYPE_CODE":
 			return ( {
-				icona : '/images/kernel-event-on.png',
+				icona : icons.calendar,
 				tipoAspetto: "EVENTDATATYPE_CODE",
 				arrayAspetti: aspettiTrovati,
+				largh: Ti.UI.SIZE,
+				leftSize: 10,
 				numero : aspettiTrovati.length
 			});
 			break;
 		case "CASHFLOWDATATYPE_CODE":
 			return ( {
-				icona : '/images/kernel-finance-on.png',
+				icona : icons.credit_card,
 				tipoAspetto: "CASHFLOWDATATYPE_CODE",
 				arrayAspetti: aspettiTrovati,
+				largh: Ti.UI.SIZE,
 				numero : aspettiTrovati.length
 			});
 			break;
 		case "FILEDOCUMENTDATATYPE_CODE":
 			return ( {
-				icona : '/images/kernel-document-on.png',
+				icona : icons.paper_clip,
 				tipoAspetto: "FILEDOCUMENTDATATYPE_CODE",
 				arrayAspetti: aspettiTrovati,
+				largh: Ti.UI.SIZE,
+				leftSize: 10,
 				numero : aspettiTrovati.length
 			});
 			break;
 		case "NOTEDATATYPE_CODE":
 			return ( {
-				icona : '/images/kernel-note-on.png',
+				icona : icons.edit,
 				tipoAspetto: "NOTEDATATYPE_CODE",
 				arrayAspetti: aspettiTrovati,
+				largh: Ti.UI.SIZE,
+				leftSize: 10,
 				numero : aspettiTrovati.length
 			});
 			break;
 		case "FILELINKDATATYPE_CODE":
 			return ( {
-				icona : '/images/kernel-link-on.png',
+				icona : icons.link,
 				tipoAspetto: "FILELINKDATATYPE_CODE",
 				arrayAspetti: aspettiTrovati,
+				largh: Ti.UI.SIZE,
+				leftSize: 10,
 				numero : aspettiTrovati.length
 			});
 			break;
 		case "COMMUNICATIONDATATYPE_CODE":
 			return ( {
-				icona : '/images/kernel-comunicazioni-on.png',
+				icona : icons.envelope,
 				tipoAspetto: "COMMUNICATIONDATATYPE_CODE",
 				arrayAspetti: aspettiTrovati,
+				largh: Ti.UI.SIZE,
+				leftSize: 10,
 				numero : aspettiTrovati.length
 			});
 			break;

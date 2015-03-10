@@ -104,11 +104,15 @@
 }
 
 "#cat_mini_icon": {
-	image: "/images/head-category.png",
+	//image: "/images/head-category.png",
 	touchEnabled: false,
 	left: 0,
 	width: 17,
-	height: 17
+	height: 17,
+	font: {
+		fontFamily: 'AppIcons',
+		fontSize: 16
+	}
 }
 
 "#category": {

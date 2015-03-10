@@ -19,7 +19,7 @@
 						<View id="postData">
 							<Label bindId="titolo" id="titolo" />
 							<View id="secondLine">
-								<ImageView id="cat_mini_icon"/>
+								<Label bindId="cat_mini_icon" id="cat_mini_icon"/>
 								<Label id="category" bindId="categoria"/>
 							</View>
 							<Label id="data_post" bindId="data"/>
@@ -29,7 +29,7 @@
 					</ItemTemplate>
 				</Templates>
 				<ListSection dataCollection="Timeline" dataTransform="transformData">
-					<ListItem cat_icon:text="{catImage}" catColor:backgroundColor="{cat_color}" titolo:text="{name}" categoria:text="{categoria}" data:text="{postDate}"></ListItem>
+					<ListItem cat_icon:text="{catImage}" catColor:backgroundColor="{cat_color}" titolo:text="{name}" cat_mini_icon:text="{cat_mini_icon}" categoria:text="{categoria}" data:text="{postDate}"></ListItem>
 				</ListSection>
 			</ListView>
 

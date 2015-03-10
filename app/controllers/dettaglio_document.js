@@ -28,8 +28,8 @@ function transform(model) {
 
 	attrs.titolo = attrs.data.title;
 	attrs.nome_file = attrs.data.name;
-	attrs.tipologia = attrs.data.format.type;
-	attrs.formato = attrs.data.format.name;
+	attrs.tipologia = testExistence(attrs.data.format)?attrs.data.format.type: "N.D.";
+	attrs.formato = testExistence(attrs.data.format)?attrs.data.format.name: "N.D.";
 	var megaBytes = (attrs.data.size) / 1048576;
 	var megaBytesRounded = parseFloat(Math.round(megaBytes * 100) / 100).toFixed(2);
 	attrs.file_size = megaBytesRounded + "MB";

@@ -91,61 +91,91 @@ function extractCtegoryIcons(code) {
 	case "01":
 		return ( {
 			icona : icons.money,
-			colore : "#11bfbc"
-		});
-		break;
-	case "02":
-		return ( {
-			icona : icons.briefcase,
-			colore : "#1596b0"
+			colore : "#38e8c6"
 		});
 		break;
 	case "03":
 		return ( {
-			icona : icons.home,
-			colore : "#1ea500"
+			icona : icons.briefcase,
+			colore : "#5a9dd0"
 		});
 		break;
 	case "04":
 		return ( {
 			icona : icons.home,
-			colore : "#ffdd01"
+			colore : "#ffd651"
 		});
 		break;
 	case "05":
 		return ( {
-			icona : icons.question,
-			colore : "#ff0000"
+			icona : icons.road,
+			colore : "#FFDD01"
 		});
 		break;
 	case "06":
+		return ( {
+			icona : icons.plug,
+			colore : "#a6c4bc"
+		});
+		break;
+	case "07":
 		return ( {
 			icona : icons.stethoscope,
 			colore : "#6cc"
 		});
 		break;
-	case "07":
-		return ( {
-			icona : icons.question,
-			colore : "#ff0000"
-		});
-		break;
 	case "08":
 		return ( {
-			icona : icons.star,
-			colore : "#fce295"
+			icona : icons.users,
+			colore : "#F44336"
 		});
 		break;
 	case "09":
 		return ( {
-			icona : icons.question,
-			colore : "#ff0000"
+			icona : icons.sun,
+			colore : "#fce295"
 		});
 		break;
 	case "10":
 		return ( {
-			icona : icons.question,
-			colore : "#ff0000"
+			icona : icons.question_sign,
+			colore : "#f8bc7c"
+		});
+		break;
+	case "11":
+		return ( {
+			icona : icons.camera,
+			colore : "#aeaeae"
+		});
+		break;
+	case "12":
+		return ( {
+			icona : icons.graduation_cap,
+			colore : "#0c0"
+		});
+		break;
+	case "13":
+		return ( {
+			icona : icons.user,
+			colore : "#CCEEFF"
+		});
+		break;
+	case "14":
+		return ( {
+			icona : icons.money,
+			colore : "#11BFBC"
+		});
+		break;
+	case "15":
+		return ( {
+			icona : icons.money,
+			colore : "#FF0000"
+		});
+		break;
+	case "16":
+		return ( {
+			icona : icons.question_sign,
+			colore : "#FAEBD7"
 		});
 		break;
 	default:
@@ -172,6 +202,7 @@ function transformData(model) {
 
 	Ti.API.debug("CAT IMAGE: " + categoryLayout.colore);
 	attrs.postDate = (diffTime > 1) ? moment(attrs.referenceTime).format('LL') : moment(attrs.referenceTime).fromNow();
+	attrs.cat_mini_icon = icons.tags;
 	attrs.categoria = (!_.isNull(attrs.category)) ? attrs.category.name : "";
 
 	attrs.rating_1 = (attrs.rating > 0) ? "/images/star-small.png" : "";
