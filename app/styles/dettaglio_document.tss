@@ -25,33 +25,14 @@
 	height: 200
 	//backgroundColor: '#C8DDE8',
 	
-
 }
 
-".rowWrapper": {
-	layout: "horizontal",
-	top: 10,
-	height: Titanium.UI.SIZE
-}
-
-".label": {
+"#titolo": {
 	touchEnabled: false,
 	font: {
 		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 18,
-	},
-	color: "#5FAEE3",
-	text: "Titolo",
-	height: Ti.UI.SIZE,
-	width: Ti.UI.SIZE,
-	left: 10
-}
-
-".value": {
-	touchEnabled: false,
-	font: {
-		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 18,
+		fontSize: 16,
+		fontWeight: "bold"
 	},
 	color: "#444",
 	height: Ti.UI.SIZE,
@@ -59,6 +40,55 @@
 	left: 10,
 	ellipsize: true,
 	wordWrap: false
+}
+
+".rowWrapper":{
+	layout: "vertical",
+	height: Ti.UI.SIZE
+}
+
+".aspect_text": {
+	touchEnabled: false,
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 14
+	},
+	color: "#444",
+	height: Ti.UI.SIZE,
+	width: Ti.UI.SIZE,
+	left: 10,
+	ellipsize: true,
+	wordWrap: false
+}
+
+"#nome_file":{
+	width: "70%"
+}
+
+
+".subcontainer": {
+	top: 0,
+	left: 10,
+	layout: "horizontal",
+	
+	height: Titanium.UI.SIZE
+}
+
+"#img_icon":{
+	//backgroundColor: "navy",
+	//left: 0,
+	top: 10,
+	bottom: 10,
+	//image: '/images/android-robot.jpg',
+	//touchEnabled: false,
+	//center: 35,
+	
+	color: "green",
+	height: 25,
+	font: {
+		fontFamily: 'AppIcons',
+		fontSize: 26
+	}
 }
 
 ".newline": {

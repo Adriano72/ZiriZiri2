@@ -9,32 +9,28 @@ function transform(model) {
 	var attrs = model.toJSON();
 	
 	Ti.API.info("MODELLO STRINGIFYZZATO DOCUMENT: "+JSON.stringify(attrs));
-	
-	//var selectedAspect = Alloy.Collections.aspettiDocument.at($.scrollableDocument.currentPage).attributes;
-	var immagine;
-	
+	/*
 	ZZ.API.Files.Attachment.get(attrs, function(response) {
 		Ti.API.info("ZZ.API.Files.Attachment.get success");
-		//var newBlob = ImageFactory.compress(response, 0.10);
 		
-		immagine = response;
+		attrs.img_preview = response;
 		
-
 	}, function(error) {
 		Ti.API.error("ZZ.API.Files.Attachment.get error [error : " + error + "]");
 	});
+	*/
 	
-	attrs.img_preview = immagine;
+	
 
 	attrs.titolo = attrs.data.title;
 	attrs.nome_file = attrs.data.name;
-	attrs.tipologia = testExistence(attrs.data.format)?attrs.data.format.type: "N.D.";
-	attrs.formato = testExistence(attrs.data.format)?attrs.data.format.name: "N.D.";
+	attrs.img_icon = icons.picture;
+	
 	var megaBytes = (attrs.data.size) / 1048576;
 	var megaBytesRounded = parseFloat(Math.round(megaBytes * 100) / 100).toFixed(2);
 	attrs.file_size = megaBytesRounded + "MB";
 	attrs.tipologia = (attrs.data.flagOrdinarioStraordinario) ? "Straordinario" : "Ordinario";
-	attrs.data_doc = moment(attrs.data.creationTime).format("LL");
+	attrs.data_doc = "Data " + moment(attrs.data.creationTime).format("LL") + " alle ore "+moment(attrs.data.creationTime).format("h:mm a");
 	
 	return attrs;
 

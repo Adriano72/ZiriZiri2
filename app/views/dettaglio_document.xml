@@ -2,35 +2,13 @@
 	<ScrollableView id="scrollableDocument" dataCollection="aspettiDocument" dataFunction="dataResync" dataTransform="transform">
 		<ScrollView id="aspectScrollView">
 
-			<ImageView id="img_preview" image="{img_preview}"/>
-			<View class="rowWrapper">
-				<Label id = "titoloLabel" class = "label">Titolo:</Label>
-				<Label id = "titolo" class = "value" text="{titolo}"/>
+			<Label id="titolo" class="aspect_title" text="{titolo}"/>
+			<View class="subcontainer">
+				<Label id="img_icon" text ="{img_icon}"/>
+				<Label class="aspect_text" id="nome_file" text="{nome_file}"/>				
+				<Label id="filesize" class="aspect_text" text="{file_size}"/>
 			</View>
-			<View class="rowWrapper">
-				<Label id = "nomeFileLabel" class = "label">Nome File:</Label>
-				<Label id = "nomeFile" class = "value" text="{nome_file}"/>
-			</View>
-			<View class="rowWrapper newline">
-				<Label id = "tipologiaLabel" class = "label">Tipologia:</Label>
-				<Label id = "tipologia" class = "value" text="{tipologia}"/>
-			</View>
-			<View class="rowWrapper">
-				<Label id = "formatoLabel" class = "label">Formato:</Label>
-				<Label id = "formato" class = "value" text="{formato}"/>
-			</View>
-			<View class="rowWrapper">
-				<Label id = "filesizeLabel" class = "label">File Size:</Label>
-				<Label id = "filesize" class = "value" text="{file_size}"/>
-			</View>
-			<View class="rowWrapper newline">
-				<Label id = "filesizeLabel" class = "label">Caricato da:</Label>
-				<Label id = "caricato" class = "value" text="{caricato}"/>
-			</View>
-			<View class="rowWrapper last">
-				<Label id = "dataDocLabel" class = "label">Data Documento:</Label>
-				<Label id = "dataDoc" class = "value" text="{data_doc}"/>
-			</View>
+			<Label id="data_creazione" class="aspect_text" text="{data_doc}"/>
 
 		</ScrollView>
 	</ScrollableView>

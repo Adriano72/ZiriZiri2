@@ -2,46 +2,18 @@
 	<ScrollableView id="scrollableCashflow" dataCollection="aspettiCashflow" dataFunction="dataResync" dataTransform="transformCASH">
 		<ScrollView id="aspectScrollView">
 
-			<View class="rowWrapper">
-				<Label class = "label">Importo:</Label>
-				<Label id = "importo" class = "value" text="{importo}"/>
+			<View class="subcontainer">
+				<Label id="img_icon" text ="{aspect_icon}"/>
+				<Label id="tipo_mov" class="aspect_text"  text="{tipo_mov_desc}" color="{tipo_mov_color}"/>
 			</View>
-			<View class="rowWrapper">
-				<Label class = "label">Movimento:</Label>
-				<Label id = "movimento" class = "value" text="{movimento}"/>
+			<Label id="titolo" class="aspect_text" text="{titolo_aspetto}"/>
+			<View class="subcontainer">
+				<Label class="aspect_text" text="{tipo_mov_desc_estesa}"/>
+				<Label id="desc_movimento" class="importo" text="{desc_movimento}" borderRadius="3" backgroundColor="{tipo_mov_color}"/>
 			</View>
-			<View class="rowWrapper">
-				<Label class = "label">Pagamento:</Label>
-				<Label id = "pagamento" class = "value" text="{pagamento}"/>
-			</View>
-			<View class="rowWrapper newline">
-				<Label class = "label">Variabilità:</Label>
-				<Label id = "variabilita" class = "value" text="{variabilita}"/>
-			</View>
-			<View class="rowWrapper">
-				<Label class = "label">Stato:</Label>
-				<Label id = "stato" class = "value" text="{stato}"/>
-			</View>
-			<View class="rowWrapper">
-				<Label class = "label">Tipologia:</Label>
-				<Label id = "tipologia" class = "value" text="{tipologia}"/>
-			</View>
-			<View class="rowWrapper">
-				<Label class = "label">Dichiarazione dei Redditi:</Label>
-				<Label id = "redditi" class = "value" text="{dich_redditi}"/>
-			</View>
-			<View class="rowWrapper newline">
-				<Label class = "label">Data Valuta:</Label>
-				<Label id = "datavaluta" class = "value" text="{datavaluta}"/>
-			</View>
-			<View class="rowWrapper">
-				<Label class = "label">Data Scadenza:</Label>
-				<Label id = "datascadenza" class = "value" text="{datascadenza}"/>
-			</View>
-			<View class="rowWrapper last">
-				<Label class = "label">Data Pagamento:</Label>
-				<Label id = "datapagamento" class = "value" text="{datapagamento}"/>
-			</View>
+			<Label id="data_operazione" class="aspect_text" text="{data_operazione}"/>
+			<Label id="mod_pagamento" class="aspect_text" text="{mod_pagamento}"/>
+			
 
 		</ScrollView>
 	</ScrollableView>

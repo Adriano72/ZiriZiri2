@@ -27,7 +27,7 @@ function transformData(model) {
 
 	attrs.catImage = ((_.isNull(attrs.category)) || (_.isNull(attrs.category.code)) ) ? '/images/android-robot.jpg' : '/images/cat_' + attrs.category.code.slice(0, 2) + ".png";
 	//Ti.API.info("DETTAGLIO CAT IMAGE: " + attrs.catImage);
-	attrs.postDate = (diffTime > 1) ? moment(attrs.referenceTime).format('LL') : moment(attrs.referenceTime).fromNow();
+	attrs.postDate = (diffTime > 1) ? moment(attrs.referenceTime).format('LL') + " alle ore "+moment(attrs.referenceTime).format("h:mm a") : moment(attrs.referenceTime).fromNow();
 	attrs.categoria = (!_.isNull(attrs.category)) ? attrs.category.name : "";
 
 	attrs.tag = (_.isNull(attrs.tags)) ? "" : attrs.tags[0].name;
