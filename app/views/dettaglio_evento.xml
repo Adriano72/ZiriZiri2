@@ -1,24 +1,12 @@
 <Alloy>
-	
+	<ScrollableView id="scrollableCashflow" dataCollection="aspettoEvento" dataFunction="dataResync" dataTransform="transformEvent">
 		<ScrollView id="aspectScrollView">
-
-			<View id="mapview" ns="Alloy.Globals.Map"/>
-			<View class="aspectEventContainer">
-
+			<Label id="titolo" class="aspect_title" text="{name}"/>
+			<Label id="dataEvento" class="aspect_text" text="{dataEvento}"/>
+			<Label id="location" class="aspect_text" text="{eventLocation}"/>
+			<View id="mapview" ns="Alloy.Globals.Map" height="{mapHeight}" region="{mapRegion}" annotations="{annotat}"/>
 				
-				<View class="row">
-					<View class="dataWrapper">
-						<Label class="dataDisplay first" id="dataInizio"/>
-						<Label class="dataDisplay" id="dataFine"/>
-
-					</View>
-					<View class="dataWrapper">
-						<Label class="dataDisplay" id="location"/>
-					</View>
-				</View>
-
-			</View>
 
 		</ScrollView>
-
+	</ScrollableView>
 </Alloy>

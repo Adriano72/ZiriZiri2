@@ -14,7 +14,7 @@
 			<Button id="btn_login" onClick="do_login" />
 			<View id="ricordamiContainer">
 				<Widget id="ricordami" src="checkbox" value="false"/>
-				<Label class="ricordamiText">Ricordati</Label>
+				<Label class="ricordamiText">Ricordami</Label>
 			</View>
 		</View>
 	</Window>

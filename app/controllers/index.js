@@ -13,7 +13,6 @@ function doOpen(evt) {
 		abx.title = "ZiriZiri";
 		abx.titleFont = "SourceSansPro-Regular.ttf";
 		abx.titleColor = "#4A678C";
-	
 
 		//actionBarHelper.setIcon('/drawericonw@2x.png');
 
@@ -44,8 +43,6 @@ if (Ti.App.Properties.getBool('authenticated', false)) {
 }
 
 function _loadTimelineAlreadyLoggedIn(utente) {
-	
-	
 
 	Ti.API.info("**** WELCOME BACK: " + utente.username);
 
@@ -68,8 +65,10 @@ function _loadTimelineAlreadyLoggedIn(utente) {
 
 		Ti.API.error("ZZ.API.Core.Posts.list error [error : " + error + "]");
 
-	});	
-	
+	}, {
+		action : ZZ.API.Core.Posts.CONSTANTS.ACTIONS.LOAD_MORE
+	});
+
 	var timeline_win = Alloy.createController("timeline").getView().open();
 
 }
@@ -80,9 +79,9 @@ $.ricordami.getView().addEventListener('change', function(e) {
 });
 
 var _coreSessionLogInCallback = function(user) {
-	
+
 	Ti.API.info("ZZ.API.Core.Session.logIn success [user : " + JSON.stringify(user) + "]");
-	
+
 	loadTabData.loadTabData();
 
 	if (rememberMe) {
@@ -92,7 +91,7 @@ var _coreSessionLogInCallback = function(user) {
 		Ti.App.Properties.setString("user_password", $.password.value);
 
 	};
-	
+
 	ZZ.API.Core.Posts.list(function(posts) {
 
 		//Ti.API.info("ZZ.API.Core.Posts.list success [response : " + JSON.stringify(posts) + "]");
@@ -100,7 +99,6 @@ var _coreSessionLogInCallback = function(user) {
 		//Ti.App.Properties.setObject('timelineProp', posts);
 
 		Alloy.Collections.Timeline.reset(posts);
-		
 
 		//Ti.API.info("COLLECTION TIMELINE: " + JSON.stringify(Alloy.Collections.Timeline));
 
@@ -111,6 +109,8 @@ var _coreSessionLogInCallback = function(user) {
 
 		Ti.API.error("ZZ.API.Core.Posts.list error [error : " + error + "]");
 
+	}, {
+		action : ZZ.API.Core.Posts.CONSTANTS.ACTIONS.LOAD_MORE
 	});
 
 	var timeline_win = Alloy.createController("timeline").getView().open();
@@ -119,7 +119,6 @@ var _coreSessionLogInCallback = function(user) {
 };
 
 function do_login(e) {
-	
 
 	var user_name = $.username.value || 'none';
 

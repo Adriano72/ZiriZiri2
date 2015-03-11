@@ -1,3 +1,8 @@
+"#scrollableCashflow": {
+	//height: Ti.UI.SIZE,
+	//width: Ti.UI.FILL
+}
+
 "#aspectScrollView": {
 	width: "95%",
 	//borderRadius: 5,
@@ -24,9 +29,37 @@
 	//touchEnabled: false
 }
 
+"#titolo": {
+	touchEnabled: false,
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16,
+		fontWeight: "bold"
+	},
+	color: "#444",
+	height: Ti.UI.SIZE,
+	width: Ti.UI.SIZE,
+	left: 10,
+	ellipsize: true,
+	wordWrap: false
+}
+
+".aspect_text": {
+	touchEnabled: false,
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 14
+	},
+	color: "#444",
+	height: Ti.UI.SIZE,
+	width: Ti.UI.SIZE,
+	left: 10,
+	ellipsize: true
+}
+
 
 "#mapview": {
-	height: 130,
+	height: 0,
 	top: 5,
 	right: 5,
 	left: 5,
@@ -35,70 +68,16 @@
 	borderColor: "#CCCCCC"
 }
 
-"#container": {
-	
-	//layout: 'horizontal',
-	height: Ti.UI.SIZE,
-	width: Ti.UI.FILL
-	
-}
-
-".row": {
-	//backgroundColor: 'pink',
-	className: 'itemRow',
-	layout: "vertical",
-	width: Ti.UI.FILL
-}
-
-".aspectEventContainer": {
-	//width: '100%',
-	//borderRadius: 5,
-	//backgroundColor: 'lime',
-	top: 5,
-	bottom:5,
-	width: Ti.UI.FILL,
-	height: Ti.UI.SIZE,
-	touchEnabled: false,
-	layout: 'horizontal'
-}
-
-".aspectEventIcon": {
-	top:5,
-	left: 5,
-	width: 25,
-	height: 25
-}
-"#eventIcona": {
-	backgroundImage: '/images/kernel-event-on.png'
-}
-
-".dataWrapper": {
-	top:2,
-	left: 2,
-	layout: "horizontal",
-	height: Ti.UI.SIZE,
-	width: Ti.UI.FILL
-}
-
-".dataDisplay": {
-	font: {
-		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 18,
-	},
-	color: "#444",
-	backgroundColor: 'white',
-	textAlign: 'center',
-	height: Ti.UI.SIZE,
-	width: 140
-	
+"#eventMarker": {
+    
+    title: "Appcelerator Headquarters",
+    subtitle: "Mountain View, CA",
+    pincolor: Alloy.Globals.Map.ANNOTATION_RED
 }
 
 "#location": {
 	color: "#999",
-	left: 5,
-	width: Ti.UI.FILL,
-	wordWrap: false,
-	ellipsize: true
+	left: 10
 }
 
 ".first": {

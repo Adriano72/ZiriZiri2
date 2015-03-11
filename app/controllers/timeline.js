@@ -216,7 +216,7 @@ function transformData(model) {
 	return attrs;
 };
 
-function dettaglioEvento(e) {
+function dettaglioPost(e) {
 
 	Alloy.Models.Post.set(Alloy.Collections.Timeline.at(e.itemIndex));
 	//Ti.API.info("STATO POST: " + JSON.stringify(Alloy.Models.Post));

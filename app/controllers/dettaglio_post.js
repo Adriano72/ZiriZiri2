@@ -217,7 +217,7 @@ function checkAspects(node, target) {
 				tipoAspetto: "EVENTDATATYPE_CODE",
 				arrayAspetti: aspettiTrovati,
 				largh: Ti.UI.SIZE,
-				leftSize: 10,
+				leftSize: 15,
 				numero : aspettiTrovati.length
 			});
 			break;
@@ -227,6 +227,7 @@ function checkAspects(node, target) {
 				tipoAspetto: "CASHFLOWDATATYPE_CODE",
 				arrayAspetti: aspettiTrovati,
 				largh: Ti.UI.SIZE,
+				leftSize: 15,
 				numero : aspettiTrovati.length
 			});
 			break;
@@ -236,7 +237,7 @@ function checkAspects(node, target) {
 				tipoAspetto: "FILEDOCUMENTDATATYPE_CODE",
 				arrayAspetti: aspettiTrovati,
 				largh: Ti.UI.SIZE,
-				leftSize: 10,
+				leftSize: 15,
 				numero : aspettiTrovati.length
 			});
 			break;
@@ -246,7 +247,7 @@ function checkAspects(node, target) {
 				tipoAspetto: "NOTEDATATYPE_CODE",
 				arrayAspetti: aspettiTrovati,
 				largh: Ti.UI.SIZE,
-				leftSize: 10,
+				leftSize: 15,
 				numero : aspettiTrovati.length
 			});
 			break;
@@ -256,7 +257,7 @@ function checkAspects(node, target) {
 				tipoAspetto: "FILELINKDATATYPE_CODE",
 				arrayAspetti: aspettiTrovati,
 				largh: Ti.UI.SIZE,
-				leftSize: 10,
+				leftSize: 15,
 				numero : aspettiTrovati.length
 			});
 			break;
@@ -266,7 +267,7 @@ function checkAspects(node, target) {
 				tipoAspetto: "COMMUNICATIONDATATYPE_CODE",
 				arrayAspetti: aspettiTrovati,
 				largh: Ti.UI.SIZE,
-				leftSize: 10,
+				leftSize: 15,
 				numero : aspettiTrovati.length
 			});
 			break;
