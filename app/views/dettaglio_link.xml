@@ -1,0 +1,16 @@
+<Alloy>
+	<ScrollableView id="scrollableLink" dataCollection="aspettiLink" dataFunction="dataResync" dataTransform="transform">
+		<ScrollView id="aspectScrollView">
+			<View class="subcontainer">
+				<Label id="img_icon" text ="{aspect_icon}"/>
+				<Label id="titolo" class="aspect_title" text="{titolo}"/>
+			</View>
+			
+			<Label id="link_url" class="link_url" text="{link_url}" onClick="goUrl"/>
+			<Label id="data_link" class="aspect_text" text="{data_link}"/>
+			<ImageView id="img_preview" image="{img_preview}"/>
+
+		
+	</ScrollView>
+</ScrollableView>
+</Alloy>

@@ -6,6 +6,7 @@
 "#scrollableTimeline": {
 	top: 0,
 	height: 170,
+	backgroundColor: "#f5f6f7",
 	width: Ti.UI.FILL
 }
 
@@ -18,7 +19,7 @@
 	height: Ti.UI.SIZE
 }
 
-"#cat_icon": {
+"#cat_icon_container": {
 	left: 15,
 	top: 20,
 	touchEnabled: false,
@@ -27,10 +28,26 @@
 	borderRadius: 4
 },
 
+"#catIcon": {
+
+	color: "#fff",
+	font: {
+		fontFamily: 'AppIcons',
+		fontSize: 32
+	}
+}
+
+"#cat_icon_container[platform=android]": {
+	left: 20
+}
 
 "#postData": {
 	//width:
 	//backgroundColor:"red",
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16
+	},
 	top: 15,
 	left: 95,
 	right: 0,
@@ -51,8 +68,9 @@
 	color: "black",
 	textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
 	font: {
-		fontSize: 16,
-		fontWeight: 'bold'
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 18,
+		fontWeight: "bold"
 	}
 },
 
@@ -72,7 +90,11 @@
 	height: 30,
 	width:Ti.UI.SIZE,
 	color: "#000",
-	left: 5
+	left: 5,
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16
+	}
 }
 
 "#cat_mini_icon": {
@@ -88,7 +110,11 @@
 }
 
 "#category": {
-	left: 5
+	left: 5,
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16
+	}
 }
 
 "#aspect_icon_toolbar": {

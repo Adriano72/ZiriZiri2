@@ -14,41 +14,37 @@
 	layout: "vertical"
 }
 
-".eventContainer": {
-	//width: '100%',
-	left: 5,
-	right: 5,
-	top: 5,
-	//borderRadius: 5,
-	borderWidth: 1,
-	borderColor: "#CCCCCC",
-	backgroundColor: '#FFF',
-	//bottom:10,
-	height: Ti.UI.SIZE,
-	layout: "vertical"
-	//touchEnabled: false
+".subcontainer": {
+	top: 0,
+	//left: 10,
+	layout: "horizontal",
+	
+	height: Titanium.UI.SIZE
 }
 
-"#titolo": {
-	touchEnabled: false,
-	font: {
-		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 16,
-		fontWeight: "bold"
-	},
-	color: "#444",
-	height: Ti.UI.SIZE,
-	width: Ti.UI.SIZE,
+"#img_icon":{
+	//backgroundColor: "navy",
 	left: 10,
-	ellipsize: true,
-	wordWrap: false
+	top: 10,
+	bottom: 10,
+	//image: '/images/android-robot.jpg',
+	//touchEnabled: false,
+	//center: 35,
+	color: "#999",
+	height: 25,
+	font: {
+		fontFamily: 'AppIcons',
+		fontSize: 26
+	}
 }
+
+
 
 ".aspect_text": {
 	touchEnabled: false,
 	font: {
 		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 14
+		fontSize: 18
 	},
 	color: "#444",
 	height: Ti.UI.SIZE,

@@ -62,6 +62,10 @@
 "#postData": {
 	//width:
 	//backgroundColor:"red",
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 18
+	},
 	left: 95,
 	right: 0,
 	bottom: 0,
@@ -81,7 +85,8 @@
 	color: "black",
 	textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
 	font: {
-		fontSize: 16,
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 18,
 		fontWeight: 'bold'
 	}
 },
@@ -100,7 +105,11 @@
 	height: 30,
 	width:Ti.UI.SIZE,
 	color: "#000",
-	left: 5
+	left: 5,
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 18
+	}
 }
 
 "#cat_mini_icon": {
@@ -116,5 +125,9 @@
 }
 
 "#category": {
-	left: 5
+	left: 5,
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16
+	}
 }

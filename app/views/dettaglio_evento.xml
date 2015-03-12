@@ -1,10 +1,15 @@
 <Alloy>
 	<ScrollableView id="scrollableCashflow" dataCollection="aspettoEvento" dataFunction="dataResync" dataTransform="transformEvent">
 		<ScrollView id="aspectScrollView">
-			<Label id="titolo" class="aspect_title" text="{name}"/>
+			<View class="subcontainer">
+				<Label id="img_icon" text ="{aspect_icon}"/>
+				<Label id="titolo" class="aspect_title" text="{name}"/>
+			</View>
+			
 			<Label id="dataEvento" class="aspect_text" text="{dataEvento}"/>
 			<Label id="location" class="aspect_text" text="{eventLocation}"/>
 			<View id="mapview" ns="Alloy.Globals.Map" height="{mapHeight}" region="{mapRegion}" annotations="{annotat}"/>
+			<Label id="tipo_evento" class="aspect_text" text="{tipo_evento}"/>
 				
 
 		</ScrollView>

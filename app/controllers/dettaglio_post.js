@@ -24,10 +24,14 @@ function transformData(model) {
 	Ti.API.info("POST DETTAGLIO: "+JSON.stringify(attrs));
 
 	var diffTime = moment().diff(attrs.referenceTime, 'days');
+	
+	var categoryLayout = extractCtegoryIcons(attrs.category.code.slice(0, 2));
+	attrs.catImage = categoryLayout.icona;
+	attrs.cat_color = categoryLayout.colore;
 
-	attrs.catImage = ((_.isNull(attrs.category)) || (_.isNull(attrs.category.code)) ) ? '/images/android-robot.jpg' : '/images/cat_' + attrs.category.code.slice(0, 2) + ".png";
+	//attrs.catImage = ((_.isNull(attrs.category)) || (_.isNull(attrs.category.code)) ) ? '/images/android-robot.jpg' : '/images/cat_' + attrs.category.code.slice(0, 2) + ".png";
 	//Ti.API.info("DETTAGLIO CAT IMAGE: " + attrs.catImage);
-	attrs.postDate = (diffTime > 1) ? moment(attrs.referenceTime).format('LL') + " alle ore "+moment(attrs.referenceTime).format("h:mm a") : moment(attrs.referenceTime).fromNow();
+	attrs.postDate = (diffTime > 1) ? moment(attrs.referenceTime).format('LL') + " alle ore "+moment(attrs.referenceTime).format("HH:mm") : moment(attrs.referenceTime).fromNow();
 	attrs.categoria = (!_.isNull(attrs.category)) ? attrs.category.name : "";
 
 	attrs.tag = (_.isNull(attrs.tags)) ? "" : attrs.tags[0].name;
@@ -77,6 +81,8 @@ function scrollendEvent(e) {
 
 var dettaglioCashflow = Alloy.createController("dettaglio_cashflow").getView();
 var dettaglioDocument = Alloy.createController("dettaglio_document").getView();
+var dettaglioNote = Alloy.createController("dettaglio_note").getView();
+var dettaglioLink = Alloy.createController("dettaglio_link").getView();
 
 
 function dettEvento(){
@@ -139,6 +145,46 @@ function dettDocument(){
 	
 	
 	$.aspect_detail_container.add(dettaglioDocument);
+	//var dettaglioDocument = Alloy.createController("dettaglio_document").getView();
+	
+}
+
+function dettNote(){
+	
+	$.aspect_detail_container.removeAllChildren();
+	
+	Alloy.Models.Post.set(Alloy.Collections.Timeline.at($.scrollableTimeline.currentPage));
+	
+	var modJson = Alloy.Models.Post.toJSON();
+	
+	var aspNote = _.filter(modJson.aspects, function(value) {
+		return value.kind.code == "NOTEDATATYPE_CODE";
+	});
+	
+	Alloy.Collections.aspettiNote.reset(aspNote);
+	
+	
+	$.aspect_detail_container.add(dettaglioNote);
+	//var dettaglioDocument = Alloy.createController("dettaglio_document").getView();
+	
+}
+
+function dettLink(){
+	
+	$.aspect_detail_container.removeAllChildren();
+	
+	Alloy.Models.Post.set(Alloy.Collections.Timeline.at($.scrollableTimeline.currentPage));
+	
+	var modJson = Alloy.Models.Post.toJSON();
+	
+	var aspLink = _.filter(modJson.aspects, function(value) {
+		return value.kind.code == "FILELINKDATATYPE_CODE";
+	});
+	
+	Alloy.Collections.aspettiLink.reset(aspLink);
+	
+	
+	$.aspect_detail_container.add(dettaglioLink);
 	//var dettaglioDocument = Alloy.createController("dettaglio_document").getView();
 	
 }
@@ -274,6 +320,111 @@ function checkAspects(node, target) {
 		default:
 			return;
 		}
+	}
+
+};
+
+function extractCtegoryIcons(code) {
+
+	switch(code) {
+
+	case "01":
+		return ( {
+			icona : icons.money,
+			colore : "#38e8c6"
+		});
+		break;
+	case "03":
+		return ( {
+			icona : icons.briefcase,
+			colore : "#5a9dd0"
+		});
+		break;
+	case "04":
+		return ( {
+			icona : icons.home,
+			colore : "#ffd651"
+		});
+		break;
+	case "05":
+		return ( {
+			icona : icons.road,
+			colore : "#FFDD01"
+		});
+		break;
+	case "06":
+		return ( {
+			icona : icons.plug,
+			colore : "#a6c4bc"
+		});
+		break;
+	case "07":
+		return ( {
+			icona : icons.stethoscope,
+			colore : "#6cc"
+		});
+		break;
+	case "08":
+		return ( {
+			icona : icons.users,
+			colore : "#F44336"
+		});
+		break;
+	case "09":
+		return ( {
+			icona : icons.sun,
+			colore : "#fce295"
+		});
+		break;
+	case "10":
+		return ( {
+			icona : icons.question_sign,
+			colore : "#f8bc7c"
+		});
+		break;
+	case "11":
+		return ( {
+			icona : icons.camera,
+			colore : "#aeaeae"
+		});
+		break;
+	case "12":
+		return ( {
+			icona : icons.graduation_cap,
+			colore : "#0c0"
+		});
+		break;
+	case "13":
+		return ( {
+			icona : icons.user,
+			colore : "#CCEEFF"
+		});
+		break;
+	case "14":
+		return ( {
+			icona : icons.money,
+			colore : "#11BFBC"
+		});
+		break;
+	case "15":
+		return ( {
+			icona : icons.money,
+			colore : "#FF0000"
+		});
+		break;
+	case "16":
+		return ( {
+			icona : icons.question_sign,
+			colore : "#FAEBD7"
+		});
+		break;
+	default:
+		return ( {
+			icona : icons.question,
+			colore : "#ff0000"
+		});
+		break;
+
 	}
 
 };

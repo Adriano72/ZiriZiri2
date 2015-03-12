@@ -42,7 +42,7 @@
 	touchEnabled: false,
 	font: {
 		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 14
+		fontSize: 18
 	},
 	color: "#444",
 	height: Ti.UI.SIZE,
@@ -56,9 +56,9 @@
 	touchEnabled: false,
 	font: {
 		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 14
+		fontSize: 18
 	},
-	color: "#444",
+	color: "#FFF",
 	textAlign: "center",
 	height: Ti.UI.SIZE,
 	width: Ti.UI.SIZE,

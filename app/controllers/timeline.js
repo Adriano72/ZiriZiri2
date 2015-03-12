@@ -5,8 +5,14 @@ moment.lang('it', Alloy.Globals.Moment_IT);
 moment.lang('it');
 
 function doOpen() {
+	Alloy.Globals.loading.show('Sincronizzazione', false);
+
+	setTimeout(function() {
+		Alloy.Globals.loading.hide();
+	}, 8000);
+
 	Alloy.Globals.navMenu = $.navWin;
-	Alloy.Globals.loading.show("Caricamento");
+
 }
 
 function layoutComplete() {
@@ -227,6 +233,8 @@ function dettaglioPost(e) {
 	Alloy.Globals.navMenu.openWindow(dett_post_win);
 
 };
+
+$.timeline_win.open();
 
 $.timeline_win.addEventListener("close", function() {
 

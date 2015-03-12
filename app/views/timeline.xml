@@ -1,6 +1,6 @@
 <Alloy>
 	<NavigationWindow id="navWin" module="xp.ui">
-		<Window id="timeline_win" class="container" title="Diario" onOpen="doOpen" onPostlayout="layoutComplete" onAndroid:back="manageClose">
+		<Window id="timeline_win" class="container" title="Diario" onOpen="doOpen"  onAndroid:back="manageClose">
 			<TitleControl platform="ios">
 				<Label class="titleControl">Diario</Label>
 			</TitleControl>

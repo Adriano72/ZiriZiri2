@@ -21,7 +21,7 @@ function transform(model) {
 	*/
 	
 	
-
+	attrs.aspect_icon = icons.paper_clip;
 	attrs.titolo = attrs.data.title;
 	attrs.nome_file = attrs.data.name;
 	attrs.img_icon = icons.picture;

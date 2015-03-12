@@ -1,4 +1,9 @@
-"#scrollableDocument": {
+"#scrollableNote": {
+	//height: Ti.UI.SIZE,
+	//width: Ti.UI.FILL
+}
+
+"#scrollableCashflow": {
 	//height: Ti.UI.SIZE,
 	//width: Ti.UI.FILL
 }
@@ -12,19 +17,6 @@
 	//bottom:10,
 	//height: Ti.UI.SIZE,
 	layout: "vertical"
-}
-
-"#img_preview": {
-	
-	borderColor: "#000000",
-	
-	top: 10,
-	left: 5,
-	right: 5,
-	//width: Alloy.Globals.screenWidth,
-	height: 200
-	//backgroundColor: '#C8DDE8',
-	
 }
 
 "#img_icon":{
@@ -43,19 +35,29 @@
 	}
 }
 
-"#titolo": {
-	touchEnabled: false,
-	font: {
-		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 18,
-		fontWeight: "bold"
-	},
-	color: "#444",
-	height: Ti.UI.SIZE,
-	width: Ti.UI.SIZE,
+
+".subcontainer": {
+	top: 0,
+	//left: 10,
+	layout: "horizontal",
+	
+	height: Titanium.UI.SIZE
+}
+
+"#img_icon":{
+	//backgroundColor: "navy",
 	left: 10,
-	ellipsize: true,
-	wordWrap: false
+	top: 10,
+	bottom: 10,
+	//image: '/images/android-robot.jpg',
+	//touchEnabled: false,
+	//center: 35,
+	color: "#999",
+	height: 25,
+	font: {
+		fontFamily: 'AppIcons',
+		fontSize: 26
+	}
 }
 
 
@@ -73,32 +75,19 @@
 	wordWrap: false
 }
 
-"#nome_file":{
-	width: "70%"
-}
-
-
-".subcontainer": {
-	top: 0,
-	left: 10,
-	layout: "horizontal",
-	
-	height: Titanium.UI.SIZE
-}
-
-"#img_iconcina":{
-	//backgroundColor: "navy",
-	//left: 0,
-	top: 10,
-	bottom: 10,
-	//image: '/images/android-robot.jpg',
-	//touchEnabled: false,
-	//center: 35,
-	
-	color: "green",
-	height: 25,
+"#note_content": {
+	touchEnabled: false,
 	font: {
-		fontFamily: 'AppIcons',
-		fontSize: 26
-	}
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 18
+	},
+	borderWidth: 1,
+	borderColor: "#B3A702",
+	backgroundColor: "#F7F5D2",
+	color: "#444",
+	height: Ti.UI.SIZE,
+	width: "95%",
+	left: 10,
+	ellipsize: false,
+	wordWrap: true
 }
