@@ -49,24 +49,20 @@ function _loadTimelineAlreadyLoggedIn(utente) {
 	loadTabData.loadTabData();
 
 	ZZ.API.Core.Posts.list(function(posts) {
-
 		//Ti.API.info("ZZ.API.Core.Posts.list success [response : " + JSON.stringify(posts) + "]");
 
-		//Ti.App.Properties.setObject('timelineProp', posts);
+		ZZ.API.Core.Posts.list(function(morePosts) {
+			//Ti.API.info("ZZ.API.Core.Posts.list success [response : " + JSON.stringify(posts) + "]");
+			Alloy.Collections.Timeline.reset(posts);
 
-		Alloy.Collections.Timeline.reset(posts);
-
-		//Ti.API.info("COLLECTION TIMELINE: " + JSON.stringify(Alloy.Collections.Timeline));
-
-		//var timeline_win = Alloy.createController("timeline").getView().open();
-		//Alloy.Globals.navMenu.openWindow(timeline_win);
+		}, function(error) {
+			Ti.API.error("ZZ.API.Core.Posts.list error [error : " + error + "]");
+		}, {
+			action : ZZ.API.Core.Posts.CONSTANTS.ACTIONS.LOAD_MORE
+		});
 
 	}, function(error) {
-
 		Ti.API.error("ZZ.API.Core.Posts.list error [error : " + error + "]");
-
-	}, {
-		action : ZZ.API.Core.Posts.CONSTANTS.ACTIONS.LOAD_MORE
 	});
 
 	var timeline_win = Alloy.createController("timeline").getView().open();
@@ -91,26 +87,23 @@ var _coreSessionLogInCallback = function(user) {
 		Ti.App.Properties.setString("user_password", $.password.value);
 
 	};
-	
+
 	ZZ.API.Core.Posts.list(function(posts) {
+		//Ti.API.info("ZZ.API.Core.Posts.list success [response : " + JSON.stringify(posts) + "]");
+
+		ZZ.API.Core.Posts.list(function(morePosts) {
 			//Ti.API.info("ZZ.API.Core.Posts.list success [response : " + JSON.stringify(posts) + "]");
-
-
-			ZZ.API.Core.Posts.list(function(morePosts) {
-				//Ti.API.info("ZZ.API.Core.Posts.list success [response : " + JSON.stringify(posts) + "]");
-				Alloy.Collections.Timeline.reset(posts);
-			
-			}, function(error) {
-				Ti.API.error("ZZ.API.Core.Posts.list error [error : " + error + "]");
-			}, {
-				action : ZZ.API.Core.Posts.CONSTANTS.ACTIONS.LOAD_MORE
-			});
+			Alloy.Collections.Timeline.reset(posts);
 
 		}, function(error) {
 			Ti.API.error("ZZ.API.Core.Posts.list error [error : " + error + "]");
+		}, {
+			action : ZZ.API.Core.Posts.CONSTANTS.ACTIONS.LOAD_MORE
 		});
 
-	
+	}, function(error) {
+		Ti.API.error("ZZ.API.Core.Posts.list error [error : " + error + "]");
+	});
 
 	var timeline_win = Alloy.createController("timeline").getView().open();
 	//Alloy.Globals.navMenu.openWindow(timeline_win);
