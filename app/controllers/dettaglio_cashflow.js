@@ -22,7 +22,7 @@ function transformCASH(model) {
 	}
 	
 	attrs.titolo_aspetto = attrs.data.descrizioneBreve;
-	attrs.desc_movimento = "  "+attrs.data.importo+"  ";
+	attrs.desc_movimento = "  "+attrs.data.importo+"€  ";
 	attrs.data_operazione = "Eseguita "+moment(attrs.data.dataOperazione).format("LL") + " alle ore "+moment(attrs.data.dataOperazione).format("HH:mm");
 	attrs.mod_pagamento = testExistence(attrs.data.modalitaPagamento)?"Pagato tramite "+attrs.data.modalitaPagamento.descrizioneBreve:"";
 	
