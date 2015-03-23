@@ -28,8 +28,8 @@
 
 					</ItemTemplate>
 				</Templates>
-				<ListSection dataCollection="Timeline" dataTransform="transformData">
-					<ListItem cat_icon:text="{catImage}" catColor:backgroundColor="{cat_color}" titolo:text="{name}" cat_mini_icon:text="{cat_mini_icon}" categoria:text="{categoria}" data:text="{postDate}"></ListItem>
+				<ListSection>
+					<ListItem></ListItem>
 				</ListSection>
 			</ListView>
 

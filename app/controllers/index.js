@@ -75,6 +75,8 @@ $.ricordami.getView().addEventListener('change', function(e) {
 });
 
 var _coreSessionLogInCallback = function(user) {
+	
+	Alloy.Globals.loading.show('Sincronizzazione', false);
 
 	Ti.API.info("ZZ.API.Core.Session.logIn success [user : " + JSON.stringify(user) + "]");
 
@@ -90,25 +92,35 @@ var _coreSessionLogInCallback = function(user) {
 
 	ZZ.API.Core.Posts.list(function(posts) {
 		//Ti.API.info("ZZ.API.Core.Posts.list success [response : " + JSON.stringify(posts) + "]");
-
-		ZZ.API.Core.Posts.list(function(morePosts) {
-			//Ti.API.info("ZZ.API.Core.Posts.list success [response : " + JSON.stringify(posts) + "]");
-			Alloy.Collections.Timeline.reset(posts);
-
-		}, function(error) {
-			Ti.API.error("ZZ.API.Core.Posts.list error [error : " + error + "]");
-		}, {
-			action : ZZ.API.Core.Posts.CONSTANTS.ACTIONS.LOAD_MORE
-		});
+			
+			loadTimeline(posts);
+			//Ti.API.info("TIMELINE : " + JSON.stringify(Alloy.Collections.Timeline));
 
 	}, function(error) {
 		Ti.API.error("ZZ.API.Core.Posts.list error [error : " + error + "]");
+		Alloy.Globals.loading.hide();
 	});
 
-	var timeline_win = Alloy.createController("timeline").getView().open();
+	
 	//Alloy.Globals.navMenu.openWindow(timeline_win);
 
 };
+
+function loadTimeline(p_posts){
+	
+	
+	
+	//Ti.API.info("POSTS ***** : " + JSON.stringify(p_posts));
+	Alloy.Collections.Timeline.reset(p_posts);
+	Alloy.Collections.Timeline.on("sync", showTimeline());
+	
+}
+
+function showTimeline(){
+	
+	Ti.API.info("TIMELINE LENGTH : " + Alloy.Collections.Timeline.length);
+	var timeline_win = Alloy.createController("timeline").getView().open();
+}
 
 function do_login(e) {
 

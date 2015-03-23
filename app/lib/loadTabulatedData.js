@@ -14,7 +14,7 @@ exports.loadTabData = function() {
 
 			Ti.App.Properties.setObject("post_template", _.omit(template, 'modules'));
 
-			Ti.API.info("############### TEMPLATE POST ONLY ***: " + JSON.stringify(Ti.App.Properties.getObject("post_template")));
+			//Ti.API.info("############### TEMPLATE POST ONLY ***: " + JSON.stringify(Ti.App.Properties.getObject("post_template")));
 
 			// ***** EXTRACT POST ONLY TEMPLATE *****************
 
@@ -96,7 +96,7 @@ exports.loadTabData = function() {
 
 		ZZ.API.Core.Categories.list(function(categories) {
 
-			Ti.API.info("ZZ.API.Core.Categories.list success [response : " + JSON.stringify(categories) + "]");
+			//Ti.API.info("ZZ.API.Core.Categories.list success [response : " + JSON.stringify(categories) + "]");
 			var objCategorie = [];
 
 			//Ti.API.info("CATEGORIE " + JSON.stringify(categoriesData));
@@ -195,7 +195,7 @@ exports.loadTabData = function() {
 
 			Ti.App.Properties.setObject("statoMovimento", objStatoMovimento);
 
-			Ti.API.info("OBJ STATO MOVIMENTO': " + JSON.stringify(Ti.App.Properties.getObject("statoMovimento")));
+			//Ti.API.info("OBJ STATO MOVIMENTO': " + JSON.stringify(Ti.App.Properties.getObject("statoMovimento")));
 
 			_.defer(f6);
 

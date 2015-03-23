@@ -4,16 +4,68 @@ var moment = require('alloy/moment');
 moment.lang('it', Alloy.Globals.Moment_IT);
 moment.lang('it');
 
-function doOpen() {
-	Alloy.Globals.loading.show('Sincronizzazione', false);
+//Ti.API.info("TIMELINE ***: " + JSON.stringify(Alloy.Collections.Timeline));
 
-	setTimeout(function() {
-		Alloy.Globals.loading.hide();
-	}, 8000);
+//Ti.API.info("2222 TIMELINE LENGTH : " + Alloy.Collections.Timeline.length);
+
+function doOpen() {
+	//Alloy.Globals.loading.show('Sincronizzazione', false);
 
 	Alloy.Globals.navMenu = $.navWin;
 
+	Alloy.Globals.loading.hide();
+
 }
+
+UiUtil.populateListViewFromCollection(Alloy.Collections.Timeline, {
+	datasetCb : function(el) {
+
+		var attrs = el.toJSON();
+
+		var diffTime = moment().diff(attrs.referenceTime, 'days');
+
+		//attrs.catImage = ((_.isNull(attrs.category)) || (_.isNull(attrs.category.code)) ) ? '/images/android-robot.jpg' : '/images/cat_' + attrs.category.code.slice(0, 2) + ".png";
+		var categoryLayout = extractCtegoryIcons(attrs.category.code.slice(0, 2));
+		attrs.catImage = categoryLayout.icona;
+		attrs.cat_color = categoryLayout.colore;
+
+		Ti.API.debug("CAT IMAGE: " + categoryLayout.colore);
+		attrs.postDate = (diffTime > 1) ? moment(attrs.referenceTime).format('LL') : moment(attrs.referenceTime).fromNow();
+		attrs.cat_mini_icon = icons.tags;
+		attrs.categoria = (!_.isNull(attrs.category)) ? attrs.category.name : "";
+
+		attrs.rating_1 = (attrs.rating > 0) ? "/images/star-small.png" : "";
+		attrs.rating_2 = (attrs.rating > 1) ? "/images/star-small.png" : "";
+		attrs.rating_3 = (attrs.rating > 2) ? "/images/star-small.png" : "";
+		attrs.rating_4 = (attrs.rating > 3) ? "/images/star-small.png" : "";
+		attrs.rating_5 = (attrs.rating > 4) ? "/images/star-small.png" : "";
+
+		attrs.tag = (_.isNull(attrs.tags)) ? "" : attrs.tags[0].name;
+
+		//Ti.API.info("ELEMENT NAME: " + JSON.stringify(el));
+		return ( {
+			titolo : {
+				text : el.get('name')
+			},
+			catColor : {
+				backgroundColor : attrs.cat_color
+			},
+			cat_icon : {
+				text : attrs.catImage
+			},
+			cat_mini_icon : {
+				text : attrs.cat_mini_icon
+			},
+			categoria : {
+				text : attrs.categoria
+			},
+			data : {
+				text : attrs.postDate
+			}
+			//cat_icon:text="{catImage}" catColor:backgroundColor="{cat_color}" titolo:text="{name}" cat_mini_icon:text="{cat_mini_icon}" categoria:text="{categoria}" data:text="{postDate}
+		});
+	}
+}, $.timelineList);
 
 function layoutComplete() {
 	Alloy.Globals.loading.hide();
