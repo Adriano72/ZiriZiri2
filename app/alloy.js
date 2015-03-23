@@ -12,6 +12,12 @@
 
 Alloy.Globals.Map = require('ti.map');
 
+T = function (name) { return require('T/'+name); };
+T('trimethyl');
+
+var Util = T('util');
+var UiUtil = T('uiutil');
+
 var icons = require('/icons');
 
 Alloy.Globals.winTop = (OS_IOS && parseInt(Ti.Platform.version, 10) >= 7) ? 20 : 0;
