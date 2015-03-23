@@ -12,7 +12,14 @@ function transform(model) {
 	
 	attrs.aspect_icon = icons.edit;
 	attrs.titolo = attrs.data.title;
-	attrs.note_content = attrs.data.content;
+	try{
+		
+		attrs.note_content = Ti.Utils.base64decode(attrs.data.content);
+	}catch(e){
+		Ti.API.info("ERRORE: "+e);
+		attrs.note_content = attrs.data.content;
+	}
+	
 	
 	
 
