@@ -18,6 +18,7 @@ function doOpen() {
 }
 
 UiUtil.populateListViewFromCollection(Alloy.Collections.Timeline, {
+
 	datasetCb : function(el) {
 
 		var attrs = el.toJSON();
@@ -30,7 +31,8 @@ UiUtil.populateListViewFromCollection(Alloy.Collections.Timeline, {
 		attrs.cat_color = categoryLayout.colore;
 
 		Ti.API.debug("CAT IMAGE: " + categoryLayout.colore);
-		attrs.postDate = (diffTime > 1) ? moment(attrs.referenceTime).format('LL') : moment(attrs.referenceTime).fromNow();
+		//attrs.postDate = (diffTime > 1) ? moment(attrs.referenceTime).format('LL') : moment(attrs.referenceTime).fromNow();
+		attrs.postDate = moment(attrs.referenceTime).format('LL')+" - "+moment(attrs.referenceTime).format("HH:mm");
 		attrs.cat_mini_icon = icons.tags;
 		attrs.categoria = (!_.isNull(attrs.category)) ? attrs.category.name : "";
 

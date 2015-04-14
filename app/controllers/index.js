@@ -7,6 +7,10 @@ if (OS_ANDROID) {
 
 var loadTabData = require("loadTabulatedData");
 
+$.ricordami.getView().addEventListener('change', function(e) {
+	rememberMe = e.value;
+});
+
 function doOpen(evt) {
 	//Alloy.Globals.loading.show('Sincronizzazione', false);
 	if (OS_ANDROID) {
@@ -45,34 +49,26 @@ if (Ti.App.Properties.getBool('authenticated', false)) {
 function _loadTimelineAlreadyLoggedIn(utente) {
 
 	Ti.API.info("**** WELCOME BACK: " + utente.username);
+	
+	Alloy.Globals.loading.show('Sincronizzazione', false);
 
 	loadTabData.loadTabData();
 
 	ZZ.API.Core.Posts.list(function(posts) {
 		//Ti.API.info("ZZ.API.Core.Posts.list success [response : " + JSON.stringify(posts) + "]");
-
-		ZZ.API.Core.Posts.list(function(morePosts) {
-			//Ti.API.info("ZZ.API.Core.Posts.list success [response : " + JSON.stringify(posts) + "]");
-			Alloy.Collections.Timeline.reset(posts);
-
-		}, function(error) {
-			Ti.API.error("ZZ.API.Core.Posts.list error [error : " + error + "]");
-		}, {
-			action : ZZ.API.Core.Posts.CONSTANTS.ACTIONS.LOAD_MORE
-		});
+			
+			loadTimeline(posts);
+			//Ti.API.info("TIMELINE : " + JSON.stringify(Alloy.Collections.Timeline));
 
 	}, function(error) {
 		Ti.API.error("ZZ.API.Core.Posts.list error [error : " + error + "]");
+		Alloy.Globals.loading.hide();
 	});
-
-	var timeline_win = Alloy.createController("timeline").getView().open();
+	
+	
 
 }
 
-
-$.ricordami.getView().addEventListener('change', function(e) {
-	rememberMe = e.value;
-});
 
 var _coreSessionLogInCallback = function(user) {
 	
