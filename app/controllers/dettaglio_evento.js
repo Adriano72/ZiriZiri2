@@ -1,53 +1,43 @@
 var args = arguments[0] || {};
 
-Ti.API.info("EVENTO COLLECTION LENGTH: " + Alloy.Collections.aspettoEvento.length);
+Ti.API.info("ASPETTO EVENTO: " + JSON.stringify(args.p_aspetto));
 
-//var ImageFactory = require('ti.imagefactory');
+var attrs = args.p_aspetto;
 
-Ti.API.info("ASPETTO EVENTO: " + JSON.stringify(Alloy.Collections.aspettoEvento));
+attrs.aspect_icon = icons.calendar;
 
-var aspetto = Alloy.Collections.aspettoEvento.at(0);
+if (_.isNull(attrs.location)) {
+	attrs.mapHeight = 0;
+	attrs.annotat = [];
+	attrs.mapRegion = {
+		latitude : 12,
+		longitude : 32,
+		latitudeDelta : 0.01,
+		longitudeDelta : 0.01
+	};
 
-var attrs = aspetto.toJSON();
+} else {
+	attrs.mapHeight = 200;
+	attrs.eventLocation = attrs.location.name;
+	attrs.mapRegion = {
+		latitude : attrs.location.latitude,
+		longitude : attrs.location.longitude,
+		latitudeDelta : 0.01,
+		longitudeDelta : 0.01
+	};
 
-Ti.API.info("MODELLO STRINGIFYZZAT EVENTO: " + JSON.stringify(attrs));
+	attrs.annotat = [Alloy.Globals.Map.createAnnotation({
+		latitude : attrs.location.latitude,
+		longitude : attrs.location.longitude,
+		title : attrs.location.name,
+		pincolor : Alloy.Globals.Map.ANNOTATION_RED
+	})];
+	//attrs.markerTitle = attrs.location.name;
+}
 
-function transformEvent(model) {
+attrs.dataDa = "Data " + moment(attrs.data.dataScadenza).format("LL");
 
-	var attrs = model.toJSON();
-	
-	attrs.aspect_icon = icons.calendar;
-
-	if (_.isNull(attrs.location)) {
-		attrs.mapHeight = 0;
-		attrs.annotat = [];
-		attrs.mapRegion = {
-			latitude : 12,
-			longitude : 32,
-			latitudeDelta : 0.01,
-			longitudeDelta : 0.01
-		};
-
-	} else {
-		attrs.mapHeight = 200;
-		attrs.eventLocation = attrs.location.name;
-		attrs.mapRegion = {
-			latitude : attrs.location.latitude,
-			longitude : attrs.location.longitude,
-			latitudeDelta : 0.01,
-			longitudeDelta : 0.01
-		};
-
-		attrs.annotat = [Alloy.Globals.Map.createAnnotation({
-			latitude : attrs.location.latitude,
-			longitude : attrs.location.longitude,
-			title : attrs.location.name,
-			pincolor : Alloy.Globals.Map.ANNOTATION_RED
-		})];
-		//attrs.markerTitle = attrs.location.name;
-	}
-
-	attrs.dataDa = "Data " + moment(attrs.data.dataScadenza).format("LL");
+if (testExistence(attrs.data.endTime)) {
 
 	if (attrs.data.startTime.time === attrs.data.endTime.time) {
 		attrs.dataEvento = "Data " + moment(attrs.data.startTime.time).format("LL") + " alle ore " + moment(attrs.data.startTime.time).format("h:mm a");
@@ -55,16 +45,24 @@ function transformEvent(model) {
 		attrs.dataEvento = "Inizia " + moment(attrs.data.startTime.time).format("LL") + " alle ore " + moment(attrs.data.startTime.time).format("h:mm a") + "\nFinisce " + moment(attrs.data.endTime.time).format("LL") + " alle ore " + moment(attrs.data.endTime.time).format("h:mm a");
 	}
 
-	if (attrs.data.type == "NONE") {
-		attrs.tipo_evento = "Evento Effettivo";
-	} else if (attrs.data.type == "PLANNED") {
-		attrs.tipo_evento = "Evento Pianificato";
-	}
-
-	return attrs;
+}else{
+	attrs.dataEvento = "Inizia " + moment(attrs.data.startTime.time).format("LL") + " alle ore " + moment(attrs.data.startTime.time).format("h:mm a");
 }
 
-dataResync();
+if (attrs.data.type == "NONE") {
+	attrs.tipo_evento = "Evento Effettivo";
+} else if (attrs.data.type == "PLANNED") {
+	attrs.tipo_evento = "Evento Pianificato";
+}
+
+$.img_icon.text = attrs.aspect_icon;
+$.titolo.text = attrs.name;
+$.dataEvento.text = attrs.dataEvento;
+$.location.text = attrs.eventLocation;
+$.mapview.height = attrs.mapHeight;
+$.mapview.mapRegion = attrs.mapRegion;
+$.mapview.annotations = attrs.annotat;
+$.tipo_evento.text = attrs.tipo_evento;
 
 function testExistence(param) {
 

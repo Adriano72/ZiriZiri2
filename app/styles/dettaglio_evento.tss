@@ -1,7 +1,3 @@
-"#scrollableCashflow": {
-	//height: Ti.UI.SIZE,
-	//width: Ti.UI.FILL
-}
 
 "#aspectScrollView": {
 	width: "95%",

@@ -30,7 +30,7 @@ UiUtil.populateListViewFromCollection(Alloy.Collections.Timeline, {
 		attrs.catImage = categoryLayout.icona;
 		attrs.cat_color = categoryLayout.colore;
 
-		Ti.API.debug("CAT IMAGE: " + categoryLayout.colore);
+		//Ti.API.debug("CAT IMAGE: " + categoryLayout.colore);
 		//attrs.postDate = (diffTime > 1) ? moment(attrs.referenceTime).format('LL') : moment(attrs.referenceTime).fromNow();
 		attrs.postDate = moment(attrs.referenceTime).format('LL')+" - "+moment(attrs.referenceTime).format("HH:mm");
 		attrs.cat_mini_icon = icons.tags;
@@ -88,6 +88,7 @@ function manageClose() {
 
 };
 
+/*
 function checkAspects(node, target) {
 
 	var aspettiTrovati = _.filter(node, function(value) {
@@ -143,6 +144,7 @@ function checkAspects(node, target) {
 	}
 
 };
+*/
 
 function extractCtegoryIcons(code) {
 
@@ -249,6 +251,7 @@ function extractCtegoryIcons(code) {
 
 };
 
+/*
 function transformData(model) {
 
 	var attrs = model.toJSON();
@@ -275,6 +278,7 @@ function transformData(model) {
 
 	return attrs;
 };
+*/
 
 function dettaglioPost(e) {
 

@@ -9,40 +9,12 @@
 		<Menu id="menu" platform="android">
 			<MenuItem id="mn_settings" title="Impostazioni"/>
 		</Menu>
-		<ScrollableView id="scrollableTimeline" dataFunction="updateCollection" dataCollection="Timeline" dataTransform="transformData" showPagingControl="true" onScrollend="scrollendEvent">
-			<View id="dettaglio_post_container">
-				<View id="cat_icon_container" backgroundColor="{cat_color}">
-					<Label id="catIcon" text="{catImage}"/>
-				</View>
-				<View id="postData">
-					<Label id="titolo" text="{name}" />
-					<View id="secondLine">
-						<Label id="cat_mini_icon" text ="{catMiniIcon}"/>
-						<Label id="category" text="{categoria}"/>
-					</View>
-					<Label id="data_post" text="{postDate}"/>
-
-				</View>
-				<View id="aspect_icon_toolbar">
-					<Label class="aspects_icons first" id="event_icon" onClick="dettEvento" text="{iconEvent}" width="{iconEventWidth}" left="{iconEventLeft}"/>
-					<Label class="aspects_icons" id="cashflow_icon" onClick="dettCashflow" text="{iconCashFlow}" width="{iconCashWidth}" left="{iconCashLeft}"/>
-					<Label class="aspects_icons" id="document_icon" onClick="dettDocument" text="{iconDocument}" width="{iconDocWidth}" left="{iconDocLeft}"/>
-					<Label class="aspects_icons" id="note_icon" onClick="dettNote" text="{iconNote}" width="{iconNoteWidth}" left="{iconNoteLeft}"/>
-					<Label class="aspects_icons" id="link_icon" onClick="dettLink" text="{iconLink}" width="{iconLinktWidth}" left="{iconLinkLeft}"/>
-					<Label class="aspects_icons" id="communication_icon" text="{iconCommunication}" width="{iconCommWidth}" left="{iconCommLeft}"/>
-					<!--<Label id = "aspects" text="{aspects}"/>-->
-					<View class="show_all_container">
-						<View class="push_to_right">
-							<!--<Label  id="show_all_text"/>-->
-							<ImageView  id="show_all_icon"/>
-						</View>
-					</View>
-
-				</View>
-			</View>
-		</ScrollableView>
+		<ScrollableView id="scrollableTimeline" showPagingControl="true" onScrollend="scrollendEvent"/>
+			
 		<View class ="separator"/>
-		<View id="aspect_detail_container"></View>
+		<ScrollableView id="scrollableAspects" showPagingControl="true" onScrollend="scrollendEventAspects"/>
+		
+		
 
 	</Window>
 </Alloy>

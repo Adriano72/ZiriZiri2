@@ -14,133 +14,13 @@
 	height: 190
 }
 
-"#dettaglio_post_container": {
+"#scrollableAspects": {
 	top: 0,
-	height: Ti.UI.SIZE
+	height: Ti.UI.FILL,
+	backgroundColor: "#F5F9FA"
 }
 
-"#cat_icon_container": {
-	left: 15,
-	top: 20,
-	touchEnabled: false,
-	width: 70,
-	height: 70,
-	borderRadius: 4
-},
 
-"#catIcon": {
-
-	color: "#fff",
-	font: {
-		fontFamily: 'AppIcons',
-		fontSize: 32
-	}
-}
-
-"#cat_icon_container[platform=android]": {
-	left: 20
-}
-
-"#postData": {
-	//width:
-	//backgroundColor:"red",
-	font: {
-		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 16
-	},
-	top: 15,
-	left: 95,
-	right: 0,
-	height: Ti.UI.SIZE,
-	layout: "vertical"
-},
-
-"#postData[platform=android]": {
-	left: 95
-},
-
-"#titolo": {
-	left: 0,
-	//top: 4,
-	height: 30,
-	ellipsize: true,
-	wordWrap: false,
-	color: "black",
-	textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
-	font: {
-		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 18,
-		fontWeight: "bold"
-	}
-},
-
-"#titolo[platform=android]": {}
-
-"#secondLine": {
-	left: 0,
-	//backgroundColor:"green",
-	height: Ti.UI.SIZE,
-	top: 2,
-	right: 0,
-	layout: "horizontal"
-},
-
-"#data_post": {
-	top: 0,
-	height: 30,
-	width:Ti.UI.SIZE,
-	color: "#000",
-	left: 5,
-	font: {
-		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 16
-	}
-}
-
-"#cat_mini_icon": {
-	image: "/images/head-category.png",
-	touchEnabled: false,
-	left: 0,
-	width: 17,
-	height: 17,
-	font: {
-		fontFamily: 'AppIcons',
-		fontSize: 14
-	}
-}
-
-"#category": {
-	left: 5,
-	font: {
-		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 16
-	}
-}
-
-"#aspect_icon_toolbar": {
-	top: 110,
-	left: 15,
-	height: 45,
-	width: Ti.UI.FILL,
-	layout: "horizontal"
-}
-
-".aspects_icons":{
-	//backgroundColor: "navy",
-	//left: 0,
-	top: 10,
-	bottom: 10,
-	//image: '/images/android-robot.jpg',
-	//touchEnabled: false,
-	//center: 35,
-	width: 0,
-	color: "#999",
-	height: 25,
-	font: {
-		fontFamily: 'AppIcons',
-		fontSize: 26
-	}
-}
 
 "#aspect_detail_container": {
 	top: 0,
