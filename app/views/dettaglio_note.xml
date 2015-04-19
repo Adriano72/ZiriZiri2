@@ -1,12 +1,10 @@
 <Alloy>
-	<ScrollableView id="scrollableNote" dataCollection="aspettiNote" dataFunction="dataResync" dataTransform="transform">
-		<ScrollView id="aspectScrollView">
-			<View class="subcontainer">
-				<Label id="img_icon" text ="{aspect_icon}"/>
-				<Label id="titolo" class="aspect_title" text="{titolo}"/>
-				<Label id="note_content" text="{note_content}"/>
+	<ScrollView id="aspectScrollView">
+		
+			
+			<Label id="titolo" class="aspect_title"/>
+			<Label id="note_content"/>
 
-			</View>
-		</ScrollView>
-	</ScrollableView>
+		
+	</ScrollView>
 </Alloy>

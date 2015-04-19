@@ -1,20 +1,14 @@
 <Alloy>
-	<ScrollableView id="scrollableCashflow" dataCollection="aspettiCashflow" dataFunction="dataResync" dataTransform="transformCASH">
-		<ScrollView id="aspectScrollView">
+	<ScrollView id="aspectScrollView">
 
-			<View class="subcontainer">
-				<Label id="img_icon" text ="{aspect_icon}"/>
-				<Label id="tipo_mov" class="aspect_text"  text="{tipo_mov_desc}" color="{tipo_mov_color}"/>
-			</View>
-			<Label id="titolo" class="aspect_text" text="{titolo_aspetto}"/>
-			<View class="subcontainer">
-				<Label class="aspect_text" text="{tipo_mov_desc_estesa}"/>
-				<Label id="desc_movimento" class="importo" text="{desc_movimento}" borderRadius="3" backgroundColor="{tipo_mov_color}"/>
-			</View>
-			<Label id="data_operazione" class="aspect_text" text="{data_operazione}"/>
-			<Label id="mod_pagamento" class="aspect_text" text="{mod_pagamento}"/>
-			
+		<Label id="tipo_mov" class="aspect_text"/>
+		<Label id="titolo" class="aspect_text"/>
+		<View class="subcontainer">
+			<Label id="tipo_mov_ext" class="aspect_text"/>
+			<Label id="desc_movimento" class="importo" borderRadius="3"/>
+		</View>
+		<Label id="data_operazione" class="aspect_text"/>
+		<Label id="mod_pagamento" class="aspect_text"/>
 
-		</ScrollView>
-	</ScrollableView>
+	</ScrollView>
 </Alloy>

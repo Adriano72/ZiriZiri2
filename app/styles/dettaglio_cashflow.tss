@@ -1,8 +1,3 @@
-"#scrollableCashflow": {
-	//height: Ti.UI.SIZE,
-	//width: Ti.UI.FILL
-}
-
 "#aspectScrollView": {
 	width: "95%",
 	//borderRadius: 5,
@@ -24,7 +19,7 @@
 
 "#img_icon":{
 	//backgroundColor: "navy",
-	left: 10,
+	left: 20,
 	top: 10,
 	bottom: 10,
 	//image: '/images/android-robot.jpg',
@@ -38,6 +33,17 @@
 	}
 }
 
+"#tipo_mov": {
+	top: 10
+}
+
+"#titolo": {
+	font: {
+		fontWeight: 'bold'
+	},
+}
+
+
 ".aspect_text": {
 	touchEnabled: false,
 	font: {
@@ -47,7 +53,7 @@
 	color: "#444",
 	height: Ti.UI.SIZE,
 	width: Ti.UI.SIZE,
-	left: 10,
+	left: 20,
 	ellipsize: true,
 	wordWrap: false
 }
@@ -62,14 +68,14 @@
 	textAlign: "center",
 	height: Ti.UI.SIZE,
 	width: Ti.UI.SIZE,
-	left: 10,
+	left: 20,
 	ellipsize: true,
 	wordWrap: false
 }
 
 ".rowWrapper": {
 	layout: "horizontal",
-	top: 10,
+	top: 20,
 	height: Titanium.UI.SIZE
 }
 

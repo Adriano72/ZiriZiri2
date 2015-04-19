@@ -1,8 +1,3 @@
-"#scrollableNote": {
-	//height: Ti.UI.SIZE,
-	//width: Ti.UI.FILL
-}
-
 "#scrollableCashflow": {
 	//height: Ti.UI.SIZE,
 	//width: Ti.UI.FILL
@@ -19,23 +14,6 @@
 	layout: "vertical"
 }
 
-"#img_icon":{
-	//backgroundColor: "navy",
-	left: 10,
-	top: 10,
-	bottom: 10,
-	//image: '/images/android-robot.jpg',
-	//touchEnabled: false,
-	//center: 35,
-	color: "#999",
-	height: 25,
-	font: {
-		fontFamily: 'AppIcons',
-		fontSize: 26
-	}
-}
-
-
 ".subcontainer": {
 	top: 0,
 	//left: 10,
@@ -44,9 +22,13 @@
 	height: Titanium.UI.SIZE
 }
 
+"#titolo": {
+	top: 10
+}
+
 "#img_icon":{
 	//backgroundColor: "navy",
-	left: 10,
+	left: 20,
 	top: 10,
 	bottom: 10,
 	//image: '/images/android-robot.jpg',
@@ -86,8 +68,10 @@
 	backgroundColor: "#F7F5D2",
 	color: "#444",
 	height: Ti.UI.SIZE,
-	width: "95%",
-	left: 10,
+	//width: "95%",
+	top: 10,
+	left: 20,
+	right: 20,
 	ellipsize: false,
 	wordWrap: true
 }

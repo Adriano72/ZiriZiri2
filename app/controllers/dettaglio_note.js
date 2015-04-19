@@ -1,39 +1,25 @@
 var args = arguments[0] || {};
 
-//Ti.API.info("CASHFLOW COLLECTION: "+JSON.stringify(Alloy.Collections.aspettiCashflow));
+var attrs = args.p_aspetto;
 
-Ti.API.info("LENGTH COLLECTION NOTE: "+Alloy.Collections.aspettiNote.length);
+attrs.aspect_icon = icons.edit;
+attrs.titolo = attrs.data.title;
 
-function transform(model) {
-	
-	var attrs = model.toJSON();
-	
-	Ti.API.info("MODELLO STRINGIFYZZATO NOTE: "+JSON.stringify(attrs));
-	
-	attrs.aspect_icon = icons.edit;
-	attrs.titolo = attrs.data.title;
-	try{
-		
-		attrs.note_content = Ti.Utils.base64decode(attrs.data.content);
-	}catch(e){
-		Ti.API.info("ERRORE: "+e);
-		attrs.note_content = attrs.data.content;
-	}
-	
-	
-	
-
-	//attrs.data_operazione = "Eseguita "+moment(attrs.data.dataOperazione).format("LL") + " alle ore "+moment(attrs.data.dataOperazione).format("h:mm a");
-	
-	return attrs;
-
+try {
+	attrs.note_content = Ti.Utils.base64decode(attrs.data.content);
+} catch(e) {
+	Ti.API.info("ERRORE: " + e);
+	attrs.note_content = attrs.data.content;
 }
 
-dataResync();
+//attrs.data_operazione = "Eseguita "+moment(attrs.data.dataOperazione).format("LL") + " alle ore "+moment(attrs.data.dataOperazione).format("h:mm a");
 
+//$.img_icon.text = attrs.aspect_icon;
+$.titolo.text = attrs.titolo;
+$.note_content.text = attrs.note_content;
 
-function testExistence(param){
-	
+function testExistence(param) {
+
 	return !(_.isUndefined(param) || _.isNull(param));
-	
+
 };

@@ -47,6 +47,7 @@
 	left: 0,
 	//top: 4,
 	height: 30,
+	right: 20,
 	ellipsize: true,
 	wordWrap: false,
 	color: "black",
@@ -74,7 +75,7 @@
 	height: 30,
 	width:Ti.UI.SIZE,
 	color: "#000",
-	left: 5,
+	left: 0,
 	font: {
 		fontFamily: 'SourceSansPro-Regular',
 		fontSize: 16
@@ -101,27 +102,3 @@
 	}
 }
 
-"#aspect_icon_toolbar": {
-	top: 110,
-	left: 15,
-	height: 45,
-	width: Ti.UI.FILL,
-	layout: "horizontal"
-}
-
-".aspects_icons":{
-	//backgroundColor: "navy",
-	//left: 0,
-	top: 10,
-	bottom: 10,
-	//image: '/images/android-robot.jpg',
-	//touchEnabled: false,
-	//center: 35,
-	width: 0,
-	color: "#999",
-	height: 25,
-	font: {
-		fontFamily: 'AppIcons',
-		fontSize: 26
-	}
-}

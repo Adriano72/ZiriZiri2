@@ -1,19 +1,140 @@
 var args = arguments[0] || {};
 
+//var dispatcher = require('dispatcher');
+
+var lodash = require('lodash');
+
 var moment = require('alloy/moment');
 moment.lang('it', Alloy.Globals.Moment_IT);
 moment.lang('it');
 
 Ti.API.info("POST INDEX: " + args.postIndex);
 
+var visteAspetti = [];
+
+var blankView = Ti.UI.createView({
+	top : 0,
+	height : Ti.UI.FILL,
+	backgroundColor : "#F5F9FA"
+	//backgroundColor : "green"
+});
+
 function doOpen() {
 	//updateCollection();
 	var postIndex = args.postIndex;
 	$.scrollableTimeline.setCurrentPage(postIndex);
-	//updateIconToolbar();
+	$.scrollableAspects.views = [blankView];
+
+	setTimeout(function() {
+		scrollendEvent(0);
+	}, 500);
+
 }
 
+function updateIconToolbar(post) {
+
+	//Ti.API.info("ICON EVENT_____________: " + JSON.stringify(post));
+
+	$.event_icon.text = post.iconEvent;
+	$.event_icon.width = post.iconEventWidth;
+	$.event_icon.left = post.iconEventLeft;
+
+	$.cashflow_icon.text = post.iconCashFlow;
+	$.cashflow_icon.width = post.iconCashWidth;
+	$.cashflow_icon.left = post.iconCashLeft;
+
+	$.document_icon.text = post.iconDocument;
+	$.document_icon.width = post.iconDocWidth;
+	$.document_icon.left = post.iconDocLeft;
+
+	$.note_icon.text = post.iconNote;
+	$.note_icon.width = post.iconNoteWidth;
+	$.note_icon.left = post.iconNoteLeft;
+
+	$.link_icon.text = post.iconLink;
+	$.link_icon.width = post.iconLinktWidth;
+	$.link_icon.left = post.iconLinkLeft;
+
+}
+
+function onAspectChange(tipoAspetto) {
+
+	switch(tipoAspetto) {
+	case "EVENTDATATYPE_CODE":
+		resetIconColors();
+		$.event_icon.color = "#63BBF2";
+
+		break;
+	case "CASHFLOWDATATYPE_CODE":
+		resetIconColors();
+		$.cashflow_icon.color = "#63BBF2";
+
+		break;
+	case "FILEDOCUMENTDATATYPE_CODE":
+		resetIconColors();
+		$.document_icon.color = "#63BBF2";
+
+		break;
+	case "NOTEDATATYPE_CODE":
+		resetIconColors();
+		$.note_icon.color = "#63BBF2";
+
+		break;
+	case "FILELINKDATATYPE_CODE":
+		resetIconColors();
+		$.link_icon.color = "#63BBF2";
+
+		break;
+	}
+
+	//dispatcher.off('aspectChanged', onAspectChange);
+};
+
+function resetIconColors() {
+	$.event_icon.color = "#999";
+	$.cashflow_icon.color = "#999";
+	$.document_icon.color = "#999";
+	$.note_icon.color = "#999";
+	$.link_icon.color = "#999";
+
+}
+
+function jumpToAspectType(aspectType) {
+	Ti.API.info("JUMP FUNCTION *************** " + aspectType);
+
+	var indexToGo = lodash.findIndex(sortedArray, function(value) {
+		return value.kind.code == aspectType
+	});
+
+	Ti.API.info("INDEX TO GO: " + indexToGo);
+
+	$.scrollableAspects.setCurrentPage(indexToGo);
+
+}
+
+function setToEvent() {
+	jumpToAspectType("EVENTDATATYPE_CODE");
+};
+
+function setToCashflow() {
+	jumpToAspectType("CASHFLOWDATATYPE_CODE");
+};
+
+function setToDocument() {
+	jumpToAspectType("FILEDOCUMENTDATATYPE_CODE");
+};
+
+function setToNote() {
+	jumpToAspectType("NOTEDATATYPE_CODE");
+};
+
+function setToLink() {
+	jumpToAspectType("FILELINKDATATYPE_CODE");
+};
+
 var timelineScrollableViews = [];
+
+var sortedArray = [];
 
 Alloy.Collections.Timeline.forEach(function(post) {
 
@@ -32,41 +153,14 @@ Alloy.Collections.Timeline.forEach(function(post) {
 
 	//value.catImage = ((_.isNull(value.category)) || (_.isNull(value.category.code)) ) ? '/images/android-robot.jpg' : '/images/cat_' + value.category.code.slice(0, 2) + ".png";
 	//Ti.API.info("DETTAGLIO CAT IMAGE: " + value.catImage);
-	value.postDate = (diffTime > 1) ? moment(value.referenceTime).format('LL') + " alle ore " + moment(value.referenceTime).format("HH:mm") : moment(value.referenceTime).fromNow();
+	value.postDate = moment(value.referenceTime).format('LL') + " - " + moment(value.referenceTime).format("HH:mm");
 	value.categoria = (!_.isNull(value.category)) ? value.category.name : "";
 
 	value.tag = (_.isNull(value.tags)) ? "" : value.tags[0].name;
 
-	var datiIconaEvento = checkAspects(value.aspects, "EVENTDATATYPE_CODE");
-	var datiIconaCashflow = checkAspects(value.aspects, "CASHFLOWDATATYPE_CODE");
-	var datiIconaDocument = checkAspects(value.aspects, "FILEDOCUMENTDATATYPE_CODE");
-	var datiIconaNote = checkAspects(value.aspects, "NOTEDATATYPE_CODE");
-	var datiIconaLink = checkAspects(value.aspects, "FILELINKDATATYPE_CODE");
-	var datiIconaCommunication = checkAspects(value.aspects, "COMMUNICATIONDATATYPE_CODE");
-
-	value.iconEvent = datiIconaEvento.icona;
-	value.iconCashFlow = datiIconaCashflow.icona;
-	value.iconDocument = datiIconaDocument.icona;
-	value.iconNote = datiIconaNote.icona;
-	value.iconLink = datiIconaLink.icona;
-	value.iconCommunication = datiIconaCommunication.icona;
-
-	value.iconEventWidth = datiIconaEvento.largh;
-	value.iconCashWidth = datiIconaCashflow.largh;
-	value.iconDocWidth = datiIconaDocument.largh;
-	value.iconNoteWidth = datiIconaNote.largh;
-	value.iconLinktWidth = datiIconaLink.largh;
-	value.iconCommWidth = datiIconaCommunication.largh;
-
-	value.iconEventLeft = datiIconaEvento.leftSize;
-	value.iconCashLeft = datiIconaCashflow.leftSize;
-	value.iconDocLeft = datiIconaDocument.leftSize;
-	value.iconNoteLeft = datiIconaNote.leftSize;
-	value.iconLinkLeft = datiIconaLink.leftSize;
-	value.iconCommLeft = datiIconaCommunication.leftSize;
-
 	var post = Alloy.createController('postDetailSingleView', {
-		p_post : value
+		p_post : value,
+
 	}).getView();
 
 	timelineScrollableViews.push(post);
@@ -74,137 +168,255 @@ Alloy.Collections.Timeline.forEach(function(post) {
 });
 
 $.scrollableTimeline.views = timelineScrollableViews;
+/*
+ function transformData(model) {
 
-function transformData(model) {
+ var attrs = model.toJSON();
 
-	var attrs = model.toJSON();
+ attrs.catMiniIcon = icons.tags;
 
-	attrs.catMiniIcon = icons.tags;
+ //Ti.API.info("POST DETTAGLIO: " + JSON.stringify(attrs));
 
-	//Ti.API.info("POST DETTAGLIO: " + JSON.stringify(attrs));
+ var diffTime = moment().diff(attrs.referenceTime, 'days');
 
-	var diffTime = moment().diff(attrs.referenceTime, 'days');
+ var categoryLayout = extractCtegoryIcons(attrs.category.code.slice(0, 2));
+ attrs.catImage = categoryLayout.icona;
+ attrs.cat_color = categoryLayout.colore;
 
-	var categoryLayout = extractCtegoryIcons(attrs.category.code.slice(0, 2));
-	attrs.catImage = categoryLayout.icona;
-	attrs.cat_color = categoryLayout.colore;
+ //attrs.catImage = ((_.isNull(attrs.category)) || (_.isNull(attrs.category.code)) ) ? '/images/android-robot.jpg' : '/images/cat_' + attrs.category.code.slice(0, 2) + ".png";
+ //Ti.API.info("DETTAGLIO CAT IMAGE: " + attrs.catImage);
+ attrs.postDate = (diffTime > 1) ? moment(attrs.referenceTime).format('LL') + " alle ore " + moment(attrs.referenceTime).format("HH:mm") : moment(attrs.referenceTime).fromNow();
+ attrs.categoria = (!_.isNull(attrs.category)) ? attrs.category.name : "";
 
-	//attrs.catImage = ((_.isNull(attrs.category)) || (_.isNull(attrs.category.code)) ) ? '/images/android-robot.jpg' : '/images/cat_' + attrs.category.code.slice(0, 2) + ".png";
-	//Ti.API.info("DETTAGLIO CAT IMAGE: " + attrs.catImage);
-	attrs.postDate = (diffTime > 1) ? moment(attrs.referenceTime).format('LL') + " alle ore " + moment(attrs.referenceTime).format("HH:mm") : moment(attrs.referenceTime).fromNow();
-	attrs.categoria = (!_.isNull(attrs.category)) ? attrs.category.name : "";
+ attrs.tag = (_.isNull(attrs.tags)) ? "" : attrs.tags[0].name;
 
-	attrs.tag = (_.isNull(attrs.tags)) ? "" : attrs.tags[0].name;
+ var datiIconaEvento = checkAspects(attrs.aspects, "EVENTDATATYPE_CODE");
+ var datiIconaCashflow = checkAspects(attrs.aspects, "CASHFLOWDATATYPE_CODE");
+ var datiIconaDocument = checkAspects(attrs.aspects, "FILEDOCUMENTDATATYPE_CODE");
+ var datiIconaNote = checkAspects(attrs.aspects, "NOTEDATATYPE_CODE");
+ var datiIconaLink = checkAspects(attrs.aspects, "FILELINKDATATYPE_CODE");
+ var datiIconaCommunication = checkAspects(attrs.aspects, "COMMUNICATIONDATATYPE_CODE");
 
-	var datiIconaEvento = checkAspects(attrs.aspects, "EVENTDATATYPE_CODE");
-	var datiIconaCashflow = checkAspects(attrs.aspects, "CASHFLOWDATATYPE_CODE");
-	var datiIconaDocument = checkAspects(attrs.aspects, "FILEDOCUMENTDATATYPE_CODE");
-	var datiIconaNote = checkAspects(attrs.aspects, "NOTEDATATYPE_CODE");
-	var datiIconaLink = checkAspects(attrs.aspects, "FILELINKDATATYPE_CODE");
-	var datiIconaCommunication = checkAspects(attrs.aspects, "COMMUNICATIONDATATYPE_CODE");
+ attrs.iconEvent = datiIconaEvento.icona;
+ attrs.iconCashFlow = datiIconaCashflow.icona;
+ attrs.iconDocument = datiIconaDocument.icona;
+ attrs.iconNote = datiIconaNote.icona;
+ attrs.iconLink = datiIconaLink.icona;
+ attrs.iconCommunication = datiIconaCommunication.icona;
 
-	attrs.iconEvent = datiIconaEvento.icona;
-	attrs.iconCashFlow = datiIconaCashflow.icona;
-	attrs.iconDocument = datiIconaDocument.icona;
-	attrs.iconNote = datiIconaNote.icona;
-	attrs.iconLink = datiIconaLink.icona;
-	attrs.iconCommunication = datiIconaCommunication.icona;
+ attrs.iconEventWidth = datiIconaEvento.largh;
+ attrs.iconCashWidth = datiIconaCashflow.largh;
+ attrs.iconDocWidth = datiIconaDocument.largh;
+ attrs.iconNoteWidth = datiIconaNote.largh;
+ attrs.iconLinktWidth = datiIconaLink.largh;
+ attrs.iconCommWidth = datiIconaCommunication.largh;
 
-	attrs.iconEventWidth = datiIconaEvento.largh;
-	attrs.iconCashWidth = datiIconaCashflow.largh;
-	attrs.iconDocWidth = datiIconaDocument.largh;
-	attrs.iconNoteWidth = datiIconaNote.largh;
-	attrs.iconLinktWidth = datiIconaLink.largh;
-	attrs.iconCommWidth = datiIconaCommunication.largh;
+ attrs.iconEventLeft = datiIconaEvento.leftSize;
+ attrs.iconCashLeft = datiIconaCashflow.leftSize;
+ attrs.iconDocLeft = datiIconaDocument.leftSize;
+ attrs.iconNoteLeft = datiIconaNote.leftSize;
+ attrs.iconLinkLeft = datiIconaLink.leftSize;
+ attrs.iconCommLeft = datiIconaCommunication.leftSize;
 
-	attrs.iconEventLeft = datiIconaEvento.leftSize;
-	attrs.iconCashLeft = datiIconaCashflow.leftSize;
-	attrs.iconDocLeft = datiIconaDocument.leftSize;
-	attrs.iconNoteLeft = datiIconaNote.leftSize;
-	attrs.iconLinkLeft = datiIconaLink.leftSize;
-	attrs.iconCommLeft = datiIconaCommunication.leftSize;
-
-	return attrs;
-};
+ return attrs;
+ };
+ */
 
 function scrollendEvent(e) {
 
 	Ti.API.info("CURRENT  PAGE: " + e.currentPage);
-	Ti.API.info("######### UNO #########");
+	$.scrollableAspects.setCurrentPage(0);
+
 	//$.aspect_detail_container.removeAllChildren();
 
+	visteAspetti = [];
+
 	Alloy.Models.Post.set(Alloy.Collections.Timeline.at($.scrollableTimeline.currentPage));
-	Ti.API.info("######### DUE #########");
 
 	var modJson = Alloy.Models.Post.toJSON();
-	Ti.API.info("######### TRE #########");
 
 	var aspettiPost = modJson.aspects;
-	Ti.API.info("######### QUATTRO #########");
 
-	Ti.API.info("******* NUM ASPETTI: " + aspettiPost.length);
-	Ti.API.info("######### CINQUE #########");
+	// ***** INIZIO - RIORDINA l'ARRAY aSPETTI VISTO CHE DANIELE FANCAZZISTA NON LO FA!!!'
 
-	var visteAspetti = [];
-	Ti.API.info("######### SEI #########");
+	sortedArray = [];
+
+	var aspettiEvento = _.filter(aspettiPost, function(value) {
+		return value.kind.code == "EVENTDATATYPE_CODE";
+	});
+
+	if (aspettiEvento.length > 0)
+		sortedArray.push(aspettiEvento);
+
+	var aspettiCashflow = _.filter(aspettiPost, function(value) {
+		return value.kind.code == "CASHFLOWDATATYPE_CODE";
+	});
+
+	if (aspettiCashflow.length > 0)
+		sortedArray.push(aspettiCashflow);
+
+	var aspettiDocument = _.filter(aspettiPost, function(value) {
+		return value.kind.code == "FILEDOCUMENTDATATYPE_CODE";
+	});
+
+	if (aspettiDocument.length > 0)
+		sortedArray.push(aspettiDocument);
+
+	var aspettiNote = _.filter(aspettiPost, function(value) {
+		return value.kind.code == "NOTEDATATYPE_CODE";
+	});
+
+	if (aspettiNote.length > 0)
+		sortedArray.push(aspettiNote);
+
+	var aspettiLink = _.filter(aspettiPost, function(value) {
+		return value.kind.code == "FILELINKDATATYPE_CODE";
+	});
+
+	if (aspettiLink.length > 0)
+		sortedArray.push(aspettiLink);
+
+	sortedArray = _.flatten(sortedArray, true);
+
+	var datiIconaEvento = checkAspects(aspettiPost, "EVENTDATATYPE_CODE");
+	var datiIconaCashflow = checkAspects(aspettiPost, "CASHFLOWDATATYPE_CODE");
+	var datiIconaDocument = checkAspects(aspettiPost, "FILEDOCUMENTDATATYPE_CODE");
+	var datiIconaNote = checkAspects(aspettiPost, "NOTEDATATYPE_CODE");
+	var datiIconaLink = checkAspects(aspettiPost, "FILELINKDATATYPE_CODE");
+	var datiIconaCommunication = checkAspects(aspettiPost, "COMMUNICATIONDATATYPE_CODE");
+
+	var objIconToolbars = {};
+
+	objIconToolbars.iconEvent = datiIconaEvento.icona;
+	objIconToolbars.iconCashFlow = datiIconaCashflow.icona;
+	objIconToolbars.iconDocument = datiIconaDocument.icona;
+	objIconToolbars.iconNote = datiIconaNote.icona;
+	objIconToolbars.iconLink = datiIconaLink.icona;
+	objIconToolbars.iconCommunication = datiIconaCommunication.icona;
+
+	objIconToolbars.iconEventWidth = datiIconaEvento.largh;
+	objIconToolbars.iconCashWidth = datiIconaCashflow.largh;
+	objIconToolbars.iconDocWidth = datiIconaDocument.largh;
+	objIconToolbars.iconNoteWidth = datiIconaNote.largh;
+	objIconToolbars.iconLinktWidth = datiIconaLink.largh;
+	objIconToolbars.iconCommWidth = datiIconaCommunication.largh;
+
+	objIconToolbars.iconEventLeft = datiIconaEvento.leftSize;
+	objIconToolbars.iconCashLeft = datiIconaCashflow.leftSize;
+	objIconToolbars.iconDocLeft = datiIconaDocument.leftSize;
+	objIconToolbars.iconNoteLeft = datiIconaNote.leftSize;
+	objIconToolbars.iconLinkLeft = datiIconaLink.leftSize;
+	objIconToolbars.iconCommLeft = datiIconaCommunication.leftSize;
+
+	updateIconToolbar(objIconToolbars);
+
+	// ***** FINE - RIORDINA l'ARRAY aSPETTI VISTO CHE DANIELE FANCAZZISTA NON LO FA!!!'
+
+	//Ti.API.info("******* SORTED ARRAY: " + JSON.stringify(sortedArray));
 
 	//$.scrollableAspects.views = [];
-	Ti.API.info("######### SETTE #########");
 
-	_.each(aspettiPost, function(value, key) {
-	Ti.API.info("######### CICLO #########");
+	_.each(sortedArray, function(value, key) {
 
 		switch(value.kind.code) {
 		case "EVENTDATATYPE_CODE":
-			Ti.API.info("######### EVENTDATATYPE_CODE #########");
+
 			var aspetto = Alloy.createController('dettaglio_evento', {
-				p_aspetto : value
+				_callback : function() {
+					Ti.API.info("Ciao")
+				},
+				p_aspetto : value,
 			}).getView();
 
 			visteAspetti.push(aspetto);
 
 			break;
-		/*
-		 case "CASHFLOWDATATYPE_CODE":
 
-		 var aspetto = Alloy.createController('dettaglio_cashflow', {
-		 p_aspetto : value
-		 }).getView();
+		case "CASHFLOWDATATYPE_CODE":
 
-		 break;
-		 case "FILEDOCUMENTDATATYPE_CODE":
+			var aspetto = Alloy.createController('dettaglio_cashflow', {
+				_callback : function() {
+					Ti.API.info("Ciao")
+				},
+				p_aspetto : value,
+			}).getView();
 
-		 var aspetto = Alloy.createController('dettaglio_document', {
-		 p_aspetto : value
-		 }).getView();
+			visteAspetti.push(aspetto);
 
-		 break;
-		 case "NOTEDATATYPE_CODE":
+			break;
 
-		 var aspetto = Alloy.createController('dettaglio_note', {
-		 p_aspetto : value
-		 }).getView();
+		case "FILEDOCUMENTDATATYPE_CODE":
 
-		 break;
-		 case "FILELINKDATATYPE_CODE":
+			var aspetto = Alloy.createController('dettaglio_document', {
+				_callback : function() {
+					Ti.API.info("Ciao")
+				},
+				p_aspetto : value,
+			}).getView();
 
-		 var aspetto = Alloy.createController('dettaglio_link', {
-		 p_aspetto : value
-		 }).getView();
+			visteAspetti.push(aspetto);
 
-		 break;
-		 */
+			break;
+
+		case "NOTEDATATYPE_CODE":
+
+			var aspetto = Alloy.createController('dettaglio_note', {
+				_callback : function() {
+					Ti.API.info("Ciao")
+				},
+				p_aspetto : value,
+			}).getView();
+
+			visteAspetti.push(aspetto);
+
+			break;
+
+		case "FILELINKDATATYPE_CODE":
+
+			var aspetto = Alloy.createController('dettaglio_link', {
+				_callback : function() {
+					Ti.API.info("Ciao")
+				},
+				p_aspetto : value,
+			}).getView();
+
+			visteAspetti.push(aspetto);
+
+			break;
+
 		default:
-		Ti.API.info("######### dEFAULT #########");
-			var d = 2;
+			Ti.API.info("######### dEFAULT #########");
+			visteAspetti = [blankView];
 		}
 
 	});
 
 	if (visteAspetti.length > 0) {
+
 		Ti.API.info("######### >0 #########");
 		$.scrollableAspects.views = visteAspetti;
 	}
+
+	setTimeout(function() {
+		scrollendEventAspects(0)
+	}, 500);
+
+};
+
+function scrollendEventAspects(e) {
+
+	var indice = e.currentPage || 0;
+	
+	onAspectChange(sortedArray[indice].kind.code || 0);
+
+	//dispatcher.trigger('aspectChanged', sortedArray[indice].kind.code);
+
+	//Ti.API.info("CURRENT  ASPECT INDEX @@@@@@@@@@@: " + sortedArray[e.currentPage].kind.code);
+
+	//$.event_icon.backgroundColor = "red";
+
+	//$.aspect_detail_container.removeAllChildren();
+
 	//updateIconToolbar();
 
 };
@@ -314,16 +526,6 @@ function scrollendEvent(e) {
 
  }
  */
-
-function scrollendEventAspects(e) {
-
-	//Ti.API.info("CURRENT  PAGE: " + e.currentPage);
-
-	//$.aspect_detail_container.removeAllChildren();
-
-	//updateIconToolbar();
-
-};
 
 function checkAspects(node, target) {
 

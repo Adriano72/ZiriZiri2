@@ -1,32 +1,17 @@
 <Alloy>
-<View id="dettaglio_post_container">
-	<View id="cat_icon_container">
-		<Label id="catIcon"/>
-	</View>
-	<View id="postData">
-		<Label id="titolo"/>
-		<View id="secondLine">
-			<Label id="cat_mini_icon"/>
-			<Label id="category"/>
+	<View id="dettaglio_post_container">
+		<View id="cat_icon_container">
+			<Label id="catIcon"/>
 		</View>
-		<Label id="data_post"/>
-
-	</View>
-	<View id="aspect_icon_toolbar">
-		<Label class="aspects_icons first" id="event_icon" onClick="setToEvent"/>
-		<Label class="aspects_icons" id="cashflow_icon" onClick="setToCashflow"/>
-		<Label class="aspects_icons" id="document_icon" onClick="setToDocument"/>
-		<Label class="aspects_icons" id="note_icon" onClick="setToNote"/>
-		<Label class="aspects_icons" id="link_icon" onClick="setToLink"/>
-		<Label class="aspects_icons" id="communication_icon"/>
-		<!--<Label id = "aspects" text="{aspects}"/>-->
-		<View class="show_all_container">
-			<View class="push_to_right">
-				<!--<Label  id="show_all_text"/>-->
-				<ImageView  id="show_all_icon"/>
+		<View id="postData">
+			<Label id="titolo"/>
+			<View id="secondLine">
+				<Label id="cat_mini_icon"/>
+				<Label id="category"/>
 			</View>
-		</View>
+			<Label id="data_post"/>
 
+		</View>
+		
 	</View>
-</View>
 </Alloy>

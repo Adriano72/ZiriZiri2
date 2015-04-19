@@ -10,17 +10,11 @@
 	layout: "vertical"
 }
 
-".subcontainer": {
-	top: 0,
-	//left: 10,
-	layout: "horizontal",
-	
-	height: Titanium.UI.SIZE
-}
+
 
 "#img_icon":{
 	//backgroundColor: "navy",
-	left: 10,
+	left: 20,
 	top: 10,
 	bottom: 10,
 	//image: '/images/android-robot.jpg',
@@ -34,6 +28,9 @@
 	}
 }
 
+"#titolo": {
+	top: 10
+}
 
 
 ".aspect_text": {
@@ -45,7 +42,7 @@
 	color: "#444",
 	height: Ti.UI.SIZE,
 	width: Ti.UI.SIZE,
-	left: 10,
+	left: 20,
 	ellipsize: true
 }
 
@@ -53,8 +50,8 @@
 "#mapview": {
 	height: 0,
 	top: 5,
-	right: 5,
-	left: 5,
+	right: 20,
+	left: 20,
 	//borderRadius: 5,
 	borderWidth: 1,
 	borderColor: "#CCCCCC"
@@ -69,7 +66,7 @@
 
 "#location": {
 	color: "#999",
-	left: 10
+	left: 20
 }
 
 ".first": {

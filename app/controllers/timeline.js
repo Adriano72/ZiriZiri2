@@ -15,59 +15,90 @@ function doOpen() {
 
 	Alloy.Globals.loading.hide();
 
+	populateListView();
+
 }
 
-UiUtil.populateListViewFromCollection(Alloy.Collections.Timeline, {
+function addMorePosts() {
+	Ti.API.info("MARKER RAGGIUNTO !!!!!!!!!!!");
 
-	datasetCb : function(el) {
+	ZZ.API.Core.Posts.list(function(posts) {
+		//Ti.API.info("ZZ.API.Core.Posts.list success [response : " + JSON.stringify(posts) + "]");
+		Ti.API.info("@@@@@@@@@@@@ TIMELINE LENGHT "+Alloy.Collections.Timeline.length);
+		Ti.API.info("@@@@@@@@@@@@ MORE POST LENGHT "+posts.length);
+		Alloy.Collections.Timeline.add(posts);
+		Alloy.Collections.Timeline.on("sync", populateListView());
+		//Ti.API.info("TIMELINE : " + JSON.stringify(Alloy.Collections.Timeline));
 
-		var attrs = el.toJSON();
+	}, function(error) {
+		Ti.API.error("ZZ.API.Core.Posts.list error [error : " + error + "]");
+		Alloy.Globals.loading.hide();
+	}, {
+		action : ZZ.API.Core.Posts.CONSTANTS.ACTIONS.LOAD_MORE
+	});
 
-		var diffTime = moment().diff(attrs.referenceTime, 'days');
+}
 
-		//attrs.catImage = ((_.isNull(attrs.category)) || (_.isNull(attrs.category.code)) ) ? '/images/android-robot.jpg' : '/images/cat_' + attrs.category.code.slice(0, 2) + ".png";
-		var categoryLayout = extractCtegoryIcons(attrs.category.code.slice(0, 2));
-		attrs.catImage = categoryLayout.icona;
-		attrs.cat_color = categoryLayout.colore;
+function populateListView() {
+	Ti.API.info(" ******** POPULATE LIST VIEW ******");
+	UiUtil.populateListViewFromCollection(Alloy.Collections.Timeline, {
 
-		//Ti.API.debug("CAT IMAGE: " + categoryLayout.colore);
-		//attrs.postDate = (diffTime > 1) ? moment(attrs.referenceTime).format('LL') : moment(attrs.referenceTime).fromNow();
-		attrs.postDate = moment(attrs.referenceTime).format('LL')+" - "+moment(attrs.referenceTime).format("HH:mm");
-		attrs.cat_mini_icon = icons.tags;
-		attrs.categoria = (!_.isNull(attrs.category)) ? attrs.category.name : "";
+		datasetCb : function(el) {
 
-		attrs.rating_1 = (attrs.rating > 0) ? "/images/star-small.png" : "";
-		attrs.rating_2 = (attrs.rating > 1) ? "/images/star-small.png" : "";
-		attrs.rating_3 = (attrs.rating > 2) ? "/images/star-small.png" : "";
-		attrs.rating_4 = (attrs.rating > 3) ? "/images/star-small.png" : "";
-		attrs.rating_5 = (attrs.rating > 4) ? "/images/star-small.png" : "";
+			var attrs = el.toJSON();
 
-		attrs.tag = (_.isNull(attrs.tags)) ? "" : attrs.tags[0].name;
+			var diffTime = moment().diff(attrs.referenceTime, 'days');
 
-		//Ti.API.info("ELEMENT NAME: " + JSON.stringify(el));
-		return ( {
-			titolo : {
-				text : el.get('name')
-			},
-			catColor : {
-				backgroundColor : attrs.cat_color
-			},
-			cat_icon : {
-				text : attrs.catImage
-			},
-			cat_mini_icon : {
-				text : attrs.cat_mini_icon
-			},
-			categoria : {
-				text : attrs.categoria
-			},
-			data : {
-				text : attrs.postDate
-			}
-			//cat_icon:text="{catImage}" catColor:backgroundColor="{cat_color}" titolo:text="{name}" cat_mini_icon:text="{cat_mini_icon}" categoria:text="{categoria}" data:text="{postDate}
-		});
-	}
-}, $.timelineList);
+			//attrs.catImage = ((_.isNull(attrs.category)) || (_.isNull(attrs.category.code)) ) ? '/images/android-robot.jpg' : '/images/cat_' + attrs.category.code.slice(0, 2) + ".png";
+			var categoryLayout = extractCtegoryIcons(attrs.category.code.slice(0, 2));
+			attrs.catImage = categoryLayout.icona;
+			attrs.cat_color = categoryLayout.colore;
+
+			//Ti.API.debug("CAT IMAGE: " + categoryLayout.colore);
+			//attrs.postDate = (diffTime > 1) ? moment(attrs.referenceTime).format('LL') : moment(attrs.referenceTime).fromNow();
+			attrs.postDate = moment(attrs.referenceTime).format('LL') + " - " + moment(attrs.referenceTime).format("HH:mm");
+			attrs.cat_mini_icon = icons.tags;
+			attrs.categoria = (!_.isNull(attrs.category)) ? attrs.category.name : "";
+
+			attrs.rating_1 = (attrs.rating > 0) ? "/images/star-small.png" : "";
+			attrs.rating_2 = (attrs.rating > 1) ? "/images/star-small.png" : "";
+			attrs.rating_3 = (attrs.rating > 2) ? "/images/star-small.png" : "";
+			attrs.rating_4 = (attrs.rating > 3) ? "/images/star-small.png" : "";
+			attrs.rating_5 = (attrs.rating > 4) ? "/images/star-small.png" : "";
+
+			attrs.tag = (_.isNull(attrs.tags)) ? "" : attrs.tags[0].name;
+
+			//Ti.API.info("ELEMENT NAME: " + JSON.stringify(el));
+			return ( {
+				titolo : {
+					text : el.get('name')
+				},
+				catColor : {
+					backgroundColor : attrs.cat_color
+				},
+				cat_icon : {
+					text : attrs.catImage
+				},
+				cat_mini_icon : {
+					text : attrs.cat_mini_icon
+				},
+				categoria : {
+					text : attrs.categoria
+				},
+				data : {
+					text : attrs.postDate
+				}
+				//cat_icon:text="{catImage}" catColor:backgroundColor="{cat_color}" titolo:text="{name}" cat_mini_icon:text="{cat_mini_icon}" categoria:text="{categoria}" data:text="{postDate}
+			});
+		}
+	}, $.timelineList);
+
+	$.timelineList.setMarker({
+		sectionIndex : 0,
+		itemIndex : (Alloy.Collections.Timeline.length - 1)
+	});
+
+};
 
 function layoutComplete() {
 	Alloy.Globals.loading.hide();
@@ -89,62 +120,62 @@ function manageClose() {
 };
 
 /*
-function checkAspects(node, target) {
+ function checkAspects(node, target) {
 
-	var aspettiTrovati = _.filter(node, function(value) {
-		return value.kind.code == target;
-	});
+ var aspettiTrovati = _.filter(node, function(value) {
+ return value.kind.code == target;
+ });
 
-	if (_.isUndefined(node) || _.isUndefined(aspettiTrovati)) {
+ if (_.isUndefined(node) || _.isUndefined(aspettiTrovati)) {
 
-		return (null);
+ return (null);
 
-	} else {
+ } else {
 
-		switch(target) {
-		case "EVENTDATATYPE_CODE":
-			return ( {
-				icona : '/images/kernel-event-on.png',
-				numero : aspettiTrovati.length
-			});
-			break;
-		case "CASHFLOWDATATYPE_CODE":
-			return ( {
-				icona : '/images/kernel-finance-on.png.png',
-				numero : aspettiTrovati.length
-			});
-			break;
-		case "FILEDOCUMENTDATATYPE_CODE":
-			return ( {
-				icona : '/images/kernel-document-on.png',
-				numero : aspettiTrovati.length
-			});
-			break;
-		case "NOTEDATATYPE_CODE":
-			return ( {
-				icona : '/images/kernel-note-on.png',
-				numero : aspettiTrovati.length
-			});
-			break;
-		case "FILELINKDATATYPE_CODE":
-			return ( {
-				icona : '/images/kernel-link-on.png',
-				numero : aspettiTrovati.length
-			});
-			break;
-		case "COMMUNICATIONDATATYPE_CODE":
-			return ( {
-				icona : '/images/kernel-comunicazioni-on.png',
-				numero : aspettiTrovati.length
-			});
-			break;
-		default:
-			return;
-		}
-	}
+ switch(target) {
+ case "EVENTDATATYPE_CODE":
+ return ( {
+ icona : '/images/kernel-event-on.png',
+ numero : aspettiTrovati.length
+ });
+ break;
+ case "CASHFLOWDATATYPE_CODE":
+ return ( {
+ icona : '/images/kernel-finance-on.png.png',
+ numero : aspettiTrovati.length
+ });
+ break;
+ case "FILEDOCUMENTDATATYPE_CODE":
+ return ( {
+ icona : '/images/kernel-document-on.png',
+ numero : aspettiTrovati.length
+ });
+ break;
+ case "NOTEDATATYPE_CODE":
+ return ( {
+ icona : '/images/kernel-note-on.png',
+ numero : aspettiTrovati.length
+ });
+ break;
+ case "FILELINKDATATYPE_CODE":
+ return ( {
+ icona : '/images/kernel-link-on.png',
+ numero : aspettiTrovati.length
+ });
+ break;
+ case "COMMUNICATIONDATATYPE_CODE":
+ return ( {
+ icona : '/images/kernel-comunicazioni-on.png',
+ numero : aspettiTrovati.length
+ });
+ break;
+ default:
+ return;
+ }
+ }
 
-};
-*/
+ };
+ */
 
 function extractCtegoryIcons(code) {
 
@@ -252,33 +283,33 @@ function extractCtegoryIcons(code) {
 };
 
 /*
-function transformData(model) {
+ function transformData(model) {
 
-	var attrs = model.toJSON();
+ var attrs = model.toJSON();
 
-	var diffTime = moment().diff(attrs.referenceTime, 'days');
+ var diffTime = moment().diff(attrs.referenceTime, 'days');
 
-	//attrs.catImage = ((_.isNull(attrs.category)) || (_.isNull(attrs.category.code)) ) ? '/images/android-robot.jpg' : '/images/cat_' + attrs.category.code.slice(0, 2) + ".png";
-	var categoryLayout = extractCtegoryIcons(attrs.category.code.slice(0, 2));
-	attrs.catImage = categoryLayout.icona;
-	attrs.cat_color = categoryLayout.colore;
+ //attrs.catImage = ((_.isNull(attrs.category)) || (_.isNull(attrs.category.code)) ) ? '/images/android-robot.jpg' : '/images/cat_' + attrs.category.code.slice(0, 2) + ".png";
+ var categoryLayout = extractCtegoryIcons(attrs.category.code.slice(0, 2));
+ attrs.catImage = categoryLayout.icona;
+ attrs.cat_color = categoryLayout.colore;
 
-	Ti.API.debug("CAT IMAGE: " + categoryLayout.colore);
-	attrs.postDate = (diffTime > 1) ? moment(attrs.referenceTime).format('LL') : moment(attrs.referenceTime).fromNow();
-	attrs.cat_mini_icon = icons.tags;
-	attrs.categoria = (!_.isNull(attrs.category)) ? attrs.category.name : "";
+ Ti.API.debug("CAT IMAGE: " + categoryLayout.colore);
+ attrs.postDate = (diffTime > 1) ? moment(attrs.referenceTime).format('LL') : moment(attrs.referenceTime).fromNow();
+ attrs.cat_mini_icon = icons.tags;
+ attrs.categoria = (!_.isNull(attrs.category)) ? attrs.category.name : "";
 
-	attrs.rating_1 = (attrs.rating > 0) ? "/images/star-small.png" : "";
-	attrs.rating_2 = (attrs.rating > 1) ? "/images/star-small.png" : "";
-	attrs.rating_3 = (attrs.rating > 2) ? "/images/star-small.png" : "";
-	attrs.rating_4 = (attrs.rating > 3) ? "/images/star-small.png" : "";
-	attrs.rating_5 = (attrs.rating > 4) ? "/images/star-small.png" : "";
+ attrs.rating_1 = (attrs.rating > 0) ? "/images/star-small.png" : "";
+ attrs.rating_2 = (attrs.rating > 1) ? "/images/star-small.png" : "";
+ attrs.rating_3 = (attrs.rating > 2) ? "/images/star-small.png" : "";
+ attrs.rating_4 = (attrs.rating > 3) ? "/images/star-small.png" : "";
+ attrs.rating_5 = (attrs.rating > 4) ? "/images/star-small.png" : "";
 
-	attrs.tag = (_.isNull(attrs.tags)) ? "" : attrs.tags[0].name;
+ attrs.tag = (_.isNull(attrs.tags)) ? "" : attrs.tags[0].name;
 
-	return attrs;
-};
-*/
+ return attrs;
+ };
+ */
 
 function dettaglioPost(e) {
 

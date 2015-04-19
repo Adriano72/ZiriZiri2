@@ -1,20 +1,13 @@
 <Alloy>
-	<ScrollableView id="scrollableDocument" dataCollection="aspettiDocument" dataFunction="dataResync" dataTransform="transform">
-		<ScrollView id="aspectScrollView">
-			
-			<View class="subcontainer">
-				<Label id="img_icon" text ="{aspect_icon}"/>
-				<Label id="titolo" class="aspect_title" text="{titolo}"/>
-			</View>
+	<ScrollView id="aspectScrollView">
 
-			
-			<View class="subcontainer">
-				<Label id="img_iconcina" text ="{img_icon}"/>
-				<Label class="aspect_text" id="nome_file" text="{nome_file}"/>				
-				<Label id="filesize" class="aspect_text" text="{file_size}"/>
-			</View>
-			<Label id="data_creazione" class="aspect_text" text="{data_doc}"/>
-
-		</ScrollView>
-	</ScrollableView>
+		<Label id="titolo" class="aspect_title"/>
+		<View class="subcontainer">
+			<Label id="img_iconcina"/>
+			<Label id="nome_file" class="aspect_text"/>
+			<Label id="filesize" class="aspect_text"/>
+		</View>
+		<Label id="data_creazione" class="aspect_text"/>
+		<ImageView id="img_preview"/>
+	</ScrollView>
 </Alloy>

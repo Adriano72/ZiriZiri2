@@ -1,8 +1,10 @@
 var args = arguments[0] || {};
 
-Ti.API.info("ASPETTO EVENTO: " + JSON.stringify(args.p_aspetto));
+//Ti.API.info("AARGUMENTS: " + JSON.stringify(arguments));
 
 var attrs = args.p_aspetto;
+
+args._callback();
 
 attrs.aspect_icon = icons.calendar;
 
@@ -55,12 +57,12 @@ if (attrs.data.type == "NONE") {
 	attrs.tipo_evento = "Evento Pianificato";
 }
 
-$.img_icon.text = attrs.aspect_icon;
+//$.img_icon.text = attrs.aspect_icon;
 $.titolo.text = attrs.name;
 $.dataEvento.text = attrs.dataEvento;
 $.location.text = attrs.eventLocation;
 $.mapview.height = attrs.mapHeight;
-$.mapview.mapRegion = attrs.mapRegion;
+$.mapview.region = attrs.mapRegion;
 $.mapview.annotations = attrs.annotat;
 $.tipo_evento.text = attrs.tipo_evento;
 

@@ -4,7 +4,7 @@
 	layout: "vertical",
 	//exitOnClose: true,
 	//top: Alloy.Globals.winTop,
-	orientationModes: []
+	orientationModes: [Ti.UI.PORTRAIT]
 }
 
 "#navWin": {
@@ -105,10 +105,10 @@
 	height: 30,
 	width:Ti.UI.SIZE,
 	color: "#000",
-	left: 5,
+	left: 0,
 	font: {
 		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 18
+		fontSize: 16
 	}
 }
 

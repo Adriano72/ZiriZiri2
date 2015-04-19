@@ -1,38 +1,29 @@
 var args = arguments[0] || {};
 
-//Ti.API.info("CASHFLOW COLLECTION: "+JSON.stringify(Alloy.Collections.aspettiCashflow));
-
-Ti.API.info("LENGTH COLLECTION LINK: " + Alloy.Collections.aspettiLink.length);
-
 var goUrl;
 
-function transform(model) {
+var attrs = args.p_aspetto;
 
-	var attrs = model.toJSON();
+Ti.API.info("MODELLO STRINGIFYZZATO LINK: " + JSON.stringify(attrs));
 
-	Ti.API.info("MODELLO STRINGIFYZZATO LINK: " + JSON.stringify(attrs));
-	
-	
-		
-		attrs.img_preview = attrs.data.preview.remote;
-		
-	
+attrs.img_preview = testExistence(attrs.data.preview)?attrs.data.preview.remote:null;
 
-	attrs.aspect_icon = icons.link;
-	attrs.titolo = attrs.data.title;
-	attrs.link_url = attrs.data.content.local;
-	
-	goUrl = function() {
-		Ti.Platform.openURL(attrs.data.content.local);
-	};
-	attrs.data_link = "Data "+moment(attrs.data.creationTime).format("LL") + " alle ore "+moment(attrs.data.creationTime).format("HH:mm");
+attrs.aspect_icon = icons.link;
+attrs.titolo = attrs.data.title;
+attrs.link_url = attrs.data.content.local;
 
-	return attrs;
+goUrl = function() {
+	Ti.Platform.openURL(attrs.data.content.local);
+};
+attrs.data_link = "Data " + moment(attrs.data.creationTime).format("LL") + " alle ore " + moment(attrs.data.creationTime).format("HH:mm");
 
-}
+//$.img_icon.text = attrs.aspect_icon;
+$.titolo.text = attrs.titolo;
+$.link_url.text = attrs.link_url;
+$.data_link.text = attrs.data_link;
+$.img_preview.image = attrs.img_preview;
 
 
-dataResync();
 
 function testExistence(param) {
 

@@ -1,9 +1,7 @@
 <Alloy>
 	<ScrollView id="aspectScrollView">
-		<View class="subcontainer">
-			<Label id="img_icon"/>
-			<Label id="titolo" class="aspect_title"/>
-		</View>
+		
+		<Label id="titolo" class="aspect_title"/>
 		<Label id="dataEvento" class="aspect_text"/>
 		<Label id="location" class="aspect_text"/>
 		<View id="mapview" ns="Alloy.Globals.Map"/>
