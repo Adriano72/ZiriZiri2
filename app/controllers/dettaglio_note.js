@@ -2,8 +2,11 @@ var args = arguments[0] || {};
 
 var attrs = args.p_aspetto;
 
+//Ti.API.info("MODELLO STRINGIFYZZATO NOTE: " + JSON.stringify(attrs));
+
 attrs.aspect_icon = icons.edit;
 attrs.titolo = attrs.data.title;
+attrs.data_nota = "Data " + moment(attrs.data.timestamp).format("LL") + " alle ore " + moment(attrs.data.timestamp).format("HH:mm");
 
 try {
 	attrs.note_content = Ti.Utils.base64decode(attrs.data.content);
@@ -16,7 +19,8 @@ try {
 
 //$.img_icon.text = attrs.aspect_icon;
 $.titolo.text = attrs.titolo;
-$.note_content.text = attrs.note_content;
+$.data_nota.text = attrs.data_nota;
+$.note_content.text = attrs.note_content+"                                                                                    .";
 
 function testExistence(param) {
 

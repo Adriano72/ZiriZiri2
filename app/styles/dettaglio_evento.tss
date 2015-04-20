@@ -46,6 +46,13 @@
 	ellipsize: true
 }
 
+"#dataEvento": {
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16
+	}
+}
+
 
 "#mapview": {
 	height: 0,

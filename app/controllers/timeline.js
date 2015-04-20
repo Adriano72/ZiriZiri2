@@ -1,5 +1,7 @@
 var args = arguments[0] || {};
 
+var abx = require('com.alcoapps.actionbarextras');
+
 var moment = require('alloy/moment');
 moment.lang('it', Alloy.Globals.Moment_IT);
 moment.lang('it');
@@ -13,6 +15,25 @@ function doOpen() {
 
 	Alloy.Globals.navMenu = $.navWin;
 
+	var activity = $.timeline_win.activity;
+	var menuItem = null;
+
+	activity.onCreateOptionsMenu = function(e) {
+
+		menuItem = e.menu.add({
+			//itemId : "PHOTO",
+			title : "Logout",
+			showAsAction : Ti.Android.SHOW_AS_ACTION_NEVER
+			//icon : Ti.Android.R.drawable.ic_menu_camera
+		});
+
+		menuItem.addEventListener("click", function(e) {
+			f_logout();
+		});
+	};
+
+	activity.invalidateOptionsMenu();
+
 	Alloy.Globals.loading.hide();
 
 	populateListView();
@@ -24,8 +45,8 @@ function addMorePosts() {
 
 	ZZ.API.Core.Posts.list(function(posts) {
 		//Ti.API.info("ZZ.API.Core.Posts.list success [response : " + JSON.stringify(posts) + "]");
-		Ti.API.info("@@@@@@@@@@@@ TIMELINE LENGHT "+Alloy.Collections.Timeline.length);
-		Ti.API.info("@@@@@@@@@@@@ MORE POST LENGHT "+posts.length);
+		Ti.API.info("@@@@@@@@@@@@ TIMELINE LENGHT " + Alloy.Collections.Timeline.length);
+		Ti.API.info("@@@@@@@@@@@@ MORE POST LENGHT " + posts.length);
 		Alloy.Collections.Timeline.add(posts);
 		Alloy.Collections.Timeline.on("sync", populateListView());
 		//Ti.API.info("TIMELINE : " + JSON.stringify(Alloy.Collections.Timeline));

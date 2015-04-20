@@ -1,5 +1,5 @@
 <Alloy>
-	<ScrollView id="aspectScrollView">
+	<ScrollView id="aspectScrollView" scrollType="vertical">
 		<Label id="titolo" class="aspect_title"/>
 		<Label id="link_url" class="link_url" onClick="goUrl"/>
 		<Label id="data_link" class="aspect_text"/>

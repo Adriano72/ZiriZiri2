@@ -25,9 +25,9 @@ function doOpen() {
 	$.scrollableTimeline.setCurrentPage(postIndex);
 	$.scrollableAspects.views = [blankView];
 
-	setTimeout(function() {
+	//setTimeout(function() {
 		scrollendEvent(0);
-	}, 500);
+	//}, 500);
 
 }
 
@@ -62,27 +62,32 @@ function onAspectChange(tipoAspetto) {
 	switch(tipoAspetto) {
 	case "EVENTDATATYPE_CODE":
 		resetIconColors();
-		$.event_icon.color = "#63BBF2";
+		$.event_icon.backgroundColor = "#545452";
+		$.event_icon.color = "#F7F7F2";
 
 		break;
 	case "CASHFLOWDATATYPE_CODE":
 		resetIconColors();
-		$.cashflow_icon.color = "#63BBF2";
+		$.cashflow_icon.backgroundColor = "#545452";
+		$.cashflow_icon.color = "#F7F7F2";
 
 		break;
 	case "FILEDOCUMENTDATATYPE_CODE":
 		resetIconColors();
-		$.document_icon.color = "#63BBF2";
+		$.document_icon.backgroundColor = "#545452";
+		$.document_icon.color = "#F7F7F2";
 
 		break;
 	case "NOTEDATATYPE_CODE":
 		resetIconColors();
-		$.note_icon.color = "#63BBF2";
+		$.note_icon.backgroundColor = "#545452";
+		$.note_icon.color = "#F7F7F2";
 
 		break;
 	case "FILELINKDATATYPE_CODE":
 		resetIconColors();
-		$.link_icon.color = "#63BBF2";
+		$.link_icon.backgroundColor = "#545452";
+		$.link_icon.color = "#F7F7F2";
 
 		break;
 	}
@@ -92,10 +97,15 @@ function onAspectChange(tipoAspetto) {
 
 function resetIconColors() {
 	$.event_icon.color = "#999";
+	$.event_icon.backgroundColor = "transparent";
 	$.cashflow_icon.color = "#999";
+	$.cashflow_icon.backgroundColor = "transparent";
 	$.document_icon.color = "#999";
+	$.document_icon.backgroundColor = "transparent";
 	$.note_icon.color = "#999";
+	$.note_icon.backgroundColor = "transparent";
 	$.link_icon.color = "#999";
+	$.link_icon.backgroundColor = "transparent";
 
 }
 
@@ -397,21 +407,33 @@ function scrollendEvent(e) {
 		$.scrollableAspects.views = visteAspetti;
 	}
 
-	setTimeout(function() {
+	//setTimeout(function() {
 		scrollendEventAspects(0)
-	}, 500);
+	//}, 500);
 
 };
 
 function scrollendEventAspects(e) {
 
 	var indice = e.currentPage || 0;
-	
-	onAspectChange(sortedArray[indice].kind.code || 0);
 
+	onAspectChange(sortedArray[indice].kind.code || 0);
+	
+	//Ti.API.info("@@@@@ ASPETTO SELEZIONATO @@@@@@: " + JSON.stringify(sortedArray[indice]));
+
+	var aspecTypeArray = _.filter(sortedArray, function(value) {
+		return value.kind.code == sortedArray[indice].kind.code;
+	});
+	
+	var indexToGo = lodash.findIndex(aspecTypeArray, function(value) {
+		return value.id == sortedArray[indice].id
+	});
+	
+	$.aspectNumIndicator.text = (indexToGo+1)+"/"+aspecTypeArray.length;
+	
 	//dispatcher.trigger('aspectChanged', sortedArray[indice].kind.code);
 
-	//Ti.API.info("CURRENT  ASPECT INDEX @@@@@@@@@@@: " + sortedArray[e.currentPage].kind.code);
+	Ti.API.info("CURRENT  ASPECT INDEX @@@@@@@@@@@: " + sortedArray[indice].kind.code);
 
 	//$.event_icon.backgroundColor = "red";
 
@@ -598,7 +620,7 @@ function checkAspects(node, target) {
 				icona : icons.calendar,
 				tipoAspetto : "EVENTDATATYPE_CODE",
 				arrayAspetti : aspettiTrovati,
-				largh : Ti.UI.SIZE,
+				largh : 30,
 				leftSize : 15,
 				numero : aspettiTrovati.length
 			});
@@ -608,7 +630,7 @@ function checkAspects(node, target) {
 				icona : icons.credit_card,
 				tipoAspetto : "CASHFLOWDATATYPE_CODE",
 				arrayAspetti : aspettiTrovati,
-				largh : Ti.UI.SIZE,
+				largh : 30,
 				leftSize : 15,
 				numero : aspettiTrovati.length
 			});
@@ -618,17 +640,17 @@ function checkAspects(node, target) {
 				icona : icons.paper_clip,
 				tipoAspetto : "FILEDOCUMENTDATATYPE_CODE",
 				arrayAspetti : aspettiTrovati,
-				largh : Ti.UI.SIZE,
+				largh : 30,
 				leftSize : 15,
 				numero : aspettiTrovati.length
 			});
 			break;
 		case "NOTEDATATYPE_CODE":
 			return ( {
-				icona : icons.edit,
+				icona : icons.file_text_alt,
 				tipoAspetto : "NOTEDATATYPE_CODE",
 				arrayAspetti : aspettiTrovati,
-				largh : Ti.UI.SIZE,
+				largh : 30,
 				leftSize : 15,
 				numero : aspettiTrovati.length
 			});
@@ -638,7 +660,7 @@ function checkAspects(node, target) {
 				icona : icons.link,
 				tipoAspetto : "FILELINKDATATYPE_CODE",
 				arrayAspetti : aspettiTrovati,
-				largh : Ti.UI.SIZE,
+				largh : 30,
 				leftSize : 15,
 				numero : aspettiTrovati.length
 			});
@@ -648,7 +670,7 @@ function checkAspects(node, target) {
 				icona : icons.envelope,
 				tipoAspetto : "COMMUNICATIONDATATYPE_CODE",
 				arrayAspetti : aspettiTrovati,
-				largh : Ti.UI.SIZE,
+				largh : 30,
 				leftSize : 15,
 				numero : aspettiTrovati.length
 			});

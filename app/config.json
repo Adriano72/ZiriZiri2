@@ -9,6 +9,6 @@
   "os:mobileweb": {},
   "dependencies": {
     "checkbox": "1.0",
-    "nl.fokkezb.loading": "*"
+    "nl.fokkezb.loading": "1.8.3"
   }
 }

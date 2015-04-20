@@ -1,5 +1,5 @@
 <Alloy>
-	<ScrollView id="aspectScrollView">
+	<ScrollView id="aspectScrollView" scrollType="vertical">
 
 		<Label id="tipo_mov" class="aspect_text"/>
 		<Label id="titolo" class="aspect_text"/>
@@ -8,7 +8,18 @@
 			<Label id="desc_movimento" class="importo" borderRadius="3"/>
 		</View>
 		<Label id="data_operazione" class="aspect_text"/>
-		<Label id="mod_pagamento" class="aspect_text"/>
+		<Label id="fonte_liquidita" class="aspect_text"/>
+		<View id="altro">
+			<Label id="modalita_pagamento" class="aspect_text"/>
+			<Label id="modalita_pagamento" class="aspect_text"/>
+			<Label id="stato_movimento" class="aspect_text"/>
+			<Label id="variabilita" class="aspect_text"/>
+			<Label id="dich_redditi" class="aspect_text"/>
+			<Label id="ord_straord" class="aspect_text"/>
+			<Label id="data_valuta" class="aspect_text"/>
+			<Label id="data_scadenza" class="aspect_text"/>
+			<Label id="data_pagamento" class="aspect_text"/>
+		</View>
 
 	</ScrollView>
 </Alloy>

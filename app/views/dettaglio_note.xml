@@ -1,8 +1,9 @@
 <Alloy>
-	<ScrollView id="aspectScrollView">
+	<ScrollView id="aspectScrollView" scrollType="vertical">
 		
 			
 			<Label id="titolo" class="aspect_title"/>
+			<Label id="data_nota" class="aspect_text"/>
 			<Label id="note_content"/>
 
 		

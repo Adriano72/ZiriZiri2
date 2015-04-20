@@ -4,7 +4,7 @@ var goUrl;
 
 var attrs = args.p_aspetto;
 
-Ti.API.info("MODELLO STRINGIFYZZATO LINK: " + JSON.stringify(attrs));
+//Ti.API.info("MODELLO STRINGIFYZZATO LINK: " + JSON.stringify(attrs));
 
 attrs.img_preview = testExistence(attrs.data.preview)?attrs.data.preview.remote:null;
 

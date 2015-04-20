@@ -32,6 +32,7 @@
 "#toolbarContainer": {
 	height: Ti.UI.SIZE,
 	backgroundColor:"#F0EFE9",
+
 }
 
 "#aspect_icon_toolbar": {
@@ -45,6 +46,8 @@
 
 ".aspects_icons":{
 	//backgroundColor: "navy",
+	borderRadius: 2,
+	textAlign : 'center',
 	//left: 0,
 	top: 10,
 	bottom: 10,
@@ -53,14 +56,21 @@
 	//center: 35,
 	width: 0,
 	color: "#999",
-	height: 25,
+	height: 30,
 	font: {
 		fontFamily: 'AppIcons',
-		fontSize: 26
+		fontSize: 20
 	}
 }
 
-".first": {
-	left: 10
-
+"#aspectNumIndicator": {
+	right: 20,
+	top: 15,
+	width: Ti.UI.SIZE,
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 18,
+		fontWeight: "bold"
+	},
+	text: "1/2"
 }

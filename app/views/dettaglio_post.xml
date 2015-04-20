@@ -12,13 +12,14 @@
 		<ScrollableView id="scrollableTimeline" showPagingControl="true" onScrollend="scrollendEvent"/>
 		<View id="toolbarContainer">
 			<View id="aspect_icon_toolbar">
-				<Label class="aspects_icons first" id="event_icon" onClick="setToEvent"/>
+				<Label class="aspects_icons" id="event_icon" onClick="setToEvent"/>
 				<Label class="aspects_icons" id="cashflow_icon" onClick="setToCashflow"/>
 				<Label class="aspects_icons" id="document_icon" onClick="setToDocument"/>
 				<Label class="aspects_icons" id="note_icon" onClick="setToNote"/>
 				<Label class="aspects_icons" id="link_icon" onClick="setToLink"/>
 				<Label class="aspects_icons" id="communication_icon"/>
 			</View>
+			<Label id="aspectNumIndicator"/>
 		</View>
 		<View class ="separator"/>
 		<ScrollableView id="scrollableAspects" showPagingControl="true" onScrollend="scrollendEventAspects"/>

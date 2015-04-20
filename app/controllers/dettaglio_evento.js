@@ -42,13 +42,13 @@ attrs.dataDa = "Data " + moment(attrs.data.dataScadenza).format("LL");
 if (testExistence(attrs.data.endTime)) {
 
 	if (attrs.data.startTime.time === attrs.data.endTime.time) {
-		attrs.dataEvento = "Data " + moment(attrs.data.startTime.time).format("LL") + " alle ore " + moment(attrs.data.startTime.time).format("h:mm a");
+		attrs.dataEvento = "Data " + moment(attrs.data.startTime.time).format("LL") + " alle ore " + moment(attrs.data.startTime.time).format("HH:mm");
 	} else {
-		attrs.dataEvento = "Inizia " + moment(attrs.data.startTime.time).format("LL") + " alle ore " + moment(attrs.data.startTime.time).format("h:mm a") + "\nFinisce " + moment(attrs.data.endTime.time).format("LL") + " alle ore " + moment(attrs.data.endTime.time).format("h:mm a");
+		attrs.dataEvento = "Inizia " + moment(attrs.data.startTime.time).format("LL") + " alle ore " + moment(attrs.data.startTime.time).format("HH:mm") + "\nFinisce " + moment(attrs.data.endTime.time).format("LL") + " alle ore " + moment(attrs.data.endTime.time).format("HH:mm");
 	}
 
 }else{
-	attrs.dataEvento = "Inizia " + moment(attrs.data.startTime.time).format("LL") + " alle ore " + moment(attrs.data.startTime.time).format("h:mm a");
+	attrs.dataEvento = "Data " + moment(attrs.data.startTime.time).format("LL") + " alle ore " + moment(attrs.data.startTime.time).format("HH:mm");
 }
 
 if (attrs.data.type == "NONE") {

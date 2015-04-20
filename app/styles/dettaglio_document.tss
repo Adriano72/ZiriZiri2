@@ -19,32 +19,31 @@
 
 "#img_preview": {
 	
-	borderColor: "#000000",
+	//borderColor: "#000000",
 	
 	top: 10,
 	left: 20,
 	right: 20,
-	//width: Alloy.Globals.screenWidth,
-	height: 200
+	//width: Ti.UI.SIZE
+	//height: 200
 	//backgroundColor: '#C8DDE8',
 	
 }
 
-"#img_icon":{
-	//backgroundColor: "navy",
-	left: 10,
-	top: 10,
-	bottom: 10,
-	//image: '/images/android-robot.jpg',
-	//touchEnabled: false,
-	//center: 35,
-	color: "#999",
-	height: 25,
-	font: {
-		fontFamily: 'AppIcons',
-		fontSize: 26
-	}
+"#img_preview[platform=android]": {
+	
+	//borderColor: "#000000",
+	
+	top: 0,
+	left: 20,
+	right: 20,
+	enableZoomControls: true
+	//width: Ti.UI.SIZE
+	//height: 200
+	//backgroundColor: '#C8DDE8',
+	
 }
+
 
 "#titolo": {
 	top: 10
@@ -66,9 +65,9 @@
 }
 
 "#nome_file":{
-	width: "60%"
+	left: 5,
+	width: "80%"
 }
-
 
 ".subcontainer": {
 	top: 0,
@@ -87,10 +86,29 @@
 	//touchEnabled: false,
 	//center: 35,
 	
-	color: "green",
+	color: "#6F99FC",
 	height: 25,
+	width: 40,
 	font: {
 		fontFamily: 'AppIcons',
 		fontSize: 26
 	}
 }
+
+"#data_documento": {
+	left: 20,
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16
+	}
+}
+
+"#filesize": {
+	top: 10,
+	left: 20
+}
+
+"#tipo_file": {
+	left: 20
+}
+
