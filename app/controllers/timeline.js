@@ -1,7 +1,6 @@
 var args = arguments[0] || {};
 
-//var abx = require('com.alcoapps.actionbarextras');
-
+//
 var moment = require('alloy/moment');
 moment.lang('it', Alloy.Globals.Moment_IT);
 moment.lang('it');
