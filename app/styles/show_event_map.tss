@@ -1,0 +1,11 @@
+
+".container" : {
+  
+}
+
+"#mapview": {
+	
+	height: Ti.UI.FILL,
+	width: Ti.UI.FILL
+	
+}

@@ -32,20 +32,6 @@
 	top: 10
 }
 
-
-".aspect_text": {
-	touchEnabled: false,
-	font: {
-		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 18
-	},
-	color: "#444",
-	height: Ti.UI.SIZE,
-	width: Ti.UI.SIZE,
-	left: 20,
-	ellipsize: true
-}
-
 "#dataEvento": {
 	font: {
 		fontFamily: 'SourceSansPro-Regular',
@@ -53,30 +39,37 @@
 	}
 }
 
+"#tipo_evento": {
+	top: 10
+}
 
-"#mapview": {
-	height: 0,
-	top: 5,
-	right: 20,
+"#show_map_container": {
+	visible: false,
 	left: 20,
-	//borderRadius: 5,
-	borderWidth: 1,
-	borderColor: "#CCCCCC"
+	top: 10,
+	borderRadius: 3,
+	borderColor: '#7A7A7A',
+	backgroundColor: "#EEE",
+	height: Ti.UI.SIZE,
+	width: Ti.UI.SIZE
 }
 
-"#eventMarker": {
-    
-    title: "Appcelerator Headquarters",
-    subtitle: "Mountain View, CA",
-    pincolor: Alloy.Globals.Map.ANNOTATION_RED
+"#show_map_icon": {
+	left: 5,
+	width: 30,
+	height: 30,
+	textAlign : 'center',
+	color: "green",	
+	font: {
+		fontFamily: 'AppIcons',
+		fontSize: 20
+	}
 }
 
-"#location": {
-	color: "#999",
-	left: 20
-}
-
-".first": {
-	left: 0
-
+"#show_map_text": {
+	
+	width: Ti.UI.SIZE,
+	left: 40,
+	right: 10,
+	text: "Show Map"
 }

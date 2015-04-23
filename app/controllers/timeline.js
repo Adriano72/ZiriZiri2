@@ -1,6 +1,6 @@
 var args = arguments[0] || {};
 
-var abx = require('com.alcoapps.actionbarextras');
+//var abx = require('com.alcoapps.actionbarextras');
 
 var moment = require('alloy/moment');
 moment.lang('it', Alloy.Globals.Moment_IT);
@@ -15,24 +15,27 @@ function doOpen() {
 
 	Alloy.Globals.navMenu = $.navWin;
 
-	var activity = $.timeline_win.activity;
-	var menuItem = null;
+	if (OS_ANDROID) {
 
-	activity.onCreateOptionsMenu = function(e) {
+		var activity = $.timeline_win.activity;
+		var menuItem = null;
 
-		menuItem = e.menu.add({
-			//itemId : "PHOTO",
-			title : "Logout",
-			showAsAction : Ti.Android.SHOW_AS_ACTION_NEVER
-			//icon : Ti.Android.R.drawable.ic_menu_camera
-		});
+		activity.onCreateOptionsMenu = function(e) {
 
-		menuItem.addEventListener("click", function(e) {
-			f_logout();
-		});
-	};
+			menuItem = e.menu.add({
+				//itemId : "PHOTO",
+				title : "Logout",
+				showAsAction : Ti.Android.SHOW_AS_ACTION_NEVER
+				//icon : Ti.Android.R.drawable.ic_menu_camera
+			});
 
-	activity.invalidateOptionsMenu();
+			menuItem.addEventListener("click", function(e) {
+				f_logout();
+			});
+		};
+
+		activity.invalidateOptionsMenu();
+	}
 
 	Alloy.Globals.loading.hide();
 

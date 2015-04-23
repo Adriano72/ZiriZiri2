@@ -81,8 +81,8 @@
         <module platform="android">ti.imagefactory</module>
         <module platform="iphone">ti.map</module>
         <module platform="android">ti.map</module>
-        <module platform="android">ti.zz.api</module>
-        <module platform="iphone">ti.zz.api</module>
+        <module platform="android" version="1.0.0">ti.zz.api</module>
+        <module platform="iphone" version="1.0.0">ti.zz.api</module>
     </modules>
     <deployment-targets>
         <target device="android">true</target>

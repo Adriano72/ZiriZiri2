@@ -1,0 +1,5 @@
+<Alloy>
+	<Window id="mappaEvento" class="container" onOpen="doOpen">
+		<View id="mapview" ns="Alloy.Globals.Map"/>
+	</Window>
+</Alloy>

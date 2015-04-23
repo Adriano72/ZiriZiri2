@@ -7,16 +7,19 @@
 "#scrollableTimeline": {
 	top: 0,
 	height: 100,
+	scrollType: "horizontal",
 	backgroundColor: "#F0EFE9",
 	width: Ti.UI.FILL
 }
 
 "#scrollableTimeline[platform=ios]": {
-	height: 190
+	height: 190,
+	showPagingControl: false
 }
 
 "#scrollableAspects": {
 	top: 0,
+	
 	height: Ti.UI.FILL,
 	backgroundColor: "#F5F9FA"
 }
