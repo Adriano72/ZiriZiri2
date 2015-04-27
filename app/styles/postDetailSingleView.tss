@@ -54,7 +54,7 @@
 	textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
 	font: {
 		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 18,
+		fontSize: 16,
 		fontWeight: "bold"
 	}
 },

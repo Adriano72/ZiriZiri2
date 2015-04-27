@@ -4,7 +4,7 @@
 	//borderRadius: 5,
 	//borderWidth: 1,
 	//borderColor: "#CCCCCC",
-	backgroundColor: 'transparent',
+	backgroundColor: 'FAF9F5',
 	//bottom:10,
 	//height: Ti.UI.SIZE,
 	layout: "vertical"

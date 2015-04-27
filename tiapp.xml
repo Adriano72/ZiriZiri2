@@ -12,6 +12,7 @@
     <navbar-hidden>false</navbar-hidden>
     <analytics>false</analytics>
     <guid>48f3b401-3ec8-4f0e-af4b-6e049aa83166</guid>
+    <!--<guid>48f3b401-3ec8-4f0e-af4b-6e049aa83166</guid>-->
     <property name="ti.ui.defaultunit" type="string">dp</property>
     <ios>
         <plist>
@@ -40,7 +41,7 @@
     </ios>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
         <manifest android:installLocation="preferExternal"
-            android:versionCode="9" android:versionName="2.1.3" package="it.ziriziri.mobile">
+            android:versionCode="10" android:versionName="2.1.4" package="it.ziriziri.mobile">
             <!--<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="18"/>-->
             <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="19"/>
             <supports-screens android:anyDensity="true"/>

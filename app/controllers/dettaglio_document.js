@@ -1,6 +1,6 @@
 var args = arguments[0] || {};
 
-var ImageFactory = require('ti.imagefactory');
+//var ImageFactory = require('ti.imagefactory');
 
 var attrs = args.p_aspetto;
 
@@ -9,9 +9,9 @@ var attrs = args.p_aspetto;
 ZZ.API.Files.Attachment.get(attrs, function(response) {
 	Ti.API.info("ZZ.API.Files.Attachment.get success");
 
-	var newBlob = ImageFactory.compress(response, 0.20);
-	attrs.img_preview = newBlob;
-	$.img_preview.image = attrs.img_preview;
+	//var newBlob = ImageFactory.compress(response, 0.20);
+	//attrs.img_preview = newBlob;
+	$.img_preview.image = response;
 
 }, function(error) {
 	Ti.API.error("ZZ.API.Files.Attachment.get eerror [error : " + error + "]");

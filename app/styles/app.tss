@@ -9,7 +9,7 @@
 	touchEnabled: false,
 	font: {
 		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 18,
+		fontSize: 16,
 		fontWeight: 'bold'
 	},
 	color: "#444",
@@ -24,11 +24,30 @@
 	touchEnabled: false,
 	font: {
 		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 18
+		fontSize: 16
 	},
 	color: "#444",
 	height: Ti.UI.SIZE,
 	width: Ti.UI.SIZE,
 	left: 20,
 	ellipsize: true
+}
+
+".aspects_icons":{
+	//backgroundColor: "navy",
+	borderRadius: 2,
+	textAlign : 'center',
+	//left: 0,
+	top: 10,
+	bottom: 10,
+	//image: '/images/android-robot.jpg',
+	//touchEnabled: false,
+	//center: 35,
+	width: 0,
+	color: "#999",
+	height: 30,
+	font: {
+		fontFamily: 'AppIcons',
+		fontSize: 20
+	}
 }

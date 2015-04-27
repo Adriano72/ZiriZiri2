@@ -97,15 +97,15 @@ function onAspectChange(tipoAspetto) {
 
 function resetIconColors() {
 	$.event_icon.color = "#999";
-	$.event_icon.backgroundColor = "transparent";
+	$.event_icon.backgroundColor = "#D9D9D9";
 	$.cashflow_icon.color = "#999";
-	$.cashflow_icon.backgroundColor = "transparent";
+	$.cashflow_icon.backgroundColor = "#D9D9D9";
 	$.document_icon.color = "#999";
-	$.document_icon.backgroundColor = "transparent";
+	$.document_icon.backgroundColor = "#D9D9D9";
 	$.note_icon.color = "#999";
-	$.note_icon.backgroundColor = "transparent";
+	$.note_icon.backgroundColor = "#D9D9D9";
 	$.link_icon.color = "#999";
-	$.link_icon.backgroundColor = "transparent";
+	$.link_icon.backgroundColor = "#D9D9D9";
 
 }
 

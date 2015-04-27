@@ -24,8 +24,6 @@
 	backgroundColor: "#F5F9FA"
 }
 
-
-
 "#aspect_detail_container": {
 	top: 0,
 	height: Ti.UI.FILL,
@@ -45,25 +43,6 @@
 	width: Ti.UI.SIZE,
 	backgroundColor:"#F0EFE9",
 	layout: "horizontal"
-}
-
-".aspects_icons":{
-	//backgroundColor: "navy",
-	borderRadius: 2,
-	textAlign : 'center',
-	//left: 0,
-	top: 10,
-	bottom: 10,
-	//image: '/images/android-robot.jpg',
-	//touchEnabled: false,
-	//center: 35,
-	width: 0,
-	color: "#999",
-	height: 30,
-	font: {
-		fontFamily: 'AppIcons',
-		fontSize: 20
-	}
 }
 
 "#aspectNumIndicator": {

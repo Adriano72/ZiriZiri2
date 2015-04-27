@@ -1,0 +1,17 @@
+<Alloy>
+	<Window id="insermiento_post" class="container" title="Dettaglio Post" onOpen="doOpen">
+		<View id="core_container">
+			<TextField id="testo_post"/>
+			<Picker id="date_picker" onChange="select_date_time"/>
+		</View>
+		<View id="bottomBar">
+			<View id="buttonsContainer">
+				<Label id="icon_event" class="aspects_icons 1_insertAspects"  onClick="addEvent"/>
+				<Label id="icon_cashflow" class="aspects_icons insertAspects" onClick="addCashflow"/>
+				<Label id="icon_document" class="aspects_icons insertAspects" onClick="addDocument"/>
+				<Label id="icon_note" class="aspects_icons insertAspects" onClick="addNote"/>
+				<Label id="icon_link" class="aspects_icons insertAspects" onClick="addLink"/>
+			</View>
+		</View>
+	</Window>
+</Alloy>

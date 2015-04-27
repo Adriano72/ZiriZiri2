@@ -1,0 +1,67 @@
+".container": {
+	backgroundColor: "#FFF",
+	//layout: "vertical",
+	orientationModes: []
+}
+
+"#core_container": {
+	top: 0,
+	left: 20,
+	right: 20,
+	layout: "vertical",
+	width: Ti.UI.FILL,
+	bottom: 50
+}
+
+"#testo_post": {
+	width: Ti.UI.FILL,
+	backgroundColor: "transparent",
+	hintText: "Inserire un titolo",
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16,
+		fontWeight: "bold"
+	}
+}
+
+"#date_picker": {
+	top: 10,
+	width: Ti.UI.SIZE,
+	height: Ti.UI.SIZE,
+	type: "Ti.UI.PICKER_TYPE_DATE"
+}
+
+"#bottomBar": {
+	backgroundColor: '#EDEDED',
+	width: Ti.UI.FILL,
+	touchEnabled: false,
+	height: 50,
+	bottom: 0
+}
+
+".separator": {
+	height: 1,
+	top: 0,
+	touchEnabled: false,
+	backgroundColor: '#D6D6D6',
+	width: '100%'
+}
+
+
+"#buttonsContainer": {
+	layout: 'horizontal',
+	width: Ti.UI.SIZE,
+	top: 0
+}
+
+".1_insertAspects": {
+	left: 0,
+	width: 30,
+	height: 30
+}
+
+".insertAspects": {
+	left: 40,
+	width: 30,
+	height: 30
+}

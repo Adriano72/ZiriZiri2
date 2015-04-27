@@ -17,23 +17,41 @@ function doOpen() {
 	if (OS_ANDROID) {
 
 		var activity = $.timeline_win.activity;
-		var menuItem = null;
+		var settings = null;
+		var nuovo_post = null;
 
 		activity.onCreateOptionsMenu = function(e) {
+			
+			/*
+			nuovo_post = e.menu.add({
+				//itemId : "PHOTO",
+				title : "Nuovo Post",
+				showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS,
+				icon : Ti.Android.R.drawable.ic_menu_add
+			});
+			
+			nuovo_post.addEventListener("click", function(e) {
+				var nuovo_post_win = Alloy.createController("inserimento_post").getView();
+				Alloy.Globals.navMenu.openWindow(nuovo_post_win);
+			});
+			*/
 
-			menuItem = e.menu.add({
+			settings = e.menu.add({
 				//itemId : "PHOTO",
 				title : "Logout",
 				showAsAction : Ti.Android.SHOW_AS_ACTION_NEVER
 				//icon : Ti.Android.R.drawable.ic_menu_camera
 			});
 
-			menuItem.addEventListener("click", function(e) {
+			settings.addEventListener("click", function(e) {
 				f_logout();
 			});
+			
 		};
-
+		
 		activity.invalidateOptionsMenu();
+
+		
 	}
 
 	Alloy.Globals.loading.hide();
