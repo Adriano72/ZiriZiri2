@@ -2,8 +2,11 @@
 	<Window id="insermiento_post" class="container" title="Dettaglio Post" onOpen="doOpen">
 		<View id="core_container">
 			<TextField id="testo_post"/>
-			<Picker id="date_picker" onChange="select_date_time"/>
+			
+			
+
 		</View>
+		<Label id="data_post" class="small_text" onClick="openDateTimeSelector"/>
 		<View id="bottomBar">
 			<View id="buttonsContainer">
 				<Label id="icon_event" class="aspects_icons 1_insertAspects"  onClick="addEvent"/>

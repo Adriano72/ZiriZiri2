@@ -1,0 +1,10 @@
+
+".container": {}
+
+"#date_picker": {
+	//type: "Ti.UI.PICKER_TYPE_DATE",
+	width:Titanium.UI.FILL,
+	height:Titanium.UI.SIZE,
+	selectionIndicator:"true"
+
+}

@@ -1,37 +1,43 @@
 var args = arguments[0] || {};
 
-
 function doOpen() {
-	
+
 	$.icon_event.text = icons.calendar;
 	$.icon_cashflow.text = icons.credit_card;
 	$.icon_document.text = icons.paper_clip;
 	$.icon_note.text = icons.file_text_alt;
 	$.icon_link.text = icons.link;
-	
+
+	$.data_post.text = "Data: " + moment().format("LL") + " alle ore " + moment().format("HH:mm");
+
 };
 
-function addEvent(){
-	
+function openDateTimeSelector() {
+	var date_time_pickers = Alloy.createController("date_time_selector").getView();
+	Alloy.Globals.navMenu.openWindow(date_time_pickers);
 }
 
-function addCashflow(){
-	
+function addEvent() {
+
 }
 
-function addDocument(){
-	
+function addCashflow() {
+
 }
 
-function addNote(){
-	
+function addDocument() {
+
 }
 
-function addLink(){
-	
+function addNote() {
+
 }
 
-function select_date_time(){
-	
+function addLink() {
+
+}
+
+function select_date_time() {
+
 }
 

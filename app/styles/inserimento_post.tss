@@ -10,13 +10,28 @@
 	right: 20,
 	layout: "vertical",
 	width: Ti.UI.FILL,
-	bottom: 50
+	bottom: 100
 }
+
+
+"#data_post": {
+	textAlign: "center",
+	borderRadius: 3,
+	borderWidth: 0.5,
+	borderColor: "#6B6B6B",
+	backgroundColor: "#CFCFCF",
+	height: 30,
+	bottom: 65,	
+	left: 20,
+	right: 20
+}
+
 
 "#testo_post": {
 	width: Ti.UI.FILL,
 	backgroundColor: "transparent",
 	hintText: "Inserire un titolo",
+	top: 15,
 	font: {
 		fontFamily: 'SourceSansPro-Regular',
 		fontSize: 16,
