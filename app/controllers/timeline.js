@@ -22,7 +22,7 @@ function doOpen() {
 
 		activity.onCreateOptionsMenu = function(e) {
 			
-			/*
+			
 			nuovo_post = e.menu.add({
 				//itemId : "PHOTO",
 				title : "Nuovo Post",
@@ -34,7 +34,7 @@ function doOpen() {
 				var nuovo_post_win = Alloy.createController("inserimento_post").getView();
 				Alloy.Globals.navMenu.openWindow(nuovo_post_win);
 			});
-			*/
+			
 
 			settings = e.menu.add({
 				//itemId : "PHOTO",
@@ -61,7 +61,7 @@ function doOpen() {
 }
 
 function addMorePosts() {
-	Ti.API.info("MARKER RAGGIUNTO !!!!!!!!!!!");
+	Ti.API.info("MARKER RAGGIUNTO  !!!!!!!!!!!");
 
 	ZZ.API.Core.Posts.list(function(posts) {
 		//Ti.API.info("ZZ.API.Core.Posts.list success [response : " + JSON.stringify(posts) + "]");
