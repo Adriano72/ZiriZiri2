@@ -1,0 +1,7 @@
+<Alloy>
+	<Window id="pickersWindow" title="Data e Ora" backgroundColor="white" onOpen="doOpen">
+		<Picker id="date_picker" onChange="changeDate" type="Ti.UI.PICKER_TYPE_DATE"/>
+		<Picker id="time_picker" onChange="changeTime" type="Ti.UI.PICKER_TYPE_TIME"/>
+		<Button id="ok_button" onClick="selectDateTime"/>
+	</Window>
+</Alloy>

@@ -1,0 +1,13 @@
+<Alloy>
+	<Window id="win" class="container" title = "Categoria" onOpen="hideActionBar">
+
+		
+		<TableView id="categorieTable" dataCollection="categorie" dataFunction="syncCategorie">
+			
+			<TableViewRow class="row" title="{name}" onClick="selectCategory"/>
+				
+
+		</TableView>
+
+	</Window>
+</Alloy>

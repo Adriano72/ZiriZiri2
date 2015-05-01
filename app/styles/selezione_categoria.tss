@@ -1,0 +1,23 @@
+".container": {
+  	backgroundColor: '#F9F9F9',
+  	orientationModes: [Ti.UI.PORTRAIT],
+  	layout: "vertical"	
+}
+
+
+
+"#categorieTable": {
+	top: 0,
+	searchAsChild: "false"
+}
+
+".row": {
+	
+	height: 45,
+	width: Ti.UI.FILL,
+	backgroundColor: '#F9F9F9',
+    className: 'itemRow',
+    color: "#999"
+    
+} 
+

@@ -1,7 +1,8 @@
 var args = arguments[0] || {};
 
 //
-var moment = require('alloy/moment');
+
+var tools = require('utility');
 moment.lang('it', Alloy.Globals.Moment_IT);
 moment.lang('it');
 
@@ -59,7 +60,7 @@ function doOpen() {
 }
 
 function addMorePosts() {
-	Ti.API.info("MARKER RAGGIUNTO !!!!!!!!!!!");
+	Ti.API.info("MARKER RAGGIUNTO  !!!!!!!!!!!");
 
 	ZZ.API.Core.Posts.list(function(posts) {
 		//Ti.API.info("ZZ.API.Core.Posts.list success [response : " + JSON.stringify(posts) + "]");
@@ -89,7 +90,7 @@ function populateListView() {
 			var diffTime = moment().diff(attrs.referenceTime, 'days');
 
 			//attrs.catImage = ((_.isNull(attrs.category)) || (_.isNull(attrs.category.code)) ) ? '/images/android-robot.jpg' : '/images/cat_' + attrs.category.code.slice(0, 2) + ".png";
-			var categoryLayout = extractCtegoryIcons(attrs.category.code.slice(0, 2));
+			var categoryLayout = tools.extractCtegoryIcons(attrs.category.code.slice(0, 2));
 			attrs.catImage = categoryLayout.icona;
 			attrs.cat_color = categoryLayout.colore;
 
@@ -216,110 +217,7 @@ function manageClose() {
  };
  */
 
-function extractCtegoryIcons(code) {
 
-	switch(code) {
-
-	case "01":
-		return ( {
-			icona : icons.money,
-			colore : "#38e8c6"
-		});
-		break;
-	case "03":
-		return ( {
-			icona : icons.briefcase,
-			colore : "#5a9dd0"
-		});
-		break;
-	case "04":
-		return ( {
-			icona : icons.home,
-			colore : "#ffd651"
-		});
-		break;
-	case "05":
-		return ( {
-			icona : icons.road,
-			colore : "#FFDD01"
-		});
-		break;
-	case "06":
-		return ( {
-			icona : icons.plug,
-			colore : "#a6c4bc"
-		});
-		break;
-	case "07":
-		return ( {
-			icona : icons.stethoscope,
-			colore : "#6cc"
-		});
-		break;
-	case "08":
-		return ( {
-			icona : icons.users,
-			colore : "#F44336"
-		});
-		break;
-	case "09":
-		return ( {
-			icona : icons.sun,
-			colore : "#fce295"
-		});
-		break;
-	case "10":
-		return ( {
-			icona : icons.question_sign,
-			colore : "#f8bc7c"
-		});
-		break;
-	case "11":
-		return ( {
-			icona : icons.camera,
-			colore : "#aeaeae"
-		});
-		break;
-	case "12":
-		return ( {
-			icona : icons.graduation_cap,
-			colore : "#0c0"
-		});
-		break;
-	case "13":
-		return ( {
-			icona : icons.user,
-			colore : "#CCEEFF"
-		});
-		break;
-	case "14":
-		return ( {
-			icona : icons.money,
-			colore : "#11BFBC"
-		});
-		break;
-	case "15":
-		return ( {
-			icona : icons.money,
-			colore : "#FF0000"
-		});
-		break;
-	case "16":
-		return ( {
-			icona : icons.question_sign,
-			colore : "#FAEBD7"
-		});
-		break;
-	default:
-		return ( {
-			icona : icons.question,
-			colore : "#ff0000"
-		});
-		break;
-
-	}
-
-};
 
 /*
  function transformData(model) {

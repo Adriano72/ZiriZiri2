@@ -1,0 +1,29 @@
+
+".container": {}
+
+"#date_picker": {
+	top: 10,
+	width:Titanium.UI.FILL,
+	height:"50%",
+	selectionIndicator:"true"
+
+}
+
+"#time_picker": {
+	bottom: 60,
+	width:Titanium.UI.FILL,
+	height:"50%",
+	selectionIndicator:"true"
+
+}
+
+"#ok_button": {
+	bottom: 10,
+	title: "OK",
+	borderRadius: 3,
+	borderWidth: 0.5,
+	borderColor: "#6B6B6B",
+	backgroundColor: "#CFCFCF",
+	width: 80,
+	height: 40
+}

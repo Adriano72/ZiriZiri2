@@ -1,9 +1,17 @@
 <Alloy>
-	<Window id="insermiento_post" class="container" title="Dettaglio Post" onOpen="doOpen">
+	<Window id="insermiento_post" class="container" title="Inserisci post" onOpen="doOpen">
 		<View id="core_container">
 			<TextField id="testo_post"/>
-			<Picker id="date_picker" onChange="select_date_time"/>
+			<View class="multi_container" onClick="openDateTimeSelector">
+				<Label id="orologetto"/>
+				<Label id="data_post" class="small_text"/>
+			</View>
+			<Label id="categoria" class="small_text" onClick="openCategoryList"/>
+			
+			
+
 		</View>
+		
 		<View id="bottomBar">
 			<View id="buttonsContainer">
 				<Label id="icon_event" class="aspects_icons 1_insertAspects"  onClick="addEvent"/>

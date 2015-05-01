@@ -7,9 +7,7 @@
 			<RightNavButton platform="ios">
 				<ImageView class="rightNavImg"/>
 			</RightNavButton>
-			<Menu id="menu" platform="android">
-				<MenuItem id="mn_settings" title="Logout" onClick="f_logout"/>
-			</Menu>
+			
 			<ListView id="timelineList" defaultItemTemplate="timelineTemplate" onMarker="addMorePosts" onItemclick="dettaglioPost">
 				<Templates>
 					<ItemTemplate name="timelineTemplate" height="90" width="90%">
