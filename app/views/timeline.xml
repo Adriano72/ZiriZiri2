@@ -7,7 +7,7 @@
 			<RightNavButton platform="ios">
 				<ImageView class="rightNavImg"/>
 			</RightNavButton>
-			
+			<Widget id="ptr" src="nl.fokkezb.pullToRefresh" onRelease="reloadAllData">
 			<ListView id="timelineList" defaultItemTemplate="timelineTemplate" onMarker="addMorePosts" onItemclick="dettaglioPost">
 				<Templates>
 					<ItemTemplate name="timelineTemplate" height="90" width="90%">
@@ -28,6 +28,7 @@
 					<ListItem></ListItem>
 				</ListSection>
 			</ListView>
+			</Widget>
 		</Window>
 	</NavigationWindow>
 </Alloy>

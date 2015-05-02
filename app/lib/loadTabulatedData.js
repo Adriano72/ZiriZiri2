@@ -8,7 +8,7 @@ exports.loadTabData = function() {
 
 		ZZ.API.Core.Post.Templates.list(function(templates) {
 
-			Ti.API.info("ZZ.API.Core.Post.Templates.list success [response : " + JSON.stringify(templates) + "]");
+			//Ti.API.info("ZZ.API.Core.Post.Templates.list success [response : " + JSON.stringify(templates) + "]");
 
 			var template = templates[0];
 

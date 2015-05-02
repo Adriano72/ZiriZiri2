@@ -2,7 +2,8 @@ Titanium.Geolocation.purpose = 'Get User Location';
 
 function stringify(obj) {
 
-	var arr = [], itm;
+	var arr = [],
+	    itm;
 	for (itm in obj) {
 		arr.push(itm + "=" + escape(obj[itm]));
 	};
@@ -64,6 +65,25 @@ function lookup(obj) {
 			if (obj.error) {
 				obj.error();
 			}
+		}
+	});
+};
+
+exports.pureReverse = function(lat, lon, _callback) {
+	
+	lookup({
+		address : lat + "," + lon,
+		success : function(e) {
+			_callback({
+				latitude : e.lat,
+				longitude : e.lon,
+				address : e.address
+
+			});
+			Ti.API.info('Rev Geocoding Success: ' + JSON.stringify(e));
+		},
+		error : function(e) {
+			alert('Error');
 		}
 	});
 };

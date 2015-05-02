@@ -57,6 +57,18 @@
 	right: 20
 }
 
+"#map_marker": {
+	left: 12,
+	width: 25,
+	height: 25,
+	//textAlign : 'center',
+	color: "navy",	
+	font: {
+		fontFamily: 'AppIcons',
+		fontSize: 18
+	}
+}
+
 "#categoria": {
 	top: 5,
 	left: 12,

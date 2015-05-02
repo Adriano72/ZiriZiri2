@@ -26,7 +26,7 @@ function doOpen() {
 	$.scrollableAspects.views = [blankView];
 
 	//setTimeout(function() {
-		scrollendEvent(0);
+	scrollendEvent(0);
 	//}, 500);
 
 }
@@ -113,7 +113,7 @@ function jumpToAspectType(aspectType) {
 	Ti.API.info("JUMP FUNCTION *************** " + aspectType);
 
 	var indexToGo = lodash.findIndex(sortedArray, function(value) {
-		return value.kind.code == aspectType
+		return value.kind.code == aspectType;
 	});
 
 	Ti.API.info("INDEX TO GO: " + indexToGo);
@@ -255,8 +255,9 @@ function scrollendEvent(e) {
 		return value.kind.code == "EVENTDATATYPE_CODE";
 	});
 
-	if (aspettiEvento.length > 0)
+	if (aspettiEvento.length > 0) {
 		sortedArray.push(aspettiEvento);
+	};
 
 	var aspettiCashflow = _.filter(aspettiPost, function(value) {
 		return value.kind.code == "CASHFLOWDATATYPE_CODE";
@@ -333,7 +334,7 @@ function scrollendEvent(e) {
 
 			var aspetto = Alloy.createController('dettaglio_evento', {
 				_callback : function() {
-					Ti.API.info("Ciao")
+					Ti.API.info("Ciao");
 				},
 				p_aspetto : value,
 			}).getView();
@@ -346,7 +347,7 @@ function scrollendEvent(e) {
 
 			var aspetto = Alloy.createController('dettaglio_cashflow', {
 				_callback : function() {
-					Ti.API.info("Ciao")
+					Ti.API.info("Ciao");
 				},
 				p_aspetto : value,
 			}).getView();
@@ -359,7 +360,7 @@ function scrollendEvent(e) {
 
 			var aspetto = Alloy.createController('dettaglio_document', {
 				_callback : function() {
-					Ti.API.info("Ciao")
+					Ti.API.info("Ciao");
 				},
 				p_aspetto : value,
 			}).getView();
@@ -372,7 +373,7 @@ function scrollendEvent(e) {
 
 			var aspetto = Alloy.createController('dettaglio_note', {
 				_callback : function() {
-					Ti.API.info("Ciao")
+					Ti.API.info("Ciao");
 				},
 				p_aspetto : value,
 			}).getView();
@@ -385,7 +386,7 @@ function scrollendEvent(e) {
 
 			var aspetto = Alloy.createController('dettaglio_link', {
 				_callback : function() {
-					Ti.API.info("Ciao")
+					Ti.API.info("Ciao");
 				},
 				p_aspetto : value,
 			}).getView();
@@ -395,7 +396,7 @@ function scrollendEvent(e) {
 			break;
 
 		default:
-			Ti.API.info("######### dEFAULT #########");
+			Ti.API.info("######### DEFAULT #########");
 			visteAspetti = [blankView];
 		}
 
@@ -408,7 +409,7 @@ function scrollendEvent(e) {
 	}
 
 	//setTimeout(function() {
-		scrollendEventAspects(0)
+	scrollendEventAspects(0);
 	//}, 500);
 
 };
@@ -417,23 +418,31 @@ function scrollendEventAspects(e) {
 
 	var indice = e.currentPage || 0;
 
-	onAspectChange(sortedArray[indice].kind.code || 0);
-	
-	//Ti.API.info("@@@@@ ASPETTO SELEZIONATO @@@@@@: " + JSON.stringify(sortedArray[indice]));
+	if (sortedArray.length > 0) {
+		
+		onAspectChange(sortedArray[indice].kind.code || 0);
 
-	var aspecTypeArray = _.filter(sortedArray, function(value) {
-		return value.kind.code == sortedArray[indice].kind.code;
-	});
-	
-	var indexToGo = lodash.findIndex(aspecTypeArray, function(value) {
-		return value.id == sortedArray[indice].id
-	});
-	
-	$.aspectNumIndicator.text = (indexToGo+1)+"/"+aspecTypeArray.length;
-	
-	//dispatcher.trigger('aspectChanged', sortedArray[indice].kind.code);
+		//Ti.API.info("@@@@@ ASPETTO SELEZIONATO @@@@@@: " + JSON.stringify(sortedArray[indice]));
 
-	Ti.API.info("CURRENT  ASPECT INDEX @@@@@@@@@@@: " + sortedArray[indice].kind.code);
+		var aspecTypeArray = _.filter(sortedArray, function(value) {
+			return value.kind.code == sortedArray[indice].kind.code;
+		});
+
+		var indexToGo = lodash.findIndex(aspecTypeArray, function(value) {
+			return value.id == sortedArray[indice].id;
+		});
+
+		$.aspectNumIndicator.text = (indexToGo + 1) + "/" + aspecTypeArray.length;
+
+		//dispatcher.trigger('aspectChanged', sortedArray[indice].kind.code);
+
+		Ti.API.info("CURRENT  ASPECT INDEX @@@@@@@@@@@: " + sortedArray[indice].kind.code);
+		
+	} else{
+		$.scrollableAspects.setCurrentPage(0);
+		$.aspectNumIndicator.text = "0/0";
+		$.scrollableAspects.views = [blankView];
+	};
 
 	//$.event_icon.backgroundColor = "red";
 

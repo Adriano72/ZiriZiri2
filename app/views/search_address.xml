@@ -1,0 +1,13 @@
+<Alloy>
+	<Window id="searchAddressWin" class="container" title = "Cerca indirizzo" onOpen="doOpen">
+		<View id="core_container">
+			<View class="multi_container">
+				<TextField id="searchAddress"/>
+				<Label id="lente" onClick="forwardGeocoding"/>
+			</View>
+			<View id="mapview" ns="Alloy.Globals.Map" onLongclick="sceltaPosizione"/>
+			<Label id="posizione" class="small_text"/>
+		</View>
+		<Button id="ok_button" onClick="saveLocation"/>
+	</Window>
+</Alloy>

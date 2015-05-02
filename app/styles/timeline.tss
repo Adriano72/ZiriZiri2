@@ -55,12 +55,7 @@
 }
 
 "#postData": {
-	//width:
-	//backgroundColor:"red",
-	font: {
-		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 18
-	},
+	
 	left: 95,
 	right: 0,
 	bottom: 0,
@@ -103,7 +98,7 @@
 	left: 0,
 	font: {
 		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 16
+		fontSize: 14
 	}
 }
 
@@ -123,6 +118,6 @@
 	left: 5,
 	font: {
 		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 16
+		fontSize: 14
 	}
 }

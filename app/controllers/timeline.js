@@ -29,9 +29,18 @@ function doOpen() {
 				showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS,
 				icon : Ti.Android.R.drawable.ic_menu_add
 			});
-			
+
 			nuovo_post.addEventListener("click", function(e) {
-				var nuovo_post_win = Alloy.createController("inserimento_post").getView();
+
+				var nuovo_post_win = Alloy.createController("inserimento_post", function() {
+
+					setTimeout(function() {
+						$.ptr.refresh();
+					}, 1000);
+
+					
+				}).getView();
+
 				Alloy.Globals.navMenu.openWindow(nuovo_post_win);
 			});
 
@@ -45,12 +54,11 @@ function doOpen() {
 			settings.addEventListener("click", function(e) {
 				f_logout();
 			});
-			
+
 		};
-		
+
 		activity.invalidateOptionsMenu();
 
-		
 	}
 
 	Alloy.Globals.loading.hide();
@@ -61,13 +69,14 @@ function doOpen() {
 
 function addMorePosts() {
 	Ti.API.info("MARKER RAGGIUNTO  !!!!!!!!!!!");
-
+	$.ptr.show();
 	ZZ.API.Core.Posts.list(function(posts) {
 		//Ti.API.info("ZZ.API.Core.Posts.list success [response : " + JSON.stringify(posts) + "]");
 		Ti.API.info("@@@@@@@@@@@@ TIMELINE LENGHT " + Alloy.Collections.Timeline.length);
 		Ti.API.info("@@@@@@@@@@@@ MORE POST LENGHT " + posts.length);
 		Alloy.Collections.Timeline.add(posts);
 		Alloy.Collections.Timeline.on("sync", populateListView());
+		$.ptr.hide();
 		//Ti.API.info("TIMELINE : " + JSON.stringify(Alloy.Collections.Timeline));
 
 	}, function(error) {
@@ -80,7 +89,9 @@ function addMorePosts() {
 }
 
 function populateListView() {
+
 	Ti.API.info(" ******** POPULATE LIST VIEW ******");
+	//Ti.API.info("ULTIO POST IN TIMELINE: " + JSON.stringify(Alloy.Collections.Timeline.at(0)));
 	UiUtil.populateListViewFromCollection(Alloy.Collections.Timeline, {
 
 		datasetCb : function(el) {
@@ -133,12 +144,33 @@ function populateListView() {
 		}
 	}, $.timelineList);
 
+	$.ptr.hide();
+	//Alloy.Globals.loading.hide();
+
 	$.timelineList.setMarker({
 		sectionIndex : 0,
 		itemIndex : (Alloy.Collections.Timeline.length - 1)
 	});
 
 };
+
+function reloadAllData() {
+
+	//Alloy.Globals.loading.show("Sincronizzazione");
+	Ti.API.info("RELOAD ALL DATA ******");
+
+	ZZ.API.Core.Posts.list(function(posts) {
+
+		Alloy.Collections.Timeline.reset(posts);
+		//Alloy.Collections.Timeline.on("sync", showTimeline());
+		populateListView();
+
+	}, function(error) {
+		Ti.API.error("ZZ.API.Core.Posts.list error [error : " + error + "]");
+		Alloy.Globals.loading.hide();
+	});
+
+}
 
 function layoutComplete() {
 	Alloy.Globals.loading.hide();
@@ -216,8 +248,6 @@ function manageClose() {
 
  };
  */
-
-
 
 /*
  function transformData(model) {
