@@ -70,22 +70,27 @@ function lookup(obj) {
 };
 
 exports.pureReverse = function(lat, lon, _callback) {
-	
-	lookup({
-		address : lat + "," + lon,
-		success : function(e) {
-			_callback({
-				latitude : e.lat,
-				longitude : e.lon,
-				address : e.address
 
-			});
-			Ti.API.info('Rev Geocoding Success: ' + JSON.stringify(e));
-		},
-		error : function(e) {
-			alert('Error');
-		}
-	});
+	if (Ti.Geolocation.locationServicesEnabled) {
+
+		lookup({
+			address : lat + "," + lon,
+			success : function(e) {
+				_callback({
+					latitude : e.lat,
+					longitude : e.lon,
+					address : e.address
+
+				});
+				Ti.API.info('Rev Geocoding Success: ' + JSON.stringify(e));
+			},
+			error : function(e) {
+				alert('Error');
+			}
+		});
+	} else {
+		alert('Servizi di localizzazione non abilitati!');
+	}
 };
 
 exports.reverseGeo = function(_callback) {

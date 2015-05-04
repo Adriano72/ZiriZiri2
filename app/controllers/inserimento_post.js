@@ -8,6 +8,10 @@ var selectedCategory = null;
 var postDate = moment();
 var jsonPostTemplate = Alloy.Models.Post_template.toJSON();
 
+var flagAddPostDone = false;
+
+//Ti.API.info("POST TEMPLATE *****: " + JSON.stringify(jsonPostTemplate));
+
 function doOpen() {
 
 	$.location_post.text = "Rilevamento posizione";
@@ -35,7 +39,7 @@ function doOpen() {
 			salva_post.addEventListener("click", function(e) {
 				Alloy.Globals.loading.show("Saving...");
 
-				updatePostTemplate();
+				savePost();
 			});
 
 		};
@@ -58,15 +62,30 @@ function updatePostTemplate() {
 
 	if ($.testo_post.value !== "" && !_.isNull(selectedCategory)) {
 
+		//jsonPostTemplate.id = null;
 		jsonPostTemplate.name = $.testo_post.value;
 		jsonPostTemplate.category = selectedCategory;
 		jsonPostTemplate.description = $.testo_post.value;
-		jsonPostTemplate.referenceTime = postDate;
+		jsonPostTemplate.referenceTime = +moment(postDate);
 
-		ZZ.API.Core.Posts.add(jsonPostTemplate, savePost, function(error) {
+		//Ti.API.info("JSON POST TEMPLATE: " + JSON.stringify(jsonPostTemplate));
 
-			Ti.API.error("ZZ.API.Core.Posts.add error [error : " + error + "]");
-		});
+		var _corePostsAddCallback = function(post) {
+
+			flagAddPostDone = true;
+			Ti.API.info("ZZ.API.Core.Posts.add success [response : " + JSON.stringify(post) + "]");
+
+		};
+
+		if (!flagAddPostDone) {
+			
+			Ti.API.info("****** FALSE  ******");
+
+			ZZ.API.Core.Posts.add(jsonPostTemplate, _corePostsAddCallback, function(error) {
+
+				Ti.API.error("ZZ.API.Core.Posts.add error [error : " + error + "]");
+			});
+		}
 
 	} else {
 		Alloy.Globals.loading.hide();
@@ -76,6 +95,8 @@ function updatePostTemplate() {
 }
 
 function savePost() {
+
+	updatePostTemplate();
 
 	ZZ.API.Core.Post.commit(jsonPostTemplate, function(response) {
 
@@ -87,7 +108,7 @@ function savePost() {
 		args();
 
 	}, function(error) {
-		Ti.API.error("ZZ.API.Core.Post.commit error [error : " + error + "]");
+		Ti.API.error("ZZ.API.Core.Post.commit error [error : " + JSON.stringify(error) + "]");
 	});
 
 }
@@ -137,11 +158,11 @@ function loactionSelected(e) {
 		case 2:
 
 			var cercaIndirizzo = Alloy.createController("search_address", function(location_obj) {
-				
+
 				selectedLocation = location_obj;
 				$.location_post.text = selectedLocation.address;
 				$.opzioni_posizione.title = selectedLocation.address;
-				
+
 			}).getView();
 
 			Alloy.Globals.navMenu.openWindow(cercaIndirizzo);
@@ -175,8 +196,37 @@ function reverseGeocoding() {
 
 };
 
+var _corePostAspectsAddCallback = function(addedAspect) {
+
+	Ti.API.info("ZZ.API.Core.Post.Aspects.add success [response : " + JSON.stringify(addedAspect) + "]");
+
+};
+
 function addEvent() {
 
+	if ($.testo_post.value !== "" && !_.isNull(selectedCategory)) {
+
+		updatePostTemplate();
+
+		var inserisciEvento = Alloy.createController("inserimento_evento", {
+
+			p_titolo : $.testo_post.value,
+			p_reference_time : postDate,
+			p_categoria : selectedCategory,
+			_callback : function(objRet) {
+				ZZ.API.Core.Post.Aspects.add(objRet, null, _corePostAspectsAddCallback, function(error) {
+
+					Ti.API.error("ZZ.API.Core.Post.Aspects.add error [error : " + error + "]");
+				});
+			}
+		}).getView();
+
+		Alloy.Globals.navMenu.openWindow(inserisciEvento);
+
+	} else {
+		Alloy.Globals.loading.hide();
+		alert("Inserire un Titolo e una Categoria prima di aggiungere aspetti al post!");
+	}
 }
 
 function addCashflow() {

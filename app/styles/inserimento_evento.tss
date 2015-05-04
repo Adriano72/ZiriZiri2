@@ -13,7 +13,7 @@
 	bottom: 100
 }
 
-"#testo_post": {
+"#titolo_evento": {
 	width: Ti.UI.FILL,
 	backgroundColor: "transparent",
 	hintText: "Inserire un titolo",
@@ -33,19 +33,43 @@
 	
 }
 
-"#orologetto": {
+"#start_orologetto": {
 	left: 12,
 	width: 25,
 	height: 25,
 	//textAlign : 'center',
-	color: "navy",	
+	color: "green",	
 	font: {
 		fontFamily: 'AppIcons',
 		fontSize: 18
 	}
 }
 
-"#data_post": {
+
+"#end_orologetto": {
+	left: 12,
+	width: 25,
+	height: 25,
+	//textAlign : 'center',
+	color: "red",	
+	font: {
+		fontFamily: 'AppIcons',
+		fontSize: 18
+	}
+}
+
+"#start_date": {
+	//textAlign: "center",
+	
+	//borderRadius: 3,
+	//borderWidth: 0.5,
+	//borderColor: "#6B6B6B",
+	width: "90%",
+	right: 0,
+	height: 30
+}
+
+"#end_date": {
 	//textAlign: "center",
 	
 	//borderRadius: 3,
@@ -73,12 +97,8 @@
 	right: 0
 }
 
-"#categoria": {
-	top: 5,
-	left: 12,
-	width: Ti.UI.SIZE,
-	text: "Categoria"
-	
+"#map_snapshot": {
+	height: Ti.UI.SIZE
 }
 
 "#bottomBar": {
@@ -97,21 +117,3 @@
 	width: '100%'
 }
 
-
-"#buttonsContainer": {
-	layout: 'horizontal',
-	width: Ti.UI.SIZE,
-	top: 0
-}
-
-".1_insertAspects": {
-	left: 0,
-	width: 30,
-	height: 30
-}
-
-".insertAspects": {
-	left: 40,
-	width: 30,
-	height: 30
-}

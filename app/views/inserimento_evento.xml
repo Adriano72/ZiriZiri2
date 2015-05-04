@@ -1,0 +1,39 @@
+<Alloy>
+	<Window id="insermiento_evento" class="container" title="Inserisci Evento" onOpen="doOpen">
+		<View id="core_container">
+			<TextField id="titolo_evento"/>
+			<View class="multi_container" onClick="openStartDateTimeSelector">
+				<Label id="start_orologetto"/>
+				<Label id="start_date" class="small_text"/>
+			</View>
+			<View class="multi_container" onClick="openEndDateTimeSelector">
+				<Label id="end_orologetto"/>
+				<Label id="end_date" class="small_text"/>
+			</View>
+			<View class="multi_container" onClick="openLocationSelector">
+				<Label id="map_marker"/>
+				<Label id="location_post" class="small_text"/>
+			</View>
+			<!--<ImageView id="map_snapshot"/>-->
+
+		</View>
+		<OptionDialog id="opzioni_posizione" onClick="loactionSelected">
+
+            <!-- The Options tag sets the options property. -->
+            <Options>
+                <Option>Usa la mia posizione</Option>
+                <Option>Cerca luoghi vicino a te</Option>
+                <Option>Cerca indirizzo/mappa</Option>
+                <Option>Rimuovi posizione</Option>
+            </Options>
+
+            <!-- The ButtonNames tag sets the Android-only buttonNames property. -->
+            <ButtonNames>
+                <ButtonName>Annulla</ButtonName>
+            </ButtonNames>
+
+            <!-- Add a View for the androidView property here. -->
+
+        </OptionDialog>
+	</Window>
+</Alloy>

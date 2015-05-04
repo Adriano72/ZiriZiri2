@@ -54,18 +54,23 @@ function updateDisplay(locationData) {
 
 };
 
-function sceltaPosizione(e){
-	
-	
+function sceltaPosizione(e) {
+
 	location.pureReverse(e.latitude, e.longitude, function(locationData) {
 
 		updateDisplay(locationData);
 
 	});
-	
+
 }
 
 function saveLocation() {
+	
+	/*
+	var Blob = $.mapview.toImage().media;
+	var file = Titanium.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory, 'mapSnapshot.png');
+	file.write(Blob);
+	*/
 
 	args(location_result);
 	$.searchAddressWin.close();
