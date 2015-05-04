@@ -11,7 +11,8 @@
 				<Label id="location_post" class="small_text"/>
 			</View>
 			<Label id="categoria" class="small_text" onClick="openCategoryList"/>
-			
+			<View class="separatore"/>
+			<TableView id="tbl_aspetti"/>
 			
 
 		</View>

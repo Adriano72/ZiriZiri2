@@ -10,6 +10,12 @@ var jsonPostTemplate = Alloy.Models.Post_template.toJSON();
 
 var flagAddPostDone = false;
 
+var arrayAspetti = [];
+
+var sortedArray = [];
+
+var aspectTableData = [];
+
 //Ti.API.info("POST TEMPLATE *****: " + JSON.stringify(jsonPostTemplate));
 
 function doOpen() {
@@ -78,7 +84,7 @@ function updatePostTemplate() {
 		};
 
 		if (!flagAddPostDone) {
-			
+
 			Ti.API.info("****** FALSE  ******");
 
 			ZZ.API.Core.Posts.add(jsonPostTemplate, _corePostsAddCallback, function(error) {
@@ -196,36 +202,173 @@ function reverseGeocoding() {
 
 };
 
+function sortAllAspects() {
+
+	sortedArray = [];
+
+	var aspettiEvento = _.filter(arrayAspetti, function(value) {
+		return value.kind.code == "EVENTDATATYPE_CODE";
+	});
+
+	if (aspettiEvento.length > 0) {
+		sortedArray.push(aspettiEvento);
+	};
+
+	var aspettiCashflow = _.filter(arrayAspetti, function(value) {
+		return value.kind.code == "CASHFLOWDATATYPE_CODE";
+	});
+
+	if (aspettiCashflow.length > 0)
+		sortedArray.push(aspettiCashflow);
+
+	var aspettiDocument = _.filter(arrayAspetti, function(value) {
+		return value.kind.code == "FILEDOCUMENTDATATYPE_CODE";
+	});
+
+	if (aspettiDocument.length > 0)
+		sortedArray.push(aspettiDocument);
+
+	var aspettiNote = _.filter(arrayAspetti, function(value) {
+		return value.kind.code == "NOTEDATATYPE_CODE";
+	});
+
+	if (aspettiNote.length > 0)
+		sortedArray.push(aspettiNote);
+
+	var aspettiLink = _.filter(arrayAspetti, function(value) {
+		return value.kind.code == "FILELINKDATATYPE_CODE";
+	});
+
+	if (aspettiLink.length > 0)
+		sortedArray.push(aspettiLink);
+
+	sortedArray = _.flatten(sortedArray, true);
+	renderAspectsTable();
+}
+
+function renderAspectsTable() {
+	Ti.API.info("SORTED ARRAY: " + JSON.stringify(sortedArray));
+
+	_.forEach(sortedArray, function(value, key) {
+
+		switch(value.kind.code) {
+		case "EVENTDATATYPE_CODE":
+
+			var aspetto = Alloy.createController('row_brief_evento', {
+				_callback : function() {
+					Ti.API.info("Ciao");
+				},
+				p_aspetto : value,
+			}).getView();
+
+			aspectTableData.push(aspetto);
+
+			break;
+
+		case "CASHFLOWDATATYPE_CODE":
+
+			var aspetto = Alloy.createController('dettaglio_cashflow', {
+				_callback : function() {
+					Ti.API.info("Ciao");
+				},
+				p_aspetto : value,
+			}).getView();
+
+			aspectTableData.push(aspetto);
+
+			break;
+
+		case "FILEDOCUMENTDATATYPE_CODE":
+
+			var aspetto = Alloy.createController('dettaglio_document', {
+				_callback : function() {
+					Ti.API.info("Ciao");
+				},
+				p_aspetto : value,
+			}).getView();
+
+			aspectTableData.push(aspetto);
+
+			break;
+
+		case "NOTEDATATYPE_CODE":
+
+			var aspetto = Alloy.createController('dettaglio_note', {
+				_callback : function() {
+					Ti.API.info("Ciao");
+				},
+				p_aspetto : value,
+			}).getView();
+
+			aspectTableData.push(aspetto);
+
+			break;
+
+		case "FILELINKDATATYPE_CODE":
+
+			var aspetto = Alloy.createController('dettaglio_link', {
+				_callback : function() {
+					Ti.API.info("Ciao");
+				},
+				p_aspetto : value,
+			}).getView();
+
+			aspectTableData.push(aspetto);
+
+			break;
+
+		}
+
+		$.tbl_aspetti.setData(aspectTableData);
+
+	});
+}
+
 var _corePostAspectsAddCallback = function(addedAspect) {
 
 	Ti.API.info("ZZ.API.Core.Post.Aspects.add success [response : " + JSON.stringify(addedAspect) + "]");
+
+	arrayAspetti.push(addedAspect);
+	sortAllAspects();
 
 };
 
 function addEvent() {
 
-	if ($.testo_post.value !== "" && !_.isNull(selectedCategory)) {
+	var eventoPresente = _.find(arrayAspetti, function(value) {
+		return value.kind.code == "EVENTDATATYPE_CODE";
+	});
 
-		updatePostTemplate();
+	if (_.isUndefined(eventoPresente)) {
 
-		var inserisciEvento = Alloy.createController("inserimento_evento", {
+		if ($.testo_post.value !== "" && !_.isNull(selectedCategory)) {
 
-			p_titolo : $.testo_post.value,
-			p_reference_time : postDate,
-			p_categoria : selectedCategory,
-			_callback : function(objRet) {
-				ZZ.API.Core.Post.Aspects.add(objRet, null, _corePostAspectsAddCallback, function(error) {
+			updatePostTemplate();
 
-					Ti.API.error("ZZ.API.Core.Post.Aspects.add error [error : " + error + "]");
-				});
-			}
-		}).getView();
+			var inserisciEvento = Alloy.createController("inserimento_evento", {
 
-		Alloy.Globals.navMenu.openWindow(inserisciEvento);
+				p_titolo : $.testo_post.value,
+				p_reference_time : postDate,
+				p_categoria : selectedCategory,
+				_callback : function(objRet) {
 
-	} else {
-		Alloy.Globals.loading.hide();
-		alert("Inserire un Titolo e una Categoria prima di aggiungere aspetti al post!");
+					ZZ.API.Core.Post.Aspects.add(objRet, null, _corePostAspectsAddCallback, function(error) {
+
+						Ti.API.error("ZZ.API.Core.Post.Aspects.add error [error : " + error + "]");
+
+					});
+
+				}
+			}).getView();
+
+			Alloy.Globals.navMenu.openWindow(inserisciEvento);
+
+		} else {
+			Alloy.Globals.loading.hide();
+			alert("E' necessario inserire un Titolo ed una Categoria prima di creare aspetti per questo post");
+		}
+	}else{
+		alert("E' già stato inserito un aspetto evento per questo post!");
 	}
 }
 

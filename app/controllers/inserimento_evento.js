@@ -26,8 +26,8 @@ function doOpen() {
 		var settings = null;
 		var nuovo_post = null;
 
-		$.start_orologetto.text = icons.alarm_clock;
-		$.end_orologetto.text = icons.alarm_clock;
+		$.start_orologetto.text = icons.calendar_empty;
+		$.end_orologetto.text = icons.calendar_empty;
 		$.map_marker.text = icons.map_marker;
 
 		activity.onCreateOptionsMenu = function(e) {
@@ -88,11 +88,16 @@ function updateEventTemplate() {
 	} : null;
 
 	jsonEventTemplate.data.startTime.time = +moment(dataInizio);
-	jsonEventTemplate.data.endTime = {
-		time : +moment(dataFine),
-		type : "NONE",
-		id : null
-	};
+
+	if (!_.isNull(dataFine)) {
+		jsonEventTemplate.data.endTime = {
+			time : +moment(dataFine),
+			type : "NONE",
+			id : null
+		};
+	}else{
+		jsonEventTemplate.data.endTime = null;
+	}
 
 	Alloy.Globals.loading.hide();
 	//Alloy.Collections.Timeline.unshift(response);

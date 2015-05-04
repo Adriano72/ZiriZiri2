@@ -44,8 +44,6 @@ if (_.isNull(attrs.location)) {
 	//attrs.markerTitle = attrs.location.name;
 }
 
-attrs.dataDa = "Data " + moment(attrs.data.dataScadenza).format("LL");
-
 if (testExistence(attrs.data.endTime)) {
 
 	if (attrs.data.startTime.time === attrs.data.endTime.time) {
