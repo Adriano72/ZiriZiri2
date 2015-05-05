@@ -422,7 +422,7 @@ function scrollendEventAspects(e) {
 		
 		onAspectChange(sortedArray[indice].kind.code || 0);
 
-		//Ti.API.info("@@@@@ ASPETTO SELEZIONATO @@@@@@: " + JSON.stringify(sortedArray[indice]));
+		Ti.API.info("@@@@@ ASPETTO SELEZIONATO @@@@@@: " + JSON.stringify(sortedArray[indice]));
 
 		var aspecTypeArray = _.filter(sortedArray, function(value) {
 			return value.kind.code == sortedArray[indice].kind.code;

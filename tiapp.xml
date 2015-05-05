@@ -41,7 +41,7 @@
     </ios>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
         <manifest android:installLocation="preferExternal"
-            android:versionCode="12" android:versionName="2.1.6" package="it.ziriziri.mobile">
+            android:versionCode="13" android:versionName="2.1.7" package="it.ziriziri.mobile">
             <!--<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="18"/>-->
             <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="19"/>
             <supports-screens android:anyDensity="true"/>

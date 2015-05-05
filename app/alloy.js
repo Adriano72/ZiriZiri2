@@ -45,6 +45,13 @@ Alloy.Collections.aspettiDocument = new Backbone.Collection;
 Alloy.Collections.aspettiLink = new Backbone.Collection;
 Alloy.Collections.aspettiNote = new Backbone.Collection;
 
+Alloy.Collections.CashSources = new Backbone.Collection;
+Alloy.Collections.PaymentModes = new Backbone.Collection;
+Alloy.Collections.PaymentTakingTools = new Backbone.Collection;
+Alloy.Collections.CashflowStatuses = new Backbone.Collection;
+Alloy.Collections.CashflowVariabilities = new Backbone.Collection;
+
+
 Alloy.Models.Template = new Backbone.Model;
 Alloy.Models.Post_template = new Backbone.Model;
 Alloy.Models.Event_template = new Backbone.Model;

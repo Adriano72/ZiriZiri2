@@ -1,0 +1,13 @@
+<Alloy>
+	<Window id="win" class="container" title = "Strumento Pagamento/Incasso" onOpen="hideActionBar">
+
+		
+		<TableView id="paymentModesTable" dataCollection="PaymentModes" dataFunction="syncCollection">
+			
+			<TableViewRow class="row" title="{descrizioneBreve}" onClick="selectItem"/>
+				
+
+		</TableView>
+
+	</Window>
+</Alloy>

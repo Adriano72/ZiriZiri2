@@ -138,6 +138,8 @@ exports.loadTabData = function() {
 		ZZ.API.Finance.CashSources.list(function(cashsources) {
 
 			//Ti.API.info("ZZ.API.Finance.CashSources.list success [response : " + JSON.stringify(cashsources) + "]");
+			
+			Alloy.Collections.CashSources.reset(cashsources);
 
 			_.defer(f4);
 
@@ -154,7 +156,8 @@ exports.loadTabData = function() {
 		ZZ.API.Finance.PaymentModes.list(function(paymentmodes) {
 
 			//Ti.API.info("ZZ.API.Finance.PaymentModes.list success [response : " + JSON.stringify(paymentmodes) + "]");
-
+			Alloy.Collections.PaymentModes.reset(paymentmodes);
+			
 			_.defer(f5);
 
 		}, function(error) {
@@ -169,8 +172,8 @@ exports.loadTabData = function() {
 
 		ZZ.API.Finance.CashflowStatuses.list(function(cashflowstatuses) {
 
-			//Ti.API.info("ZZ.API.Finance.CashflowStatuses.list success [response : " + JSON.stringify(cashflowstatuses) + "]");
-
+			Ti.API.info("ZZ.API.Finance.CashflowStatuses.list success [response : " + JSON.stringify(cashflowstatuses) + "]");
+			/*
 			var objStatoMovimento = [];
 
 			_.forEach(cashflowstatuses, function(value, key) {
@@ -194,9 +197,12 @@ exports.loadTabData = function() {
 			});
 
 			Ti.App.Properties.setObject("statoMovimento", objStatoMovimento);
+			*/
 
 			//Ti.API.info("OBJ STATO MOVIMENTO': " + JSON.stringify(Ti.App.Properties.getObject("statoMovimento")));
-
+			
+			Alloy.Collections.CashflowStatuses.reset(cashflowstatuses);
+			
 			_.defer(f6);
 
 		}, function(error) {
@@ -212,7 +218,7 @@ exports.loadTabData = function() {
 		ZZ.API.Finance.PaymentTakingTools.list(function(paymenttakingtools) {
 
 			//Ti.API.info("ZZ.API.Finance.PaymentTakingTools.list success [response : " + JSON.stringify(paymenttakingtools) + "]");
-
+			/*
 			var objPagamIncasso = [];
 
 			_.forEach(paymenttakingtools, function(value, key) {
@@ -234,7 +240,9 @@ exports.loadTabData = function() {
 			Ti.App.Properties.setObject("elencoPagamIncasso", objPagamIncasso);
 
 			//Ti.API.info("OBJ PAGAM INCASSO: " + JSON.stringify(Ti.App.Properties.getObject("elencoPagamIncasso")));
-
+			*/
+			Alloy.Collections.PaymentTakingTools.reset(paymenttakingtools);
+			
 			_.defer(f7);
 
 		}, function(error) {
@@ -256,7 +264,7 @@ exports.loadTabData = function() {
 			_.forEach(cashflowtypes, function(value, key) {
 
 				//Ti.API.info("Categoria: "+key+" : "+value.name);
-
+				/*	
 				objTipoMov.push({
 
 					"title" : value.descrizioneBreve,
@@ -268,6 +276,9 @@ exports.loadTabData = function() {
 					"descrizioneBreve" : value.descrizioneBreve
 
 				});
+				*/
+				
+				objTipoMov.push(value);
 
 			});
 
@@ -290,7 +301,7 @@ exports.loadTabData = function() {
 		ZZ.API.Finance.CashflowVariabilities.list(function(cashflowvariabilities) {
 			
 			//Ti.API.info("ZZ.API.Finance.CashflowVariabilities.list success [response : " + JSON.stringify(cashflowvariabilities) + "]");
-
+			/*
 			var objTipoVariabilita = [];
 
 			_.forEach(cashflowvariabilities, function(value, key) {
@@ -314,7 +325,8 @@ exports.loadTabData = function() {
 			});
 
 			Ti.App.Properties.setObject("tipoVariabilita", objTipoVariabilita);
-
+			*/
+			Alloy.Collections.CashflowVariabilities.reset(cashflowvariabilities);
 			//Ti.API.info("OBJ VARIABILITA': " + JSON.stringify(Ti.App.Properties.getObject("tipoVariabilita")));
 
 		}, function(error) {

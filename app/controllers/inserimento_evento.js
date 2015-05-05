@@ -57,7 +57,7 @@ function updateEventTemplate() {
 
 	//jsonEventTemplate.id = null;
 	jsonEventTemplate.name = args.p_titolo;
-	//jsonEventTemplate.description = $.titolo_evento.value;
+	jsonEventTemplate.description = $.titolo_evento.value;
 	jsonEventTemplate.referenceTime = +moment(args.p_reference_time);
 	jsonEventTemplate.category = args.p_categoria;
 	//jsonEventTemplate.status = "NONE";
@@ -101,6 +101,7 @@ function updateEventTemplate() {
 
 	Alloy.Globals.loading.hide();
 	//Alloy.Collections.Timeline.unshift(response);
+	Ti.API.info("EVENTO DA AGGIUNGERE: "+JSON.stringify(jsonEventTemplate));
 	$.insermiento_evento.close();
 	args._callback(jsonEventTemplate);
 

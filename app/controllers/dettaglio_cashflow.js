@@ -11,9 +11,9 @@ attrs.tipo_mov_desc_estesa = testExistence(attrs.data.tipoMovimento) ? attrs.dat
 
 if (attrs.data.tipoMovimento.descrizioneBreve == "Uscita") {
 	attrs.tipo_mov_color = "#E85D5F";
-} else if ((attrs.data.tipoMovimento.descrizioneBreve == "Entrata")) {
+} else if (attrs.data.tipoMovimento.descrizioneBreve == "Entrata") {
 	attrs.tipo_mov_color = "#7BC46E";
-} else if ((attrs.data.tipoMovimento.descrizioneBreve == "Bancomat")) {
+} else if (attrs.data.tipoMovimento.descrizioneBreve == "Bancomat") {
 	attrs.tipo_mov_color = "#3B6BDB";
 }
 

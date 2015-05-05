@@ -66,63 +66,59 @@ function doOpen() {
 
 function updatePostTemplate() {
 
-	if ($.testo_post.value !== "" && !_.isNull(selectedCategory)) {
+	//jsonPostTemplate.id = null;
+	jsonPostTemplate.name = $.testo_post.value;
+	jsonPostTemplate.category = selectedCategory;
+	jsonPostTemplate.description = $.testo_post.value;
+	jsonPostTemplate.referenceTime = +moment(postDate);
 
-		//jsonPostTemplate.id = null;
-		jsonPostTemplate.name = $.testo_post.value;
-		jsonPostTemplate.category = selectedCategory;
-		jsonPostTemplate.description = $.testo_post.value;
-		jsonPostTemplate.referenceTime = +moment(postDate);
+	//Ti.API.info("JSON POST TEMPLATE: " + JSON.stringify(jsonPostTemplate));
 
-		//Ti.API.info("JSON POST TEMPLATE: " + JSON.stringify(jsonPostTemplate));
+	var _corePostsAddCallback = function(post) {
 
-		var _corePostsAddCallback = function(post) {
+		flagAddPostDone = true;
+		Ti.API.info("ZZ.API.Core.Posts.add success [response : " + JSON.stringify(post) + "]");
 
-			flagAddPostDone = true;
-			Ti.API.info("ZZ.API.Core.Posts.add success [response : " + JSON.stringify(post) + "]");
+	};
 
-		};
+	if (!flagAddPostDone) {
 
-		if (!flagAddPostDone) {
+		Ti.API.info("****** FALSE  ******");
 
-			Ti.API.info("****** FALSE  ******");
+		ZZ.API.Core.Posts.add(jsonPostTemplate, _corePostsAddCallback, function(error) {
 
-			ZZ.API.Core.Posts.add(jsonPostTemplate, _corePostsAddCallback, function(error) {
-
-				Ti.API.error("ZZ.API.Core.Posts.add error [error : " + error + "]");
-			});
-		}
-
-	} else {
-		Alloy.Globals.loading.hide();
-		alert("Il campo Titolo e il campo Categoria sono obbligatori!");
+			Ti.API.error("ZZ.API.Core.Posts.add error [error : " + error + "]");
+		});
 	}
 
 }
 
 function savePost() {
 
-	updatePostTemplate();
 
-	ZZ.API.Core.Post.commit(jsonPostTemplate, function(response) {
+		updatePostTemplate();
 
-		Ti.API.info("ZZ.API.Core.Post.commit success [response : " + JSON.stringify(response) + "]");
+		ZZ.API.Core.Post.commit(jsonPostTemplate, function(response) {
 
-		Alloy.Globals.loading.hide();
-		//Alloy.Collections.Timeline.unshift(response);
-		$.insermiento_post.close();
-		args();
+			Ti.API.info("ZZ.API.Core.Post.commit success [response : " + JSON.stringify(response) + "]");
 
-	}, function(error) {
-		Ti.API.error("ZZ.API.Core.Post.commit error [error : " + JSON.stringify(error) + "]");
-	});
+			Alloy.Globals.loading.hide();
+			//Alloy.Collections.Timeline.unshift(response);
+			$.insermiento_post.close();
+			args();
+
+		}, function(error) {
+			Ti.API.error("ZZ.API.Core.Post.commit error [error : " + JSON.stringify(error) + "]");
+		});
+
+	
 
 }
 
 function openCategoryList() {
 	var selectCategory = Alloy.createController("selezione_categoria", function(cat_obj) {
 
-		var categoryLayout = tools.extractCtegoryIcons(cat_obj.code.slice(0, 2));
+		var categoryLayout = tools.extractCategoryIcons(cat_obj.code.slice(0, 2));
 		$.categoria.text = " " + cat_obj.name + " ";
 		$.categoria.backgroundColor = categoryLayout.colore;
 		selectedCategory = cat_obj;
@@ -147,8 +143,45 @@ function openLocationSelector() {
 	$.opzioni_posizione.show();
 }
 
+function openCashFlowSelector() {
+
+		$.opzioni_cashflow.show();
+	
+}
+
+function openMediaTypeSelector() {
+	
+		$.opzioni_media.show();
+
+}
+
+function openSelectedMedia(e) {
+
+	if (!e.button) {
+		switch(e.source.selectedIndex) {
+		case 0:
+
+			tools.openCamera(function(p_blob) {
+				addDocument(p_blob)
+			});
+
+			break;
+		case 1:
+
+			tools.openGallery(function(p_blob) {
+				addDocument(p_blob);
+			});
+
+			break;
+
+		}
+	}
+
+}
+
 function loactionSelected(e) {
-	Ti.API.info(JSON.stringify(e));
+
+	//Ti.API.info(JSON.stringify(e));
 	if (!e.button) {
 		switch(e.source.selectedIndex) {
 		case 0:
@@ -176,7 +209,10 @@ function loactionSelected(e) {
 			break;
 		case 3:
 
-			Ti.API.info("CIAO");
+			Ti.API.info("RIMUOVI");
+			selectedLocation = null;
+			$.location_post.text = "Posizione non specificata";
+			$.opzioni_posizione.title = "Posizione non specificata";
 
 			break;
 		}
@@ -205,6 +241,8 @@ function reverseGeocoding() {
 function sortAllAspects() {
 
 	sortedArray = [];
+
+	Ti.API.info("ARRAY  ASPETTI: " + JSON.stringify(arrayAspetti));
 
 	var aspettiEvento = _.filter(arrayAspetti, function(value) {
 		return value.kind.code == "EVENTDATATYPE_CODE";
@@ -247,7 +285,10 @@ function sortAllAspects() {
 }
 
 function renderAspectsTable() {
-	Ti.API.info("SORTED ARRAY: " + JSON.stringify(sortedArray));
+	//Ti.API.info("SORTED ARRAY: " + JSON.stringify(sortedArray));
+
+	$.tbl_aspetti.removeAllChildren();
+	aspectTableData = [];
 
 	_.forEach(sortedArray, function(value, key) {
 
@@ -267,7 +308,7 @@ function renderAspectsTable() {
 
 		case "CASHFLOWDATATYPE_CODE":
 
-			var aspetto = Alloy.createController('dettaglio_cashflow', {
+			var aspetto = Alloy.createController('row_brief_cashflow', {
 				_callback : function() {
 					Ti.API.info("Ciao");
 				},
@@ -329,9 +370,20 @@ var _corePostAspectsAddCallback = function(addedAspect) {
 	Ti.API.info("ZZ.API.Core.Post.Aspects.add success [response : " + JSON.stringify(addedAspect) + "]");
 
 	arrayAspetti.push(addedAspect);
+	Ti.API.info("ARRAY  ASPETTI 2: " + JSON.stringify(arrayAspetti));
 	sortAllAspects();
 
 };
+
+function f_addAspect(o) {
+
+	Ti.API.info("ASPETTO IN ARRIVO *****: " + JSON.stringify(o));
+	ZZ.API.Core.Post.Aspects.add(o, null, _corePostAspectsAddCallback,  function(error) {
+		_corePostAspectsAddCallback(o);
+		Ti.API.error("ZZ.API.Core.Post.Aspects.add success [error : " + error + "]");
+
+	});
+}
 
 function addEvent() {
 
@@ -341,8 +393,6 @@ function addEvent() {
 
 	if (_.isUndefined(eventoPresente)) {
 
-		if ($.testo_post.value !== "" && !_.isNull(selectedCategory)) {
-
 			updatePostTemplate();
 
 			var inserisciEvento = Alloy.createController("inserimento_evento", {
@@ -350,34 +400,107 @@ function addEvent() {
 				p_titolo : $.testo_post.value,
 				p_reference_time : postDate,
 				p_categoria : selectedCategory,
-				_callback : function(objRet) {
-
-					ZZ.API.Core.Post.Aspects.add(objRet, null, _corePostAspectsAddCallback, function(error) {
-
-						Ti.API.error("ZZ.API.Core.Post.Aspects.add error [error : " + error + "]");
-
-					});
-
+				_callback : function(p_evnt) {
+					f_addAspect(p_evnt);
 				}
 			}).getView();
 
 			Alloy.Globals.navMenu.openWindow(inserisciEvento);
 
-		} else {
-			Alloy.Globals.loading.hide();
-			alert("E' necessario inserire un Titolo ed una Categoria prima di creare aspetti per questo post");
-		}
-	}else{
+	} else {
 		alert("E' già stato inserito un aspetto evento per questo post!");
 	}
 }
 
-function addCashflow() {
+function addCashflow(e) {
+	Ti.API.info("ARRAY ASPETTI 1: " + JSON.stringify(arrayAspetti));
+	var tipo_movimento = null;
+
+	if (!e.button) {
+		switch(e.source.selectedIndex) {
+		case 0:
+
+			tipo_movimento = "Uscita";
+
+			break;
+		case 1:
+
+			tipo_movimento = "Entrata";
+
+			break;
+		case 2:
+
+			tipo_movimento = "Bancomat";
+
+			break;
+		case 3:
+
+			tipo_movimento = "Prelievo";
+
+			break;
+		case 4:
+
+			tipo_movimento = "Versamento";
+
+			break;
+		case 5:
+
+			tipo_movimento = "Giroconto";
+
+			break;
+		}
+
+		updatePostTemplate();
+
+		var inserisciCashflow = Alloy.createController("inserimento_cashflow", {
+			p_tipo : tipo_movimento,
+			p_titolo : $.testo_post.value,
+			p_location : selectedLocation,
+			p_reference_time : postDate,
+			p_categoria : selectedCategory,
+			_callback : function(p_cash) {
+				f_addAspect(p_cash);
+			}
+		}).getView();
+
+		Alloy.Globals.navMenu.openWindow(inserisciCashflow);
+	}
 
 }
 
-function addDocument() {
+function addDocument(p_image) {
+	
+	updatePostTemplate();
 
+	var inserisciDocument = Alloy.createController("inserimento_documento", {
+		p_image : p_image,
+		p_titolo : $.testo_post.value,
+		p_location : selectedLocation,
+		p_reference_time : postDate,
+		p_categoria : selectedCategory,
+		_callback : function(p_doc) {
+			
+			Ti.API.info("ASPETTO DOCUMENTO: "+JSON.stringify(p_doc));
+			var _allegaDocumento = function(addedAspect) {
+
+				Ti.API.info("ZZ.API.Core.Post.Aspects.add success [response : " + JSON.stringify(addedAspect) + "]");
+
+				ZZ.API.Files.Attachment.set(addedAspect, p_image, function(response) {
+					Ti.API.info("ZZ.API.Files.Attachment.set success [response : " + response + "]");
+				}, function(error) {
+					Ti.API.error("ZZ.API.Files.Attachment.set error [error : " + error + "]");
+				});
+			};
+
+			ZZ.API.Core.Post.Aspects.add(p_doc, null, _allegaDocumento, function(error) {
+
+				Ti.API.error("ZZ.API.Core.Post.Aspects.add error [error : " + error + "]");
+			});
+
+		}
+	}).getView();
+
+	Alloy.Globals.navMenu.openWindow(inserisciDocument);
 }
 
 function addNote() {

@@ -1,0 +1,20 @@
+<Alloy>
+	<Window id="insermiento_documento" class="container" title="Inserisci Documento" onOpen="doOpen">
+		<ScrollView id="core_container">
+			<TextField id="titolo_documento"/>
+			<ImageView id="img_preview"/>
+				
+			<View class="multi_container" onClick="openDateTimeSelector">
+				<Label id="orologetto"/>
+				<Label id="pict_date" class="small_text"/>
+			</View>
+			<View class="multi_container">
+				<Label id="immaginina"/>
+				<Label id="pict_size" class="small_text"/>
+			</View>
+			<!--<ImageView id="map_snapshot"/>-->
+
+		</ScrollView>
+		
+	</Window>
+</Alloy>

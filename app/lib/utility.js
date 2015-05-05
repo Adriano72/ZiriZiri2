@@ -1,4 +1,122 @@
-exports.extractCtegoryIcons = function (code) {
+exports.openCamera = function(_callback) {
+	
+	var ImageFactory = require('ti.imagefactory');
+
+	try {
+
+		Ti.Media.showCamera({
+			success : function(event) {
+
+				var cropRect = event.cropRect;
+				var image = event.media;
+				
+				
+				
+				var newBlob = ImageFactory.compress(image, 0.20);
+				//Alloy.Globals.blobImage = newBlob;
+				_callback(newBlob);
+				/*
+				// called when media returned from the camera
+				Ti.API.info('Our type was: ' + event.mediaType);
+
+				$.preview.image = newBlob;
+				var hashedImage = "data:image/jpeg;base64," + Ti.Utils.base64encode(newBlob).toString();
+				var tempFile = Ti.Filesystem.createTempFile();
+				tempFile.write(newBlob);
+
+				//Ti.API.info("HASHED IMAGE : " + hashedImage);
+				Ti.API.info("HASHED IMAGE MIME TYPE: " + image.getMimeType());
+				Ti.API.info("IMAGE FILE SIZE: " + tempFile.size);
+				Ti.API.info("IMAGE FILE NAME: " + tempFile.name);
+
+				
+				imageContent.base64 = hashedImage;
+				fileSize = tempFile.size;
+				fileName = tempFile.name;
+				*/
+				
+			
+
+			},
+			cancel : function() {
+				return;
+			},
+			error : function(error) {
+				// called when there's an error
+				var a = Titanium.UI.createAlertDialog({
+					title : 'Camera'
+				});
+				if (error.code == Titanium.Media.NO_CAMERA) {
+					a.setMessage('Impossibile attivare la funzione foto su questo dispositivo');
+				} else {
+					a.setMessage('Unexpected error: ' + error.code);
+				}
+				a.show();
+				return;
+			},
+			saveToPhotoGallery : true,
+			// allowEditing and mediaTypes are iOS-only settings
+			allowEditing : false,
+			mediaTypes : [Ti.Media.MEDIA_TYPE_PHOTO]
+		});
+	} catch(error) {
+		Ti.API.info("CATCHED ERROR: " + error);
+	}
+
+};
+
+exports.openGallery = function(_callback) {
+	
+	var ImageFactory = require('ti.imagefactory');
+
+	Titanium.Media.openPhotoGallery({
+
+		success : function(event) {
+			var cropRect = event.cropRect;
+			var image = event.media;
+			//Alloy.Globals.blobImage = image;
+
+			// set image view
+			Ti.API.info('Our type was: ' + event.mediaType);
+			//$.preview.setWidth(cropRect.width);
+			//$.preview.setHeight(cropRect.height);
+			
+			_callback(image);
+		
+			//var hashedImage = Ti.Utils.base64encode(image).toString();
+			//Ti.API.info("HASHED IMAGE: " + image.getFile());
+			Ti.API.info("IMAGE MIME TYPE: " + image.getMimeType());
+			
+			var tempFile = Ti.Filesystem.createTempFile();
+			tempFile.write(image);
+
+			var content = tempFile.read();
+			Ti.API.info("IMAGE  FILE SIZE: " + tempFile.size);
+			Ti.API.info("IMAGE FILE NAME: " + tempFile.name);
+			//Ti.API.info("HASHED IMAGE : " + hashedImage);
+
+
+			fileSize = tempFile.size;
+			fileName = tempFile.name;
+
+			Titanium.API.info('PHOTO GALLERY SUCCESS cropRect.x ' + cropRect.x + ' cropRect.y ' + cropRect.y + ' cropRect.height ' + cropRect.height + ' cropRect.width ' + cropRect.width);
+
+		},
+		cancel : function() {
+
+		},
+		error : function(error) {
+			Ti.API.info("ERROR: " + error);
+		},
+		allowEditing : false,
+
+		mediaTypes : [Ti.Media.MEDIA_TYPE_PHOTO]
+	});
+};
+
+
+
+exports.extractCategoryIcons = function (code) {
 
 	switch(code) {
 
@@ -102,3 +220,5 @@ exports.extractCtegoryIcons = function (code) {
 	}
 
 };
+
+

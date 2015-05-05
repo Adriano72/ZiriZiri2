@@ -1,6 +1,6 @@
 
 ".container" : {
-  
+  orientationModes: [Ti.UI.PORTRAIT]
 }
 
 "#mapview": {

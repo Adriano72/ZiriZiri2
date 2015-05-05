@@ -32,6 +32,19 @@
 	wordWrap: false
 }
 
+".small_text_bold": {
+	//touchEnabled: false,
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 14,
+		fontWeight: 'bold'
+	},
+	color: "#444",
+	height: Ti.UI.SIZE,
+	ellipsize: true,
+	wordWrap: false
+}
+
 
 ".aspect_text": {
 	touchEnabled: false,

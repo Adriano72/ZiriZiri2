@@ -1,0 +1,18 @@
+<Alloy>
+	<TableViewRow id="row">
+		<View class="container">
+			<View class="multi_container">
+				<Label id="iconcina"/>
+				<Label id="tipoMov" class="small_text"/>
+				<Label id="importo" class="small_text"/>
+			</View>
+			<Label id="fonte_liquidita" class="small_text"/>
+			<!--
+			<View class="multi_container">
+				<Label id="fonte_liquidita" class="small_text"/>
+				<Label id="modalita_pagamento" class="small_text"/>
+			</View>
+			-->
+		</View>
+	</TableViewRow>
+</Alloy>

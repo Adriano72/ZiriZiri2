@@ -1,0 +1,13 @@
+<Alloy>
+	<Window id="win" class="container" title = "Fonte di liquidità" onOpen="hideActionBar">
+
+		
+		<TableView id="cashSourcesTable" dataCollection="CashSources" dataFunction="syncCollection">
+			
+			<TableViewRow class="row" title="{descrizioneBreve}" onClick="selectItem"/>
+				
+
+		</TableView>
+
+	</Window>
+</Alloy>

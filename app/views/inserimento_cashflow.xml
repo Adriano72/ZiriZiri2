@@ -1,0 +1,118 @@
+<Alloy>
+	<Window id="insermiento_cashflow" class="container" title="Inserisci Cashflow" onOpen="doOpen">
+		<ScrollView id="core_container">
+			<Label id="testatina_movimento" class="aspect_text"/>
+			<TextField id="titolo_cashflow"/>
+			<View class="multi_container">
+				<Label id="importo_label" class="small_text_bold"/>
+				<View id="importo_wrapper">
+					<Label id="simboloValuta" class="small_text"/>
+					<TextField id="importo" class="small_text" onBlur="formattaImporto"/>
+				</View>
+				
+			</View>
+			<View class="multi_container">
+				<Label id="data_movimento_label" class="small_text_bold" text="Eseguita"/>
+				<Label id="data_movimento" class="small_text" onClick="openDataMovimentoSelector"/>
+			</View>
+			<View id="cashsources_container" class="multi_container" onClick="openCashSourcesSelector">
+				<Label id="cashsources_label" class="small_text_bold" text="Fonte Liquidità"/>
+				<Label id="cashsources" class="small_text" text="..."/>
+			</View>
+			<View id="mov_da_container" class="multi_container">
+				<View id="mov_da_subcontainer" class="subcontainer" onClick="openCashSourcesSelector_da">
+					<Label id="mov_da_label" class="small_text_bold" text="Da"/>
+					<Label id="mov_da" class="small_text" text="..."/>
+				</View>
+				<View id="mov_a_subcontainer" class="subcontainer" onClick="openCashSourcesSelector_a">
+					<Label id="mov_a_label" class="small_text_bold" text="A"/>
+					<Label id="mov_a" class="small_text" text="..."/>
+				</View>
+			</View>
+			<View id="tramite_con_container" class="multi_container">
+				<View id="tramite_subcontainer" class="subcontainer" onClick="openPaymentModesSelector_tramite">
+					<Label id="tramite_label" class="small_text_bold" text="Tramite"/>
+					<Label id="tramite" class="small_text" text="..."/>
+				</View>
+				<View id="con_subcontainer" class="subcontainer" onClick="openPaymentTakingToolsSelector_con">
+					<Label id="con_label" class="small_text_bold" text="con"/>
+					<Label id="con" class="small_text" text="..."/>
+				</View>
+			</View>
+			<Label id="switch_altro" class="small_text_bold" text="Altro" onClick="toggleAltro"/>
+			<View id="altro_container">
+				<View id="payment_modes_container" class="multi_container" onClick="openPaymentModesSelector">
+					<Label id="payment_modes_label" class="small_text_bold"/>
+					<Label id="payment_modes" class="small_text" text="..."/>
+				</View>
+				<View id="payment_taking_tool_container" class="multi_container" onClick="openPaymentTakingToolsSelector">
+					<Label id="payment_taking_tool_label" class="small_text_bold"/>
+					<Label id="payment_taking_tool" class="small_text" text="..."/>
+				</View>
+				<View id="stato_container" class="multi_container" onClick="statoSelector">
+					<Label id="stato_label" class="small_text_bold" text="Stato"/>
+					<Label id="stato" class="small_text" text="..."/>
+				</View>
+				<View id="variabilita_container" class="multi_container" onClick="variabilitaSelector">
+					<Label id="variabilita_label" class="small_text_bold" text="Variabilità"/>
+					<Label id="variabilita" class="small_text" text="..."/>
+				</View>
+				<View id="redditi_container" class="multi_container" onClick="redditiSelector">
+					<Label id="redditi_label" class="small_text_bold" text="Dich. Redditi"/>
+					<Label id="redditi" class="small_text" text="..."/>
+				</View>
+				<View id="ordinario_container" class="multi_container" onClick="ordinarioSelector">
+					<Label id="ordinario_label" class="small_text_bold" text="Ord./Straord."/>
+					<Label id="ordinario" class="small_text" text="..."/>
+				</View>
+				<View id="data_valuta_container" class="multi_container">
+					<Label id="data_valuta_label" class="small_text_bold" text="Valuta"/>
+					<Label id="data_valuta" class="small_text" onClick="openDataValutaSelector"/>
+				</View>
+				<View id="data_scadenza_container" class="multi_container">
+					<Label id="data_scadenza_label" class="small_text_bold" text="Scadenza"/>
+					<Label id="data_scadenza" class="small_text" onClick="openDataScadenzaSelector"/>
+				</View>
+				<View id="data_pag_inc_container" class="multi_container">
+					<Label id="data_pag_inc_label" class="small_text_bold"/>
+					<Label id="data_pag_inc" class="small_text" onClick="openDataPagIncSelector"/>
+				</View>
+			</View>
+
+		</ScrollView>
+		<OptionDialog id="opzioni_redditi" onClick="redditiSelected">
+
+			<!-- The Options tag sets the options property. -->
+			<Options>
+				<Option>Rilevante</Option>
+				<Option>Non Rilevante</Option>
+
+			</Options>
+
+			<!-- The ButtonNames tag sets the Android-only buttonNames property. -->
+			<ButtonNames>
+				<ButtonName>Annulla</ButtonName>
+			</ButtonNames>
+
+			<!-- Add a View for the androidView property here. -->
+
+		</OptionDialog>
+		<OptionDialog id="opzioni_straordinario" onClick="ordinarioSelected">
+
+			<!-- The Options tag sets the options property. -->
+			<Options>
+				<Option>Ordinario</Option>
+				<Option>Straordinario</Option>
+
+			</Options>
+
+			<!-- The ButtonNames tag sets the Android-only buttonNames property. -->
+			<ButtonNames>
+				<ButtonName>Annulla</ButtonName>
+			</ButtonNames>
+
+			<!-- Add a View for the androidView property here. -->
+
+		</OptionDialog>
+	</Window>
+</Alloy>

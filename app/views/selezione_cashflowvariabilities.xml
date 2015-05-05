@@ -1,0 +1,13 @@
+<Alloy>
+	<Window id="win" class="container" title = "Variabilità" onOpen="hideActionBar">
+
+		
+		<TableView id="cashflowVriabilitiesTable" dataCollection="CashflowVariabilities" dataFunction="syncCollection">
+			
+			<TableViewRow class="row" title="{descrizioneBreve}" onClick="selectItem"/>
+				
+
+		</TableView>
+
+	</Window>
+</Alloy>

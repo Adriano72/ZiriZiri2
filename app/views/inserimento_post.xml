@@ -20,12 +20,28 @@
 		<View id="bottomBar">
 			<View id="buttonsContainer">
 				<Label id="icon_event" class="aspects_icons 1_insertAspects"  onClick="addEvent"/>
-				<Label id="icon_cashflow" class="aspects_icons insertAspects" onClick="addCashflow"/>
-				<Label id="icon_document" class="aspects_icons insertAspects" onClick="addDocument"/>
+				<Label id="icon_cashflow" class="aspects_icons insertAspects" onClick="openCashFlowSelector"/>
+				<Label id="icon_document" class="aspects_icons insertAspects" onClick="openMediaTypeSelector"/>
 				<Label id="icon_note" class="aspects_icons insertAspects" onClick="addNote"/>
 				<Label id="icon_link" class="aspects_icons insertAspects" onClick="addLink"/>
 			</View>
 		</View>
+		<OptionDialog id="opzioni_media" onClick="openSelectedMedia">
+
+            <!-- The Options tag sets the options property. -->
+            <Options>
+                <Option>Scatta una foto</Option>
+                <Option>Scegli dalla Galleria</Option>
+            </Options>
+
+            <!-- The ButtonNames tag sets the Android-only buttonNames property. -->
+            <ButtonNames>
+                <ButtonName>Annulla</ButtonName>
+            </ButtonNames>
+
+            <!-- Add a View for the androidView property here. -->
+
+        </OptionDialog>
 		<OptionDialog id="opzioni_posizione" onClick="loactionSelected">
 
             <!-- The Options tag sets the options property. -->
@@ -34,6 +50,27 @@
                 <Option>Cerca luoghi vicino a te</Option>
                 <Option>Cerca indirizzo/mappa</Option>
                 <Option>Rimuovi posizione</Option>
+            </Options>
+
+            <!-- The ButtonNames tag sets the Android-only buttonNames property. -->
+            <ButtonNames>
+                <ButtonName>Annulla</ButtonName>
+            </ButtonNames>
+
+            <!-- Add a View for the androidView property here. -->
+
+        </OptionDialog>
+        
+        <OptionDialog id="opzioni_cashflow" onClick="addCashflow" title="Aggiungi">
+
+            <!-- The Options tag sets the options property. -->
+            <Options>
+                <Option>Uscita</Option>
+                <Option>Entrata</Option>
+                <Option>Bancomat</Option>
+                <Option>Prelievo</Option>
+                <Option>Versamento</Option>
+                <Option>Giroconto</Option>
             </Options>
 
             <!-- The ButtonNames tag sets the Android-only buttonNames property. -->

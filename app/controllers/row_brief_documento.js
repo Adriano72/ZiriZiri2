@@ -4,7 +4,7 @@ var args = arguments[0] || {};
 
 var evento = args.p_aspetto;
 
-$.iconcina.text = icons.calendar;
+$.iconcina.text = icons.paper_clip;
 $.location.text = evento.location?evento.location.name:"";
 $.start_date.text = "Inizia " + moment(evento.data.startTime.time).format("LL") + " alle ore " + moment(evento.data.startTime.time).format("HH:mm");
 

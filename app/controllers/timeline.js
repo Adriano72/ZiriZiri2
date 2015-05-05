@@ -101,7 +101,7 @@ function populateListView() {
 			var diffTime = moment().diff(attrs.referenceTime, 'days');
 
 			//attrs.catImage = ((_.isNull(attrs.category)) || (_.isNull(attrs.category.code)) ) ? '/images/android-robot.jpg' : '/images/cat_' + attrs.category.code.slice(0, 2) + ".png";
-			var categoryLayout = tools.extractCtegoryIcons(attrs.category.code.slice(0, 2));
+			var categoryLayout = tools.extractCategoryIcons(attrs.category.code.slice(0, 2));
 			attrs.catImage = categoryLayout.icona;
 			attrs.cat_color = categoryLayout.colore;
 

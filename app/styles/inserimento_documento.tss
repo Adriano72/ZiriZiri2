@@ -13,7 +13,7 @@
 	bottom: 100
 }
 
-"#titolo_evento": {
+"#titolo_documento": {
 	width: Ti.UI.FILL,
 	backgroundColor: "transparent",
 	hintText: "Inserire un titolo",
@@ -25,6 +25,20 @@
 	}
 }
 
+"#img_preview[platform=android]": {
+	
+	//borderColor: "#000000",
+	
+	top: 0,
+	left: 20,
+	right: 20,
+	//enableZoomControls: true
+	//width: Ti.UI.SIZE
+	//height: 200
+	//backgroundColor: '#C8DDE8',
+	
+}
+
 ".multi_container": {
 	//layout: "horizontal",
 	//borderRadius: 3,
@@ -33,54 +47,8 @@
 	
 }
 
-"#start_orologetto": {
-	left: 12,
-	width: 25,
-	height: 25,
-	//textAlign : 'center',
-	color: "green",	
-	font: {
-		fontFamily: 'AppIcons',
-		fontSize: 18
-	}
-}
 
-
-"#end_orologetto": {
-	left: 12,
-	width: 25,
-	height: 25,
-	//textAlign : 'center',
-	color: "red",	
-	font: {
-		fontFamily: 'AppIcons',
-		fontSize: 18
-	}
-}
-
-"#start_date": {
-	//textAlign: "center",
-	
-	//borderRadius: 3,
-	//borderWidth: 0.5,
-	//borderColor: "#6B6B6B",
-	width: "90%",
-	right: 0,
-	height: 30
-}
-
-"#end_date": {
-	//textAlign: "center",
-	
-	//borderRadius: 3,
-	//borderWidth: 0.5,
-	//borderColor: "#6B6B6B",
-	width: "90%",
-	right: 0,
-	height: 30
-}
-
-"#map_marker": {
+"#orologetto": {
 	left: 12,
 	width: 25,
 	height: 25,
@@ -92,22 +60,30 @@
 	}
 }
 
-"#location_post": {
+"#pict_date": {
+	//textAlign: "center",
+	
+	//borderRadius: 3,
+	//borderWidth: 0.5,
+	//borderColor: "#6B6B6B",
 	width: "90%",
-	right: 0
+	right: 0,
+	height: 30
 }
 
-"#map_snapshot": {
-	height: Ti.UI.SIZE
+"#pict_size": {
+	//textAlign: "center",
+	
+	//borderRadius: 3,
+	//borderWidth: 0.5,
+	//borderColor: "#6B6B6B",
+	width: "90%",
+	right: 0,
+	height: 30
 }
 
-"#bottomBar": {
-	backgroundColor: '#EDEDED',
-	width: Ti.UI.FILL,
-	touchEnabled: false,
-	height: 50,
-	bottom: 0
-}
+
+
 
 ".separator": {
 	height: 1,

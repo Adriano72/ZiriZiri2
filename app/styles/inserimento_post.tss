@@ -1,7 +1,7 @@
 ".container": {
 	backgroundColor: "#FFF",
 	//layout: "vertical",
-	orientationModes: []
+	orientationModes: [Ti.UI.PORTRAIT]
 }
 
 "#core_container": {

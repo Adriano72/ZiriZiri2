@@ -1,5 +1,7 @@
 
-".container": {}
+".container": {
+	orientationModes: [Ti.UI.PORTRAIT]
+}
 
 "#date_picker": {
 	top: 10,

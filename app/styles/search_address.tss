@@ -1,5 +1,6 @@
 ".container": {
-  	backgroundColor: '#FFF'
+  	backgroundColor: '#FFF',
+  	orientationModes: [Ti.UI.PORTRAIT]
 }
 
 "#core_container": {

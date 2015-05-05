@@ -1,0 +1,288 @@
+".container": {
+	backgroundColor: "#FFF",
+	//layout: "vertical",
+	orientationModes: [Ti.UI.PORTRAIT]
+}
+
+"#core_container": {
+	top: 0,
+	left: 20,
+	right: 20,
+	layout: "vertical",
+	width: Ti.UI.FILL,
+	height: Ti.UI.FILL
+}
+
+"#testatina_movimento": {
+	left:12,
+	top: 10
+}
+
+"#titolo_cashflow": {
+	width: Ti.UI.FILL,
+	backgroundColor: "transparent",
+	left: 0,
+	top: 10,
+	hintText: "Inserisci una descrizione",
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16,
+		fontWeight: "bold"
+	}
+}
+
+".multi_container": {
+	//layout: "horizontal",
+	//borderRadius: 3,
+	//backgroundColor: "#CFCFCF",
+	top: 0,
+	height: 35
+	
+}
+
+"#altro_container":{
+	layout: "vertical"
+}
+
+"#importo_label": {
+	left: 12
+}
+
+"#importo_wrapper": {
+	left: 130,
+	width: Ti.UI.FILL,
+	height: Ti.UI.SIZE,
+}
+
+"#simboloValuta": {
+	left: 0,
+	text: "€"
+}
+
+"#importo": {
+	width: Ti.UI.FILL,
+	height: Ti.UI.SIZE,
+	backgroundColor: "transparent",
+	hintText: "Importo",
+	left: 5
+}
+
+"#data_movimento_label": {
+	left: 12
+}
+
+"#data_movimento": {
+	width: Ti.UI.FILL,
+	left: 130,
+	color: "#444",
+}
+
+"#cashsources_label": {
+	left: 12
+}
+
+"#cashsources": {
+	width: Ti.UI.FILL,
+	left: 130,
+	color: "#444",
+}
+
+"#payment_modes_label": {
+	left: 12
+}
+
+"#payment_modes": {
+	width: Ti.UI.FILL,
+	left: 130,
+	color: "#444",
+}
+
+"#payment_taking_tool_label": {
+	left: 12
+}
+
+"#payment_taking_tool": {
+	width: Ti.UI.FILL,
+	left: 130,
+	color: "#444",
+}
+
+"#variabilita_label": {
+	left: 12
+}
+
+"#variabilita": {
+	width: Ti.UI.FILL,
+	left: 130,
+	color: "#444",
+}
+
+"#stato_label": {
+	left: 12
+}
+
+"#stato": {
+	width: Ti.UI.FILL,
+	left: 130,
+	color: "#444",
+}
+
+"#redditi_label": {
+	left: 12
+}
+
+"#redditi": {
+	width: Ti.UI.FILL,
+	left: 130,
+	color: "#444",
+}
+
+"#ordinario_label": {
+	left: 12
+}
+
+"#ordinario": {
+	width: Ti.UI.FILL,
+	left: 130,
+	color: "#444",
+}
+
+"#data_valuta_label": {
+	left: 12
+}
+
+"#data_valuta": {
+	width: Ti.UI.FILL,
+	left: 130,
+	color: "#444",
+}
+
+"#data_scadenza_label": {
+	left: 12
+}
+
+"#data_scadenza": {
+	width: Ti.UI.FILL,
+	left: 130,
+	color: "#444",
+}
+
+"#data_pag_inc_label": {
+	left: 12
+}
+
+"#data_pag_inc": {
+	width: Ti.UI.FILL,
+	left: 130,
+	color: "#444",
+}
+
+
+
+"#mov_da_container": {
+	height: 0
+}
+
+"#mov_da_subcontainer": {
+	left:0,
+	width: "50%"
+}
+
+"#mov_a_subcontainer": {
+	right:0,
+	width: "50%"
+}
+
+"#mov_da_label": {
+	left: 12
+}
+
+"#mov_da": {
+	left: 34
+}
+
+"#mov_a_label": {
+	left: 5
+}
+
+"#mov_a": {
+	left: 22
+}
+
+
+
+"#tramite_con_container": {
+	height: 0
+}
+
+"#tramite_subcontainer": {
+	left:0,
+	width: "50%"
+}
+
+"#variabilita_container": {
+	height: 0
+}
+
+"#redditi_container": {
+	height: 0
+}
+
+"#ordinario_container": {
+	height: 0
+}
+
+"#data_pag_inc_container": {
+	height: 0
+}
+
+"#con_subcontainer": {
+	right:0,
+	width: "50%"
+}
+
+"#tramite_label": {
+	left: 12
+}
+
+"#tramite": {
+	left: 65
+}
+
+"#con_label": {
+	left: 5
+}
+
+"#con": {
+	left: 35
+}
+
+
+
+
+"#switch_altro":{
+	width: Ti.UI.SIZE,
+	color: "#C7C7C7",
+	right: 0
+}
+
+"#start_orologetto": {
+	left: 12,
+	width: 25,
+	height: 25,
+	//textAlign : 'center',
+	color: "green",	
+	font: {
+		fontFamily: 'AppIcons',
+		fontSize: 18
+	}
+}
+
+".separator": {
+	height: 1,
+	top: 0,
+	touchEnabled: false,
+	backgroundColor: '#D6D6D6',
+	width: '100%'
+}
+
