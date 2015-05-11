@@ -10,6 +10,8 @@
 //
 // Alloy.Globals.someGlobalFunction = function(){};
 
+var abx = require('com.alcoapps.actionbarextras');
+
 Alloy.Globals.Map = require('ti.map');
 
 T = function (name) { return require('T/'+name); };

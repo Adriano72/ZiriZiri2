@@ -2,7 +2,7 @@ var rememberMe = false;
 
 if (OS_ANDROID) {
 	//zapImageCache();
-	var abx = require('com.alcoapps.actionbarextras');
+	//var abx = require('com.alcoapps.actionbarextras');
 }
 
 var loadTabData = require("loadTabulatedData");
@@ -13,15 +13,10 @@ $.ricordami.getView().addEventListener('change', function(e) {
 
 function doOpen(evt) {
 	//Alloy.Globals.loading.show('Sincronizzazione', false);
+
 	if (OS_ANDROID) {
-		abx.title = "ZiriZiri";
-		abx.titleFont = "SourceSansPro-Regular.ttf";
-		abx.titleColor = "#4A678C";
+		$.index.activity.actionBar.hide();
 
-		//actionBarHelper.setIcon('/drawericonw@2x.png');
-
-	} else {
-		//$.windowtitle.text = winTitle;
 	}
 
 }
@@ -49,29 +44,26 @@ if (Ti.App.Properties.getBool('authenticated', false)) {
 function _loadTimelineAlreadyLoggedIn(utente) {
 
 	Ti.API.info("**** WELCOME BACK: " + utente.username);
-	
+
 	Alloy.Globals.loading.show('Sincronizzazione', false);
 
 	loadTabData.loadTabData();
 
 	ZZ.API.Core.Posts.list(function(posts) {
 		//Ti.API.info("ZZ.API.Core.Posts.list success [response : " + JSON.stringify(posts) + "]");
-			
-			loadTimeline(posts);
-			//Ti.API.info("TIMELINE : " + JSON.stringify(Alloy.Collections.Timeline));
+
+		loadTimeline(posts);
+		//Ti.API.info("TIMELINE : " + JSON.stringify(Alloy.Collections.Timeline));
 
 	}, function(error) {
 		Ti.API.error("ZZ.API.Core.Posts.list error [error : " + error + "]");
 		Alloy.Globals.loading.hide();
 	});
-	
-	
 
 }
 
-
 var _coreSessionLogInCallback = function(user) {
-	
+
 	Alloy.Globals.loading.show('Sincronizzazione', false);
 
 	Ti.API.info("ZZ.API.Core.Session.logIn success [user : " + JSON.stringify(user) + "]");
@@ -88,32 +80,29 @@ var _coreSessionLogInCallback = function(user) {
 
 	ZZ.API.Core.Posts.list(function(posts) {
 		//Ti.API.info("ZZ.API.Core.Posts.list success [response : " + JSON.stringify(posts) + "]");
-			
-			loadTimeline(posts);
-			//Ti.API.info("TIMELINE : " + JSON.stringify(Alloy.Collections.Timeline));
+
+		loadTimeline(posts);
+		//Ti.API.info("TIMELINE : " + JSON.stringify(Alloy.Collections.Timeline));
 
 	}, function(error) {
 		Ti.API.error("ZZ.API.Core.Posts.list error [error : " + error + "]");
 		Alloy.Globals.loading.hide();
 	});
 
-	
 	//Alloy.Globals.navMenu.openWindow(timeline_win);
 
 };
 
-function loadTimeline(p_posts){
-	
-	
-	
+function loadTimeline(p_posts) {
+
 	//Ti.API.info("POSTS ***** : " + JSON.stringify(p_posts));
 	Alloy.Collections.Timeline.reset(p_posts);
 	Alloy.Collections.Timeline.on("sync", showTimeline());
-	
+
 }
 
-function showTimeline(){
-	
+function showTimeline() {
+
 	Ti.API.info("TIMELINE LENGTH : " + Alloy.Collections.Timeline.length);
 	var timeline_win = Alloy.createController("timeline").getView().open();
 }
