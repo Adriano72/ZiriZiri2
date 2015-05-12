@@ -4,7 +4,7 @@
     <name>ZiriZiri2</name>
     <version>1.0</version>
     <publisher>adrianomassi</publisher>
-    <url>http://</url>
+    <url>http://ziriziri.com</url>
     <description>ZiriZiri Mobile</description>
     <copyright>2015 by adrianomassi</copyright>
     <icon>appicon.png</icon>
@@ -43,7 +43,7 @@
         <manifest android:installLocation="preferExternal"
             android:versionCode="13" android:versionName="2.1.7" package="it.ziriziri.mobile">
             <!--<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="18"/>-->
-            <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="19"/>
+            <!--<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="19"/>-->
             <supports-screens android:anyDensity="true"/>
             <!-- Allows the API to download data from Google Map servers -->
             <uses-permission android:name="android.permission.INTERNET"/>
@@ -77,15 +77,15 @@
         <theme>default</theme>
     </mobileweb>
     <modules>
-    <module platform="android">com.alcoapps.actionbarextras</module>
-    <module platform="iphone">ti.imagefactory</module>
-    <module platform="android">ti.imagefactory</module>
-    <module platform="iphone">ti.map</module>
-    <module platform="android">ti.map</module>
-    <module platform="android" version="1.0.0">ti.zz.api</module>
-    <module platform="iphone" version="1.0.0">ti.zz.api</module>
-    <module platform="android" version="0.4.1">com.rkam.swiperefreshlayout</module>
-  <module platform="iphone" version="0.2.1">yy.tidynamicfont</module>
+        <module platform="android">com.alcoapps.actionbarextras</module>
+        <module platform="iphone">ti.imagefactory</module>
+        <module platform="android">ti.imagefactory</module>
+        <module platform="iphone">ti.map</module>
+        <module platform="android">ti.map</module>
+        <module platform="android" version="1.0.0">ti.zz.api</module>
+        <module platform="iphone" version="1.0.0">ti.zz.api</module>
+        <module platform="android" version="0.4.1">com.rkam.swiperefreshlayout</module>
+    <module platform="iphone" version="0.2.1">yy.tidynamicfont</module>
 <module platform="iphone" version="0.5">net.iamyellow.tiws</module>
 <module platform="android" version="0.1">net.iamyellow.tiws</module>
 <module platform="iphone" version="0.2.0">yy.logcatcher</module>
@@ -104,7 +104,7 @@
         <target device="iphone">true</target>
         <target device="mobileweb">false</target>
     </deployment-targets>
-    <sdk-version>3.5.0.GA</sdk-version>
+    <sdk-version>4.0.0.RC3</sdk-version>
     <plugins>
         
     </plugins>
