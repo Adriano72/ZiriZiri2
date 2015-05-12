@@ -6,9 +6,6 @@
 		<RightNavButton platform="ios">
 			<ImageView class="rightNavImg"/>
 		</RightNavButton>
-		<Menu id="menu" platform="android">
-			<MenuItem id="mn_settings" title="Impostazioni"/>
-		</Menu>
 		<ScrollableView id="scrollableTimeline" showPagingControl="true" onScrollend="scrollendEvent"/>
 		<View id="toolbarContainer">
 			<View id="aspect_icon_toolbar">

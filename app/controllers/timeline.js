@@ -1,7 +1,5 @@
 var args = arguments[0] || {};
 
-//
-
 var tools = require('utility');
 moment.lang('it', Alloy.Globals.Moment_IT);
 moment.lang('it');
@@ -14,6 +12,8 @@ function doOpen() {
 	//Alloy.Globals.loading.show('Sincronizzazione', false);
 
 	Alloy.Globals.navMenu = $.navWin;
+	
+	
 
 	if (OS_ANDROID) {
 
@@ -22,6 +22,10 @@ function doOpen() {
 		var nuovo_post = null;
 
 		activity.onCreateOptionsMenu = function(e) {
+			
+			abx.setBackgroundColor("white");
+			activity.actionBar.displayHomeAsUp = true;
+			abx.setHomeAsUpIcon("/images/logo.png");
 
 			nuovo_post = e.menu.add({
 				//itemId : "PHOTO",
@@ -38,7 +42,6 @@ function doOpen() {
 						$.ptr.refresh();
 					}, 1000);
 
-					
 				}).getView();
 
 				Alloy.Globals.navMenu.openWindow(nuovo_post_win);
@@ -101,7 +104,16 @@ function populateListView() {
 			var diffTime = moment().diff(attrs.referenceTime, 'days');
 
 			//attrs.catImage = ((_.isNull(attrs.category)) || (_.isNull(attrs.category.code)) ) ? '/images/android-robot.jpg' : '/images/cat_' + attrs.category.code.slice(0, 2) + ".png";
-			var categoryLayout = tools.extractCategoryIcons(attrs.category.code.slice(0, 2));
+			var categoryLayout;
+			
+			if((_.isNull(attrs.category)) || (_.isNull(attrs.category.code)) ){
+				categoryLayout = tools.extractCategoryIcons(null);
+			}else{
+				categoryLayout = tools.extractCategoryIcons(attrs.category.code.slice(0, 2));
+			};
+			
+			
+			
 			attrs.catImage = categoryLayout.icona;
 			attrs.cat_color = categoryLayout.colore;
 

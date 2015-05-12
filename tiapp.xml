@@ -4,7 +4,7 @@
     <name>ZiriZiri2</name>
     <version>1.0</version>
     <publisher>adrianomassi</publisher>
-    <url>http://</url>
+    <url>http://ziriziri.com</url>
     <description>ZiriZiri Mobile</description>
     <copyright>2015 by adrianomassi</copyright>
     <icon>appicon.png</icon>
@@ -43,7 +43,6 @@
         <manifest android:installLocation="preferExternal"
             android:versionCode="13" android:versionName="2.1.7" package="it.ziriziri.mobile">
             <!--<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="18"/>-->
-            
             <supports-screens android:anyDensity="true"/>
             <!-- Allows the API to download data from Google Map servers -->
             <uses-permission android:name="android.permission.INTERNET"/>
@@ -93,7 +92,9 @@
         <target device="iphone">true</target>
         <target device="mobileweb">false</target>
     </deployment-targets>
-    <sdk-version>4.0.0.RC2</sdk-version>
+
+    <sdk-version>4.0.0.RC3</sdk-version>
+
     <plugins>
         <plugin version="1.0">ti.alloy</plugin>
     </plugins>

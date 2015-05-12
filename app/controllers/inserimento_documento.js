@@ -66,7 +66,7 @@ function updateDocumentTemplate() {
 	//jsonDocumentTemplate.data.size = args.p_image.file.size;
 	Alloy.Globals.loading.hide();
 	$.insermiento_documento.close();
-	args._callback(jsonDocumentTemplate);
+	args._callback(JSON.stringify(jsonDocumentTemplate));
 
 }
 

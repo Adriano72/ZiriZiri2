@@ -26,6 +26,7 @@ function doOpen() {
 	$.scrollableAspects.views = [blankView];
 
 	//setTimeout(function() {
+
 	scrollendEvent(0);
 	//}, 500);
 
@@ -419,7 +420,7 @@ function scrollendEventAspects(e) {
 	var indice = e.currentPage || 0;
 
 	if (sortedArray.length > 0) {
-		
+
 		onAspectChange(sortedArray[indice].kind.code || 0);
 
 		Ti.API.info("@@@@@ ASPETTO SELEZIONATO @@@@@@: " + JSON.stringify(sortedArray[indice]));
@@ -437,8 +438,8 @@ function scrollendEventAspects(e) {
 		//dispatcher.trigger('aspectChanged', sortedArray[indice].kind.code);
 
 		Ti.API.info("CURRENT  ASPECT INDEX @@@@@@@@@@@: " + sortedArray[indice].kind.code);
-		
-	} else{
+
+	} else {
 		$.scrollableAspects.setCurrentPage(0);
 		$.aspectNumIndicator.text = "0/0";
 		$.scrollableAspects.views = [blankView];

@@ -1,5 +1,5 @@
 exports.openCamera = function(_callback) {
-	
+
 	var ImageFactory = require('ti.imagefactory');
 
 	try {
@@ -9,33 +9,28 @@ exports.openCamera = function(_callback) {
 
 				var cropRect = event.cropRect;
 				var image = event.media;
-				
-				
-				
+
 				var newBlob = ImageFactory.compress(image, 0.20);
 				//Alloy.Globals.blobImage = newBlob;
 				_callback(newBlob);
 				/*
-				// called when media returned from the camera
-				Ti.API.info('Our type was: ' + event.mediaType);
+				 // called when media returned from the camera
+				 Ti.API.info('Our type was: ' + event.mediaType);
 
-				$.preview.image = newBlob;
-				var hashedImage = "data:image/jpeg;base64," + Ti.Utils.base64encode(newBlob).toString();
-				var tempFile = Ti.Filesystem.createTempFile();
-				tempFile.write(newBlob);
+				 $.preview.image = newBlob;
+				 var hashedImage = "data:image/jpeg;base64," + Ti.Utils.base64encode(newBlob).toString();
+				 var tempFile = Ti.Filesystem.createTempFile();
+				 tempFile.write(newBlob);
 
-				//Ti.API.info("HASHED IMAGE : " + hashedImage);
-				Ti.API.info("HASHED IMAGE MIME TYPE: " + image.getMimeType());
-				Ti.API.info("IMAGE FILE SIZE: " + tempFile.size);
-				Ti.API.info("IMAGE FILE NAME: " + tempFile.name);
+				 //Ti.API.info("HASHED IMAGE : " + hashedImage);
+				 Ti.API.info("HASHED IMAGE MIME TYPE: " + image.getMimeType());
+				 Ti.API.info("IMAGE FILE SIZE: " + tempFile.size);
+				 Ti.API.info("IMAGE FILE NAME: " + tempFile.name);
 
-				
-				imageContent.base64 = hashedImage;
-				fileSize = tempFile.size;
-				fileName = tempFile.name;
-				*/
-				
-			
+				 imageContent.base64 = hashedImage;
+				 fileSize = tempFile.size;
+				 fileName = tempFile.name;
+				 */
 
 			},
 			cancel : function() {
@@ -66,7 +61,7 @@ exports.openCamera = function(_callback) {
 };
 
 exports.openGallery = function(_callback) {
-	
+
 	var ImageFactory = require('ti.imagefactory');
 
 	Titanium.Media.openPhotoGallery({
@@ -80,13 +75,13 @@ exports.openGallery = function(_callback) {
 			Ti.API.info('Our type was: ' + event.mediaType);
 			//$.preview.setWidth(cropRect.width);
 			//$.preview.setHeight(cropRect.height);
-			
+
 			_callback(image);
-		
+
 			//var hashedImage = Ti.Utils.base64encode(image).toString();
 			//Ti.API.info("HASHED IMAGE: " + image.getFile());
 			Ti.API.info("IMAGE MIME TYPE: " + image.getMimeType());
-			
+
 			var tempFile = Ti.Filesystem.createTempFile();
 			tempFile.write(image);
 
@@ -94,7 +89,6 @@ exports.openGallery = function(_callback) {
 			Ti.API.info("IMAGE  FILE SIZE: " + tempFile.size);
 			Ti.API.info("IMAGE FILE NAME: " + tempFile.name);
 			//Ti.API.info("HASHED IMAGE : " + hashedImage);
-
 
 			fileSize = tempFile.size;
 			fileName = tempFile.name;
@@ -114,11 +108,16 @@ exports.openGallery = function(_callback) {
 	});
 };
 
-
-
-exports.extractCategoryIcons = function (code) {
+exports.extractCategoryIcons = function(code) {
 
 	switch(code) {
+
+	case null:
+		return ( {
+			icona : icons.question,
+			colore : "#E6E6E6"
+		});
+		break;
 
 	case "01":
 		return ( {
@@ -220,5 +219,4 @@ exports.extractCategoryIcons = function (code) {
 	}
 
 };
-
 

@@ -148,7 +148,7 @@ function updateCashflowTemplate() {
 	
 	//Ti.API.info("CASHFLOW DA AGGIUNGERE: "+JSON.stringify(jsonCashflowTemplate));
 	$.insermiento_cashflow.close();
-	args._callback(jsonCashflowTemplate);
+	args._callback(JSON.stringify(jsonCashflowTemplate));
 
 }
 

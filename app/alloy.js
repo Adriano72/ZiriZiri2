@@ -10,9 +10,16 @@
 //
 // Alloy.Globals.someGlobalFunction = function(){};
 
+if (OS_ANDROID) {
+
+	var abx = require('com.alcoapps.actionbarextras');
+}
+
 Alloy.Globals.Map = require('ti.map');
 
-T = function (name) { return require('T/'+name); };
+T = function(name) {
+	return require('T/' + name);
+};
 T('trimethyl');
 
 var Util = T('util');
@@ -50,7 +57,6 @@ Alloy.Collections.PaymentModes = new Backbone.Collection;
 Alloy.Collections.PaymentTakingTools = new Backbone.Collection;
 Alloy.Collections.CashflowStatuses = new Backbone.Collection;
 Alloy.Collections.CashflowVariabilities = new Backbone.Collection;
-
 
 Alloy.Models.Template = new Backbone.Model;
 Alloy.Models.Post_template = new Backbone.Model;
@@ -108,4 +114,4 @@ Alloy.Globals.Moment_IT = {
 
 var moment = require('alloy/moment');
 moment.lang('it', Alloy.Globals.Moment_IT);
-moment.lang('it');
+moment.lang('it'); 
