@@ -480,7 +480,7 @@ function addDocument(p_image) {
 		p_categoria : selectedCategory,
 		_callback : function(p_doc) {
 			
-			Ti.API.info("ASPETTO DOCUMENTO: "+JSON.stringify(p_doc));
+			Ti.API.info("ASPETTO  DOCUMENTO: "+JSON.stringify(p_doc));
 			var _allegaDocumento = function(addedAspect) {
 
 				Ti.API.info("ZZ.API.Core.Post.Aspects.add success [response : " + JSON.stringify(addedAspect) + "]");
