@@ -27,6 +27,11 @@ function doOpen() {
 	if (OS_ANDROID) {
 
 		var activity = $.insermiento_post.activity;
+		
+		abx.setBackgroundColor("white");
+		activity.actionBar.displayHomeAsUp = true;
+		abx.setHomeAsUpIcon("/images/logo.png");
+		
 		var settings = null;
 		var nuovo_post = null;
 

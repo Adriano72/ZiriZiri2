@@ -20,6 +20,14 @@ var blankView = Ti.UI.createView({
 });
 
 function doOpen() {
+
+	if (OS_ANDROID) {
+		
+		var activity = $.dettaglio_post_win.activity;
+		abx.setBackgroundColor("white");
+		activity.actionBar.displayHomeAsUp = true;
+		abx.setHomeAsUpIcon("/images/logo.png");
+	}
 	//updateCollection();
 	var postIndex = args.postIndex;
 	$.scrollableTimeline.setCurrentPage(postIndex);
@@ -423,7 +431,7 @@ function scrollendEventAspects(e) {
 
 		onAspectChange(sortedArray[indice].kind.code || 0);
 
-		Ti.API.info("@@@@@ ASPETTO SELEZIONATO @@@@@@: " + JSON.stringify(sortedArray[indice]));
+		//Ti.API.info("@@@@@ ASPETTO SELEZIONATO @@@@@@: " + JSON.stringify(sortedArray[indice]));
 
 		var aspecTypeArray = _.filter(sortedArray, function(value) {
 			return value.kind.code == sortedArray[indice].kind.code;

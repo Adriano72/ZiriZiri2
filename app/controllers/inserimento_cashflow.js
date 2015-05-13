@@ -31,6 +31,42 @@ var dataPagInc = +moment(args.p_reference_time);
 var jsonCashflowTemplate = Alloy.Models.Cashflow_template.toJSON();
 
 function doOpen() {
+	
+	if (OS_ANDROID) {
+
+		var activity = $.insermiento_cashflow.activity;
+		
+		abx.setBackgroundColor("white");
+		activity.actionBar.displayHomeAsUp = true;
+		abx.setHomeAsUpIcon("/images/logo.png");
+		
+		var settings = null;
+		var nuovo_post = null;
+		/*
+		 $.start_orologetto.text = icons.calendar_empty;
+		 $.end_orologetto.text = icons.calendar_empty;
+		 $.map_marker.text = icons.map_marker;
+		 */
+		activity.onCreateOptionsMenu = function(e) {
+
+			salva_cashflow = e.menu.add({
+				//itemId : "PHOTO",
+				title : "Salva Evento",
+				showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS,
+				icon : Ti.Android.R.drawable.ic_menu_save
+			});
+
+			salva_cashflow.addEventListener("click", function(e) {
+				Alloy.Globals.loading.show("Saving...");
+
+				updateCashflowTemplate();
+			});
+
+		};
+
+		activity.invalidateOptionsMenu();
+
+	}
 
 	$.altro_container.visible = false;
 
@@ -84,37 +120,6 @@ function doOpen() {
 
 	//$.start_date.text = "Inizia: " + moment().format("LL") + " alle ore " + moment().format("HH:mm");
 	//$.end_date.text = "Finisce...";
-
-	if (OS_ANDROID) {
-
-		var activity = $.insermiento_cashflow.activity;
-		var settings = null;
-		var nuovo_post = null;
-		/*
-		 $.start_orologetto.text = icons.calendar_empty;
-		 $.end_orologetto.text = icons.calendar_empty;
-		 $.map_marker.text = icons.map_marker;
-		 */
-		activity.onCreateOptionsMenu = function(e) {
-
-			salva_cashflow = e.menu.add({
-				//itemId : "PHOTO",
-				title : "Salva Evento",
-				showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS,
-				icon : Ti.Android.R.drawable.ic_menu_save
-			});
-
-			salva_cashflow.addEventListener("click", function(e) {
-				Alloy.Globals.loading.show("Saving...");
-
-				updateCashflowTemplate();
-			});
-
-		};
-
-		activity.invalidateOptionsMenu();
-
-	}
 
 };
 
