@@ -3,11 +3,10 @@
 		<View class="container">
 			<View class="multi_container">
 				<ImageView id="preview"/>
-				<Label id="location" class="small_text"/>
+				<Label id="titolo_doc" class="small_text"/>
 			</View>
-			
-			<Label id="start_date" class="small_text"/>
-			<Label id="end_date" class="small_text"/>
+			<Label id="document_date" class="small_text"/>
+
 		</View>
 	</TableViewRow>
 </Alloy>

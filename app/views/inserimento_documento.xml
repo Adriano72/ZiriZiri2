@@ -8,10 +8,7 @@
 				<Label id="orologetto"/>
 				<Label id="pict_date" class="small_text"/>
 			</View>
-			<View class="multi_container">
-				<Label id="immaginina"/>
-				<Label id="pict_size" class="small_text"/>
-			</View>
+			
 			<!--<ImageView id="map_snapshot"/>-->
 
 		</ScrollView>

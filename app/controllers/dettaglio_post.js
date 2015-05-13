@@ -24,9 +24,11 @@ function doOpen() {
 	if (OS_ANDROID) {
 		
 		var activity = $.dettaglio_post_win.activity;
+		/*
 		abx.setBackgroundColor("white");
 		activity.actionBar.displayHomeAsUp = true;
 		abx.setHomeAsUpIcon("/images/logo.png");
+		*/
 	}
 	//updateCollection();
 	var postIndex = args.postIndex;

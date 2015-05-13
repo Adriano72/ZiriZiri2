@@ -1,19 +1,27 @@
 var args = arguments[0] || {};
 
-//Ti.API.info("EVENT DATA *******: "+JSON.stringify(args));
+//Ti.API.info("DOCUMENT DATA *******: "+JSON.stringify(args));
 
-var evento = args.p_aspetto;
+var documento = args.p_aspetto;
 
-$.iconcina.text = icons.paper_clip;
-$.location.text = evento.location?evento.location.name:"";
-$.start_date.text = "Inizia " + moment(evento.data.startTime.time).format("LL") + " alle ore " + moment(evento.data.startTime.time).format("HH:mm");
+ZZ.API.Files.Attachment.get(documento, function(response) {
+	Ti.API.info("ZZ.API.Files.Attachment.get success");
+	$.preview.image = response;
 
-if(!_.isNull(evento.data.endTime)){
-	
-	$.end_date.text = "Finisce " + moment(evento.data.endTime.time).format("LL") + " alle ore " + moment(evento.data.endTime.time).format("HH:mm");
-	
-}else{
-	$.end_date.height = 0;
+}, function(error) {
+	Ti.API.error("ZZ.API.Files.Attachment.get error [error : " + error + "]");
+});
+
+//$.iconcina.text = icons.paper_clip;
+$.titolo_doc.text = documento.data.title;
+//$.document_date.text = moment(evento.data.startTime.time).format("LL") + " alle ore " + moment(evento.data.startTime.time).format("HH:mm");
+
+if (!_.isNull(documento.data.creationTime)) {
+
+	$.document_date.text = moment(documento.data.creationTime).format("LL") + " alle ore " + moment(documento.data.creationTime).format("HH:mm");
+
+} else {
+	$.document_date.height = 0;
 }
 
 

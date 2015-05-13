@@ -23,9 +23,11 @@ function doOpen() {
 
 		activity.onCreateOptionsMenu = function(e) {
 			
+			/*
 			abx.setBackgroundColor("white");
 			activity.actionBar.displayHomeAsUp = true;
 			abx.setHomeAsUpIcon("/images/logo.png");
+			*/
 
 			nuovo_post = e.menu.add({
 				//itemId : "PHOTO",

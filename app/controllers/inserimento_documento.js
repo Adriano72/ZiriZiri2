@@ -17,16 +17,17 @@ function doOpen() {
 	if (OS_ANDROID) {
 
 		var activity = $.insermiento_documento.activity;
-		
+		/*
 		abx.setBackgroundColor("white");
 		activity.actionBar.displayHomeAsUp = true;
 		abx.setHomeAsUpIcon("/images/logo.png");
+		*/
 		
 		var settings = null;
 		var nuovo_post = null;
 
 		$.orologetto.text = icons.alarm_clock;
-		$.immaginina.text = icons.picture;
+		//$.immaginina.text = icons.picture;
 
 		activity.onCreateOptionsMenu = function(e) {
 

@@ -35,10 +35,11 @@ function doOpen() {
 	if (OS_ANDROID) {
 
 		var activity = $.insermiento_cashflow.activity;
-		
+		/*
 		abx.setBackgroundColor("white");
 		activity.actionBar.displayHomeAsUp = true;
 		abx.setHomeAsUpIcon("/images/logo.png");
+		*/
 		
 		var settings = null;
 		var nuovo_post = null;

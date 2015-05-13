@@ -42,7 +42,7 @@
     <android xmlns:android="http://schemas.android.com/apk/res/android">
         <manifest android:installLocation="preferExternal"
             android:versionCode="13" android:versionName="2.1.7" package="it.ziriziri.mobile">
-            <!--<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="18"/>-->
+            <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="18"/>
             <supports-screens android:anyDensity="true"/>
             <!-- Allows the API to download data from Google Map servers -->
             <uses-permission android:name="android.permission.INTERNET"/>
@@ -84,18 +84,18 @@
         <module platform="android" version="1.0.0">ti.zz.api</module>
         <module platform="iphone" version="1.0.0">ti.zz.api</module>
         <module platform="android" version="0.4.1">com.rkam.swiperefreshlayout</module>
-    <module platform="iphone" version="0.2.1">yy.tidynamicfont</module>
-<module platform="iphone" version="0.5">net.iamyellow.tiws</module>
-<module platform="android" version="0.1">net.iamyellow.tiws</module>
-<module platform="iphone" version="0.2.0">yy.logcatcher</module>
-<module platform="android" version="0.1">yy.logcatcher</module>
-<module platform="iphone" version="1.1.1">ti.compression</module>
-<module platform="android" version="2.0.3">ti.compression</module>
-<module platform="android">bencoding.android.tools</module>
-</modules>
-  <property name="tishadow:version" type="string">2.8.0</property>
-<property name="ti.android.bug2373.finishfalseroot" type="bool">true</property>
-<property name="ti.android.bug2373.skipAlert" type="bool">true</property>
+        <module platform="iphone" version="0.2.2">yy.tidynamicfont</module>
+        <module platform="iphone" version="0.5">net.iamyellow.tiws</module>
+        <module platform="android" version="0.1.2">net.iamyellow.tiws</module>
+        <module platform="iphone" version="0.2.0">yy.logcatcher</module>
+        <module platform="android" version="0.1">yy.logcatcher</module>
+        <module platform="iphone" version="1.1.1">ti.compression</module>
+        <module platform="android" version="2.0.3">ti.compression</module>
+        <module platform="android">bencoding.android.tools</module>
+    </modules>
+    <property name="tishadow:version" type="string">2.8.1</property>
+    <property name="ti.android.bug2373.finishfalseroot" type="bool">true</property>
+    <property name="ti.android.bug2373.skipAlert" type="bool">true</property>
     <deployment-targets>
         <target device="android">true</target>
         <target device="blackberry">false</target>
@@ -103,10 +103,6 @@
         <target device="iphone">true</target>
         <target device="mobileweb">false</target>
     </deployment-targets>
-
-    <sdk-version>4.0.0.RC3</sdk-version>
-
-    <plugins>
-        
-    </plugins>
+    <sdk-version>3.5.0.GA</sdk-version>
+    <plugins/>
 </ti:app>

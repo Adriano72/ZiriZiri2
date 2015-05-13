@@ -27,10 +27,11 @@ function doOpen() {
 	if (OS_ANDROID) {
 
 		var activity = $.insermiento_post.activity;
-		
+		/*
 		abx.setBackgroundColor("white");
 		activity.actionBar.displayHomeAsUp = true;
 		abx.setHomeAsUpIcon("/images/logo.png");
+		*/
 		
 		var settings = null;
 		var nuovo_post = null;
@@ -326,7 +327,7 @@ function renderAspectsTable() {
 
 		case "FILEDOCUMENTDATATYPE_CODE":
 
-			var aspetto = Alloy.createController('dettaglio_document', {
+			var aspetto = Alloy.createController('row_brief_documento', {
 				_callback : function() {
 					Ti.API.info("Ciao");
 				},
@@ -386,7 +387,18 @@ function addEvent() {
 			p_reference_time : postDate,
 			p_categoria : selectedCategory,
 			_callback : function(p_evnt) {
-				f_addAspect(p_evnt);
+				
+				var tempOBJ = JSON.parse(p_evnt);
+				
+				ZZ.API.Core.Post.Aspects.add(tempOBJ, null, function(aspetto) {
+					
+					arrayAspetti.push(tempOBJ);
+					//Ti.API.info("ARRAY  ASPETTI 2: " + JSON.stringify(arrayAspetti));
+					sortAllAspects();
+				}, function(error) {
+					Ti.API.error("ZZ.API.Core.Post.Aspects.add success [error : " + error + "]");
+
+				});
 			}
 		}).getView();
 
@@ -481,14 +493,16 @@ function addDocument(p_image) {
 			var _allegaDocumento = function(addedAspect) {
 
 				ZZ.API.Files.Attachment.set(addedAspect, p_image, function(response) {
-					Ti.API.info("ZZ.API.Files.Attachment.set success [response : " + response + "]");
+					Ti.API.info("ZZ.API.Files.Attachment.set success");
+					arrayAspetti.push(addedAspect);
+					sortAllAspects();
 				}, function(error) {
 					Ti.API.error("ZZ.API.Files.Attachment.set error [error : " + error + "]");
 				});
 			};
 
 			ZZ.API.Core.Post.Aspects.add(tempOBJ, null, _allegaDocumento, function(error) {
-
+				
 				Ti.API.error("ZZ.API.Core.Post.Aspects.add error [error : " + error + "]");
 			});
 
