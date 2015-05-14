@@ -63,8 +63,8 @@ function updateLinkTemplate() {
 	jsonLinkTemplate.data.title = $.titolo_link.value;
 	jsonLinkTemplate.data.description = $.titolo_link.value;
 
-	jsonLinkTemplate.data.content.local = $.link_date.value;
-	jsonLinkTemplate.data.content.remote = $.link_date.value;
+	//jsonLinkTemplate.data.content.local = $.link_date.value;
+	jsonLinkTemplate.data.content.remote = $.link_url.value;
 
 	Alloy.Globals.loading.hide();
 	//Alloy.Collections.Timeline.unshift(response);
@@ -75,7 +75,7 @@ function updateLinkTemplate() {
 }
 
 function prependhttp(e){
-	e.source.value = "http://"+e.source.value;
+	e.source.value = "http://"+e.source.value;	
 }
 
 function openDateTimeSelector() {

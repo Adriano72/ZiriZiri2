@@ -10,10 +10,10 @@ attrs.img_preview = testExistence(attrs.data.preview)?attrs.data.preview.remote:
 
 attrs.aspect_icon = icons.link;
 attrs.titolo = attrs.data.title;
-attrs.link_url = attrs.data.content.local;
+attrs.link_url = attrs.data.content.remote;
 
 goUrl = function() {
-	Ti.Platform.openURL(attrs.data.content.local);
+	Ti.Platform.openURL(attrs.data.content.remote);
 };
 attrs.data_link = "Data " + moment(attrs.data.creationTime).format("LL") + " alle ore " + moment(attrs.data.creationTime).format("HH:mm");
 
