@@ -1,0 +1,10 @@
+<Alloy>
+	<TableViewRow id="row">
+		<View class="container">
+			<View class="multi_container">
+				<Label id="iconcina"/>
+				<Label id="link_url" class="small_text"/>
+			</View>
+		</View>
+	</TableViewRow>
+</Alloy>

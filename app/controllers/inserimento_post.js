@@ -353,7 +353,7 @@ function renderAspectsTable() {
 
 		case "FILELINKDATATYPE_CODE":
 
-			var aspetto = Alloy.createController('dettaglio_link', {
+			var aspetto = Alloy.createController('row_brief_link', {
 				_callback : function() {
 					Ti.API.info("Ciao");
 				},
