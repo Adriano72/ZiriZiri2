@@ -28,11 +28,11 @@ function doOpen() {
 
 		var activity = $.insermiento_post.activity;
 		/*
-		abx.setBackgroundColor("white");
-		activity.actionBar.displayHomeAsUp = true;
-		abx.setHomeAsUpIcon("/images/logo.png");
-		*/
-		
+		 abx.setBackgroundColor("white");
+		 activity.actionBar.displayHomeAsUp = true;
+		 abx.setHomeAsUpIcon("/images/logo.png");
+		 */
+
 		var settings = null;
 		var nuovo_post = null;
 
@@ -73,9 +73,9 @@ function doOpen() {
 function updatePostTemplate() {
 
 	//jsonPostTemplate.id = null;
-	Ti.API.info("TESTO POST VALUE: "+$.testo_post.value);
-	jsonPostTemplate.name = ($.testo_post.value == "")?"Post inserito il "+moment().format("LL") + " alle ore " + moment().format("HH:mm"):$.testo_post.value;
-	if(!_.isNull(selectedCategory)){
+	Ti.API.info("TESTO POST VALUE: " + $.testo_post.value);
+	jsonPostTemplate.name = ($.testo_post.value == "") ? "Post inserito il " + moment().format("LL") + " alle ore " + moment().format("HH:mm") : $.testo_post.value;
+	if (!_.isNull(selectedCategory)) {
 		jsonPostTemplate.category = selectedCategory;
 	}
 	jsonPostTemplate.description = $.testo_post.value;
@@ -92,7 +92,7 @@ function updatePostTemplate() {
 
 	if (!flagAddPostDone) {
 
-		Ti.API.info("****** FALSE  ******");
+		Ti.API.info("****** FALSE ******");
 
 		ZZ.API.Core.Posts.add(jsonPostTemplate, _corePostsAddCallback, function(error) {
 
@@ -387,11 +387,11 @@ function addEvent() {
 			p_reference_time : postDate,
 			p_categoria : selectedCategory,
 			_callback : function(p_evnt) {
-				
+
 				var tempOBJ = JSON.parse(p_evnt);
-				
+
 				ZZ.API.Core.Post.Aspects.add(tempOBJ, null, function(aspetto) {
-					
+
 					arrayAspetti.push(tempOBJ);
 					//Ti.API.info("ARRAY  ASPETTI 2: " + JSON.stringify(arrayAspetti));
 					sortAllAspects();
@@ -456,11 +456,11 @@ function addCashflow(e) {
 			p_reference_time : postDate,
 			p_categoria : selectedCategory,
 			_callback : function(p_cash) {
-				
+
 				var tempOBJ = JSON.parse(p_cash);
-				
+
 				ZZ.API.Core.Post.Aspects.add(tempOBJ, null, function(aspetto) {
-					
+
 					arrayAspetti.push(tempOBJ);
 					//Ti.API.info("ARRAY  ASPETTI 2: " + JSON.stringify(arrayAspetti));
 					sortAllAspects();
@@ -502,7 +502,7 @@ function addDocument(p_image) {
 			};
 
 			ZZ.API.Core.Post.Aspects.add(tempOBJ, null, _allegaDocumento, function(error) {
-				
+
 				Ti.API.error("ZZ.API.Core.Post.Aspects.add error [error : " + error + "]");
 			});
 
@@ -514,6 +514,28 @@ function addDocument(p_image) {
 
 function addNote() {
 
+	updatePostTemplate();
+
+	var inserisciNota = Alloy.createController("inserimento_note", {
+		p_titolo : $.testo_post.value,
+		p_location : selectedLocation,
+		p_reference_time : postDate,
+		p_categoria : selectedCategory,
+		_callback : function(p_nota) {
+
+			var tempOBJ = JSON.parse(p_nota);
+
+			ZZ.API.Core.Post.Aspects.add(tempOBJ, null, function(aspetto){
+				
+			}, function(error) {
+
+				Ti.API.error("ZZ.API.Core.Post.Aspects.add error [error : " + error + "]");
+			});
+
+		}
+	}).getView();
+
+	Alloy.Globals.navMenu.openWindow(inserisciNota);
 }
 
 function addLink() {

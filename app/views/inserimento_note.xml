@@ -1,0 +1,11 @@
+<Alloy>
+	<Window id="insermiento_nota" class="container" title="Inserisci Nota" onOpen="doOpen">
+		<View id="core_container">
+			<TextField id="titolo_nota"/>
+			<View class="note_frame">
+				<TextArea id="note_body"/>	
+			</View>
+			<Label id="note_date" class="small_text" onClick="openDateTimeSelector"/>
+		</View>	
+	</Window>
+</Alloy>

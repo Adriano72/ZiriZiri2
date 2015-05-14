@@ -8,7 +8,7 @@ exports.loadTabData = function() {
 
 		ZZ.API.Core.Post.Templates.list(function(templates) {
 
-			//Ti.API.info("ZZ.API.Core.Post.Templates.list success [response : " + JSON.stringify(templates) + "]");
+			Ti.API.info("ZZ.API.Core.Post.Templates.list success [response : " + JSON.stringify(templates) + "]");
 
 			var template = templates[0];
 
@@ -66,6 +66,23 @@ exports.loadTabData = function() {
 			Alloy.Models.Document_template.unset("id");
 
 			//Ti.API.info("DOCUMENT  TEMPLATE: " + JSON.stringify(Alloy.Models.Document_template));
+			
+			
+			// ***** EXTRACT NOTE TEMPLATE *****************
+
+			var templateNote = _.filter(templateJson.modules, function(value) {
+				
+				return value.kind.code == "NOTEDATATYPE_CODE";
+
+			});
+
+			Alloy.Models.Note_template.set(templateNote[0]);		
+
+			Alloy.Models.Note_template.unset("id");
+			
+			//Ti.API.info("_____|||||||||||||||| CIAOOOOOo!");
+			
+			//Ti.API.info("_____|||||| | TEMPLATE NOTE: "+JSON.stringify(templateNote[0]));
 			
 			// ***** EXTRACT LINK TEMPLATE *****************
 
