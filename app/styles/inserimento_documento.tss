@@ -33,7 +33,7 @@
 	left: 20,
 	right: 20,
 	//enableZoomControls: true
-	//width: Ti.UI.SIZE
+	width: Ti.UI.SIZE
 	//height: 200
 	//backgroundColor: '#C8DDE8',
 	

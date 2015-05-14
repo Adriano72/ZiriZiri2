@@ -65,21 +65,29 @@
 	}
 }
 
-"#note_content": {
-	touchEnabled: false,
-	font: {
-		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 18
-	},
-	borderWidth: 1,
-	borderColor: "#B3A702",
-	backgroundColor: "#F7F5D2",
-	color: "#444",
-	height: Ti.UI.SIZE,
-	//width: "95%",
+".note_frame": {
 	top: 10,
 	left: 20,
 	right: 20,
-	ellipsize: false,
-	wordWrap: true
+	borderRadius: 3,
+	backgroundColor: "#F3F3A4",
+	width: Ti.UI.FILL,
+	height: Ti.UI.SIZE
+	
 }
+
+"#note_content": {
+	top: 10,
+	bottom: 10,
+	left: 10,
+	right: 10,
+	height: Ti.UI.SIZE,
+	backgroundColor: "transparent",
+	editable: false,
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16,
+		fontWeight: "bold"
+	}
+}
+

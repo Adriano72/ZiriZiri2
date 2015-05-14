@@ -19,35 +19,34 @@
 	
 }
 
-"#iconcina": {
+"#mini_nota": {
 	left: 0,
-	width: 25,
-	height: 25,
-	//textAlign : 'center',
-	color: "#6B6B6B",	
+	width: 30,
+	height: 30,
+	borderRadius: 2,
+	textAlign: "center",
+	backgroundColor: "#F3F3A4",
 	font: {
-		fontFamily: 'AppIcons',
-		fontSize: 18
-	}
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 5
+	},
+	ellipsize: true,
+	//height: 25,
+	//textAlign : 'center',
+	
 }
 
-"#location": {
+"#titolo_nota": {
 	height: Ti.UI.SIZE,
 	width: Ti.UI.SIZE,
-	width: "90%",
+	width: "80%",
 	right: 0
 }
 
-"#start_date": {
-	top: 3,
+"#document_date": {
+	top: 5,
 	height: Ti.UI.SIZE,
 	width: Ti.UI.SIZE,
 	left: 0
 }
 
-"#end_date": {
-	top: 3,
-	height: Ti.UI.SIZE,
-	width: Ti.UI.SIZE,
-	left: 0
-}

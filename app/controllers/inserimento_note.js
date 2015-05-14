@@ -66,7 +66,8 @@ function updateNoteTemplate() {
 	
 
 	jsonNoteTemplate.data.title = $.titolo_nota.value;
-	jsonNoteTemplate.data.content = $.note_body.value;
+	jsonNoteTemplate.data.content = Ti.Utils.base64encode($.note_body.value).toString();
+	//jsonNoteTemplate.data.content = $.note_body.value;
 	jsonNoteTemplate.data.timestamp = note_time;
 	
 
@@ -84,7 +85,7 @@ function openDateTimeSelector() {
 	var date_time_pickers = Alloy.createController("date_time_selector", function(o) {
 
 		//Ti.API.info("DATA SELEZIONATA: " + moment(o).format("LLL"));
-		$.note_date.text = "Inizia: " + moment(o).format("LL") + " alle ore " + moment(o).format("HH:mm");
+		$.note_date.text = "Data: " + moment(o).format("LL") + " alle ore " + moment(o).format("HH:mm");
 		note_time = +moment(o);
 
 	}).getView();

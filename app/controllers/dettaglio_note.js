@@ -20,7 +20,7 @@ try {
 //$.img_icon.text = attrs.aspect_icon;
 $.titolo.text = attrs.titolo;
 $.data_nota.text = attrs.data_nota;
-$.note_content.text = attrs.note_content+"                                                                                    .";
+$.note_content.text = attrs.note_content;
 
 function testExistence(param) {
 

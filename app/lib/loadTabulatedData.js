@@ -12,7 +12,7 @@ exports.loadTabData = function() {
 
 			var template = templates[0];
 
-			Ti.App.Properties.setObject("post_template", _.omit(template, 'modules'));
+			//Ti.App.Properties.setObject("post_template", _.omit(template, 'modules'));
 
 			//Ti.API.info("############### TEMPLATE POST ONLY ***: " + JSON.stringify(Ti.App.Properties.getObject("post_template")));
 

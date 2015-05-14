@@ -4,7 +4,10 @@
 			
 			<Label id="titolo" class="aspect_title"/>
 			<Label id="data_nota" class="aspect_text"/>
-			<Label id="note_content"/>
+			<View class="note_frame">
+				<Label id="note_content"/>	
+			</View>
+			<!--<Label id="note_content"/>-->
 
 		
 	</ScrollView>

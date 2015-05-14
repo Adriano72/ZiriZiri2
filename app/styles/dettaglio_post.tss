@@ -21,7 +21,7 @@
 	top: 0,
 	
 	height: Ti.UI.FILL,
-	backgroundColor: "#F5F9FA"
+	backgroundColor: "#F2FCFF"
 }
 
 "#aspect_detail_container": {

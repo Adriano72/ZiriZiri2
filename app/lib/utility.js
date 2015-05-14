@@ -12,7 +12,7 @@ exports.openCamera = function(_callback) {
 
 				var newBlob = ImageFactory.compress(image, 0.20);
 				//Alloy.Globals.blobImage = newBlob;
-				_callback(newBlob);
+				_callback(image);
 				/*
 				 // called when media returned from the camera
 				 Ti.API.info('Our type was: ' + event.mediaType);

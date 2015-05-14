@@ -1,0 +1,9 @@
+<Alloy>
+	<Window id="insermiento_link" class="container" title="Inserisci Link" onOpen="doOpen">
+		<View id="core_container">
+			<TextField id="titolo_link"/>
+			<TextField id="link_url"/>
+			<Label id="link_date" class="small_text" onClick="openDateTimeSelector"/>
+		</View>	
+	</Window>
+</Alloy>

@@ -10,6 +10,11 @@
 //
 // Alloy.Globals.someGlobalFunction = function(){};
 
+Alloy.Globals.screenWidth = Ti.Platform.displayCaps.platformWidth;
+
+Alloy.Globals.deviceWidth = parseInt(Ti.Platform.displayCaps.platformWidth / (Ti.Platform.displayCaps.logicalDensityFactor || 1), 10);
+Ti.API.info("SCREEN WIDTH: "+Alloy.Globals.screenWidth+" DEVICE WIDTH: "+Alloy.Globals.deviceWidth);
+
 if (OS_ANDROID) {
 
 	var abx = require('com.alcoapps.actionbarextras');
@@ -20,6 +25,7 @@ Alloy.Globals.Map = require('ti.map');
 T = function(name) {
 	return require('T/' + name);
 };
+
 T('trimethyl');
 
 var Util = T('util');

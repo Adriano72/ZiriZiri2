@@ -168,7 +168,7 @@ function openSelectedMedia(e) {
 		case 0:
 
 			tools.openCamera(function(p_blob) {
-				addDocument(p_blob)
+				addDocument(p_blob);
 			});
 
 			break;
@@ -340,7 +340,7 @@ function renderAspectsTable() {
 
 		case "NOTEDATATYPE_CODE":
 
-			var aspetto = Alloy.createController('dettaglio_note', {
+			var aspetto = Alloy.createController('row_brief_nota', {
 				_callback : function() {
 					Ti.API.info("Ciao");
 				},
@@ -525,8 +525,9 @@ function addNote() {
 
 			var tempOBJ = JSON.parse(p_nota);
 
-			ZZ.API.Core.Post.Aspects.add(tempOBJ, null, function(aspetto){
-				
+			ZZ.API.Core.Post.Aspects.add(tempOBJ, null, function(aspetto) {
+				arrayAspetti.push(tempOBJ);
+				sortAllAspects();
 			}, function(error) {
 
 				Ti.API.error("ZZ.API.Core.Post.Aspects.add error [error : " + error + "]");
@@ -539,7 +540,30 @@ function addNote() {
 }
 
 function addLink() {
+	
+	updatePostTemplate();
 
+	var inserisciLink = Alloy.createController("inserimento_link", {
+		p_titolo : $.testo_post.value,
+		p_location : selectedLocation,
+		p_reference_time : postDate,
+		p_categoria : selectedCategory,
+		_callback : function(p_nota) {
+
+			var tempOBJ = JSON.parse(p_nota);
+
+			ZZ.API.Core.Post.Aspects.add(tempOBJ, null, function(aspetto) {
+				arrayAspetti.push(tempOBJ);
+				sortAllAspects();
+			}, function(error) {
+
+				Ti.API.error("ZZ.API.Core.Post.Aspects.add error [error : " + error + "]");
+			});
+
+		}
+	}).getView();
+
+	Alloy.Globals.navMenu.openWindow(inserisciLink);
 }
 
 function select_date_time() {

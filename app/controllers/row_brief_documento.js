@@ -1,3 +1,4 @@
+
 var args = arguments[0] || {};
 
 //Ti.API.info("DOCUMENT DATA *******: "+JSON.stringify(args));
@@ -23,5 +24,3 @@ if (!_.isNull(documento.data.creationTime)) {
 } else {
 	$.document_date.height = 0;
 }
-
-

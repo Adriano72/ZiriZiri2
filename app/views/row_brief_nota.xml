@@ -1,0 +1,11 @@
+<Alloy>
+	<TableViewRow id="row">
+		<View class="container">
+			<View class="multi_container">
+				<Label id="mini_nota"/>
+				<Label id="titolo_nota" class="small_text"/>
+			</View>
+
+		</View>
+	</TableViewRow>
+</Alloy>

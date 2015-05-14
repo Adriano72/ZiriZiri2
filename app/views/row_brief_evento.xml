@@ -6,8 +6,8 @@
 				<Label id="location" class="small_text"/>
 			</View>
 			
-			<Label id="start_date" class="small_text"/>
-			<Label id="end_date" class="small_text"/>
+			<Label id="start_date" class="very_small_text"/>
+			<Label id="end_date" class="very_small_text"/>
 		</View>
 	</TableViewRow>
 </Alloy>

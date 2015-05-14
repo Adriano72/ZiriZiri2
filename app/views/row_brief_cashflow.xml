@@ -6,7 +6,7 @@
 				<Label id="tipoMov" class="small_text"/>
 				<Label id="importo" class="small_text"/>
 			</View>
-			<Label id="fonte_liquidita" class="small_text"/>
+			<Label id="fonte_liquidita" class="very_small_text"/>
 			<!--
 			<View class="multi_container">
 				<Label id="fonte_liquidita" class="small_text"/>
