@@ -5,14 +5,16 @@ var args = arguments[0] || {};
 var tools = require("utility");
 var location = require('getUserLocation');
 
-var dataPicture = +moment(args.postDate);
+var dataPicture = +moment(args.p_reference_time);
 var jsonDocumentTemplate = Alloy.Models.Document_template.toJSON();
 
 function doOpen() {
 
 	$.img_preview.image = args.p_image;
 	$.titolo_documento.value = args.p_titolo;
-	$.pict_date.text = moment(args.postDate).format("LL") + " alle ore " + moment(args.postDate).format("HH:mm");
+	$.pict_date.text = moment(args.p_reference_time).format("LL") + " alle ore " + moment(args.p_reference_time).format("HH:mm");
+	$.file_name.text = args.p_image.file.name;
+	$.file_size.text = "Dimensioni file: "+parseFloat(1000*(args.p_image.file.size / 1048576)).toFixed(2)+" KB";
 
 	if (OS_ANDROID) {
 
@@ -27,6 +29,7 @@ function doOpen() {
 		var nuovo_post = null;
 
 		$.orologetto.text = icons.alarm_clock;
+		$.icona_immagine.text = icons.picture;
 		//$.immaginina.text = icons.picture;
 
 		activity.onCreateOptionsMenu = function(e) {
@@ -56,20 +59,21 @@ function updateDocumentTemplate() {
 	
 	jsonDocumentTemplate.name = args.p_titolo;
 	jsonDocumentTemplate.description = $.titolo_documento.value;
-	jsonDocumentTemplate.referenceTime = +moment(args.p_reference_time);
+	jsonDocumentTemplate.referenceTime = +moment(dataPicture);
 	jsonDocumentTemplate.category = args.p_categoria;
 
 	jsonDocumentTemplate.name = args.p_titolo;
 	jsonDocumentTemplate.description = $.titolo_documento.value;
-	jsonDocumentTemplate.referenceTime = +moment(args.p_reference_time);
 	jsonDocumentTemplate.category = args.p_categoria;
 
 	jsonDocumentTemplate.data.title = $.titolo_documento.value;
 	//jsonDocumentTemplate.data.name = args.p_image.file.name;
 
-	//jsonDocumentTemplate.data.format = "JPG"; //_.last(fileName, 3).toUpperCase();
+	jsonDocumentTemplate.data.format.name = "JPG"; //_.last(fileName, 3).toUpperCase();
+	jsonDocumentTemplate.data.name = args.p_image.file.name;
+	jsonDocumentTemplate.data.size = args.p_image.file.size;
+	
 	jsonDocumentTemplate.data.description = $.titolo_documento.value;
-	//jsonDocumentTemplate.data.size = args.p_image.file.size;
 	Alloy.Globals.loading.hide();
 	$.insermiento_documento.close();
 	args._callback(JSON.stringify(jsonDocumentTemplate));

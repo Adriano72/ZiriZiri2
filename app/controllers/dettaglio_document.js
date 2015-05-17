@@ -27,7 +27,7 @@ var megaBytes = (attrs.data.size) / 1048576;
 var megaBytesRounded = parseFloat(megaBytes * 1000).toFixed(2);
 attrs.file_size = "Dimensioni File: "+megaBytesRounded + "KB";
 attrs.tipologia = (attrs.data.flagOrdinarioStraordinario) ? "Straordinario" : "Ordinario";
-attrs.data_documento = "Data " + moment(attrs.data.creationTime).format("LL") + " alle ore " + moment(attrs.data.creationTime).format("HH:mm");
+attrs.data_documento = "Data " + moment(attrs.referenceTime).format("LL") + " alle ore " + moment(attrs.referenceTime).format("HH:mm");
 
 //$.img_icon.text = attrs.aspect_icon;
 $.titolo.text = attrs.titolo;

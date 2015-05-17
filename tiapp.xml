@@ -41,7 +41,7 @@
     </ios>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
         <manifest android:installLocation="preferExternal"
-            android:versionCode="16" android:versionName="2.2.0" package="it.ziriziri.mobile">
+            android:versionCode="17" android:versionName="2.2.1" package="it.ziriziri.mobile">
             <!--<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="18"/>-->
             <supports-screens android:anyDensity="true"/>
             <!-- Allows the API to download data from Google Map servers -->
@@ -76,15 +76,15 @@
         <theme>default</theme>
     </mobileweb>
     <modules>
-    <module platform="android">com.alcoapps.actionbarextras</module>
-    <module platform="iphone">ti.imagefactory</module>
-    <module platform="android">ti.imagefactory</module>
-    <module platform="iphone">ti.map</module>
-    <module platform="android">ti.map</module>
-    <module platform="android" version="0.4.1">com.rkam.swiperefreshlayout</module>
-    <module platform="android">ti.zz.api</module>
-    <module platform="iphone">ti.zz.api</module>
-  </modules>
+        <module platform="android">com.alcoapps.actionbarextras</module>
+        <module platform="iphone">ti.imagefactory</module>
+        <module platform="android">ti.imagefactory</module>
+        <module platform="iphone">ti.map</module>
+        <module platform="android">ti.map</module>
+        <module platform="android" version="0.4.1">com.rkam.swiperefreshlayout</module>
+        <module platform="android">ti.zz.api</module>
+        <module platform="iphone">ti.zz.api</module>
+    </modules>
     <deployment-targets>
         <target device="android">true</target>
         <target device="blackberry">false</target>

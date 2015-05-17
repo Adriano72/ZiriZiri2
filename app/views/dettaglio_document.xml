@@ -7,9 +7,9 @@
 			<Label id="nome_file" class="aspect_text"/>
 			
 		</View>
-		<Label id="data_documento" class="aspect_text"/>
-		<Label id="filesize" class="aspect_text"/>
-		<Label id="tipo_file" class="aspect_text"/>
+		<Label id="data_documento" class="small_text"/>
+		<Label id="filesize" class="small_text"/>
+		<Label id="tipo_file" class="small_text"/>
 		
 		<ImageView id="img_preview"/>
 	</ScrollView>

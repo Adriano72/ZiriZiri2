@@ -67,6 +67,11 @@ function doOpen() {
 	$.icon_link.text = icons.link;
 
 	$.data_post.text = moment().format("LL") + " alle ore " + moment().format("HH:mm");
+	
+	if(args.shortcut){
+		updatePostTemplate()
+		addDocument(args.media);
+	} 
 
 };
 
@@ -74,7 +79,7 @@ function updatePostTemplate() {
 
 	//jsonPostTemplate.id = null;
 	Ti.API.info("TESTO POST VALUE: " + $.testo_post.value);
-	jsonPostTemplate.name = ($.testo_post.value == "") ? "Post inserito il " + moment().format("LL") + " alle ore " + moment().format("HH:mm") : $.testo_post.value;
+	jsonPostTemplate.name = ($.testo_post.value == "" || _.isUndefined($.testo_post.value) || _.isNull($.testo_post.value)) ? "Post inserito il " + moment().format("LL") + " alle ore " + moment().format("HH:mm") : $.testo_post.value;
 	if (!_.isNull(selectedCategory)) {
 		jsonPostTemplate.category = selectedCategory;
 	}
@@ -113,7 +118,7 @@ function savePost() {
 		Alloy.Globals.loading.hide();
 		//Alloy.Collections.Timeline.unshift(response);
 		$.insermiento_post.close();
-		args();
+		args._callback();
 
 	}, function(error) {
 		Ti.API.error("ZZ.API.Core.Post.commit error [error : " + JSON.stringify(error) + "]");
@@ -497,7 +502,7 @@ function addDocument(p_image) {
 					arrayAspetti.push(addedAspect);
 					sortAllAspects();
 				}, function(error) {
-					Ti.API.error("ZZ.API.Files.Attachment.set error [error : " + error + "]");
+					Ti.API.error("ZZ.API.Files.Attachment.set  error [error : " + error + "]");
 				});
 			};
 

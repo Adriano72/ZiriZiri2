@@ -97,18 +97,16 @@
 
 "#data_documento": {
 	left: 20,
-	font: {
-		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 16
-	}
+	
 }
 
 "#filesize": {
-	top: 10,
+	top: 5,
 	left: 20
 }
 
 "#tipo_file": {
+	top: 5,
 	left: 20
 }
 

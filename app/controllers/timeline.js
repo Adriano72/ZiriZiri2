@@ -12,8 +12,6 @@ function doOpen() {
 	//Alloy.Globals.loading.show('Sincronizzazione', false);
 
 	Alloy.Globals.navMenu = $.navWin;
-	
-	
 
 	if (OS_ANDROID) {
 
@@ -22,12 +20,37 @@ function doOpen() {
 		var nuovo_post = null;
 
 		activity.onCreateOptionsMenu = function(e) {
-			
+
 			/*
-			abx.setBackgroundColor("white");
-			activity.actionBar.displayHomeAsUp = true;
-			abx.setHomeAsUpIcon("/images/logo.png");
-			*/
+			 abx.setBackgroundColor("white");
+			 activity.actionBar.displayHomeAsUp = true;
+			 abx.setHomeAsUpIcon("/images/logo.png");
+			 */
+
+			take_picture = e.menu.add({
+				//itemId : "PHOTO",
+				title : "Fai Foto",
+				showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS,
+				icon : Ti.Android.R.drawable.ic_menu_camera
+			});
+
+			take_picture.addEventListener("click", function(e) {
+
+				tools.openCamera(function(p_blob) {
+
+					var nuovo_post_win = Alloy.createController("inserimento_post", {
+						shortcut : true,
+						media : p_blob,
+						_callback : function() {
+							$.ptr.refresh();
+						}
+					}).getView();
+
+					Alloy.Globals.navMenu.openWindow(nuovo_post_win);
+
+				});
+
+			});
 
 			nuovo_post = e.menu.add({
 				//itemId : "PHOTO",
@@ -38,12 +61,12 @@ function doOpen() {
 
 			nuovo_post.addEventListener("click", function(e) {
 
-				var nuovo_post_win = Alloy.createController("inserimento_post", function() {
-
-					setTimeout(function() {
+				var nuovo_post_win = Alloy.createController("inserimento_post", {
+					shortcut : false,
+					media : null,
+					_callback : function() {
 						$.ptr.refresh();
-					}, 1000);
-
+					}
 				}).getView();
 
 				Alloy.Globals.navMenu.openWindow(nuovo_post_win);
@@ -107,15 +130,13 @@ function populateListView() {
 
 			//attrs.catImage = ((_.isNull(attrs.category)) || (_.isNull(attrs.category.code)) ) ? '/images/android-robot.jpg' : '/images/cat_' + attrs.category.code.slice(0, 2) + ".png";
 			var categoryLayout;
-			
-			if((_.isNull(attrs.category)) || (_.isNull(attrs.category.code)) ){
+
+			if ((_.isNull(attrs.category)) || (_.isNull(attrs.category.code))) {
 				categoryLayout = tools.extractCategoryIcons(null);
-			}else{
+			} else {
 				categoryLayout = tools.extractCategoryIcons(attrs.category.code.slice(0, 2));
 			};
-			
-			
-			
+
 			attrs.catImage = categoryLayout.icona;
 			attrs.cat_color = categoryLayout.colore;
 

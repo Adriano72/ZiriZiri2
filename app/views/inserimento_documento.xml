@@ -8,6 +8,12 @@
 				<Label id="orologetto"/>
 				<Label id="pict_date" class="small_text"/>
 			</View>
+			<View class="multi_container">
+				<Label id="icona_immagine"/>
+				<Label id="file_name" class="small_text"/>
+			</View>
+			
+			<Label id="file_size" class="small_text"/>
 			
 			<!--<ImageView id="map_snapshot"/>-->
 

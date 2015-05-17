@@ -76,7 +76,8 @@ exports.openGallery = function(_callback) {
 			//$.preview.setWidth(cropRect.width);
 			//$.preview.setHeight(cropRect.height);
 
-			_callback(image);
+			var newBlob = ImageFactory.compress(image, 0.20);
+			//Alloy.Globals.blobImage = newBlob;
 
 			//var hashedImage = Ti.Utils.base64encode(image).toString();
 			//Ti.API.info("HASHED IMAGE: " + image.getFile());
@@ -85,13 +86,17 @@ exports.openGallery = function(_callback) {
 			var tempFile = Ti.Filesystem.createTempFile();
 			tempFile.write(image);
 
-			var content = tempFile.read();
+			//var content = tempFile.read();
 			Ti.API.info("IMAGE  FILE SIZE: " + tempFile.size);
 			Ti.API.info("IMAGE FILE NAME: " + tempFile.name);
 			//Ti.API.info("HASHED IMAGE : " + hashedImage);
 
-			fileSize = tempFile.size;
-			fileName = tempFile.name;
+			var fileSize = tempFile.size;
+			var fileName = tempFile.name;
+
+			//Ti.API.info("BLOB: " + JSON.stringify(newBlob));
+
+			_callback(image);
 
 			Titanium.API.info('PHOTO GALLERY SUCCESS cropRect.x ' + cropRect.x + ' cropRect.y ' + cropRect.y + ' cropRect.height ' + cropRect.height + ' cropRect.width ' + cropRect.width);
 

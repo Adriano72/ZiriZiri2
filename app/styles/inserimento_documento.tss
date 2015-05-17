@@ -40,15 +40,28 @@
 }
 
 ".multi_container": {
-	//layout: "horizontal",
+	layout: "horizontal",
 	//borderRadius: 3,
 	//backgroundColor: "#CFCFCF",
-	height: Ti.UI.SIZE
+	height: Ti.UI.SIZE,
+	width: Ti.UI.FILL
 	
 }
 
 
 "#orologetto": {
+	left: 12,
+	width: 25,
+	height: 25,
+	//textAlign : 'center',
+	color: "navy",	
+	font: {
+		fontFamily: 'AppIcons',
+		fontSize: 18
+	}
+}
+
+"#icona_immagine": {
 	left: 12,
 	width: 25,
 	height: 25,
@@ -66,20 +79,24 @@
 	//borderRadius: 3,
 	//borderWidth: 0.5,
 	//borderColor: "#6B6B6B",
-	width: "90%",
-	right: 0,
+	//width: "90%",
+	left: 6,
 	height: 30
 }
 
-"#pict_size": {
+"#file_name": {
 	//textAlign: "center",
 	
 	//borderRadius: 3,
 	//borderWidth: 0.5,
 	//borderColor: "#6B6B6B",
-	width: "90%",
-	right: 0,
+	//width: "90%",
+	left: 6,
 	height: 30
+}
+
+"#file_size": {
+	left: 12,
 }
 
 

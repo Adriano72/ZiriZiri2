@@ -19,7 +19,7 @@ $.titolo_doc.text = documento.data.title;
 
 if (!_.isNull(documento.data.creationTime)) {
 
-	$.document_date.text = moment(documento.data.creationTime).format("LL") + " alle ore " + moment(documento.data.creationTime).format("HH:mm");
+	$.document_date.text = moment(documento.referenceTime).format("LL") + " alle ore " + moment(documento.referenceTime).format("HH:mm");
 
 } else {
 	$.document_date.height = 0;
