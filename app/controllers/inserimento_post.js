@@ -16,6 +16,8 @@ var sortedArray = [];
 
 var aspectTableData = [];
 
+var uncommittedPost = null;
+
 //Ti.API.info("POST TEMPLATE *****: " + JSON.stringify(jsonPostTemplate));
 
 function doOpen() {
@@ -67,18 +69,19 @@ function doOpen() {
 	$.icon_link.text = icons.link;
 
 	$.data_post.text = moment().format("LL") + " alle ore " + moment().format("HH:mm");
-	
-	if(args.shortcut){
-		updatePostTemplate()
+
+	if (args.shortcut) {
+		updatePostTemplate();
 		addDocument(args.media);
-	} 
+	}
 
 };
 
 function updatePostTemplate() {
 
 	//jsonPostTemplate.id = null;
-	Ti.API.info("TESTO POST VALUE: " + $.testo_post.value);
+	Ti.API.info("******TESTO POST VALUE: " + $.testo_post.value);
+	
 	jsonPostTemplate.name = ($.testo_post.value == "" || _.isUndefined($.testo_post.value) || _.isNull($.testo_post.value)) ? "Post inserito il " + moment().format("LL") + " alle ore " + moment().format("HH:mm") : $.testo_post.value;
 	if (!_.isNull(selectedCategory)) {
 		jsonPostTemplate.category = selectedCategory;
@@ -91,6 +94,8 @@ function updatePostTemplate() {
 	var _corePostsAddCallback = function(post) {
 
 		flagAddPostDone = true;
+
+		uncommittedPost = post;
 		Ti.API.info("ZZ.API.Core.Posts.add success [response : " + JSON.stringify(post) + "]");
 
 	};
@@ -110,19 +115,47 @@ function updatePostTemplate() {
 function savePost() {
 
 	updatePostTemplate();
+	
+	Ti.API.info("UNCOMMITTED POST: " + JSON.stringify(uncommittedPost));
+	uncommittedPost.name = ($.testo_post.value == "" || _.isUndefined($.testo_post.value) || _.isNull($.testo_post.value)) ? "Post inserito il " + moment().format("LL") + " alle ore " + moment().format("HH:mm") : $.testo_post.value;
+	if (!_.isNull(selectedCategory)) {
+		uncommittedPost.category = selectedCategory;
+	}
+	uncommittedPost.description = $.testo_post.value;
+	uncommittedPost.referenceTime = +moment(postDate);
 
-	ZZ.API.Core.Post.commit(jsonPostTemplate, function(response) {
+	
+	var _corePostUpdateCallback = function(post) {
+		Ti.API.info("ZZ.API.Core.Post.update success [response : " + JSON.stringify(post) + "]");
 
-		Ti.API.info("ZZ.API.Core.Post.commit success [response : " + JSON.stringify(response) + "]");
+		ZZ.API.Core.Post.get(post, _corePostGetCallback, function(error) {
+			Ti.API.error("ZZ.API.Core.Post.get error [error : " + error + "]");
+		});
 
-		Alloy.Globals.loading.hide();
-		//Alloy.Collections.Timeline.unshift(response);
-		$.insermiento_post.close();
-		args._callback();
+	};
 
-	}, function(error) {
-		Ti.API.error("ZZ.API.Core.Post.commit error [error : " + JSON.stringify(error) + "]");
+	var _corePostGetCallback = function(post) {
+		Ti.API.info("ZZ.API.Core.Post.get success [response : " + JSON.stringify(post) + "]");
+
+		ZZ.API.Core.Post.commit(post, function(response) {
+
+			Ti.API.info("ZZ.API.Core.Post.commit success [response : " + JSON.stringify(response) + "]");
+
+			Alloy.Globals.loading.hide();
+			//Alloy.Collections.Timeline.unshift(response);
+			$.insermiento_post.close();
+			args._callback();
+
+		}, function(error) {
+			Ti.API.error("ZZ.API.Core.Post.commit error [error : " + JSON.stringify(error) + "]");
+		});
+
+	};
+	
+	ZZ.API.Core.Post.update(uncommittedPost, _corePostUpdateCallback, function(error) {
+		Ti.API.error("ZZ.API.Core.Post.update error [error : " + error + "]");
 	});
+
 
 }
 
@@ -545,7 +578,7 @@ function addNote() {
 }
 
 function addLink() {
-	
+
 	updatePostTemplate();
 
 	var inserisciLink = Alloy.createController("inserimento_link", {
