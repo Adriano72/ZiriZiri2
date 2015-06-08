@@ -37,6 +37,8 @@ Alloy.Globals.winTop = (OS_IOS && parseInt(Ti.Platform.version, 10) >= 7) ? 20 :
 
 var zzAPI = require("ti.zz.api");
 
+Ti.API.info("ZZAPI: "+zzAPI.version);
+
 ZZ = zzAPI.ZZ;
 
 Alloy.Globals.loading = Alloy.createWidget("nl.fokkezb.loading");

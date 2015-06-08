@@ -13,16 +13,16 @@ win.add(label);
 win.open();
 
 // TODO: write your module tests here
-var zz_mobile_frontend_api_appcelerator_module_ios = require('ti.zz.api');
-Ti.API.info("module is => " + zz_mobile_frontend_api_appcelerator_module_ios);
+var zz_mobile_frontend_api_appcelerator_module_android = require('ti.zz.api');
+Ti.API.info("module is => " + zz_mobile_frontend_api_appcelerator_module_android);
 
-label.text = zz_mobile_frontend_api_appcelerator_module_ios.example();
+label.text = zz_mobile_frontend_api_appcelerator_module_android.example();
 
-Ti.API.info("module exampleProp is => " + zz_mobile_frontend_api_appcelerator_module_ios.exampleProp);
-zz_mobile_frontend_api_appcelerator_module_ios.exampleProp = "This is a test value";
+Ti.API.info("module exampleProp is => " + zz_mobile_frontend_api_appcelerator_module_android.exampleProp);
+zz_mobile_frontend_api_appcelerator_module_android.exampleProp = "This is a test value";
 
 if (Ti.Platform.name == "android") {
-	var proxy = zz_mobile_frontend_api_appcelerator_module_ios.createExample({
+	var proxy = zz_mobile_frontend_api_appcelerator_module_android.createExample({
 		message: "Creating an example Proxy",
 		backgroundColor: "red",
 		width: 100,

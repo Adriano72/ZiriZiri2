@@ -2,7 +2,7 @@
 # this is your module manifest and used by Titanium
 # during compilation, packaging, distribution, etc.
 #
-version: 1.0.0
+version: 1.0.1
 apiversion: 2
 architectures: armv7 arm64 i386 x86_64
 description: zz-mobile-frontend-api-appcelerator-module-ios
@@ -15,4 +15,5 @@ name: zz-mobile-frontend-api-appcelerator-module-ios
 moduleid: ti.zz.api
 guid: d34cf19a-b5b6-46f3-97e6-c0cfefcf717c
 platform: iphone
-minsdk: 3.5.0.GA
+#minsdk: 4.0.0.GA
+minsdk: 3.5.1.GA
