@@ -50,7 +50,7 @@ function _loadTimelineAlreadyLoggedIn(utente) {
 	loadTabData.loadTabData();
 
 	ZZ.API.Core.Posts.list(function(posts) {
-		//Ti.API.info("ZZ.API.Core.Posts.list success [response : " + JSON.stringify(posts) + "]");
+		Ti.API.info("ZZ.API.Core.Posts.list success [response : " + JSON.stringify(posts) + "]");
 
 		loadTimeline(posts);
 		//Ti.API.info("TIMELINE : " + JSON.stringify(Alloy.Collections.Timeline));
@@ -79,7 +79,7 @@ var _coreSessionLogInCallback = function(user) {
 	};
 
 	ZZ.API.Core.Posts.list(function(posts) {
-		//Ti.API.info("ZZ.API.Core.Posts.list success [response : " + JSON.stringify(posts) + "]");
+		Ti.API.info("ZZ.API.Core.Posts.list success [response : " + JSON.stringify(posts) + "]");
 
 		loadTimeline(posts);
 		//Ti.API.info("TIMELINE : " + JSON.stringify(Alloy.Collections.Timeline));
