@@ -144,7 +144,7 @@ exports.extractCategoryIcons = function(code) {
 		break;
 	case "05":
 		return ( {
-			icona : icons.road,
+			icona : icons.car,
 			colore : "#FFDD01"
 		});
 		break;
@@ -168,7 +168,7 @@ exports.extractCategoryIcons = function(code) {
 		break;
 	case "09":
 		return ( {
-			icona : icons.sun,
+			icona : icons.glass,
 			colore : "#fce295"
 		});
 		break;
@@ -210,8 +210,20 @@ exports.extractCategoryIcons = function(code) {
 		break;
 	case "16":
 		return ( {
-			icona : icons.question_sign,
+			icona : icons.asterisk,
 			colore : "#FAEBD7"
+		});
+		break;
+	case "17":
+		return ( {
+			icona : icons.plane,
+			colore : "#38e8c6"
+		});
+		break;
+	case "18":
+		return ( {
+			icona : icons.car,
+			colore : "#FFDD01"
 		});
 		break;
 	default:

@@ -150,23 +150,12 @@ function savePost() {
 		});
 
 	};
-	/*
+	
 	 ZZ.API.Core.Post.update(uncommittedPost, _corePostUpdateCallback, function(error) {
 	 Ti.API.error("ZZ.API.Core.Post.update error [error : " + error + "]");
 	 });
-	 */
-	ZZ.API.Core.Post.commit(uncommittedPost, function(response) {
-
-		Ti.API.info("ZZ.API.Core.Post.commit success [response : " + JSON.stringify(response) + "]");
-
-		Alloy.Globals.loading.hide();
-		//Alloy.Collections.Timeline.unshift(response);
-		$.insermiento_post.close();
-		args._callback();
-
-	}, function(error) {
-		Ti.API.error("ZZ.API.Core.Post.commit error [error : " + JSON.stringify(error) + "]");
-	});
+	 
+	
 
 }
 

@@ -86,7 +86,7 @@ function doOpen() {
 			
 			versione = e.menu.add({
 				//itemId : "PHOTO",
-				title : "V 2.2.3",
+				title : "V 2.2.4",
 				showAsAction : Ti.Android.SHOW_AS_ACTION_NEVER
 				//icon : Ti.Android.R.drawable.ic_menu_camera
 			});
@@ -111,7 +111,7 @@ function addMorePosts() {
 		Ti.API.info("@@@@@@@@@@@@ TIMELINE LENGHT " + Alloy.Collections.Timeline.length);
 		Ti.API.info("@@@@@@@@@@@@ MORE POST LENGHT " + posts.length);
 		Alloy.Collections.Timeline.add(posts);
-		Alloy.Collections.Timeline.on("sync", populateListView(posts));
+		Alloy.Collections.Timeline.on("sync", populateListView(posts.length));
 		$.ptr.hide();
 		//Ti.API.info("TIMELINE : " + JSON.stringify(Alloy.Collections.Timeline));
 

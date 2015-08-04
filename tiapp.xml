@@ -43,7 +43,7 @@
     </ios>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
         <manifest android:installLocation="preferExternal"
-            android:versionCode="19" android:versionName="2.2.3" package="it.ziriziri.mobile">
+            android:versionCode="20" android:versionName="2.2.4" package="it.ziriziri.mobile">
             <!--<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="18"/>-->
             <supports-screens android:anyDensity="true"/>
             <!-- Allows the API to download data from Google Map servers -->
