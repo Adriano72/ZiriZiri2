@@ -17,6 +17,7 @@ function doOpen() {
 
 		var activity = $.timeline_win.activity;
 		var settings = null;
+		var versione = null;
 		var nuovo_post = null;
 
 		activity.onCreateOptionsMenu = function(e) {
@@ -82,6 +83,13 @@ function doOpen() {
 			settings.addEventListener("click", function(e) {
 				f_logout();
 			});
+			
+			versione = e.menu.add({
+				//itemId : "PHOTO",
+				title : "V 2.2.3",
+				showAsAction : Ti.Android.SHOW_AS_ACTION_NEVER
+				//icon : Ti.Android.R.drawable.ic_menu_camera
+			});
 
 		};
 
@@ -103,7 +111,7 @@ function addMorePosts() {
 		Ti.API.info("@@@@@@@@@@@@ TIMELINE LENGHT " + Alloy.Collections.Timeline.length);
 		Ti.API.info("@@@@@@@@@@@@ MORE POST LENGHT " + posts.length);
 		Alloy.Collections.Timeline.add(posts);
-		Alloy.Collections.Timeline.on("sync", populateListView());
+		Alloy.Collections.Timeline.on("sync", populateListView(posts));
 		$.ptr.hide();
 		//Ti.API.info("TIMELINE : " + JSON.stringify(Alloy.Collections.Timeline));
 
@@ -116,7 +124,7 @@ function addMorePosts() {
 
 }
 
-function populateListView() {
+function populateListView(numPosts) {
 
 	Ti.API.info(" ******** POPULATE LIST VIEW ******");
 	//Ti.API.info("ULTIO POST IN TIMELINE: " + JSON.stringify(Alloy.Collections.Timeline.at(0)));
@@ -125,7 +133,7 @@ function populateListView() {
 		datasetCb : function(el) {
 
 			var attrs = el.toJSON();
-			
+
 			var diffTime = moment().diff(attrs.referenceTime, 'days');
 
 			//attrs.catImage = ((_.isNull(attrs.category)) || (_.isNull(attrs.category.code)) ) ? '/images/android-robot.jpg' : '/images/cat_' + attrs.category.code.slice(0, 2) + ".png";
@@ -181,11 +189,12 @@ function populateListView() {
 
 	$.ptr.hide();
 	//Alloy.Globals.loading.hide();
-
-	$.timelineList.setMarker({
-		sectionIndex : 0,
-		itemIndex : (Alloy.Collections.Timeline.length - 1)
-	});
+	if (numPosts > 0 || _.isUndefined(numPosts)) {
+		$.timelineList.setMarker({
+			sectionIndex : 0,
+			itemIndex : (Alloy.Collections.Timeline.length - 1)
+		});
+	}
 
 };
 
