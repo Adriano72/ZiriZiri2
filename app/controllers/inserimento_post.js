@@ -81,7 +81,7 @@ function updatePostTemplate() {
 
 	//jsonPostTemplate.id = null;
 	Ti.API.info("******TESTO POST VALUE: " + $.testo_post.value);
-	
+
 	jsonPostTemplate.name = ($.testo_post.value == "" || _.isUndefined($.testo_post.value) || _.isNull($.testo_post.value)) ? "Post inserito il " + moment().format("LL") + " alle ore " + moment().format("HH:mm") : $.testo_post.value;
 	if (!_.isNull(selectedCategory)) {
 		jsonPostTemplate.category = selectedCategory;
@@ -115,7 +115,7 @@ function updatePostTemplate() {
 function savePost() {
 
 	updatePostTemplate();
-	
+
 	Ti.API.info("UNCOMMITTED POST: " + JSON.stringify(uncommittedPost));
 	uncommittedPost.name = ($.testo_post.value == "" || _.isUndefined($.testo_post.value) || _.isNull($.testo_post.value)) ? "Post inserito il " + moment().format("LL") + " alle ore " + moment().format("HH:mm") : $.testo_post.value;
 	if (!_.isNull(selectedCategory)) {
@@ -124,7 +124,6 @@ function savePost() {
 	uncommittedPost.description = $.testo_post.value;
 	uncommittedPost.referenceTime = +moment(postDate);
 
-	
 	var _corePostUpdateCallback = function(post) {
 		Ti.API.info("ZZ.API.Core.Post.update success [response : " + JSON.stringify(post) + "]");
 
@@ -151,11 +150,23 @@ function savePost() {
 		});
 
 	};
-	
-	ZZ.API.Core.Post.update(uncommittedPost, _corePostUpdateCallback, function(error) {
-		Ti.API.error("ZZ.API.Core.Post.update error [error : " + error + "]");
-	});
+	/*
+	 ZZ.API.Core.Post.update(uncommittedPost, _corePostUpdateCallback, function(error) {
+	 Ti.API.error("ZZ.API.Core.Post.update error [error : " + error + "]");
+	 });
+	 */
+	ZZ.API.Core.Post.commit(uncommittedPost, function(response) {
 
+		Ti.API.info("ZZ.API.Core.Post.commit success [response : " + JSON.stringify(response) + "]");
+
+		Alloy.Globals.loading.hide();
+		//Alloy.Collections.Timeline.unshift(response);
+		$.insermiento_post.close();
+		args._callback();
+
+	}, function(error) {
+		Ti.API.error("ZZ.API.Core.Post.commit error [error : " + JSON.stringify(error) + "]");
+	});
 
 }
 

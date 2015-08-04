@@ -8,7 +8,8 @@
 		<View class="textFieldContainer">
 			<!--<TextField id="username" value="rnduser_1418923442021"/>-->
 			<!--<TextField id="username" value="mario.muggianu"/>-->
-			<TextField id="username" value="rnduser_1418923442021"/>
+			<!--<TextField id="username" value="rnduser_1418923442021"/>-->
+			<TextField id="username"/>
 			<TextField id="password" value="password"/>
 			<Button id="btn_login" onClick="do_login" />
 			<View id="ricordamiContainer">
