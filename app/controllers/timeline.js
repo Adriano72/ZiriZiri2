@@ -87,7 +87,7 @@ function doOpen() {
 			
 			versione = e.menu.add({
 				//itemId : "PHOTO",
-				title : "V 2.2.4",
+				title : "V 2.2.5",
 				showAsAction : Ti.Android.SHOW_AS_ACTION_NEVER
 				//icon : Ti.Android.R.drawable.ic_menu_camera
 			});
