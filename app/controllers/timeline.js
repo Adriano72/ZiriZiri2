@@ -43,7 +43,8 @@ function doOpen() {
 						shortcut : true,
 						media : p_blob,
 						_callback : function() {
-							$.ptr.refresh();
+							//$.ptr.refresh();
+							populateListView();
 						}
 					}).getView();
 

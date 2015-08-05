@@ -125,37 +125,44 @@ function savePost() {
 	uncommittedPost.referenceTime = +moment(postDate);
 
 	var _corePostUpdateCallback = function(post) {
+		Ti.API.info("POST INVIATO ALLA UPDATE : " + JSON.stringify(post));
 		Ti.API.info("ZZ.API.Core.Post.update success [response : " + JSON.stringify(post) + "]");
-
+		
+		/*
 		ZZ.API.Core.Post.get(post, _corePostGetCallback, function(error) {
+			Ti.API.info("POST INVIATO ALLA ALLA GET : " + JSON.stringify(post));
 			Ti.API.error("ZZ.API.Core.Post.get error [error : " + error + "]");
 		});
+		*/
+		ZZ.API.Core.Post.commit(post, _corePostCommitCallback, function(error) {
+			Ti.API.error("ZZ.API.Core.Post.commit error [error : " + JSON.stringify(error) + "]");
+		});
 
+	};
+
+	var _corePostCommitCallback = function(response) {
+
+		Ti.API.info("ZZ.API.Core.Post.commit success [response : " + JSON.stringify(response) + "]");
+
+		Alloy.Globals.loading.hide();
+		Alloy.Collections.Timeline.unshift(response);
+		$.insermiento_post.close();
+		args._callback();
 	};
 
 	var _corePostGetCallback = function(post) {
 		Ti.API.info("ZZ.API.Core.Post.get success [response : " + JSON.stringify(post) + "]");
 
-		ZZ.API.Core.Post.commit(post, function(response) {
-
-			Ti.API.info("ZZ.API.Core.Post.commit success [response : " + JSON.stringify(response) + "]");
-
-			Alloy.Globals.loading.hide();
-			//Alloy.Collections.Timeline.unshift(response);
-			$.insermiento_post.close();
-			args._callback();
-
-		}, function(error) {
+		ZZ.API.Core.Post.commit(post, _corePostCommitCallback, function(error) {
 			Ti.API.error("ZZ.API.Core.Post.commit error [error : " + JSON.stringify(error) + "]");
 		});
 
 	};
-	
-	 ZZ.API.Core.Post.update(uncommittedPost, _corePostUpdateCallback, function(error) {
-	 Ti.API.error("ZZ.API.Core.Post.update error [error : " + error + "]");
-	 });
-	 
-	
+
+	ZZ.API.Core.Post.update(uncommittedPost, _corePostUpdateCallback, function(error) {
+
+		Ti.API.error("ZZ.API.Core.Post.update error [error : " + error + "]");
+	});
 
 }
 
