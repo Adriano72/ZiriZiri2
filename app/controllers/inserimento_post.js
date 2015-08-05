@@ -149,7 +149,8 @@ function savePost() {
 		$.insermiento_post.close();
 		args._callback();
 	};
-
+	
+	/*
 	var _corePostGetCallback = function(post) {
 		Ti.API.info("ZZ.API.Core.Post.get success [response : " + JSON.stringify(post) + "]");
 
@@ -158,6 +159,7 @@ function savePost() {
 		});
 
 	};
+	*/
 
 	ZZ.API.Core.Post.update(uncommittedPost, _corePostUpdateCallback, function(error) {
 
