@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ti:app xmlns:ti="http://ti.appcelerator.org">
+    <!--<id>it.ziriziri.mobile</id>-->
+    <!--<id>it.adrianomassi.ziriziri</id>-->
     <id>it.ziriziri.mobile</id>
     <name>ZiriZiri2</name>
     <version>1.0</version>
@@ -10,8 +12,8 @@
     <icon>appicon.png</icon>
     <fullscreen>false</fullscreen>
     <navbar-hidden>false</navbar-hidden>
-    <analytics>false</analytics>
-    <guid>48f3b401-3ec8-4f0e-af4b-6e049aa83166</guid>
+    <analytics>true</analytics>
+    <guid>8ae323f4-bfe9-4171-9000-ce5f9f5ff31c</guid>
     <!--<guid>48f3b401-3ec8-4f0e-af4b-6e049aa83166</guid>-->
     <property name="ti.ui.defaultunit" type="string">dp</property>
     <ios>
@@ -41,7 +43,7 @@
     </ios>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
         <manifest android:installLocation="preferExternal"
-            android:versionCode="16" android:versionName="2.2.0" package="it.ziriziri.mobile">
+            android:versionCode="20" android:versionName="2.2.4" package="it.ziriziri.mobile">
             <!--<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="18"/>-->
             <supports-screens android:anyDensity="true"/>
             <!-- Allows the API to download data from Google Map servers -->
@@ -76,35 +78,51 @@
         <theme>default</theme>
     </mobileweb>
     <modules>
-        <module platform="android">com.alcoapps.actionbarextras</module>
-        <module platform="iphone">ti.imagefactory</module>
-        <module platform="android">ti.imagefactory</module>
-        <module platform="iphone">ti.map</module>
-        <module platform="android">ti.map</module>
-        <module platform="android" version="0.4.1">com.rkam.swiperefreshlayout</module>
-        <module platform="android">ti.zz.api</module>
-        <module platform="iphone">ti.zz.api</module>
-    <module platform="iphone" version="0.2.1">yy.tidynamicfont</module>
+    <module platform="android">com.alcoapps.actionbarextras</module>
+    <module platform="iphone">ti.imagefactory</module>
+    <module platform="android">ti.imagefactory</module>
+    <module platform="iphone" version="2.2.2">ti.map</module>
+    <module platform="android" version="2.2.3">ti.map</module>
+    <module platform="android">com.rkam.swiperefreshlayout</module>
+    <module platform="commonjs">ti.cloud</module>
+  <module platform="iphone" version="0.2.2">yy.tidynamicfont</module>
 <module platform="iphone" version="0.5">net.iamyellow.tiws</module>
-<module platform="android" version="0.1">net.iamyellow.tiws</module>
+<module platform="android" version="0.1.2">net.iamyellow.tiws</module>
 <module platform="iphone" version="0.2.0">yy.logcatcher</module>
 <module platform="android" version="0.1">yy.logcatcher</module>
 <module platform="iphone" version="1.1.1">ti.compression</module>
 <module platform="android" version="2.0.3">ti.compression</module>
 <module platform="android">bencoding.android.tools</module>
 </modules>
-  <property name="tishadow:version" type="string">2.8.0</property>
+  <property name="tishadow:version" type="string">2.8.2</property>
 <property name="ti.android.bug2373.finishfalseroot" type="bool">true</property>
 <property name="ti.android.bug2373.skipAlert" type="bool">true</property>
     <deployment-targets>
         <target device="android">true</target>
-        <target device="blackberry">false</target>
+        <!--<target device="blackberry">false</target>-->
         <target device="ipad">true</target>
         <target device="iphone">true</target>
         <target device="mobileweb">false</target>
     </deployment-targets>
-    <sdk-version>3.5.0.GA</sdk-version>
+    <sdk-version>4.1.0.GA</sdk-version>
     <plugins>
         
     </plugins>
+    <property name="appc-app-id" type="string">5561b1982daf52a8029ef737</property>
+    <property name="acs-authbase-url-development" type="string">https://secure-identity.cloud.appcelerator.com</property>
+    <property name="acs-base-url-development" type="string">https://api.cloud.appcelerator.com</property>
+    <property name="acs-oauth-secret-development" type="string">ID8Kq50mHqO10bMGd0MpVih2lPoSkHMk</property>
+    <property name="acs-oauth-key-development" type="string">lRihfFQy3hFx8jlK9MQ1OaJ27gC06KQp</property>
+    <property name="acs-api-key-development" type="string">BhUmAURECEwzqebIed3OosVLMgL0L7o0</property>
+    <property name="acs-username-development" type="string">appc_app_user_dev</property>
+    <property name="acs-password-development" type="string">goqQJqo1i37R8MQlAu</property>
+    <property name="acs-authbase-url-production" type="string">https://secure-identity.cloud.appcelerator.com</property>
+    <property name="acs-base-url-production" type="string">https://api.cloud.appcelerator.com</property>
+    <property name="acs-oauth-secret-production" type="string">Pr0WGRmTvokueHMtYdpDgBbLSsylPtmI</property>
+    <property name="acs-oauth-key-production" type="string">52kOjCOkL7iWGtLFo9CEgRYAPfbVBykd</property>
+    <property name="acs-api-key-production" type="string">YsXOvBqF2vCB2YTv5espCuJhfTKyWN8B</property>
+    <property name="acs-username-production" type="string">appc_app_user</property>
+    <property name="acs-password-production" type="string">NSu08jNYjeKKXbSm0y</property>
+    <property name="appc-org-id" type="string">100001397</property>
+    <property name="appc-creator-user-id" type="string">dabdfe2a-fba4-44af-9e3d-cda80d356c11</property>
 </ti:app>
