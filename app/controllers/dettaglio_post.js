@@ -31,7 +31,7 @@ function doOpen() {
 
 			edit_post = e.menu.add({
 				//itemId : "PHOTO",
-				title : "Nuovo Post",
+				title : "Edit Post",
 				showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS,
 				icon : Ti.Android.R.drawable.ic_menu_edit
 			});
