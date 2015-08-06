@@ -24,6 +24,35 @@ function doOpen() {
 	if (OS_ANDROID) {
 
 		var activity = $.dettaglio_post_win.activity;
+
+		var edit_post = null;
+
+		activity.onCreateOptionsMenu = function(e) {
+
+			edit_post = e.menu.add({
+				//itemId : "PHOTO",
+				title : "Nuovo Post",
+				showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS,
+				icon : Ti.Android.R.drawable.ic_menu_edit
+			});
+
+			edit_post.addEventListener("click", function(e) {
+
+				var nuovo_post_win = Alloy.createController("inserimento_post", {
+					shortcut : false,
+					media : null,
+					_callback : function() {
+						$.ptr.refresh();
+					}
+				}).getView();
+
+				Alloy.Globals.navMenu.openWindow(nuovo_post_win);
+			});
+
+		};
+		
+		activity.invalidateOptionsMenu();
+
 		/*
 		 abx.setBackgroundColor("white");
 		 activity.actionBar.displayHomeAsUp = true;
@@ -710,7 +739,6 @@ function checkAspects(node, target) {
 	}
 
 };
-
 
 $.dettaglio_post_win.addEventListener("close", function() {
 	//$.scrollableCashflow.removeAllChildren();
