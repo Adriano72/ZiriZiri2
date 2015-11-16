@@ -7,28 +7,71 @@
 			<RightNavButton platform="ios">
 				<ImageView class="rightNavImg"/>
 			</RightNavButton>
-			<Widget id="ptr" src="nl.fokkezb.pullToRefresh" onRelease="reloadAllData">
-			<ListView id="timelineList" defaultItemTemplate="timelineTemplate" onMarker="addMorePosts" onItemclick="dettaglioPost">
-				<Templates>
+			<View>
+				<View class="floatingActions">
+					<View class="actionCamera">
+						<Label class="actionCameraIcon" onClick="onAddFromImages" />
+					</View>
+					<View class="actionSeparator"></View>
+					<View class="actionAdd">
+						<Label class="actionAddIcon" onClick="onAddFromScratch" />
+					</View>
+				</View>
+				<Widget id="ptr" src="nl.fokkezb.pullToRefresh" onRelease="reloadAllData">
+
+					<ListView id="listView" defaultItemTemplate="template" onMarker="addMorePosts" onItemclick="dettaglioPost">
+						<Templates>
+							<ItemTemplate name="template">
+								<View class="template">
+									<View class="avatar">
+										<View bindId="avatarBox" class="avatarBox">
+											<Label bindId="avatarImage" class="avatarImage" />
+										</View>
+									</View>
+									<View class="text">
+										<View class="firstLine">
+											<Label bindId="title" class="firstLineTitle" />
+											<Label bindId="time" class="firstLineTime" />
+										</View>
+										<View class="secondLine">
+											<Label bindId="subtitle" class="secondLineTitle" />
+										</View>
+										<View class="thirdLine">
+											<Label bindId="subsubtitle" class="thirdLineTitle" />
+										</View>
+									</View>
+								</View>
+							</ItemTemplate>
+						</Templates>
+						<ListSection>
+							<ListItem/>
+						</ListSection>
+					</ListView>
+
+					<!-->
+					<ListView id="timelineList" defaultItemTemplate="timelineTemplate" onMarker="addMorePosts" onItemclick="dettaglioPost">
+					<Templates>
 					<ItemTemplate name="timelineTemplate" height="90" width="90%">
-						<View id="cat_icon_container" bindId="catColor">
-							<Label bindId="cat_icon" id="catIcon"/>
-						</View>
-						<View id="postData">
-							<Label bindId="titolo" id="titolo" />
-							<View id="secondLine">
-								<Label bindId="cat_mini_icon" id="cat_mini_icon"/>
-								<Label id="category" bindId="categoria"/>
-							</View>
-							<Label id="data_post" bindId="data"/>
-						</View>
+					<View id="cat_icon_container" bindId="catColor">
+					<Label bindId="cat_icon" id="catIcon"/>
+					</View>
+					<View id="postData">
+					<Label bindId="titolo" id="titolo" />
+					<View id="secondLine">
+					<Label bindId="cat_mini_icon" id="cat_mini_icon"/>
+					<Label id="category" bindId="categoria"/>
+					</View>
+					<Label id="data_post" bindId="data"/>
+					</View>
 					</ItemTemplate>
-				</Templates>
-				<ListSection>
+					</Templates>
+					<ListSection>
 					<ListItem></ListItem>
-				</ListSection>
-			</ListView>
-			</Widget>
+					</ListSection>
+					</ListView>
+					<-->
+				</Widget>
+			</View>
 		</Window>
 	</NavigationWindow>
 </Alloy>

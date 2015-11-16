@@ -27,7 +27,7 @@ function doOpen() {
 			 activity.actionBar.displayHomeAsUp = true;
 			 abx.setHomeAsUpIcon("/images/logo.png");
 			 */
-
+			/*
 			take_picture = e.menu.add({
 				//itemId : "PHOTO",
 				title : "Fai Foto",
@@ -73,7 +73,7 @@ function doOpen() {
 
 				Alloy.Globals.navMenu.openWindow(nuovo_post_win);
 			});
-
+			*/
 			settings = e.menu.add({
 				//itemId : "PHOTO",
 				title : "Logout",
@@ -84,7 +84,7 @@ function doOpen() {
 			settings.addEventListener("click", function(e) {
 				f_logout();
 			});
-			
+
 			versione = e.menu.add({
 				//itemId : "PHOTO",
 				title : "V 2.2.5",
@@ -102,6 +102,35 @@ function doOpen() {
 
 	populateListView();
 
+}
+
+function onAddFromImages() {
+	tools.openCamera(function(p_blob) {
+
+		var nuovo_post_win = Alloy.createController("inserimento_post", {
+			shortcut : true,
+			media : p_blob,
+			_callback : function() {
+				//$.ptr.refresh();
+				populateListView();
+			}
+		}).getView();
+
+		Alloy.Globals.navMenu.openWindow(nuovo_post_win);
+
+	});
+}
+
+function onAddFromScratch() {
+	var nuovo_post_win = Alloy.createController("inserimento_post", {
+		shortcut : false,
+		media : null,
+		_callback : function() {
+			$.ptr.refresh();
+		}
+	}).getView();
+
+	Alloy.Globals.navMenu.openWindow(nuovo_post_win);
 }
 
 function addMorePosts() {
@@ -135,6 +164,22 @@ function populateListView(numPosts) {
 
 			var attrs = el.toJSON();
 
+			var stories = null;
+			if (attrs.stories) {
+				stories = "";
+				_.each(attrs.stories, function(item, index) {
+					stories = stories.concat((index > 0 ? ", " : ""), item.name);
+				});
+			}
+
+			var tags = null;
+			if (attrs.tags) {
+				tags = "";
+				_.each(attrs.tags, function(item, index) {
+					tags = tags.concat((index > 0 ? ", " : ""), item.name);
+				});
+			}
+
 			var diffTime = moment().diff(attrs.referenceTime, 'days');
 
 			//attrs.catImage = ((_.isNull(attrs.category)) || (_.isNull(attrs.category.code)) ) ? '/images/android-robot.jpg' : '/images/cat_' + attrs.category.code.slice(0, 2) + ".png";
@@ -151,8 +196,8 @@ function populateListView(numPosts) {
 
 			//Ti.API.debug("CAT IMAGE: " + categoryLayout.colore);
 			//attrs.postDate = (diffTime > 1) ? moment(attrs.referenceTime).format('LL') : moment(attrs.referenceTime).fromNow();
-			attrs.postDate = moment(attrs.referenceTime).format('LL') + " - " + moment(attrs.referenceTime).format("HH:mm");
-			attrs.cat_mini_icon = icons.tags;
+			//attrs.postDate = moment(attrs.referenceTime).format('LL') + " - " + moment(attrs.referenceTime).format("HH:mm");
+			attrs.time = moment(new Date(attrs.referenceTime)).format("DD MMM"), attrs.cat_mini_icon = icons.tags;
 			attrs.categoria = (!_.isNull(attrs.category)) ? attrs.category.name : "";
 
 			attrs.rating_1 = (attrs.rating > 0) ? "/images/star-small.png" : "";
@@ -165,33 +210,33 @@ function populateListView(numPosts) {
 
 			//Ti.API.info("ELEMENT NAME: " + JSON.stringify(el));
 			return ( {
-				titolo : {
+				title : {
 					text : el.get('name')
 				},
-				catColor : {
+				avatarBox : {
 					backgroundColor : attrs.cat_color
 				},
-				cat_icon : {
+				avatarImage : {
 					text : attrs.catImage
 				},
-				cat_mini_icon : {
-					text : attrs.cat_mini_icon
-				},
-				categoria : {
+				subtitle : {
 					text : attrs.categoria
 				},
-				data : {
-					text : attrs.postDate
+				subsubtitle : {
+					text : "".concat(( stories ? stories : ""), (stories && tags ? ", " : ""), ( tags ? tags : "")),
+				},
+				time : {
+					text : attrs.time
 				}
 				//cat_icon:text="{catImage}" catColor:backgroundColor="{cat_color}" titolo:text="{name}" cat_mini_icon:text="{cat_mini_icon}" categoria:text="{categoria}" data:text="{postDate}
 			});
 		}
-	}, $.timelineList);
+	}, $.listView);
 
 	$.ptr.hide();
 	//Alloy.Globals.loading.hide();
 	if (numPosts > 0 || _.isUndefined(numPosts)) {
-		$.timelineList.setMarker({
+		$.listView.setMarker({
 			sectionIndex : 0,
 			itemIndex : (Alloy.Collections.Timeline.length - 1)
 		});

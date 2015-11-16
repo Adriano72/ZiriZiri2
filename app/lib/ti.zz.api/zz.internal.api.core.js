@@ -94,7 +94,7 @@ zz.Internal.API.Core.Session.logIn = function(user, successCallback, errorCallba
 			Ti.API.debug("ZZ.Internal.API.Core.Session.logIn._logInErrorCallback [error : " + JSON.stringify(error) + "]");
 			
 			var errorMessage = "ZZ.Internal.API.Core.Session.logIn unable to perform login due to : " + error;
-			_manageError({errorMessage : errorMessage});	
+			_manageError({errorMessage : errorMessage}, errorCallback);	
 					
 		};		
 		
@@ -165,7 +165,7 @@ zz.Internal.API.Core.Session.logIn = function(user, successCallback, errorCallba
 /* ---------- *** ---------- */
 
 zz.Internal.API.Core.Session.logOut = function(successCallback, errorCallback) {
-	Ti.API.debug("ZZ.Internal.API.Core.Session.logIn");
+	Ti.API.debug("ZZ.Internal.API.Core.Session.logOut");
 	
 	throw "Not yet implemented";
 };
@@ -233,8 +233,15 @@ zz.Internal.API.Core.Posts.list = function(successCallback, errorCallback, optio
 		});
 		*/
 		
-		storedDataPosts = storedDatas.pop();		
-		//objs = objs.concat( JSON.parse(storedDataPosts.serialized_data) );		
+		storedDataPosts = storedDatas.pop();				
+		try { 
+			objs = objs.concat( JSON.parse(storedDataPosts.serialized_data) );					
+		} catch(ex) {
+			var errorMessage = "ZZ.Internal.API.Core.Posts.list unable to perform list due to " + ex;
+			_manageError({errorMessage : errorMessage});					
+		} finally {
+		}
+				
 	}	
 	Ti.API.debug("ZZ.Internal.API.Core.Posts.list [cached.length : " + objs.length + "]");
 	
@@ -419,7 +426,13 @@ zz.Internal.API.Core.Post.Templates.list = function(successCallback, errorCallba
 		*/
 		
 		storedDataTemplates = storedDatas.pop();
-		objs = objs.concat( JSON.parse(storedDataTemplates.serialized_data) );				
+		try { 
+			objs = objs.concat( JSON.parse(storedDataTemplates.serialized_data) );					
+		} catch(ex) {
+			var errorMessage = "ZZ.Internal.API.Core.Post.Templates.list unable to perform list due to " + ex;
+			_manageError({errorMessage : errorMessage});					
+		} finally {
+		}					
 	}	
 	
 	var online = zzGlobals.ZZ.Internal.Globals.isOnline();
@@ -483,7 +496,8 @@ zz.Internal.API.Core.Post.Templates.list = function(successCallback, errorCallba
 			_manageError({errorMessage : errorMessage});					
 		};		
 		
-		zzCloud.ZZ.Internal.Cloud.Core.Posts.Post.Templates.read(user, _readSuccessCallback, _readErrorCallback);
+		//zzCloud.ZZ.Internal.Cloud.Core.Posts.Post.Templates.read(user, _readSuccessCallback, _readErrorCallback);
+		zzCloud.ZZ.Internal.Cloud.Core.Post.Templates.read(user, _readSuccessCallback, _readErrorCallback);
 		return;		
 		
 	}		
@@ -540,15 +554,59 @@ zz.Internal.API.Core.Posts.remove = function(post, successCallback, errorCallbac
 		return;		
 	}
 			
-	if (post == null) {
-		var errorMessage = "ZZ.Internal.API.Core.Post.remove unable to perform remove due to NULL post";
+	if (post == null || post.id == null) {
+		var errorMessage = "ZZ.Internal.API.Core.Posts.remove unable to perform remove due to NULL post";
 		_manageError({errorMessage : errorMessage}, errorCallback);	
 			
 		return;			
 	}
 	
+	
 	var storedData = zzLocalDB.ZZ.Internal.Local.DB.Data.getByUserRefAndIdOrRemoteDataRef(user.id, post.id);
-	if (storedData != null && storedData.id == post.id) {
+	
+	var _removeExistingPostLocalSuccessCallback = function(response) {
+		Ti.API.debug("ZZ.Internal.API.Core.Posts.remove._removeExistingPostLocalSuccessCallback");
+		Ti.API.debug("ZZ.Internal.API.Core.Posts.remove._removeExistingPostLocalSuccessCallback [response : " + JSON.stringify(response) + "]");
+		
+		zzGlobals.ZZ.Internal.Globals.setCurrentPost(null);
+		
+		if (successCallback != null)
+			successCallback(response);				
+									
+	};
+	var _removeExistingPostLocalErrorCallback = function(error) {
+		Ti.API.debug("ZZ.Internal.API.Core.Posts.remove._removeExistingPostLocalErrorCallback");
+		Ti.API.debug("ZZ.Internal.API.Core.Posts.remove._removeExistingPostLocalErrorCallback [error : " + JSON.stringify(error) + "]");
+
+		_manageError({errorMessage : error}, errorCallback);	
+	};	
+	
+	if (storedData == null) {
+		
+		var _addExistingPostLocalSuccessCallback = function(response) {
+			Ti.API.debug("ZZ.Internal.API.Core.Posts.remove._addExistingPostLocalSuccessCallback");
+			Ti.API.debug("ZZ.Internal.API.Core.Posts.remove._addExistingPostLocalSuccessCallback [response : " + JSON.stringify(response) + "]");
+			
+			zzGlobals.ZZ.Internal.Globals.setCurrentPost(response);
+			
+			//if (successCallback != null)
+			//	successCallback(response);
+			
+			zzInternalCoreLocal.ZZ.Internal.API.Core.Local.removeExistingPostLocal(user, response, _removeExistingPostLocalSuccessCallback, _removeExistingPostLocalErrorCallback);																	
+		};
+		var _addExistingPostLocalErrorCallback = function(error) {
+			Ti.API.debug("ZZ.Internal.API.Core.Posts.remove._addExistingPostLocalErrorCallback");
+			Ti.API.debug("ZZ.Internal.API.Core.Posts.remove._addExistingPostLocalErrorCallback [error : " + JSON.stringify(error) + "]");
+	
+			_manageError({errorMessage : error}, errorCallback);	
+		};	
+											
+		zzInternalCoreLocal.ZZ.Internal.API.Core.Local.addExistingPostLocal(user, post, _addExistingPostLocalSuccessCallback, _addExistingPostLocalErrorCallback);			
+		return;		
+		
+	}	
+		
+	if (storedData.id == post.id) {
 			
 		var _removeNewPostLocalSuccessCallback = function(response) {
 			Ti.API.debug("ZZ.Internal.API.Core.Post.update._removeNewPostLocalSuccessCallback");
@@ -571,10 +629,11 @@ zz.Internal.API.Core.Posts.remove = function(post, successCallback, errorCallbac
 		return;			
 		
 	}
-				
+		
+	/*		
 	var _removeExistingPostLocalSuccessCallback = function(response) {
-		Ti.API.debug("ZZ.Internal.API.Core.Post.update._removeExistingPostLocalSuccessCallback");
-		Ti.API.debug("ZZ.Internal.API.Core.Post.update._removeExistingPostLocalSuccessCallback [response : " + JSON.stringify(response) + "]");
+		Ti.API.debug("ZZ.Internal.API.Core.Posts.remove._removeExistingPostLocalSuccessCallback");
+		Ti.API.debug("ZZ.Internal.API.Core.Posts.remove._removeExistingPostLocalSuccessCallback [response : " + JSON.stringify(response) + "]");
 		
 		zzGlobals.ZZ.Internal.Globals.setCurrentPost(null);
 		
@@ -583,14 +642,96 @@ zz.Internal.API.Core.Posts.remove = function(post, successCallback, errorCallbac
 									
 	};
 	var _removeExistingPostLocalErrorCallback = function(error) {
-		Ti.API.debug("ZZ.Internal.API.Core.Post.update._removeExistingPostLocalErrorCallback");
-		Ti.API.debug("ZZ.Internal.API.Core.Post.update._removeExistingPostLocalErrorCallback [error : " + JSON.stringify(error) + "]");
+		Ti.API.debug("ZZ.Internal.API.Core.Posts.remove._removeExistingPostLocalErrorCallback");
+		Ti.API.debug("ZZ.Internal.API.Core.Posts.remove._removeExistingPostLocalErrorCallback [error : " + JSON.stringify(error) + "]");
 
 		_manageError({errorMessage : error}, errorCallback);	
 	};	
+	*/
 											
 	zzInternalCoreLocal.ZZ.Internal.API.Core.Local.removeExistingPostLocal(user, post, _removeExistingPostLocalSuccessCallback, _removeExistingPostLocalErrorCallback);			
 	return;	
+};
+
+zz.Internal.API.Core.Posts.commit = function(successCallback, errorCallback) {
+	Ti.API.debug("ZZ.Internal.API.Core.Posts.commit");
+	
+	zzGlobals.ZZ.Internal.Globals.setCurrentPost(null);
+	
+	var user = zzGlobals.ZZ.Internal.Globals.getCurrentUser();	
+	if (user == null) {
+		var errorMessage = "ZZ.Internal.API.Core.Posts.commit unable to perform commit due to NULL user";
+		_manageError({errorMessage : errorMessage}, errorCallback);	
+
+		return;			
+	}
+			
+	var storedDatas = zzLocalDB.ZZ.Internal.Local.DB.Datas.findByUserRefAndTypeAndAlias(
+		user.id,
+		zzLocalDB.ZZ.Internal.Local.DB.Data.CONSTANTS.TYPES.MODEL,
+		zzLocalDB.ZZ.Internal.Local.DB.Data.CONSTANTS.ALIASES.POST		
+	);	
+	
+	var objs = [];
+	
+	Ti.API.debug("ZZ.Internal.API.Core.Posts.commit [storedDatas.length : " + (storedDatas ? storedDatas.length : null) + "]");
+	if (storedDatas != null && storedDatas.length > 0) {					
+		_.each(storedDatas, function(storedData) {	
+			Ti.API.debug("ZZ.Internal.API.Core.Posts.commit [storedData : " + JSON.stringify(storedData) + "]");
+				
+			var obj = JSON.parse(storedData.serialized_data);	
+			objs.push(obj);
+													
+		});	
+	}	
+	
+	storedDatas = zzLocalDB.ZZ.Internal.Local.DB.Datas.findByUserRefAndTypeAndAlias(
+		user.id,
+		zzLocalDB.ZZ.Internal.Local.DB.Data.CONSTANTS.TYPES.MODEL,
+		zzLocalDB.ZZ.Internal.Local.DB.Data.CONSTANTS.ALIASES.ASPECT		
+	);	
+	
+	Ti.API.debug("ZZ.Internal.API.Core.Posts.commit [storedDatas.length : " + (storedDatas ? storedDatas.length : null) + "]");
+	if (storedDatas != null && storedDatas.length > 0) {			
+		_.each(storedDatas, function(storedData) {												
+			Ti.API.debug("ZZ.Internal.API.Core.Posts.commit [storedData : " + JSON.stringify(storedData) + "]");
+		});	
+	}
+
+	storedDatas = zzLocalDB.ZZ.Internal.Local.DB.Datas.findByUserRefAndTypeAndAlias(
+		user.id,
+		zzLocalDB.ZZ.Internal.Local.DB.Data.CONSTANTS.TYPES.FILE,
+		zzLocalDB.ZZ.Internal.Local.DB.Data.CONSTANTS.ALIASES.IMAGE		
+	);	
+	
+	Ti.API.debug("ZZ.Internal.API.Core.Posts.commit [storedDatas.length : " + (storedDatas ? storedDatas.length : null) + "]");
+	if (storedDatas != null && storedDatas.length > 0) {			
+		_.each(storedDatas, function(storedData) {												
+			Ti.API.debug("ZZ.Internal.API.Core.Posts.commit [storedData : " + JSON.stringify(storedData) + "]");
+		});	
+	}
+
+	var _commitSuccessCallback = function(response) {
+		Ti.API.debug("ZZ.Internal.API.Core.Posts.commit._commitSuccessCallback");
+		Ti.API.debug("ZZ.Internal.API.Core.Posts.commit._commitSuccessCallback [response : " + JSON.stringify(response) + "]");
+		
+		if (successCallback)
+			successCallback(response);
+	};
+	var _commitErrorCallback = function(error) {
+		Ti.API.debug("ZZ.Internal.API.Core.Posts.commit._commitErrorCallback");
+		Ti.API.debug("ZZ.Internal.API.Core.Posts.commit._commitErrorCallback [error : " + JSON.stringify(error) + "]");
+			
+		_manageError({errorMessage : error}, errorCallback);
+	};	
+	
+	Ti.API.debug("ZZ.Internal.API.Core.Posts.commit [objs.length : " + (objs ? objs.length : null) + "]");
+	_.each(objs, function(obj) {	
+		Ti.API.debug("ZZ.Internal.API.Core.Posts.commit [obj : " + JSON.stringify(obj) + "]");
+													
+		zz.Internal.API.Core.Post.commit(obj, _commitSuccessCallback, _commitErrorCallback);
+	});	
+		
 };
 
 zz.Internal.API.Core.Post.update = function(post, successCallback, errorCallback) {
@@ -721,7 +862,7 @@ zz.Internal.API.Core.Post.commit = function(post, successCallback, errorCallback
 		Ti.API.debug("ZZ.Internal.API.Core.Post.commit._commitPostLocalErrorCallback [error : " + JSON.stringify(error) + "]");
 
 		_manageError({errorMessage : error}, errorCallback);			
-	};	
+	};						
 		
 	zzInternalCoreLocal.ZZ.Internal.API.Core.Local.commitPostLocal(user, post, _commitPostLocalSuccessCallback, _commitPostLocalErrorCallback);
 	return;		
@@ -947,7 +1088,7 @@ zz.Internal.API.Core.Post.Aspects.remove = function(aspect, post, successCallbac
 		
 	var storedDataAspect = zzLocalDB.ZZ.Internal.Local.DB.Data.getByUserRefAndIdOrRemoteDataRef(user.id, aspect.id);
 	var storedDataPost = zzLocalDB.ZZ.Internal.Local.DB.Data.getByUserRefAndIdOrRemoteDataRef(user.id, post.id);
-		
+						
 	var _removeNewAspectLocalSuccessCallback = function(response) {
 		Ti.API.debug("ZZ.Internal.API.Core.Post.Aspects.remove._removeNewAspectLocalSuccessCallback");
 		Ti.API.debug("ZZ.Internal.API.Core.Post.Aspects.remove._removeNewAspectLocalSuccessCallback [response : " + JSON.stringify(response) + "]");
@@ -981,27 +1122,52 @@ zz.Internal.API.Core.Post.Aspects.remove = function(aspect, post, successCallbac
 
 		_manageError({errorMessage : error}, errorCallback);	
 	};	
-	
+		
+	var _addExistingAspectLocalSuccessCallback = function(response) {
+		Ti.API.debug("ZZ.Internal.API.Core.Post.Aspects.remove._addExistingAspectLocalSuccessCallback");
+		Ti.API.debug("ZZ.Internal.API.Core.Post.Aspects.remove._addExistingAspectLocalSuccessCallback [response : " + JSON.stringify(response) + "]");
+		
+		zzGlobals.ZZ.Internal.Globals.setCurrentAspect(response);
+			
+		//if (successCallback != null)
+		//	successCallback(response);
+		
+		zzInternalCoreLocal.ZZ.Internal.API.Core.Local.removeExistingAspectLocal(user, response, aspect, _removeExistingAspectLocalSuccessCallback, _removeExistingAspectLocalErrorCallback);			
+									
+	};
+	var _addExistingAspectLocalErrorCallback = function(error) {
+		Ti.API.debug("ZZ.Internal.API.Core.Post.Aspects.remove._addExistingAspectLocalErrorCallback");
+		Ti.API.debug("ZZ.Internal.API.Core.Post.Aspects.remove._addExistingAspectLocalErrorCallback [error : " + JSON.stringify(error) + "]");
+
+		_manageError({errorMessage : error}, errorCallback);	
+	};
+		
 	var _removeFunction = (
-		storedDataAspect.id == aspect.id ? 
+		storedDataAspect == null ? 
+		zzInternalCoreLocal.ZZ.Internal.API.Core.Local.addExistingAspectLocal :		
+		(storedDataAspect.id == aspect.id ? 
 		zzInternalCoreLocal.ZZ.Internal.API.Core.Local.removeNewAspectLocal : 
-		zzInternalCoreLocal.ZZ.Internal.API.Core.Local.removeExistingAspectLocal
+		zzInternalCoreLocal.ZZ.Internal.API.Core.Local.removeExistingAspectLocal)
 	);
 	
 	var _removeFunctionSuccessCallback = (
-		storedDataAspect.id == aspect.id ?
+		storedDataAspect == null ?
+		_addExistingAspectLocalSuccessCallback :
+		(storedDataAspect.id == aspect.id ?
 		_removeNewAspectLocalSuccessCallback :
-		_removeExistingAspectLocalSuccessCallback
+		_removeExistingAspectLocalSuccessCallback)
 	);
 	
 	var _removeFunctionErrorCallback = (
-		storedDataAspect.id == aspect.id ?
+		storedDataAspect == null ?
+		_addExistingAspectLocalErrorCallback :
+		(storedDataAspect.id == aspect.id ?
 		_removeNewAspectLocalErrorCallback :
-		_removeExistingAspectLocalErrorCallback
+		_removeExistingAspectLocalErrorCallback)
 	);
 	
 	if (storedDataPost == null) {
-
+		/*
 		var _getPostLocalAndAddExistingPostLocalSuccessCallback = function(response) {
 			Ti.API.debug("ZZ.Internal.API.Core.Post.Aspects.remove._getPostLocalAndAddExistingPostLocalSuccessCallback");
 			Ti.API.debug("ZZ.Internal.API.Core.Post.Aspects.remove._getPostLocalAndAddExistingPostLocalSuccessCallback [response : " + JSON.stringify(response) + "]");
@@ -1016,12 +1182,33 @@ zz.Internal.API.Core.Post.Aspects.remove = function(aspect, post, successCallbac
 			_manageError({errorMessage : error});	
 		};
 
-		_getPostLocalAndAddExistingPostLocal(user, post, _getAndAddPostLocalSuccessCallback, _getAndAddPostLocalErrorCallback);
+		_getPostLocalAndAddExistingPostLocal(user, post, _getPostLocalAndAddExistingPostLocalSuccessCallback, _getPostLocalAndAddExistingPostLocalErrorCallback);
 		return;
-											
+		*/
+		
+		if (storedDataPost == null) {
+	
+			var _addExistingPostLocalSuccessCallback = function(response) {
+				Ti.API.debug("ZZ.Internal.API.Core.Post.Aspects.remove._addExistingPostLocalSuccessCallback");
+				Ti.API.debug("ZZ.Internal.API.Core.Post.Aspects.remove._addExistingPostLocalSuccessCallback [response : " + JSON.stringify(response) + "]");
+	
+				_removeFunction(user, response, aspect, _removeFunctionSuccessCallback, _removeFunctionErrorCallback);
+								
+			};
+			var _addExistingPostLocalErrorCallback = function(error) {
+				Ti.API.debug("ZZ.Internal.API.Core.Post.Aspects.remove._addExistingPostLocalErrorCallback");
+				Ti.API.debug("ZZ.Internal.API.Core.Post.Aspects.remove._addExistingPostLocalErrorCallback [error : " + JSON.stringify(error) + "]");
+		
+				_manageError({errorMessage : error});	
+			};
+			
+			zzInternalCoreLocal.ZZ.Internal.API.Core.Local.addExistingPostLocal(user, post, _addExistingPostLocalSuccessCallback, _addExistingPostLocalErrorCallback);
+			return;
+												
+		}										
 	}	
 	
-	_removeFunction(user, response, aspect, _removeFunctionSuccessCallback, _removeFunctionErrorCallback);
+	_removeFunction(user, storedDataPost, aspect, _removeFunctionSuccessCallback, _removeFunctionErrorCallback);
 
 };
 
@@ -1060,7 +1247,24 @@ zz.Internal.API.Core.Aspect.update = function(aspect, post, successCallback, err
 	}
 		
 	var storedDataAspect = zzLocalDB.ZZ.Internal.Local.DB.Data.getByUserRefAndIdOrRemoteDataRef(user.id, aspect.id);
-	var storedDataPost = zzLocalDB.ZZ.Internal.Local.DB.Data.getByUserRefAndIdOrRemoteDataRef(user.id, post.id);
+	var storedDataPost = zzLocalDB.ZZ.Internal.Local.DB.Data.getByUserRefAndIdOrRemoteDataRef(user.id, post.id);		
+		
+	var _addExistingAspectLocalSuccessCallback = function(response) {
+		Ti.API.debug("ZZ.Internal.API.Core.Post.update._addExistingAspectLocalSuccessCallback");
+		Ti.API.debug("ZZ.Internal.API.Core.Post.update._addExistingAspectLocalSuccessCallback [response : " + JSON.stringify(response) + "]");
+		
+		zzGlobals.ZZ.Internal.Globals.setCurrentAspect(response);
+			
+		if (successCallback != null)
+			successCallback(response);			
+									
+	};
+	var _addExistingAspectLocalErrorCallback = function(error) {
+		Ti.API.debug("ZZ.Internal.API.Core.Post.update._addExistingAspectLocalErrorCallback");
+		Ti.API.debug("ZZ.Internal.API.Core.Post.update._addExistingAspectLocalErrorCallback [error : " + JSON.stringify(error) + "]");
+
+		_manageError({errorMessage : error}, errorCallback);	
+	};			
 		
 	var _updateNewAspectLocalSuccessCallback = function(response) {
 		Ti.API.debug("ZZ.Internal.API.Core.Aspect.update._updateNewAspectLocalSuccessCallback");
@@ -1095,27 +1299,33 @@ zz.Internal.API.Core.Aspect.update = function(aspect, post, successCallback, err
 
 		_manageError({errorMessage : error}, errorCallback);	
 	};	
-	
-	var _updateFunction = (
-		storedDataAspect.id == aspect.id ? 
+
+	var _updateFunction = (		
+		storedDataAspect == null ? 
+		zzInternalCoreLocal.ZZ.Internal.API.Core.Local.addExistingAspectLocal :		
+		(storedDataAspect.id == aspect.id ? 
 		zzInternalCoreLocal.ZZ.Internal.API.Core.Local.updateNewAspectLocal : 
-		zzInternalCoreLocal.ZZ.Internal.API.Core.Local.updateExistingAspectLocal
+		zzInternalCoreLocal.ZZ.Internal.API.Core.Local.updateExistingAspectLocal)
 	);
 	
 	var _updateFunctionSuccessCallback = (
-		storedDataAspect.id == aspect.id ?
+		storedDataAspect == null ?
+		_addExistingAspectLocalSuccessCallback :
+		(storedDataAspect.id == aspect.id ?
 		_updateNewAspectLocalSuccessCallback :
-		_updateExistingAspectLocalSuccessCallback
+		_updateExistingAspectLocalSuccessCallback)
 	);
 	
 	var _updateFunctionErrorCallback = (
-		storedDataAspect.id == aspect.id ?
+		storedDataAspect == null ?
+		_addExistingAspectLocalErrorCallback :
+		(storedDataAspect.id == aspect.id ?
 		_updateNewAspectLocalErrorCallback :
-		_updateExistingAspectLocalErrorCallback
+		_updateExistingAspectLocalErrorCallback)
 	);
 	
 	if (storedDataPost == null) {
-
+		/*
 		var _getPostLocalAndAddExistingPostLocalSuccessCallback = function(response) {
 			Ti.API.debug("ZZ.Internal.API.Core.Aspect.update._getPostLocalAndAddExistingPostLocalSuccessCallback");
 			Ti.API.debug("ZZ.Internal.API.Core.Aspect.update._getPostLocalAndAddExistingPostLocalSuccessCallback [response : " + JSON.stringify(response) + "]");
@@ -1130,12 +1340,30 @@ zz.Internal.API.Core.Aspect.update = function(aspect, post, successCallback, err
 			_manageError({errorMessage : error});	
 		};
 
-		_getPostLocalAndAddExistingPostLocal(user, post, _getAndAddPostLocalSuccessCallback, _getAndAddPostLocalErrorCallback);
+		_getPostLocalAndAddExistingPostLocal(user, post, _getPostLocalAndAddExistingPostLocalSuccessCallback, _getPostLocalAndAddExistingPostLocalErrorCallback);
 		return;
+		*/
+		
+		var _addExistingPostLocalSuccessCallback = function(response) {
+			Ti.API.debug("ZZ.Internal.API.Core.Aspect.update._addExistingPostLocalSuccessCallback");
+			Ti.API.debug("ZZ.Internal.API.Core.Aspect.update._addExistingPostLocalSuccessCallback [response : " + JSON.stringify(response) + "]");
+
+			_updateFunction(user, response, aspect, _updateFunctionSuccessCallback, _updateFunctionErrorCallback);
+							
+		};
+		var _addExistingPostLocalErrorCallback = function(error) {
+			Ti.API.debug("ZZ.Internal.API.Core.Aspect.update._addExistingPostLocalErrorCallback");
+			Ti.API.debug("ZZ.Internal.API.Core.Aspect.update._addExistingPostLocalErrorCallback [error : " + JSON.stringify(error) + "]");
+	
+			_manageError({errorMessage : error});	
+		};
+		
+		zzInternalCoreLocal.ZZ.Internal.API.Core.Local.addExistingPostLocal(user, post, _addExistingPostLocalSuccessCallback, _addExistingPostLocalErrorCallback);
+		return;		
 											
 	}	
-	
-	_updateFunction(user, response, aspect, _updateFunctionSuccessCallback, _updateFunctionErrorCallback);
+		
+	_updateFunction(user, storedDataPost, aspect, _updateFunctionSuccessCallback, _updateFunctionErrorCallback);
 
 };
 
@@ -1218,7 +1446,13 @@ zz.Internal.API.Core.Categories.list = function(successCallback, errorCallback) 
 		*/
 		
 		storedDataCategories = storedDatas.pop();
-		//objs = objs.concat( JSON.parse(storedDataCategories.serialized_data) );		
+		try { 
+			objs = objs.concat( JSON.parse(storedDataCategories.serialized_data) );					
+		} catch(ex) {
+			var errorMessage = "ZZ.Internal.API.Core.Categories.list unable to perform list due to " + ex;
+			_manageError({errorMessage : errorMessage});					
+		} finally {
+		}			
 	}	
 	
 	var online = zzGlobals.ZZ.Internal.Globals.isOnline();
@@ -1327,7 +1561,13 @@ zz.Internal.API.Core.Stories.list = function(successCallback, errorCallback) {
 		*/
 		
 		storedDataStories = storedDatas.pop();
-		objs = objs.concat( JSON.parse(storedDataStories.serialized_data) );	
+		try { 
+			objs = objs.concat( JSON.parse(storedDataStories.serialized_data) );					
+		} catch(ex) {
+			var errorMessage = "ZZ.Internal.API.Core.Stories.list unable to perform list due to " + ex;
+			_manageError({errorMessage : errorMessage});					
+		} finally {
+		}			
 	}
 	
 	var online = zzGlobals.ZZ.Internal.Globals.isOnline();
@@ -1421,7 +1661,13 @@ zz.Internal.API.Core.Tags.list = function(successCallback, errorCallback) {
 		*/
 		
 		storedDataTags = storedDatas.pop();
-		objs = objs.concat( JSON.parse(storedDataTags.serialized_data) );
+		try { 
+			objs = objs.concat( JSON.parse(storedDataTags.serialized_data) );					
+		} catch(ex) {
+			var errorMessage = "ZZ.Internal.API.Core.Tags.list unable to perform list due to " + ex;
+			_manageError({errorMessage : errorMessage});					
+		} finally {
+		}		
 	}
 	
 	var online = zzGlobals.ZZ.Internal.Globals.isOnline();

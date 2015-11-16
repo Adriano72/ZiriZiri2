@@ -6,13 +6,18 @@ var zz = {
 			Core : {
 				Session : {},
 				Posts : {
-					Post : {
+					/*Post : {
 						Templates : {}
-					}
+					}*/
 				},
+				Post : {
+					Aspects : {},
+					Templates : {}
+				},				
 				Aspects : {
-					Aspect : {}
+					//Aspect : {}
 				},
+				Aspect : {},
 				Categories : {},
 				Tags : {},
 				Stories : {}
@@ -27,7 +32,8 @@ var zz = {
 				CashflowCurrencies : {}				
 			},
 			Files : {
-				Attachment : {}
+				Attachment : {},
+				Links : {}
 			}
 		}
 	}
@@ -120,10 +126,11 @@ zz.Internal.Cloud.Core.Posts.read = function(options) {
 
 };
 
-zz.Internal.Cloud.Core.Posts.Post.create = function(user, post, successCallback, errorCallback) {
-	Ti.API.debug("ZZ.Internal.Cloud.Core.Posts.Post.create");
-	Ti.API.debug("ZZ.Internal.Cloud.Core.Posts.Post.create [user : " + JSON.stringify(user) + "]");
-	Ti.API.debug("ZZ.Internal.Cloud.Core.Posts.Post.create [post : " + JSON.stringify(post) + "]");
+//zz.Internal.Cloud.Core.Posts.Post.create = function(user, post, successCallback, errorCallback) {
+zz.Internal.Cloud.Core.Post.create = function(user, post, successCallback, errorCallback) {	
+	Ti.API.debug("ZZ.Internal.Cloud.Core.Post.create");
+	Ti.API.debug("ZZ.Internal.Cloud.Core.Post.create [user : " + JSON.stringify(user) + "]");
+	Ti.API.debug("ZZ.Internal.Cloud.Core.Post.create [post : " + JSON.stringify(post) + "]");
 	
 	post.id = null;
 	post.modules = null;
@@ -134,15 +141,15 @@ zz.Internal.Cloud.Core.Posts.Post.create = function(user, post, successCallback,
 	};
 	
 	var _sendSuccessCallback = function(data) {
-		Ti.API.debug("ZZ.Internal.Cloud.Core.Posts.Post.create._sendSuccessCallback");
-		Ti.API.debug("ZZ.Internal.Cloud.Core.Posts.Post.create._sendSuccessCallback [data : " + JSON.stringify(data) + "]");	
+		Ti.API.debug("ZZ.Internal.Cloud.Core.Post.create._sendSuccessCallback");
+		Ti.API.debug("ZZ.Internal.Cloud.Core.Post.create._sendSuccessCallback [data : " + JSON.stringify(data) + "]");	
 		
 		if (successCallback != null)
 			successCallback(data);
 	};
 	var _sendErrorCallback = function(error) {
-		Ti.API.debug("ZZ.Internal.Cloud.Core.Posts.Post.create._sendErrorCallback");
-		Ti.API.debug("ZZ.Internal.Cloud.Core.Posts.Post.create._sendErrorCallback [error : " + error + "]");
+		Ti.API.debug("ZZ.Internal.Cloud.Core.Post.create._sendErrorCallback");
+		Ti.API.debug("ZZ.Internal.Cloud.Core.Post.create._sendErrorCallback [error : " + error + "]");
 		
 		if (errorCallback != null)
 			errorCallback(error);		
@@ -158,10 +165,11 @@ zz.Internal.Cloud.Core.Posts.Post.create = function(user, post, successCallback,
 
 };
 
-zz.Internal.Cloud.Core.Posts.Post.update = function(user, post, successCallback, errorCallback) {
-	Ti.API.debug("ZZ.Internal.Cloud.Core.Posts.Post.update");
-	Ti.API.debug("ZZ.Internal.Cloud.Core.Posts.Post.update [user : " + JSON.stringify(user) + "]");
-	Ti.API.debug("ZZ.Internal.Cloud.Core.Posts.Post.update [post : " + JSON.stringify(post) + "]");
+//zz.Internal.Cloud.Core.Posts.Post.update = function(user, post, successCallback, errorCallback) {
+zz.Internal.Cloud.Core.Post.update = function(user, post, successCallback, errorCallback) {	
+	Ti.API.debug("ZZ.Internal.Cloud.Core.Post.update");
+	Ti.API.debug("ZZ.Internal.Cloud.Core.Post.update [user : " + JSON.stringify(user) + "]");
+	Ti.API.debug("ZZ.Internal.Cloud.Core.Post.update [post : " + JSON.stringify(post) + "]");
 	
 	post.modules = null;
 	
@@ -171,15 +179,15 @@ zz.Internal.Cloud.Core.Posts.Post.update = function(user, post, successCallback,
 	};
 	
 	var _sendSuccessCallback = function(data) {
-		Ti.API.debug("ZZ.Internal.Cloud.Core.Posts.Post.update._sendSuccessCallback");
-		Ti.API.debug("ZZ.Internal.Cloud.Core.Posts.Post.update._sendSuccessCallback [data : " + JSON.stringify(data) + "]");	
+		Ti.API.debug("ZZ.Internal.Cloud.Core.Post.update._sendSuccessCallback");
+		Ti.API.debug("ZZ.Internal.Cloud.Core.Post.update._sendSuccessCallback [data : " + JSON.stringify(data) + "]");	
 		
 		if (successCallback != null)
 			successCallback(data);
 	};
 	var _sendErrorCallback = function(error) {
-		Ti.API.debug("ZZ.Internal.Cloud.Core.Posts.Post.update._sendErrorCallback");
-		Ti.API.debug("ZZ.Internal.Cloud.Core.Posts.Post.update._sendErrorCallback [error : " + error + "]");
+		Ti.API.debug("ZZ.Internal.Cloud.Core.Post.update._sendErrorCallback");
+		Ti.API.debug("ZZ.Internal.Cloud.Core.Post.update._sendErrorCallback [error : " + error + "]");
 		
 		if (errorCallback != null)
 			errorCallback(error);		
@@ -195,23 +203,24 @@ zz.Internal.Cloud.Core.Posts.Post.update = function(user, post, successCallback,
 
 };
 
-zz.Internal.Cloud.Core.Posts.Post.read = function(user, post, successCallback, errorCallback) {
-	Ti.API.debug("ZZ.Internal.Cloud.Core.Posts.Post.read");
-	Ti.API.debug("ZZ.Internal.Cloud.Core.Posts.Post.read [user : " + JSON.stringify(user) + "]");
-	Ti.API.debug("ZZ.Internal.Cloud.Core.Posts.Post.read [post : " + JSON.stringify(post) + "]");
+//zz.Internal.Cloud.Core.Posts.Post.read = function(user, post, successCallback, errorCallback) {
+zz.Internal.Cloud.Core.Post.read = function(user, post, successCallback, errorCallback) {
+	Ti.API.debug("ZZ.Internal.Cloud.Core.Post.read");
+	Ti.API.debug("ZZ.Internal.Cloud.Core.Post.read [user : " + JSON.stringify(user) + "]");
+	Ti.API.debug("ZZ.Internal.Cloud.Core.Post.read [post : " + JSON.stringify(post) + "]");
 	
 	var url = zzConfig.ZZ.Config.Cloud.baseURL + "/actions/actions/" + user.token + "/" + post.id + "?cached=" + zzConfig.ZZ.Config.Cloud.cached;
 	
 	var _sendSuccessCallback = function(data) {
-		Ti.API.debug("ZZ.Internal.Cloud.Core.Posts.Post.read._sendSuccessCallback");
-		Ti.API.debug("ZZ.Internal.Cloud.Core.Posts.Post.read._sendSuccessCallback [data : " + JSON.stringify(data) + "]");	
+		Ti.API.debug("ZZ.Internal.Cloud.Core.Post.read._sendSuccessCallback");
+		Ti.API.debug("ZZ.Internal.Cloud.Core.Post.read._sendSuccessCallback [data : " + JSON.stringify(data) + "]");	
 		
 		if (successCallback != null)
 			successCallback(data);
 	};
 	var _sendErrorCallback = function(error) {
-		Ti.API.debug("ZZ.Internal.Cloud.Core.Posts.Post.read._sendErrorCallback");
-		Ti.API.debug("ZZ.Internal.Cloud.Core.Posts.Post.read._sendErrorCallback [error : " + error + "]");
+		Ti.API.debug("ZZ.Internal.Cloud.Core.Post.read._sendErrorCallback");
+		Ti.API.debug("ZZ.Internal.Cloud.Core.Post.read._sendErrorCallback [error : " + error + "]");
 		
 		if (errorCallback != null)
 			errorCallback(error);		
@@ -227,22 +236,94 @@ zz.Internal.Cloud.Core.Posts.Post.read = function(user, post, successCallback, e
 
 };
 
-zz.Internal.Cloud.Core.Posts.Post.Templates.read = function(user, successCallback, errorCallback) {
-	Ti.API.debug("ZZ.Internal.Cloud.Core.Posts.Post.Templates.read");
-	Ti.API.debug("ZZ.Internal.Cloud.Core.Posts.Post.Templates.read [user : " + JSON.stringify(user) + "]");
+//zz.Internal.Cloud.Core.Posts.Post.delete = function(user, post, successCallback, errorCallback) {
+zz.Internal.Cloud.Core.Post.delete = function(user, post, successCallback, errorCallback) {	
+	Ti.API.debug("ZZ.Internal.Cloud.Core.Post.delete");
+	Ti.API.debug("ZZ.Internal.Cloud.Core.Post.delete [user : " + JSON.stringify(user) + "]");
+	Ti.API.debug("ZZ.Internal.Cloud.Core.Post.delete [post : " + JSON.stringify(post) + "]");
 	
-	var url = zzConfig.ZZ.Config.Cloud.baseURL + "/actions/actions/templates/" + user.token + "?page=0&max=100&cached=" + zzConfig.ZZ.Config.Cloud.cached;
+	var url = zzConfig.ZZ.Config.Cloud.baseURL + "/actions/actions/" + user.token + "/" + post.id + "/delete";
 	
 	var _sendSuccessCallback = function(data) {
-		Ti.API.debug("ZZ.Internal.Cloud.Core.Posts.Post.Templates.read._sendSuccessCallback");
-		Ti.API.debug("ZZ.Internal.Cloud.Core.Posts.Post.Templates.read._sendSuccessCallback [data : " + JSON.stringify(data) + "]");	
+		Ti.API.debug("ZZ.Internal.Cloud.Core.Post.delete._sendSuccessCallback");
+		Ti.API.debug("ZZ.Internal.Cloud.Core.Post.delete._sendSuccessCallback [data : " + JSON.stringify(data) + "]");	
 		
 		if (successCallback != null)
 			successCallback(data);
 	};
 	var _sendErrorCallback = function(error) {
-		Ti.API.debug("ZZ.Internal.Cloud.Core.Posts.Post.Templates.read._sendErrorCallback");
-		Ti.API.debug("ZZ.Internal.Cloud.Core.Posts.Post.Templates.read._sendErrorCallback [error : " + error + "]");
+		Ti.API.debug("ZZ.Internal.Cloud.Core.Post.delete._sendErrorCallback");
+		Ti.API.debug("ZZ.Internal.Cloud.Core.Post.delete._sendErrorCallback [error : " + error + "]");
+		
+		if (errorCallback != null)
+			errorCallback(error);		
+	};	
+	
+	_send(
+		"POST",
+		url,
+		null,
+		_sendSuccessCallback,
+		_sendErrorCallback
+	);
+
+};
+
+zz.Internal.Cloud.Core.Post.Aspects.remove = function(user, post, aspects, successCallback, errorCallback) {	
+	Ti.API.debug("ZZ.Internal.Cloud.Core.Post.Aspects.remove");
+	Ti.API.debug("ZZ.Internal.Cloud.Core.Post.Aspects.remove [user : " + JSON.stringify(user) + "]");
+	Ti.API.debug("ZZ.Internal.Cloud.Core.Post.Aspects.remove [post : " + JSON.stringify(post) + "]");
+	Ti.API.debug("ZZ.Internal.Cloud.Core.Post.Aspects.remove [aspects : " + JSON.stringify(aspects) + "]");
+	
+	var url = zzConfig.ZZ.Config.Cloud.baseURL + "/actions/actions/" + user.token + "/" + post.id + "/relations/delete";
+	var data = {
+		data : _.map(aspects, function(item){
+			return item.id;
+		})
+	};
+	
+	var _sendSuccessCallback = function(data) {
+		Ti.API.debug("ZZ.Internal.Cloud.Core.Post.Aspects.remove._sendSuccessCallback");
+		Ti.API.debug("ZZ.Internal.Cloud.Core.Post.Aspects.remove._sendSuccessCallback [data : " + JSON.stringify(data) + "]");	
+		
+		if (successCallback != null)
+			successCallback(data);
+	};
+	var _sendErrorCallback = function(error) {
+		Ti.API.debug("ZZ.Internal.Cloud.Core.Post.Aspects.remove._sendErrorCallback");
+		Ti.API.debug("ZZ.Internal.Cloud.Core.Post.Aspects.remove._sendErrorCallback [error : " + error + "]");
+		
+		if (errorCallback != null)
+			errorCallback(error);		
+	};	
+	
+	_send(
+		"PUT",
+		url,
+		data,
+		_sendSuccessCallback,
+		_sendErrorCallback
+	);
+
+};
+
+//zz.Internal.Cloud.Core.Posts.Post.Templates.read = function(user, successCallback, errorCallback) {
+zz.Internal.Cloud.Core.Post.Templates.read = function(user, successCallback, errorCallback) {	
+	Ti.API.debug("ZZ.Internal.Cloud.Core.Post.Templates.read");
+	Ti.API.debug("ZZ.Internal.Cloud.Core.Post.Templates.read [user : " + JSON.stringify(user) + "]");
+	
+	var url = zzConfig.ZZ.Config.Cloud.baseURL + "/actions/actions/templates/" + user.token + "?page=0&max=100&cached=" + zzConfig.ZZ.Config.Cloud.cached;
+	
+	var _sendSuccessCallback = function(data) {
+		Ti.API.debug("ZZ.Internal.Cloud.Core.Post.Templates.read._sendSuccessCallback");
+		Ti.API.debug("ZZ.Internal.Cloud.Core.Post.Templates.read._sendSuccessCallback [data : " + JSON.stringify(data) + "]");	
+		
+		if (successCallback != null)
+			successCallback(data);
+	};
+	var _sendErrorCallback = function(error) {
+		Ti.API.debug("ZZ.Internal.Cloud.Core.Post.Templates.read._sendErrorCallback");
+		Ti.API.debug("ZZ.Internal.Cloud.Core.Post.Templates.read._sendErrorCallback [error : " + error + "]");
 		
 		if (errorCallback != null)
 			errorCallback(error);		
@@ -250,6 +331,38 @@ zz.Internal.Cloud.Core.Posts.Post.Templates.read = function(user, successCallbac
 	
 	_send(
 		"GET",
+		url,
+		null,
+		_sendSuccessCallback,
+		_sendErrorCallback
+	);
+
+};
+
+zz.Internal.Cloud.Core.Aspect.delete = function(user, aspect, successCallback, errorCallback) {	
+	Ti.API.debug("ZZ.Internal.Cloud.Core.Aspect.delete");
+	Ti.API.debug("ZZ.Internal.Cloud.Core.Aspect.delete [user : " + JSON.stringify(user) + "]");
+	Ti.API.debug("ZZ.Internal.Cloud.Core.Aspect.delete [post : " + JSON.stringify(post) + "]");
+	
+	var url = zzConfig.ZZ.Config.Cloud.baseURL + "/aspects/aspects/" + user.token + "/" + aspect.id + "/delete";
+	
+	var _sendSuccessCallback = function(data) {
+		Ti.API.debug("ZZ.Internal.Cloud.Core.Aspect.delete._sendSuccessCallback");
+		Ti.API.debug("ZZ.Internal.Cloud.Core.Aspect.delete._sendSuccessCallback [data : " + JSON.stringify(data) + "]");	
+		
+		if (successCallback != null)
+			successCallback(data);
+	};
+	var _sendErrorCallback = function(error) {
+		Ti.API.debug("ZZ.Internal.Cloud.Core.Aspect.delete._sendErrorCallback");
+		Ti.API.debug("ZZ.Internal.Cloud.Core.Aspect.delete._sendErrorCallback [error : " + error + "]");
+		
+		if (errorCallback != null)
+			errorCallback(error);		
+	};	
+	
+	_send(
+		"POST",
 		url,
 		null,
 		_sendSuccessCallback,
@@ -568,6 +681,7 @@ zz.Internal.Cloud.Finance.CashflowCurrencies.read = function(user, successCallba
 
 };
 
+/*
 zz.Internal.Cloud.Files.Attachment.upload = function(user, blob, successCallback, errorCallback) {
 	Ti.API.debug("ZZ.Internal.Cloud.Files.Attachment.upload");
 	Ti.API.debug("ZZ.Internal.Cloud.Files.Attachment.upload [user : " + JSON.stringify(user) + "]");
@@ -600,8 +714,44 @@ zz.Internal.Cloud.Files.Attachment.upload = function(user, blob, successCallback
 			errorCallback(error);		
 	};	
 	
-	_send(
+	_upload(
 		"POST",
+		url,
+		data,
+		_sendSuccessCallback,
+		_sendErrorCallback
+	);
+
+};
+*/
+
+zz.Internal.Cloud.Files.Attachment.upload = function(user, blob, successCallback, errorCallback) {
+	Ti.API.debug("ZZ.Internal.Cloud.Files.Attachment.upload");
+	Ti.API.debug("ZZ.Internal.Cloud.Files.Attachment.upload [user : " + JSON.stringify(user) + "]");
+	Ti.API.debug("ZZ.Internal.Cloud.Files.Attachment.upload [blob.mimeType : " + blob.mimeType + "]");
+	
+	var url = zzConfig.ZZ.Config.Cloud.cdnURL + "/files/attachments/upload/" + user.token;
+	
+	var data = {};
+	var key = user.token + "-" + new Date().getTime();
+	data[key] = blob.file;
+	
+	var _sendSuccessCallback = function(data) {
+		Ti.API.debug("ZZ.Internal.Cloud.Files.Attachment.upload._sendSuccessCallback");
+		Ti.API.debug("ZZ.Internal.Cloud.Files.Attachment.upload._sendSuccessCallback [data : " + JSON.stringify(data) + "]");	
+		
+		if (successCallback != null)
+			successCallback({id : key});
+	};
+	var _sendErrorCallback = function(error) {
+		Ti.API.debug("ZZ.Internal.Cloud.Files.Attachment.upload._sendErrorCallback");
+		Ti.API.debug("ZZ.Internal.Cloud.Files.Attachment.upload._sendErrorCallback [error : " + error + "]");
+		
+		if (errorCallback != null)
+			errorCallback(error);		
+	};	
+	
+	_upload(
 		url,
 		data,
 		_sendSuccessCallback,
@@ -640,6 +790,37 @@ zz.Internal.Cloud.Files.Attachment.download = function(user, aspect, successCall
 
 };
 
+zz.Internal.Cloud.Files.Links.metadata = function(url, successCallback, errorCallback) {
+	Ti.API.debug("ZZ.Internal.Cloud.Files.Links.metadata");
+	Ti.API.debug("ZZ.Internal.Cloud.Files.Links.metadata [url : " + url+ "]");
+	
+	var url = zzConfig.ZZ.Config.Cloud.baseURL + "/files/links/metadata" + "?url=" + encodeURIComponent(url);
+
+	var _sendSuccessCallback = function(data) {
+		Ti.API.debug("ZZ.Internal.Cloud.Files.Links.metadata._sendSuccessCallback");
+		Ti.API.debug("ZZ.Internal.Cloud.Files.Links.metadata._sendSuccessCallback [data : " + data + "]");	
+		
+		if (successCallback != null)
+			successCallback(data);
+	};
+	var _sendErrorCallback = function(error) {
+		Ti.API.debug("ZZ.Internal.Cloud.Files.Links.metadata._sendErrorCallback");
+		Ti.API.debug("ZZ.Internal.Cloud.Files.Links.metadata._sendErrorCallback [error : " + error + "]");
+		
+		if (errorCallback != null)
+			errorCallback(error);		
+	};	
+	
+	_send(
+		"GET",
+		url,
+		null,
+		_sendSuccessCallback,
+		_sendErrorCallback
+	);
+
+};
+
 exports.ZZ = zz;
 exports.version = 0.2;
 
@@ -658,7 +839,7 @@ var _send = function(method, url, json, successCallback, errorCallback) {
 	        // this.responseData holds any returned binary data
 
 			var json = JSON.parse(this.responseText);
-
+			
 			if (json == null)
 				successCallback();
 
@@ -677,10 +858,11 @@ var _send = function(method, url, json, successCallback, errorCallback) {
 	       	if (errorCallback != null)
 	        	errorCallback(e.error);
 	    },
-	    timeout:15000  /* in milliseconds */
+	    timeout: 0 //15000  /* in milliseconds */
 	});
 	xhr.open(method, url);
 	
+	xhr.setRequestHeader('Accept','application/json');
 	xhr.setRequestHeader('Content-Type','application/json');
 	
 	if (method == "POST" || method == "PUT") {
@@ -720,10 +902,71 @@ var _download = function(url, successCallback, errorCallback) {
 	       	if (errorCallback != null)
 	        	errorCallback(e.error);
 	    },
-	    timeout:15000  /* in milliseconds */
+	    timeout: 0 //15000  /* in milliseconds */
 	});
 	xhr.open("GET", url);
 	
-	xhr.send();
+	xhr.send();	
+};
+
+/*
+var _upload = function(method, url, json, successCallback, errorCallback) {
+	Ti.API.trace("ZZ.Internal.Cloud._upload");
+	Ti.API.trace("ZZ.Internal.Cloud._upload [method : " + method + ", url : " + url + "]");
+
+	var xhr = Ti.Network.createHTTPClient({
+	    onload: function(e) {
+	    	Ti.API.trace("ZZ.Internal.Cloud._upload.onload");
+	       
+	       	successCallback();
+	    },
+	    onerror: function(e) {
+	    	Ti.API.trace("ZZ.Internal.Cloud._upload.onerror");
+	    	Ti.API.trace("ZZ.Internal.Cloud._upload.onerror [e : " + JSON.stringify(e) + "]");
+			
+	       	if (errorCallback != null)
+	        	errorCallback(e.error);
+	    },
+	    timeout: 30000
+	});
+	xhr.open(method, url);
 	
+	xhr.setRequestHeader('Content-Type','application/json');
+	
+	if (method == "POST" || method == "PUT") {
+		var data = JSON.stringify(json);
+		Ti.API.trace("ZZ.Internal.Cloud._upload [data : " + data + "]");		
+		
+		xhr.send(data);
+	} else {
+		xhr.send();
+	}
+	
+};
+*/
+
+var _upload = function(url, data, successCallback, errorCallback) {
+	Ti.API.trace("ZZ.Internal.Cloud._upload");
+	Ti.API.trace("ZZ.Internal.Cloud._upload [url : " + url + "]");
+
+	var xhr = Ti.Network.createHTTPClient({
+	    onload: function(e) {
+	    	Ti.API.trace("ZZ.Internal.Cloud._upload.onload");
+	       
+	       	successCallback();
+	    },
+	    onerror: function(e) {
+	    	Ti.API.trace("ZZ.Internal.Cloud._upload.onerror");
+	    	Ti.API.trace("ZZ.Internal.Cloud._upload.onerror [e : " + JSON.stringify(e) + "]");
+			
+	       	if (errorCallback != null)
+	        	errorCallback(e.error);
+	    },
+	    timeout: 0
+	});
+	xhr.open("POST", url);
+	
+	xhr.setRequestHeader('enctype','multipart/form-data');
+					
+	xhr.send(data);	
 };
