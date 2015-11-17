@@ -62,7 +62,7 @@ function doOpen() {
 	//updateCollection();
 	var postIndex = args.postIndex;
 	$.scrollableTimeline.setCurrentPage(postIndex);
-	$.scrollableAspects.views = [blankView];
+	//$.scrollableAspects.views = [blankView];
 
 	//setTimeout(function() {
 
@@ -70,7 +70,7 @@ function doOpen() {
 	//}, 500);
 
 }
-
+/*
 function updateIconToolbar(post) {
 
 	//Ti.API.info("ICON EVENT_____________: " + JSON.stringify(post));
@@ -134,7 +134,7 @@ function onAspectChange(tipoAspetto) {
 
 	//dispatcher.off('aspectChanged', onAspectChange);
 };
-
+*/
 function resetIconColors() {
 	$.event_icon.color = "#999";
 	$.event_icon.backgroundColor = "#D9D9D9";
@@ -158,7 +158,7 @@ function jumpToAspectType(aspectType) {
 
 	Ti.API.info("INDEX TO GO: " + indexToGo);
 
-	$.scrollableAspects.setCurrentPage(indexToGo);
+	//$.scrollableAspects.setCurrentPage(indexToGo);
 
 }
 
@@ -284,7 +284,7 @@ $.scrollableTimeline.views = timelineScrollableViews;
 function scrollendEvent(e) {
 
 	Ti.API.info("CURRENT  PAGE: " + e.currentPage);
-	$.scrollableAspects.setCurrentPage(0);
+	//$.scrollableAspects.setCurrentPage(0);
 
 	//$.aspect_detail_container.removeAllChildren();
 
@@ -368,7 +368,7 @@ function scrollendEvent(e) {
 	objIconToolbars.iconLinkLeft = datiIconaLink.leftSize;
 	objIconToolbars.iconCommLeft = datiIconaCommunication.leftSize;
 
-	updateIconToolbar(objIconToolbars);
+	//updateIconToolbar(objIconToolbars);
 
 	// ***** FINE - RIORDINA l'ARRAY aSPETTI VISTO CHE DANIELE FANCAZZISTA NON LO FA!!!'
 
@@ -454,24 +454,24 @@ function scrollendEvent(e) {
 	if (visteAspetti.length > 0) {
 
 		Ti.API.info("######### >0 #########");
-		$.scrollableAspects.views = visteAspetti;
+		//$.scrollableAspects.views = visteAspetti;
 	}
 
 	//setTimeout(function() {
-	scrollendEventAspects(0);
+	//scrollendEventAspects(0);
 	//}, 500);
 
 };
-
+/*
 function scrollendEventAspects(e) {
 
 	var indice = e.currentPage || 0;
 
 	if (sortedArray.length > 0) {
 
-		onAspectChange(sortedArray[indice].kind.code || 0);
+		//onAspectChange(sortedArray[indice].kind.code || 0);
 
-		Ti.API.info("@@@@@ ASPETTO CROLLATO @@@@@@: " + JSON.stringify(sortedArray[indice]));
+		Ti.API.info("@@@@@ ASPETTO SCROLLATO @@@@@@: " + JSON.stringify(sortedArray[indice]));
 
 		var aspecTypeArray = _.filter(sortedArray, function(value) {
 			return value.kind.code == sortedArray[indice].kind.code;
@@ -481,7 +481,7 @@ function scrollendEventAspects(e) {
 			return value.id == sortedArray[indice].id;
 		});
 
-		$.aspectNumIndicator.text = (indexToGo + 1) + "/" + aspecTypeArray.length;
+		//$.aspectNumIndicator.text = (indexToGo + 1) + "/" + aspecTypeArray.length;
 
 		//dispatcher.trigger('aspectChanged', sortedArray[indice].kind.code);
 
@@ -500,6 +500,7 @@ function scrollendEventAspects(e) {
 	//updateIconToolbar();
 
 };
+*/
 
 /*
  var dettaglioCashflow = Alloy.createController("dettaglio_cashflow").getView();

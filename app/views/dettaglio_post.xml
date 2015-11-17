@@ -7,6 +7,7 @@
 			<ImageView class="rightNavImg"/>
 		</RightNavButton>
 		<ScrollableView id="scrollableTimeline" showPagingControl="true" onScrollend="scrollendEvent"/>
+		<!-->
 		<View id="toolbarContainer">
 			<View id="aspect_icon_toolbar">
 				<Label class="aspects_icons" id="event_icon" onClick="setToEvent"/>
@@ -18,8 +19,9 @@
 			</View>
 			<Label id="aspectNumIndicator"/>
 		</View>
-		<View class ="separator"/>
-		<ScrollableView id="scrollableAspects" showPagingControl="true" onScrollend="scrollendEventAspects"/>
+		<-->
+		
+		<!--<ScrollableView id="scrollableAspects" showPagingControl="true" onScrollend="scrollendEventAspects"/>-->
 
 	</Window>
 </Alloy>

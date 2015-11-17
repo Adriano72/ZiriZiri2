@@ -1,12 +1,13 @@
 ".container": {
 	backgroundColor: "#FFF",
 	layout: "vertical",
+	displayHomeAsUp: true,
 	orientationModes: [Ti.UI.PORTRAIT]
 }
 
 "#scrollableTimeline": {
 	top: 0,
-	height: 100,
+	//height: 100,
 	scrollType: "horizontal",
 	backgroundColor: "#F0EFE9",
 	width: Ti.UI.FILL
